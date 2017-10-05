@@ -14,7 +14,7 @@ trait ArticleFilterable
 
   public function getArticleFilter($filter)
   {
-      $filters = ['newdata', 'updatedata', 'weekdata','recent', 'wiki', 'jobs', 'excellent-pinned', 'index'];
+      $filters = ['newdata', 'updatedata'];
       if (in_array($filter, $filters)) {
           return $filter;
       }
@@ -30,17 +30,13 @@ trait ArticleFilterable
     switch ($filter) {
 
       case 'newdata':
-          return $this->orderBy('postdate', 'desc');
+          return $this->makeVisible('lastupdatef')->orderBy('postdate', 'desc');
           break;
 
       case 'updatedata':
-          return $this->orderBy('lastupdate', 'desc');
+          return $this->makeVisible('lastupdatef')->orderBy('lastupdate', 'desc');
           break;
 
-      case 'weekdata':
-          return $this->orderBy('lastupdate', 'desc');
-          break;
-          
 
       default:
           return '';

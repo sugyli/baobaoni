@@ -11,11 +11,17 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->get('systemsettings', 'SystemSettingsController@index');
+    $router->post('systemsettings', 'SystemSettingsController@seting');
+
+
+
+
 
     $router->get('users', 'UsersController@index')->name('admin-users.index');
     $router->get('users/{id}/edit', 'UsersController@edit')->name('admin-users.edit');
 
-    //$router->resource('admin/articles', ArticlesController::class);
+    $router->resource('articles', ArticlesController::class);
     //$router->resource('admin/inboxs', InboxsController::class);
 
 

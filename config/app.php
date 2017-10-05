@@ -2,12 +2,27 @@
 
 return [
 
-
-    'xsfmdir' => env('XSFMDIR',DS),//小说封面路径
-    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认路径
+    'weburi' => env('WEBURI'),//WEB地址结尾要加 /
+    'webname' => env('WEBNAME'),
+    'webkeywords' => env('WEBKEYWORDS'),
+    'webdes' => env('WEBDES'),
     'cacheTime_d' => env('CACHETIME_D',1),
     'cacheTime_z' => env('CACHETIME_Z',2),
     'cacheTime_g' => env('CACHETIME_G',3),
+    'bili' => 5,
+    'qiandao_maxnums' => 35,
+    'qiandao_newuser' => 20,
+    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认路径
+    'maxchapter' => 10000,
+    'massagemaxcount' => 20,
+    'bookcasemaxcount' => 20,
+    'dayrecommendmaxcount' => 20,
+    'recommendscore' => 1,
+    'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
+
+
+    'xsfmdir' => env('XSFMDIR',DS),//小说封面路径
+
     'txtdir' => env('TXTDIR'),//txt域名
     'imagedir' => env('IMAGEDIR'),//图片地址
     'txtlog' => env('TXTLOG',false),//是否开启txt采集日记

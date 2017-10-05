@@ -46,8 +46,7 @@ class OutboxsController extends Controller
     {
         $title = $request->title ?: '来源Web用户中心的问题';
         $from = $request->from;
-        dd($from);
-        return view('webdashubao.usermessagecreate',compact('title'));
+        return view('webdashubao.usermessagecreate',compact('title','from'));
     }
     public function store(OutboxRequest $request)
     {

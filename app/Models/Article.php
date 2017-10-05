@@ -12,14 +12,13 @@ class Article extends Model
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
-
-
+    protected $hidden = ['lastupdatef'];
     /**
      * 访问器被附加到模型数组的形式。
      *
      * @var array
      */
-    //protected $appends = ['lastupdatef'];
+    protected $appends = ['lastupdatef'];
     /**
      * 数据模型的启动方法
      *
@@ -50,12 +49,12 @@ class Article extends Model
     {
         $this->attributes['fullflag'] = $value == '完本' ? 1 : 0;
     }
-    /*
+
     public function getLastupdatefAttribute()
     {
         return  $this->attributes['lastupdatef']  = $this->attributes['lastupdate'] > 0 ? formatTime($this->attributes['lastupdate']) : '未知';
     }
-
+    /*
     public function setLastupdatefAttribute($value)
     {
         $this->attributes['lastupdate'] = time();
@@ -83,10 +82,10 @@ class Article extends Model
     public function link()
     {
         if (empty($this->slug)) {
-            return route('articles.show', ['bid' => $this->articleid]);
+            return route('web.articles.show', ['bid' => $this->articleid]);
         }
 
-        return route('articles.show', ['bid' => $this->articleid ,'slug' => $this->slug]);
+        return route('web.articles.show', ['bid' => $this->articleid ,'slug' => $this->slug]);
 
     }
 
@@ -114,10 +113,15 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(WEEKHITS.$this->articleid, config('app.cacheTime_g'), function () use ($articleid){
+            \Cache::remember(WEEKHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
+
+                              $week_begin = mktime(0, 0, 0,date("m"),date("d")-date("w")+1,date("Y"));
+                              $week_end = mktime(23,59,59,date("m"),date("d")-date("w")+7,date("Y"));
+
                               $ranking =
                                           Ranking::select(\DB::raw('sum(hits) as h,articleid'))
-                                                        ->where('articleid',$this->articleid)
+                                                        ->whereBetween('ranking_date', [$week_begin, $week_end])
+                                                        ->where('articleid',$articleid)
                                                         ->groupBy('articleid')
                                                         ->orderBy('h', 'desc')
                                                         ->first();
@@ -136,12 +140,13 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(MONTHHITS.$this->articleid, config('app.cacheTime_g'), function () use ($articleid){
+            \Cache::remember(MONTHHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
                               $dt = Carbon::now();
                               $ranking =
                                           Ranking::select(\DB::raw('sum(hits) as h,articleid'))
                                                         ->whereYear('created_at', $dt->year)
                                                         ->whereMonth('created_at', $dt->month)
+                                                        ->where('articleid',$articleid)
                                                         ->groupBy('articleid')
                                                         ->orderBy('h', 'desc')
                                                         ->first();
@@ -160,13 +165,14 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(DAYHITS.$this->articleid, config('app.cacheTime_g'), function () use ($articleid){
+            \Cache::remember(DAYHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
                               $dt = Carbon::now();
                               $ranking =
                                           Ranking::select(\DB::raw('sum(hits) as h,articleid'))
                                                         ->whereYear('created_at', $dt->year)
                                                         ->whereMonth('created_at', $dt->month)
                                                         ->whereDay('created_at', $dt->day)
+                                                        ->where('articleid',$articleid)
                                                         ->groupBy('articleid')
                                                         ->orderBy('h', 'desc')
                                                         ->first();
@@ -195,7 +201,7 @@ class Article extends Model
         return $this->hasMany(Chapter::class ,'articleid' ,'articleid')
                     //->where('display',0)
                     ->orderBy('chapterorder', 'asc')
-                    ->limit(MAXCHAPTER);
+                    ->limit(get_sys_set('maxchapter'));
     }
 
     public function relationBookcases($uid)

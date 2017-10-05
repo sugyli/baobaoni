@@ -2932,7 +2932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           bid: self.a,
           cid: self.b
         }).then(function (response) {
-          console.log(response);
+          //console.log(response);
           self.e = 0;
           if (response.data.message) {
 
@@ -3495,7 +3495,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var self = this;
         axios.post(self.getdataurl, {}).then(function (response) {
-            console.log(response);
+            //console.log(response);
             if (response.data.error == 0) {
                 self.toggleShow();
                 self.items = response.data.bakdata;
@@ -3510,6 +3510,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         toggleShow: function toggleShow() {
             this.show = !this.show;
+        },
+        jump: function jump(url) {
+            var redirect_url = window.location.href;
+            if (redirect_url.toLowerCase().indexOf(url) >= 0 || redirect_url.toLowerCase().indexOf('redirect_url=') >= 0) {
+                document.location = url;
+            } else {
+                document.location = url + "?redirect_url=" + redirect_url;
+            }
         }
     }
 });
@@ -41878,8 +41886,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('vm-button', {
     attrs: {
       "type": "primary",
-      "disabled": _vm.isloading,
-      "id": "subBnt"
+      "disabled": _vm.isloading
     },
     on: {
       "click": _vm.onSubmit

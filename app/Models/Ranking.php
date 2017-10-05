@@ -25,7 +25,6 @@ class Ranking extends Model
                       ->get();
     }
 
-    //获取周数据
     static public function getMonthBookHits($limit)
     {
 

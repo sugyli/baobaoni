@@ -1,18 +1,19 @@
 <?php
+
 define("DS", DIRECTORY_SEPARATOR);
-define("BOOKID", 'bookid_');//章节前缀
-define("MAXCHAPTER", 10000);//最大章节
-define("DFNR", '章节丢失了,欢迎举报让我们修复,非常感谢！！！');
-define("TXT", 'txt_');//内容前缀
-define("MINNR", 300);//最小内容
+define("SYSKEY", 'syskey');
+define("BOOKID", 'bookid_');
+define("HONORS", 'honors');
 define("WEEKHITS", 'getweekhits_');
 define("MONTHHITS", 'getMonthhits_');
 define("DAYHITS", 'getDayhits_');
 
-define("MASSAGEMAXCOUNT", 20);//收件箱最大显示数量
-define("BOOKCASEMAXCOUNT", 20);//默认书架数量
-define("DAYRECOMMENDMAXCOUNT", 20);//默认日推荐数量
-define("HONORS", 'honors');//KEY
+define("TXT", 'txt_');//内容前缀
+define("MINNR", 300);//最小内容
+
+
+
+
 define("SORTS", 'sorts');//KEY
 
 //缓存小说 和目录
@@ -32,7 +33,7 @@ function saveOrGetBookData($bid)
         }
 
         $article->load('relationChapters');
-        \Cache::put($key, $article, config('app.cacheTime_z'));
+        \Cache::put($key, $article, get_sys_set('cacheTime_z'));
         return $article;
   }
   return $bookObj;
@@ -192,6 +193,8 @@ function curlTxt($txtDir,$attachment)
     }
 
 }
+
+
 function txtLog($txtDir,$attachment,$http_status_code)
 {
 
@@ -222,7 +225,7 @@ function getChapterUrl($bid , $chapter)
 function qiandaoList()
 {
   return
-          \Cache::remember('qiandao', config('app.cacheTime_d'), function (){
+          \Cache::remember('qiandao', get_sys_set('cacheTime_d'), function (){
 
               return \App\Models\Qiandao::orderBy('last_dateline', 'DESC')
                                   ->limit(50)
@@ -323,12 +326,13 @@ function get_image_links($html)
     $image_links = get_images_from_html($html);
     $result = [];
     foreach ($image_links as $url) {
-        if (strpos($url, config('app.url_static')) !== false) {
+        if (strpos($url, config('app.url_static' ,'')) !== false) {
             $result[] = strtok($url, '?');
         }
     }
     return $result;
 }
+
 function get_images_from_html($html)
 {
     $doc = new DOMDocument();
@@ -343,6 +347,7 @@ function get_images_from_html($html)
 
     return $result;
 }
+
 
 /**
  * t函数用于过滤标签，输出没有html的干净的文本
@@ -471,6 +476,17 @@ if (!function_exists('del_hits_cache')) {
         \Cache::forget(WEEKHITS.$bid);
         \Cache::forget(MONTHHITS.$bid);
         \Cache::forget(DAYHITS.$bid);
+
+      }
+
+}
+
+if (!function_exists('get_sys_set')) {
+
+      function get_sys_set($key)
+      {
+         $data = \Cache::get(SYSKEY);
+         return  (isset($data[$key]) && !empty($data[$key])) ? $data[$key] : config('app.'.$key);
 
       }
 

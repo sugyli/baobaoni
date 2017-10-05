@@ -17,7 +17,7 @@
                   </li>
               </ul>
           </form>
-    <p slot="button"><vm-button type="primary" v-on:click="onSubmit" :disabled="isloading" id="subBnt">{{ isloading ? '提交中' : '提交' }}</vm-button></p>
+    <p slot="button"><vm-button type="primary" v-on:click="onSubmit" :disabled="isloading">{{ isloading ? '提交中' : '提交' }}</vm-button></p>
 
   </sweet-modal>
 </div>
@@ -80,7 +80,7 @@
                         cid: self.b,
                     })
                     .then(function (response) {
-                      console.log(response);
+                      //console.log(response);
                       self.e = 0;
                       if(response.data.message){
 

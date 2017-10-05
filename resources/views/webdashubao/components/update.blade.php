@@ -32,8 +32,8 @@
       <li>
         <div class="update-list">
           <span class="nb">{{$loop->iteration}}</span>
-          <span class="sm"><a href="{{ $updataBook->link() }}">{{$updataBook->articlename}}</a></span>
-          <span class="zj"><a href="{{route('articles.show', ['bid' => $updataBook->articleid , 'cid' => $updataBook->lastchapterid])}}">{{$updataBook->lastchapter}}</a></span>
+          <span class="sm"><a href="{{ $updataBook->link() }}" title="{{$updataBook->articlename}}">{{$updataBook->articlename}}</a></span>
+          <span class="zj"><a href="{{route('web.articles.content', ['bid' => $updataBook->articleid , 'cid' => $updataBook->lastchapterid])}}">{{$updataBook->lastchapter}}</a></span>
           <span class="zz">{{$updataBook->author}}</span>
           <span class="sj">{{$updataBook->lastupdatef}}</span>
         </div>

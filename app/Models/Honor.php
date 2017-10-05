@@ -14,15 +14,15 @@ class Honor extends Model
 
     public function getMassageMaxCount()
     {
-      return isset($this->setting['maxmessage']) ? $this->setting['maxmessage'] : MASSAGEMAXCOUNT;
+      return isset($this->setting['maxmessage']) ? $this->setting['maxmessage'] : get_sys_set('massagemaxcount');
     }
 
     public function getBookcaseCount()
     {
-      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : BOOKCASEMAXCOUNT;
+      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : get_sys_set('bookcasemaxcount');
     }
     public function getDayRecommendCount()
     {
-      return isset($this->setting['dayrecommendcount']) ? $this->setting['dayrecommendcount'] : DAYRECOMMENDMAXCOUNT;
+      return isset($this->setting['dayrecommendcount']) ? $this->setting['dayrecommendcount'] : get_sys_set('dayrecommendmaxcount');
     }
 }

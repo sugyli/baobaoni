@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Traits;
 use Illuminate\Http\Request;
 trait AuthenticatesUsers
 {
+
   public function username()
   {
       return 'uname';
@@ -20,7 +21,7 @@ trait AuthenticatesUsers
   {
     //$backUrl = route('member.show', [Auth::user()]);
     //$redirect_url = \Request::query('redirect_url');
-    $redirect_url = request()->redirect_url ?: route('member.show');
+    $redirect_url = request()->redirect_url ?: route('member.user.show');
     //$redirect_url = request()->input('redirect_url',$backUrl);
     return redirect($redirect_url);
   }
@@ -29,16 +30,19 @@ trait AuthenticatesUsers
   {
     //$redirect_url = request()->input('redirect_url');
     //$redirect_url = \Request::query('redirect_url');
+    $loginUrl = route('web.login.create');
+    $registerUrl = route('web.register.create');
+    $passwordUrl = route('web.password.create');
     $redirect_url = request()->redirect_url;
     if ($redirect_url) {
-      if (str_contains( $redirect_url , route('login.create') ) || str_contains($redirect_url ,route('register.create')) || str_contains($redirect_url ,route('password.create'))) {
+      if (str_contains( $redirect_url , $loginUrl ) || str_contains($redirect_url ,$registerUrl) || str_contains($redirect_url ,$passwordUrl)) {
           $redirect_url = null;
       }
     }
 
-    $loginSubmitAddress = $redirect_url ? route('login.create').'?redirect_url='.$redirect_url : route('login.create');
-    $registerSubmitAddress = $redirect_url ? route('register.create').'?redirect_url='.$redirect_url : route('register.create');
-    $passwordSubmitAddress = $redirect_url ? route('password.create').'?redirect_url='.$redirect_url : route('password.create');
+    $loginSubmitAddress = $redirect_url ? $loginUrl.'?redirect_url='.$redirect_url : $loginUrl;
+    $registerSubmitAddress = $redirect_url ? $registerUrl.'?redirect_url='.$redirect_url : $registerUrl;
+    $passwordSubmitAddress = $redirect_url ? $passwordUrl.'?redirect_url='.$redirect_url : $passwordUrl;
 
     return compact('loginSubmitAddress','registerSubmitAddress','passwordSubmitAddress');
   }

@@ -9,7 +9,7 @@
       <li><a :href='d' target='_top'>我的书架</a></li>
       <li class="nav-link" v-if="items.adminemail > 0"><a :href='e' style="color:red;" target='_top'>查看短信</a><div class="nav-counter nav-counter-blue">{{items.adminemail}}</div></li>
       <li v-else><a :href='e' target='_top'>查看短信</a></li>
-      <li><a :href='f' target='_self'>退出登录</a></li>
+      <li><a :href="f" target='_self'>退出登录</a></li>
     </ul>
 </div>
 </template>
@@ -35,7 +35,7 @@
             axios.post(self.getdataurl, {
               })
               .then(function (response) {
-                console.log(response);
+                //console.log(response);
                 if(response.data.error == 0){
                   self.toggleShow();
                   self.items = response.data.bakdata;
@@ -55,6 +55,16 @@
         methods: {
             toggleShow: function() {
                 this.show = !this.show;
+            },
+            jump: function(url) {
+                var redirect_url = window.location.href;
+                if(redirect_url.toLowerCase().indexOf(url)>= 0 || redirect_url.toLowerCase().indexOf('redirect_url=')>= 0){
+                    document.location = url;
+                }else{
+                    document.location = url + "?redirect_url=" + redirect_url;
+
+                }
+
             },
         }
     }

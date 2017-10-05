@@ -40,7 +40,7 @@ class Chapter extends Model
 
       public function link()
       {
-        return route('articles.content', ['article' => $this->articleid ,'cid'=>$this->chapterid]);
+        return route('web.articles.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
 
       }
 }

@@ -123,6 +123,7 @@ class ArticlesController extends Controller
     protected function form()
     {
         return Admin::form(Article::class, function (Form $form) {
+
             $form->display('articleid', 'ID');
             $form->text('articlename', '小说名称')->rules('required');
             $form->text('author', '小说作者')->rules('required');
@@ -133,6 +134,20 @@ class ArticlesController extends Controller
             $items = ['连载'=>'连载','完本'=>'完本'];
             $form->select('fullflag', '状态')->options($items);
             $form->textarea('intro','简介')->rows(8);
+            $form->hidden('postdate');
+            $form->hidden('lastupdate');
+            //保存前回调
+            $form->saving(function (Form $form) {
+                $t = time();
+                if(empty($form->postdate)){
+
+                  $form->postdate = $t;
+                }
+                if(empty($form->lastupdate)){
+
+                  $form->lastupdate = $t;
+                }
+            });
 
           });
     }

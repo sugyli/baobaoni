@@ -34,14 +34,15 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
       $email = User::createEmail();
+      $t = time();
       $user = User::create([
           'uname' => $request->uname,
           'pass' => md5($request->pass),
           'groupid' => 3,
-          'regdate' => time(),
-          'lastlogin'=> time(),
+          'regdate' => $t,
+          'lastlogin'=> $t,
           'viewemail'=> 1,
-          'adminemail'=> 1,
+          'adminemail'=> 0,
           'email' => $email,
       ]);
       if (!$user) {

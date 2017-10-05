@@ -55,6 +55,7 @@
 <div class="case_main re f-cb">
 
   <div class="case_left">
+    {{--
     <dl>
       <dt>会员中心</dt>
       <dd>
@@ -86,7 +87,7 @@
         <a {{ Request::is('member/outboxs/create') ? " href=javascript: class=active " : 'href='.route('outboxs.create').' ' }} title="联系管理员">联系管理员</a>
       </dd>
     </dl>
-
+    --}}
   </div>
 
 

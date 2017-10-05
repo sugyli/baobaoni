@@ -13,6 +13,6 @@
   </div>
 
   <div class="qiandao">
-    <a href="{{route('qiandao.show')}}" title="我要签到">我要签到</a>
+    <a href="{{route('member.qiandao.show')}}" title="我要签到">我要签到</a>
   </div>
 </div>

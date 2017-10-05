@@ -1,4 +1,7 @@
 @extends('webdashubao.layouts.user')
+@section('title')发邮件@endsection
+@section('keywords')发邮件@endsection
+@section('description')发邮件@endsection
 @section('substyle')
 .case_right .msg_button {
     margin-left: 40px;
@@ -47,6 +50,7 @@
 <form name="frmnewmessage" action="{{ route('outboxs.store') }}" method="post">
   {{ csrf_field() }}
   <input type="hidden" name="title" value="{{ old($title) ?: $title }}">
+  <input type="hidden" name="from" value="{{ old($from) ?: $from }}">
   <textarea id="content" name="content" style="display:none"></textarea>
   @if( $errors->any())
     @foreach($errors->all() as $error)

@@ -143,7 +143,7 @@
   </div>
   <div class="qd_check">
     @if(!$isqiandao)
-    <input type="button" value="开始签到" onclick="javascript:{this.disabled=true;this.value='签到中...';document.location='{{ route('qiandao.update') }}';}" class="btn">
+    <input type="button" value="开始签到" onclick="javascript:{this.disabled=true;this.value='签到中...';document.location='{{ route('member.qiandao.update') }}';}" class="btn">
     @else
     <input type="button" value="已经签到" disabled="disabled" class="btn">
     @endif

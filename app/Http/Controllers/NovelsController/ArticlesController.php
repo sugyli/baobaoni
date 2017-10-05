@@ -24,25 +24,25 @@ class ArticlesController extends Controller
     {
 
       $newBookDatas =
-                    \Cache::remember('index_newbook', config('app.cacheTime_d'), function (){
+                    \Cache::remember('index_newbook', get_sys_set('cacheTime_d'), function (){
 
                         return $this->article->getArticlesWithFilter('newdata',6);
 
                      });
        $weekdates =
-                     \Cache::remember('index_weekdate', config('app.cacheTime_d'), function (){
+                     \Cache::remember('index_weekdate', get_sys_set('cacheTime_d'), function (){
 
                           return  Ranking::getWeekBookHits(31);
 
                       });
       $monthdates =
-                    \Cache::remember('index_monthdate', config('app.cacheTime_d'), function (){
+                    \Cache::remember('index_monthdate', get_sys_set('cacheTime_d'), function (){
 
                          return  Ranking::getMonthBookHits(31);
 
                      });
 
-      $updataBooks = \Cache::remember('index_updatabook', config('app.cacheTime_d'), function (){
+      $updataBooks = \Cache::remember('index_updatabook', get_sys_set('cacheTime_d'), function (){
 
                         return  $this->article->getArticlesWithFilter('updatedata',20);
 
@@ -61,7 +61,8 @@ class ArticlesController extends Controller
         if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
             return redirect($bookData->link(), 301);
         }
-        return view('webdashubao.info', compact('bookData'));
+        $sorts = $bookData->getSort();
+        return view('webdashubao.info', compact('bookData','sorts'));
 
     }
 
@@ -69,8 +70,8 @@ class ArticlesController extends Controller
     {
         //注释  过滤只在 内容获取到的时候
         //内容不存在默认提示语句
-        $content  = DFNR;
-        $bakUrl = route('articles.show', ['bid' => $bid]);
+        $content  = get_sys_set('dfnr');
+        $bakUrl = route('web.articles.show', ['bid' => $bid]);
         $isimg = 0;//判断是否图片
         //先要获取 章节 这个KEY 是获取章节的KEY
         //  $keyChapter = BIDCID_ . $article->articleid;

@@ -17,22 +17,19 @@ include_once('jump.php');
 include_once('admin.php');
 
 
-# ------------------小说介绍路由处理------------------------
+# ------------------小说路由处理------------------------
 
 
-Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('articles.show');
+Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
 
-Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('articles.content');
-# ------------------小说内容路由处理------------------------
+Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
+# ------------------ajax路由处理------------------------
 
+Route::post('webajax/user/getuser', 'NovelsController\UsersController@getuser')->name('webajax.member.getuser');
 
-
-//Route::get('/contents/{article}/{cid}', 'NovelsController\ArticlesController@showContent')->name('contents.showContent');
-
-Route::post('ajax/user/getuser', 'NovelsController\UsersController@getuser')->name('ajax.member.getuser');
 Route::post('ajax/bookshelf/getbookshelfs', 'NovelsController\BookshelfsController@getBookshelfsData')->name('ajax.bookshelf.ajaxbookshelf');
-Route::post('ajax/bookshelf/addbookcase', 'NovelsController\BookshelfsController@addbookcase')->name('ajax.bookshelf.addbookcase');
-Route::post('ajax/user/recommend', 'NovelsController\UsersController@recommend')->name('ajax.member.recommend');
+Route::post('webajax/bookshelf/addbookcase', 'NovelsController\BookshelfsController@addbookcase')->name('webajax.bookshelf.addbookcase');
+Route::post('webajax/user/recommend', 'NovelsController\UsersController@recommend')->name('webajax.user.recommend');
 # ------------------用户------------------------
 Route::group([
     'prefix'        => 'member',
@@ -41,9 +38,7 @@ Route::group([
 ], function () {
 
 
-
-
-    Route::get('bookshelf', 'NovelsController\UsersController@bookshelf')->name('web.bookshelf');
+    //Route::get('bookshelf', 'NovelsController\UsersController@bookshelf')->name('web.bookshelf');
     //Route::match(['get', 'post'] , 'delbookshelf/{id?}', 'NovelsController\UsersController@delBookshelf')->name('web.delbookshelf');
 
 
@@ -63,7 +58,7 @@ Route::group([
 
   //  Route::resource('inboxs', InboxsController::class);
 
-    Route::get('user', 'UsersController@show')->name('member.show');
+    Route::get('user', 'UsersController@show')->name('member.user.show');
 
     Route::get('user/edit', 'UsersController@edit')->name('member.edit');
     Route::post('user', 'UsersController@update')->name('member.update');
@@ -76,24 +71,27 @@ Route::group([
     Route::post('users/updateavatar', 'UsersController@updateAvatar')->name('member.updateavatar');
 
 
-    Route::get('bookshelf', 'BookshelfsController@show')->name('bookshelf.show');
+    //Route::get('bookshelf', 'BookshelfsController@show')->name('member.bookshelf.show');
+    Route::get('bookshelf', 'BookshelfsController@index')->name('member.bookshelf.index');
+
+
 
     Route::match(['get', 'post'] ,'bookshelf/{id?}', 'BookshelfsController@destroy')->name('bookshelf.destroy');
     Route::get('bookshelf/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('bookshelf.clickbookshelf');
 
     //收件箱
-    Route::get('inboxs', 'InboxsController@index')->name('inboxs.index');
+    Route::get('inboxs', 'InboxsController@index')->name('member.inboxs.index');
     Route::get('inboxs/{id}', 'InboxsController@show')->name('inboxs.show');
     Route::delete('inboxs/{id?}', 'InboxsController@destroy')->name('inboxs.destroy');
     //发件箱
     Route::get('outboxs', 'OutboxsController@index')->name('outboxs.index');
     Route::get('outboxs/{id}', 'OutboxsController@show')->name('outboxs.show');
-    Route::get('outboxs/create', 'OutboxsController@create')->name('outboxs.create');
+    Route::get('outboxs/create', 'OutboxsController@create')->name('member.outboxs.create');
     Route::post('outboxs', 'OutboxsController@store')->name('outboxs.store');
     Route::delete('outboxs/{id?}', 'OutboxsController@destroy')->name('outboxs.destroy');
 
-    Route::get('qiandao', 'UserSignInController@show')->name('qiandao.show');
-    Route::get('qiandao/update', 'UserSignInController@update')->name('qiandao.update');
+    Route::get('qiandao', 'UserSignInController@show')->name('member.qiandao.show');
+    Route::get('qiandao/update', 'UserSignInController@update')->name('member.qiandao.update');
 });
 
 Route::group([
@@ -102,15 +100,15 @@ Route::group([
     //'middleware'    => ['auth'],
 ], function () {
 
-  Route::get('login', 'LoginController@create')->name('login.create');
-  Route::post('login', 'LoginController@store')->name('login.store');
-  Route::any('logout', 'LoginController@destroy')->name('login.destroy');
+  Route::get('login', 'LoginController@create')->name('web.login.create');
+  Route::post('login', 'LoginController@store');
+  Route::any('logout', 'LoginController@destroy')->name('web.login.destroy');
 
-  Route::get('register', 'RegisterController@create')->name('register.create');
-  Route::post('register', 'RegisterController@store')->name('register.store');
+  Route::get('register', 'RegisterController@create')->name('web.register.create');
+  Route::post('register', 'RegisterController@store');
 
 
-  Route::get('password','PasswordController@create')->name('password.create');
+  Route::get('password','PasswordController@create')->name('web.password.create');
   Route::post('password','PasswordController@store')->name('password.store');
 
 });

@@ -1,7 +1,7 @@
 @extends('webdashubao.layouts.default')
-@section('title'){{config('app.title_index')}}@endsection
-@section('keywords'){{config('app.keywords_index')}}@endsection
-@section('description'){{config('app.des_index')}}@endsection
+@section('title'){{get_sys_set('webname')}}@endsection
+@section('keywords'){{get_sys_set('webkeywords')}}@endsection
+@section('description'){{get_sys_set('webdes')}}@endsection
 
 @section('content')
 

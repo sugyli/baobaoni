@@ -11,7 +11,7 @@ use App\Models\Article;
 use App\Models\Chapter;
 class BookshelfsController extends Controller
 {
-    public function show()
+    public function index()
     {
 
        $user = Auth::user();
@@ -110,14 +110,13 @@ class BookshelfsController extends Controller
     {
         $user = $request->user();
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
-        $time = time();
         if (empty($user)) {
             $result['message'] = '您还没有登录,请登录！';
             return response()->json($result);
         }
         $bid = $request->bid + 0;
         $cid = $request->cid + 0;
-
+        $time = time();
         if($bid <= 0){
           $result['message'] = '操作非法';
           return response()->json($result);
@@ -178,7 +177,6 @@ class BookshelfsController extends Controller
             if(Bookcase::create($data)){
               $result['error'] = 0;
               return response()->json($result);
-
             }
             $result['message'] = '添加书架失败了';
             return response()->json($result);
@@ -206,7 +204,6 @@ class BookshelfsController extends Controller
           $result['error'] = 0;
           $result['message'] = '更新书签成功了';
           return response()->json($result);
-
         }
         $result['message'] = '更新书签失败了';
         return response()->json($result);

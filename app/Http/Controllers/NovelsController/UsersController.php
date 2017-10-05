@@ -71,11 +71,12 @@ class UsersController extends Controller
         if($num > $userRecommendCount){
           $result['message'] = "不好意思您今日的推荐票只有 {$userRecommendCount} 张";
           return response()->json($result);
-
         }
 
         $date = date("Y-m-d",time());
         $date = strtotime($date);
+        $s = get_sys_set('recommendscore');//增长的经验
+        $s = $s * $num;
         $ranking= $article->relationRankings($user->uid,$date);
         if(empty($ranking)){
             $data = [
@@ -86,9 +87,10 @@ class UsersController extends Controller
             $bak = $user->relationRankings()->create($data);
 
             if($bak){
-              $user->increment('score' , $num);
+
+              $user->increment('score' , $s);
               $result['error'] = 0;
-              $result['message'] = "推荐成功,并且获取 {$num} 点经验";
+              $result['message'] = "推荐成功,并且获取 {$s} 点经验";
               del_hits_cache($articleid);
               return response()->json($result);
             }
@@ -106,13 +108,11 @@ class UsersController extends Controller
         }
 
         $ranking->increment('hits' , $num);
-        $user->increment('score' , $num);
+        $user->increment('score' , $s);
         $result['error'] = 0;
-        $result['message'] = "推荐本书成功！并且获取 {$num} 点经验";
+        $result['message'] = "推荐本书成功！并且获取 {$s} 点经验";
         del_hits_cache($articleid);
         return response()->json($result);
-
-
     }
 
     //用户首页

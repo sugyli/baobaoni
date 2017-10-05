@@ -29,9 +29,9 @@ class UserSignInController extends Controller
       	}
       }
       $qiandao = Auth::user()->relationQiandao;
-      $bili = 5;//就是天数乘以这个数字，得到最终积分数
-      $maxnums = 35;//连续奖励最高可获得的积分
-      $newUser = 20;//新签到用户获取积分数
+      $bili = get_sys_set('bili');//就是天数乘以这个数字，得到最终积分数
+      $maxnums = get_sys_set('qiandao_maxnums');//连续奖励最高可获得的积分
+      $newUser = get_sys_set('qiandao_newuser');//新签到用户获取积分数
       if(!empty($qiandao)){
       	$jifenNums = ($qiandao['lianxu_days']+1)*$bili;
       	if($jifenNums>$maxnums) $jifenNums = $maxnums;
@@ -53,9 +53,9 @@ class UserSignInController extends Controller
     {
 
         //连续签到奖励的积分，按照天来增加
-        $bili = 5;//就是天数乘以这个数字，得到最终积分数
-        $maxnums = 35;//连续奖励最高可获得的积分
-        $newUser = 20;//新签到用户获取积分数
+        $bili = get_sys_set('bili');//就是天数乘以这个数字，得到最终积分数
+        $maxnums = get_sys_set('qiandao_maxnums');//连续奖励最高可获得的积分
+        $newUser = get_sys_set('qiandao_newuser');//新签到用户获取积分数
         $nowtime = time();
         $user = Auth::user();
         $qiandao = $user->relationQiandao;
@@ -91,18 +91,18 @@ class UserSignInController extends Controller
           		}else{
                 $qiandao->batchAssignment($nowtime ,false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您的签到，连续签到有奖励哦！');
+                session()->flash('message', '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点');
           		}
           	}else{
           		//如果不是当前月份
           		if(($thisdateunix-$lastqiandaodateunix)<'172800'){//如果是连续天数签到
                 $qiandao->batchAssignment($nowtime ,true, false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励积分'.$jifenNums.'点');
+                session()->flash('message', '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励经验'.$jifenNums.'点');
           		}else{
                 $qiandao->batchAssignment($nowtime ,false, false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您的签到，连续签到有奖励哦！');
+                session()->flash('message', '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点');
 
           		}
           	}
@@ -119,7 +119,7 @@ class UserSignInController extends Controller
 
 
             $user->increment('score', $newUser);
-            session()->flash('message', '您是新签到用户，奖励积分'.$newUser.'点');
+            session()->flash('message', '您是新签到用户，奖励经验'.$newUser.'点');
         }
 
         return redirect()->back();
