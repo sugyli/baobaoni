@@ -31,7 +31,9 @@ class SystemSettingsController extends Controller
                 $form->textarea('weblink','web网站友情链接')->rows(10)->default(get_sys_set('weblink'))->help('直接输入代码就行');
                 $form->textarea('webfoot','web网站版权信息')->rows(10)->default(get_sys_set('webfoot'))->help('直接输入代码就行');
                 $form->divide();
-                $form->text('dfxsfmdir', '小说默认封面')->default(get_sys_set('dfxsfmdir'))->help('全局通用');
+                $form->text('dfxsfmdir', '小说默认封面')->default(get_sys_set('dfxsfmdir'))->help('全局通用,结尾要加 /');
+                $form->text('imagedir', '小说内容附件地址')->default(get_sys_set('imagedir'))->help('全局通用,结尾要加 /');
+                $form->text('txtdir', 'TXT域名前缀')->default(get_sys_set('txtdir'))->help('全局通用,结尾要加 /');
                 $form->number('cacheTime_d', '低缓存时间')->default(get_sys_set('cacheTime_d'))->help('常用于封推或者签到等');
                 $form->number('cacheTime_z', '中缓存时间')->default(get_sys_set('cacheTime_z'))->help('常用于介绍等');
                 $form->number('cacheTime_g', '高缓存时间')->default(get_sys_set('cacheTime_g'))->help('常用于内容等');
@@ -43,7 +45,17 @@ class SystemSettingsController extends Controller
                 $form->number('bookcasemaxcount', '默认书架容量')->default(get_sys_set('bookcasemaxcount'))->help('当权限没设置启用默认');
                 $form->number('dayrecommendmaxcount', '默认日推荐票')->default(get_sys_set('dayrecommendmaxcount'))->help('当权限没设置启用默认');
                 $form->number('recommendscore', '投一票增长经验')->default(get_sys_set('recommendscore'));
-                $form->textarea('dfnr','内容丢失提示语')->rows(5)->default(get_sys_set('dfnr'))->help('直接输入代码就行');
+                $form->number('minnr', '内容最小内容')->default(get_sys_set('minnr'))->help('章节内容小于此数值才会去检测附件');;
+
+
+                $form->select('txtlog')->options(function () {
+                  if(get_sys_set('txtlog')){
+
+                    return[true=>'开启',false=>'关闭'];
+                  }
+                  return[false=>'关闭',true=>'开启'];
+                });
+                $form->textarea('dfnr','内容丢失提示语')->rows(3)->default(get_sys_set('dfnr'))->help('直接输入代码就行');
                 $column->append((new Box('设置', $form))->style('success'));
             });
           });

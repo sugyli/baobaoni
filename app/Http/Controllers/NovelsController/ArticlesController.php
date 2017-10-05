@@ -105,18 +105,18 @@ class ArticlesController extends Controller
 
             //下面是获取TXT的部分
             $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
-            $txtDir = config('app.txtdir') . $path;
+            $txtDir = get_sys_set('txtdir') . $path;
             $keyTxt = TXT . $path;
 
             $txtObj = saveOrGetTxtData($keyTxt , $txtDir, $chapter->lastupdate ,$chapter->attachment);
             //获取到了内容 $txtObj['state'] == true 百分百有内容
             if ($txtObj['state']) {
                 //判断附件 如果替换了文字就不会走这个
-                if (!empty($chapter->attachment) && getstrlength($txtObj['content']) <= MINNR){
+                if (!empty($chapter->attachment) && getstrlength($txtObj['content']) <= get_sys_set('minnr')){
                   $imgobj = unserialize($chapter->attachment);
                   $imghtml = '';
                   foreach ($imgobj as  $item) {
-                      $img = config('app.imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
+                      $img = get_sys_set('imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
                       $imghtml .= '<div class="divimage"><img src="'. $img .'" /></div>';
                   }
                   $content = $imghtml;
@@ -133,7 +133,7 @@ class ArticlesController extends Controller
                     $imgobj = unserialize($chapter->attachment);
                     $imghtml = '';
                     foreach ($imgobj as  $item) {
-                        $img = config('app.imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
+                        $img = get_sys_set('imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
                         $imghtml .= '<div class="divimage"><img src="'. $img .'" /></div>';
                     }
                     $content = $imghtml;

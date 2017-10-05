@@ -7,8 +7,10 @@ define("HONORS", 'honors');
 define("WEEKHITS", 'getweekhits_');
 define("MONTHHITS", 'getMonthhits_');
 define("DAYHITS", 'getDayhits_');
-
 define("TXT", 'txt_');//内容前缀
+
+
+
 define("MINNR", 300);//最小内容
 
 
@@ -154,7 +156,7 @@ function saveTxt($key,$txtDir,$lastupdate,$outData ,$attachment)
     $txt = curlTxt($txtDir,$attachment);
     if (!empty($txt)) {
       $outData = ['state'=>true , 'content'=>$txt , 'lastupdate' =>$lastupdate];
-      \Cache::put($key, $outData, config('app.cacheTime_g'));
+      \Cache::put($key, $outData, get_sys_set('cacheTime_g'));
     }
 
     return $outData;
@@ -199,7 +201,7 @@ function txtLog($txtDir,$attachment,$http_status_code)
 {
 
   //记录获取错误的TXT 因为历史原因 可记录
-  if (config('app.txtlog')) {
+  if (get_sys_set('txtlog')) {
 
       if (!empty($attachment)) {
         $ms = 'txt内容获取失败 有附件提示可能是图片 状态码不是200 代表txt文件不存在';
@@ -218,7 +220,7 @@ function getChapterUrl($bid , $chapter)
         return $chapter->link();
     }
 
-    return route('articles.show',['bid'=>$bid]);
+    return route('web.articles.show',['bid'=>$bid]);
 
 }
 

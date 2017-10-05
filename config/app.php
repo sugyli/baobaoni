@@ -12,19 +12,22 @@ return [
     'bili' => 5,
     'qiandao_maxnums' => 35,
     'qiandao_newuser' => 20,
-    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认路径
+    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认图片
     'maxchapter' => 10000,
     'massagemaxcount' => 20,
     'bookcasemaxcount' => 20,
     'dayrecommendmaxcount' => 20,
     'recommendscore' => 1,
     'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
-
+    'txtdir' => env('TXTDIR'),//txt域名
+    'txtlog' => false,//是否开启txt采集日记
+    'minnr' => 300,
+    'imagedir' => env('IMAGEDIR'),//图片地址
 
     'xsfmdir' => env('XSFMDIR',DS),//小说封面路径
 
-    'txtdir' => env('TXTDIR'),//txt域名
-    'imagedir' => env('IMAGEDIR'),//图片地址
+
+
     'txtlog' => env('TXTLOG',false),//是否开启txt采集日记
 
 
