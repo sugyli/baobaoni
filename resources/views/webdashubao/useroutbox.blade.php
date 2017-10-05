@@ -1,6 +1,6 @@
 @extends('webdashubao.layouts.user')
 @section('usercontent')
-<style>
+@section('substyle')
 .top {
     width: 100%;
     height: 35px;
@@ -63,8 +63,8 @@
     color: #000;
     background: #e6f5e2;
 }
-</style>
-<form action="{{ route('outboxs.destroy') }}" method="post" name="checkform" id="checkform">
+@endsection
+<form action="{{ route('member.outboxs.destroy') }}" method="post" name="checkform" id="checkform">
   {{ csrf_field() }}
   {{ method_field('DELETE') }}
   <div class="case_title">发件箱（您的等级只显示发件箱数：{{$user->getUserHonor()->getMassageMaxCount()}}，现有消息数：{{$user->relationOutboxs->count()}}条） </div>
@@ -87,7 +87,7 @@
         <font color="#FF0000">{{ $message->toname }}</font>
       </span>
       <span class="bt">
-        <a href="{{ route('outboxs.show',['id'=> $message->messageid ]) }}" title="{{$message->title}}">{{$message->title}}</a>
+        <a href="{{ route('member.outboxs.show',['id'=> $message->messageid ]) }}" title="{{$message->title}}">{{$message->title}}</a>
       </span>
       <span class="rq">{{ formatTime($message->postdate) }}</span>
     </li>

@@ -1,4 +1,7 @@
 @extends('webdashubao.layouts.user')
+@section('title')编辑资料@endsection
+@section('keywords')编辑资料@endsection
+@section('description')编辑资料@endsection
 @section('substyle')
 .msg_left {
     float: left;
@@ -48,7 +51,7 @@
 @endsection
 @section('usercontent')
 <div class="case_title">编辑资料</div>
-<form name="formtable" action="{{ route('member.update') }}" method="post">
+<form name="formtable" action="{{ route('member.user.show') }}" method="post">
   {{ csrf_field() }}
   <div class="msg_left">修改昵称：</div>
   <div class="msg_right">

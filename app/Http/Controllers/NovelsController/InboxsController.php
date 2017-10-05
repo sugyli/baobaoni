@@ -10,8 +10,6 @@ use Auth;
 //use App\Http\Controllers\Traits\PublicTrait;
 class InboxsController extends Controller
 {
-
-
     //use PublicTrait;
     //列出收件箱
     public function index()
@@ -45,7 +43,7 @@ class InboxsController extends Controller
       }
 
       session()->flash('message', '您没有此消息');
-      return redirect()->route('inboxs.index');
+      return redirect()->route('member.inboxs.index');
     }
 
     public function destroy(Request $request)
@@ -60,7 +58,7 @@ class InboxsController extends Controller
                       ->update(['todel' => 1]);
           if ($backData) {
             session()->flash('message', '批量删除成功');
-            return redirect()->route('inboxs.index');
+            return redirect()->route('member.inboxs.index');
           }
 
         }elseif (!is_array($ids) && $ids > 0) {
@@ -69,12 +67,12 @@ class InboxsController extends Controller
                       ->update(['todel' => 1]);
           if ($backData) {
             session()->flash('message', '删除成功');
-            return redirect()->route('inboxs.index');
+            return redirect()->route('member.inboxs.index');
           }
         }
         session()->flash('message', '删除失败');
 
-        return redirect()->route('inboxs.index');
+        return redirect()->route('member.inboxs.index');
 
     }
 }

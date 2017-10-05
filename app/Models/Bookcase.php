@@ -30,7 +30,6 @@ class Bookcase extends Model
   {
     //第2个参数是 chapter类的外键   第3个是 本类中articleid
 
-
       return $this->hasOne(Article::class ,'articleid' ,'articleid');
 
   }

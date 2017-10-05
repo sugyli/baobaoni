@@ -8,7 +8,7 @@ define("WEEKHITS", 'getweekhits_');
 define("MONTHHITS", 'getMonthhits_');
 define("DAYHITS", 'getDayhits_');
 define("TXT", 'txt_');//内容前缀
-
+define("SORTS", 'sorts');//KEY
 
 
 define("MINNR", 300);//最小内容
@@ -16,7 +16,7 @@ define("MINNR", 300);//最小内容
 
 
 
-define("SORTS", 'sorts');//KEY
+
 
 //缓存小说 和目录
 function saveOrGetBookData($bid)

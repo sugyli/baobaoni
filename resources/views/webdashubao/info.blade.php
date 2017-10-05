@@ -12,7 +12,7 @@
   <div class="rt jieshao-main">
     <h1>{{ $bookData->articlename }}</h1>
     <div class="msg">
-      <em>作者：{{ $bookData->author }} </em><em>状态：{{ $bookData->fullflag }} </em><em>日推荐：{{ $bookData->getDayHits() }} </em><em>周推荐：{{ $bookData->getWeekHits() }} </em><em>月推荐：{{ $bookData->getMonthHits() }} </em><em>更新时间：{{formatTime($bookData->lastupdate)}}</em><em>最新章节：<a href="{{ route('web.articles.content' ,['article'=>$bookData->articleid ,'cid'=>$bookData->lastchapterid]) }}">{{$bookData->lastchapter}}</a></em>
+      <em>作者：{{ $bookData->author }} </em><em>状态：{{ $bookData->fullflag }} </em><em>今日推荐：{{ $bookData->getDayHits() }} </em><em>周推荐：{{ $bookData->getWeekHits() }} </em><em>月推荐：{{ $bookData->getMonthHits() }} </em><em>更新时间：{{formatTime($bookData->lastupdate)}}</em><em>最新章节：<a href="{{ route('web.articles.content' ,['article'=>$bookData->articleid ,'cid'=>$bookData->lastchapterid]) }}">{{$bookData->lastchapter}}</a></em>
     </div>
     <div class="info f-cb" style="line-height: 23px;height: 23px;">
 
@@ -49,6 +49,9 @@
   </dl>
 </div>
 @endif
-
-
+@endsection
+@section('subscripts')
+<script type="text/javascript">
+baobaoni.toTop();
+</script>
 @endsection

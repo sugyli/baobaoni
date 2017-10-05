@@ -14,7 +14,7 @@ trait ArticleFilterable
 
   public function getArticleFilter($filter)
   {
-      $filters = ['newdata', 'updatedata'];
+      $filters = ['newdata', 'updatedata','fenleidata'];
       if (in_array($filter, $filters)) {
           return $filter;
       }
@@ -36,7 +36,10 @@ trait ArticleFilterable
       case 'updatedata':
           return $this->makeVisible('lastupdatef')->orderBy('lastupdate', 'desc');
           break;
-
+      case 'fenleidata':
+          $id = request()->id;
+          return $this->where('sortid',$id)->orderBy('lastupdate', 'desc');
+          break;
 
       default:
           return '';

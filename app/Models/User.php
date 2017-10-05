@@ -30,7 +30,7 @@ class User extends Authenticatable
     public function getCaptionAttribute()
     {
         $honor = $this->getUserHonor();
-        return  $this->attributes['grade']  = $honor->caption;
+        return  $honor->caption;
     }
     //经典的递归
     public static function createEmail()
@@ -65,6 +65,7 @@ class User extends Authenticatable
     {
         return empty($value) ? '/webdashubao/images/noavatar.jpg' : $value;
     }
+    
     public function getMobileAttribute($value)
     {
         return empty($value) ? '未填' : $value;

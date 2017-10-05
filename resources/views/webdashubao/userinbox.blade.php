@@ -1,6 +1,9 @@
 @extends('webdashubao.layouts.user')
+@section('title')收件箱@endsection
+@section('keywords')收件箱@endsection
+@section('description')收件箱@endsection
 @section('usercontent')
-<style>
+@section('substyle')
 .top {
     width: 100%;
     height: 35px;
@@ -71,9 +74,8 @@
     color: #000;
     background: #e6f5e2;
 }
-
-</style>
-<form action="{{ route('inboxs.destroy') }}" method="post" name="checkform" id="checkform">
+@endsection
+<form action="{{ route('member.inboxs.destroy') }}" method="post" name="checkform" id="checkform">
   {{ csrf_field() }}
   {{ method_field('DELETE') }}
   <div class="case_title">收件箱（您的等级只显示收件箱数：{{$user->getUserHonor()->getMassageMaxCount()}}，现有消息数：{{$user->relationInboxs->count()}}条） </div>
@@ -88,27 +90,27 @@
       <span class="sc">状态</span>
     </li>
     @if($user->relationInboxs->count() > 0)
-    @foreach($user->relationInboxs as $message)
-    <li>
-      <span class="fk">
-        <input class="input" type="checkbox" id="checkid[]" name="checkid[]" value="{{$message->messageid}}">
-      </span>
-      <span class="wz">
-        <font color="#FF0000">{{ $message->fromname }}</font>
-      </span>
-      <span class="bt">
-        <a href="{{ route('inboxs.show',['id'=> $message->messageid ]) }}" title="{{$message->title}}">{{$message->title}}</a>
-      </span>
-      <span class="rq">{{formatTime($message->postdate)}}</span>
-      <span class="sc">
-        @if($message->isread <= 0)
-        <img src="/webdashubao/images/new.gif">
-        @else
-        已读
-        @endif
-      </span>
-    </li>
-    @endforeach
+      @foreach($user->relationInboxs as $message)
+      <li>
+        <span class="fk">
+          <input class="input" type="checkbox" id="checkid[]" name="checkid[]" value="{{$message->messageid}}">
+        </span>
+        <span class="wz">
+          <font color="#FF0000">{{ $message->fromname }}</font>
+        </span>
+        <span class="bt">
+          <a href="{{ route('member.inboxs.show',['id'=> $message->messageid ]) }}" title="{{$message->title}}">{{$message->title}}</a>
+        </span>
+        <span class="rq">{{formatTime($message->postdate)}}</span>
+        <span class="sc">
+          @if($message->isread <= 0)
+          <img src="/webdashubao/images/new.gif">
+          @else
+          已读
+          @endif
+        </span>
+      </li>
+      @endforeach
     @endif
     <li class="bottom">
       <input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">

@@ -25,6 +25,7 @@ Vue.component('user-info', require('./components/UserInfo.vue'));
 Vue.component('user-bookinfobnt', require('./components/BookInfoBnt.vue'));
 Vue.component('user-booknrbnt', require('./components/BookNrBnt.vue'));
 Vue.component('user-jilu', require('./components/Jilu.vue'));
+Vue.component('user-fenleibnt', require('./components/FenleiBnt.vue'));
 const app = new Vue({
     el: '#app'
 });

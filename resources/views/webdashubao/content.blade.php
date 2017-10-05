@@ -8,15 +8,13 @@
 当前位置：<a href="/">首页</a> &gt; <a href="{{ $sorts->uri or '/'}}">{{$sorts->title or '未知分类'}}</a> &gt; <a href="{{ route('web.articles.show',['bid'=>$chapter->articleid]) }}">{{ $chapter->articlename }}</a> &gt;  {{$chapter->chaptername}}
 </div>
 <div class="read_b re f-cb">
-  {{--
   <user-booknrbnt
   bid={{$chapter->articleid}}
   cid={{$chapter->chapterid}}
-  addbookcaseurl="{{route('ajax.bookshelf.addbookcase')}}"
-  recommend="{{route('ajax.member.recommend')}}"
-  newmessageurl="{{route('outboxs.create')}}?title={{ $chapter->articlename}}_{{ $chapter->chaptername}}&amp;from={{request()->url()}}"
+  addbookcaseurl="{{ route('webajax.bookshelf.addbookcase') }}"
+  recommend="{{route('webajax.user.recommend')}}"
+  newmessageurl="{{route('member.outboxs.create')}}?title={{ $chapter->articlename}}_{{ $chapter->chaptername}}&amp;from={{request()->url()}}"
   ></user-booknrbnt>
-  --}}
 </div>
 <div class="novel re">
   <h1>{{$chapter->chaptername}}</h1>

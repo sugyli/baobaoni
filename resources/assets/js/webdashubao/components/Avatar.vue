@@ -7,7 +7,7 @@
            v-model="show"
            :width="120"
            :height="120"
-           url="/member/updateavatar"
+           :url="a"
            :params="params"
            :headers="headers"
            img-format="png"></my-upload>
@@ -21,7 +21,7 @@
     import myUpload from 'vue-image-crop-upload/upload-2.vue';
 
     export default {
-        props:['avatar','_token'],
+        props:['avatar','_token','updateavatar'],
         data() {
             return {
                 show: false,
@@ -32,7 +32,8 @@
                 headers: {
                     smail: '*_~'
                 },
-                imgDataUrl: this.avatar
+                imgDataUrl: this.avatar,
+                a: this.updateavatar,
             }
         },
         components: {
@@ -41,6 +42,13 @@
         methods: {
             toggleShow() {
                 this.show = !this.show;
+            },
+            msg: function (msg ,t = 3000) {
+              this.$toasted.show(msg, {
+                   theme: "bubble",
+                   position: "top-center",
+                   duration : t
+                });
             },
             /**
              * crop success
@@ -61,7 +69,7 @@
                 if(response.errno == 0 ){
                   this.imgDataUrl = response.data
                 }
-                this.toggleShow()
+                this.toggleShow();
             },
             /**
              * upload fail
@@ -73,6 +81,7 @@
                 console.log('-------- upload fail --------');
                 console.log(status);
                 console.log('field: ' + field);
+
             }
         }
     }

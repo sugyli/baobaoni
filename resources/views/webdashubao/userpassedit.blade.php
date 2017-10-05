@@ -1,4 +1,7 @@
 @extends('webdashubao.layouts.user')
+@section('title')修改密码@endsection
+@section('keywords')修改密码@endsection
+@section('description')修改密码@endsection
 @section('substyle')
 .msg_left {
     float: left;
@@ -48,7 +51,7 @@
 @endsection
 @section('usercontent')
 <div class="case_title">修改密码</div>
-<form name="formtable" action="{{ route('member.passedit') }}" method="post">
+<form name="formtable" action="{{ route('member.user.passedit') }}" method="post">
   {{ csrf_field() }}
   <div class="msg_left">原密码：</div>
   <div class="msg_right">

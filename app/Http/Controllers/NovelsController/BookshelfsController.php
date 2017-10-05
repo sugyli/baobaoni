@@ -31,7 +31,6 @@ class BookshelfsController extends Controller
        $bookcases = $user->relationBookcases()
                          ->with('relationArticles')->get();
 
-
        if (!$bookcases->isEmpty()) {
            $bookcases = $bookcases->sortByDesc('relationArticles.lastupdate');
            $bookcases = $bookcases->values();
@@ -51,8 +50,8 @@ class BookshelfsController extends Controller
 
     public function clickBookshelf(Request $request)
     {
-      $bid = $request->bid ?: 0;
-      $cid = $request->cid;
+      $bid = $request->bid + 0;
+      $cid = $request->cid + 0;
       //echo route('articles.show',['article'=>$bid , 'cid' =>$cid]);
       //return;
       if($bid > 0){
@@ -60,9 +59,11 @@ class BookshelfsController extends Controller
                      ->where('articleid', $bid)
                      ->update(['lastvisit' => time()]);
       }
+      if($cid > 0){
+        return redirect()->route('web.articles.content',['article'=>$bid , 'cid' =>$cid]);
+      }
 
-
-        return redirect()->route('articles.show',['article'=>$bid , 'cid' =>$cid]);
+      return redirect()->route('web.articles.show',['article'=>$bid]);
     }
 
 
@@ -72,13 +73,13 @@ class BookshelfsController extends Controller
 
         if ($request->isMethod('post')) {
             $ids  =  $request->checkid;
-            if (is_array($ids)) {
+            if (is_array($ids) && !empty($ids)) {
               $a =  $user->relationBookcases()
                            ->whereIn('caseid', $ids)
                            ->delete();
               if ($a) {
                 session()->flash('message', '批量删除书架成功');
-                return redirect()->route('bookshelf.show');
+                return redirect()->route('member.bookshelf.index');
               }
 
             }
@@ -93,7 +94,7 @@ class BookshelfsController extends Controller
 
                 if($a){
                   session()->flash('message', '删除单本书架成功');
-                  return redirect()->route('bookshelf.show');
+                  return redirect()->route('member.bookshelf.index');
                 }
 
             }
@@ -101,7 +102,7 @@ class BookshelfsController extends Controller
         }
 
         session()->flash('message', '删除书架失败');
-        return redirect()->route('bookshelf.show');
+        return redirect()->route('member.bookshelf.index');
 
     }
 

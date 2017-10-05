@@ -1,6 +1,9 @@
 @extends('webdashubao.layouts.user')
+@section('title')我的消息内容@endsection
+@section('keywords')我的消息内容@endsection
+@section('description')我的消息内容@endsection
 @section('usercontent')
-<style>
+@section('substyle')
 .case_right .msg_title{
     background: url(/webdashubao/images/case.png) repeat-x 0 -58px;
     height: 38px;
@@ -46,7 +49,7 @@
     color: #000;
     background: #e6f5e2;
 }
-</style>
+@endsection
 <div class="msg_title">{{$messageData->title}}</div>
 <div class="msg_left online">发送人：{{$messageData->fromname}}</div>
 <div class="msg_left online">接收人：<font color="#FF0000">{{$messageData->toname}}</font></div>
@@ -54,14 +57,14 @@
 <div class="msg_neirong">
 {!! $messageData->content !!}
 </div>
-<form action="{{ route('outboxs.destroy') }}" method="post">
+<form action="{{ Request::is('member/inboxs/*') ? route('member.inboxs.destroy') : route('member.outboxs.destroy') }}" method="post">
   {{ csrf_field() }}
   {{ method_field('DELETE') }}
   <div class="msg_foot">
     @if(Request::is('member/inboxs/*'))
-    <input type="button" value="回复邮件" class="button" onclick="javascript:document.location='{{ route('outboxs.create') }}'">
+    <input type="button" value="回复邮件" class="button" onclick="javascript:document.location='{{ route('member.outboxs.create') }}'">
     @endif
-    <input type="button" value="{{ Request::is('member/inboxs/*') ? '返回收件箱' : '返回发件箱' }}" class="button" onclick="javascript:document.location='{{ Request::is('member/inboxs/*') ? route('inboxs.index') : route('outboxs.index') }}'">
+    <input type="button" value="{{ Request::is('member/inboxs/*') ? '返回收件箱' : '返回发件箱' }}" class="button" onclick="javascript:document.location='{{ Request::is('member/inboxs/*') ? route('member.inboxs.index') : route('member.outboxs.index') }}'">
     <input type="button" value="删除此消息" class="button" onclick="javascript:if(confirm('确实要删除此记录么？')){ this.disabled=true;this.value='提交中...'; this.form.submit();}">
     <input name="checkid" type="hidden" value="{{$messageData->messageid}}">
   </div>

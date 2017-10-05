@@ -37,7 +37,7 @@ class OutboxsController extends Controller
       }
 
       session()->flash('message', '您没有此消息');
-      return redirect()->route('outboxs.index');
+      return redirect()->route('member.outboxs.index');
     }
 
 
@@ -46,7 +46,8 @@ class OutboxsController extends Controller
     {
         $title = $request->title ?: '来源Web用户中心的问题';
         $from = $request->from;
-        return view('webdashubao.usermessagecreate',compact('title','from'));
+        $title = $title.'_'.$from;
+        return view('webdashubao.usermessagecreate',compact('title'));
     }
     public function store(OutboxRequest $request)
     {
@@ -67,7 +68,8 @@ class OutboxsController extends Controller
             return $this->creatorFailed('数据库繁忙稍后再试！');
         }
         $message->collectImages();
-        return redirect()->route('outboxs.index');
+        session()->flash('message', '发送消息成功');
+        return redirect()->route('member.outboxs.index');
     }
 
     public function destroy(Request $request)
@@ -81,7 +83,7 @@ class OutboxsController extends Controller
                       ->update(['fromdel' => 1]);
           if ($backData) {
             session()->flash('message', '批量删除成功');
-            return redirect()->route('outboxs.index');
+            return redirect()->route('member.outboxs.index');
           }
 
         }elseif (!is_array($ids) && $ids > 0) {
@@ -90,12 +92,12 @@ class OutboxsController extends Controller
                       ->update(['fromdel' => 1]);
           if ($backData) {
             session()->flash('message', '删除成功');
-            return redirect()->route('outboxs.index');
+            return redirect()->route('member.outboxs.index');
           }
         }
         session()->flash('message', '删除失败');
 
-        return redirect()->route('outboxs.index');
+        return redirect()->route('member.outboxs.index');
 
     }
 }

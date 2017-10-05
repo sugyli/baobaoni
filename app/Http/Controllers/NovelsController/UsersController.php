@@ -28,7 +28,6 @@ class UsersController extends Controller
       */
     }
 
-
     public function getuser(Request $request)
     {
         $user = $request->user();
@@ -141,7 +140,8 @@ class UsersController extends Controller
             $user->name = $request->name;
             $user->mobile = $request->mobile;
             $user->save();
-            return redirect()->route('member.show');
+            session()->flash('message', '修改资料成功');
+            return redirect()->route('member.user.show');
         } catch (\Exception $exception) {
             session()->flash('message', '修改失败');
             return redirect()->back()->withInput();
@@ -185,7 +185,8 @@ class UsersController extends Controller
       try {
           $user->pass = md5($request->newpass);
           $user->save();
-          return redirect()->route('member.show');
+          session()->flash('message', '修改密码成功');
+          return redirect()->route('member.user.show');
       } catch (\Exception $exception) {
           session()->flash('message', '修改失败');
           return redirect()->back();

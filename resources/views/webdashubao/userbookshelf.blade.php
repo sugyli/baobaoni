@@ -76,15 +76,10 @@
 @endsection
 @section('usercontent')
 <user-bookshelf
-      getdataurl="{{ route('ajax.bookshelf.ajaxbookshelf') }}"
-      destroyurl="{{route('bookshelf.destroy')}}"
-      redurl={{route('bookshelf.clickbookshelf')}}
+      getdataurl="{{ route('webajax.bookshelf.getbookshelfs') }}"
+      destroyurl="{{ route('member.bookshelf.destroy') }}"
+      redurl={{route('member.bookshelf.clickbookshelf')}}
       token= "{{ csrf_token() }}"
       bookcasecount = "{{ $user->getUserHonor()->getBookcaseCount() }}"
       ></user-bookshelf>
-@endsection
-
-
-@section('scripts')
-@parent
 @endsection

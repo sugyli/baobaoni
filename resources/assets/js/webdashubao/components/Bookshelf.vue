@@ -40,7 +40,7 @@
 
 
       <span class="gx">
-        <label v-if="item.relation_articles">{{ item.relation_articles.Lastupdatef }}</label>
+        <label v-if="item.relation_articles">{{ get_Date(item.relation_articles.lastupdate) }}</label>
         <label v-else>无</label>
       </span>
 
@@ -78,6 +78,7 @@
             axios.post(self.getdataurl, {
               })
               .then(function (response) {
+                //console.log(response);
                 self.toggleShow();
                 if(response.data.error == 0 ){
                   self.d = response.data.bakdata.length;
@@ -94,6 +95,9 @@
               });
 
         },
+        computed: {
+
+        },
         mounted() {
 
         },
@@ -103,6 +107,12 @@
         methods: {
             toggleShow: function() {
                 this.loading = !this.loading;
+            },
+            get_Date: function(tm) {
+                var d = new Date(tm * 1000);    //根据时间戳生成的时间对象
+                var date = (d.getMonth() + 1) + "-" +
+                           (d.getDate());
+                return date;
             },
             msg: function (msg ,t = 3000) {
               this.$toasted.show(msg, {

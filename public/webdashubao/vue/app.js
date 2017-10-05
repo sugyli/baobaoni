@@ -2782,7 +2782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['avatar', '_token'],
+    props: ['avatar', '_token', 'updateavatar'],
     data: function data() {
         return {
             show: false,
@@ -2793,7 +2793,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             headers: {
                 smail: '*_~'
             },
-            imgDataUrl: this.avatar
+            imgDataUrl: this.avatar,
+            a: this.updateavatar
         };
     },
 
@@ -2805,6 +2806,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.show = !this.show;
         },
 
+        msg: function msg(_msg) {
+            var t = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
+
+            this.$toasted.show(_msg, {
+                theme: "bubble",
+                position: "top-center",
+                duration: t
+            });
+        },
         /**
          * crop success
          *
@@ -3321,45 +3331,123 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['getdataurl', 'destroyurl', 'token', 'bookcasecount', 'redurl'],
+    props: ['getdataurl', 'destroyurl', 'token', 'bookcasecount', 'redurl'],
+    data: function data() {
+        return {
+            loading: true,
+            items: [],
+            a: this.destroyurl, //删除地址
+            b: this.token,
+            c: this.bookcasecount,
+            d: "计算中...",
+            e: this.redurl
+
+        };
+    },
+
+    //created 比 mounted早 钩子方法
+    created: function created() {
+        var self = this;
+        axios.post(self.getdataurl, {}).then(function (response) {
+            //console.log(response);
+            self.toggleShow();
+            if (response.data.error == 0) {
+                self.d = response.data.bakdata.length;
+                self.items = response.data.bakdata;
+            } else {
+                self.d = 0;
+                self.msg('没有获取到您的收藏,可能您还没有收藏！');
+            }
+        }).catch(function (response) {
+            console.log(response);
+            self.toggleShow();
+            self.msg('网络故障,稍后刷新页面再试验！');
+        });
+    },
+
+    computed: {},
+    mounted: function mounted() {},
+
+    components: {},
+    methods: {
+        toggleShow: function toggleShow() {
+            this.loading = !this.loading;
+        },
+        get_Date: function get_Date(tm) {
+            var d = new Date(tm * 1000); //根据时间戳生成的时间对象
+            var date = d.getMonth() + 1 + "-" + d.getDate();
+            return date;
+        },
+        msg: function msg(_msg) {
+            var t = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
+
+            this.$toasted.show(_msg, {
+                theme: "bubble",
+                position: "top-center",
+                duration: t
+            });
+        },
+        deljump: function deljump(caseid) {
+            if (confirm('确实要将本书移出书架么？')) {
+                this.msg('正在删除,请稍后...');
+                document.location = this.a + "/" + caseid;
+            }
+        },
+        delpiliang: function delpiliang() {
+            var flag = false;
+            for (var i = 0; i < document.getElementById('bookshelfform').elements.length; i++) {
+                if (document.getElementById('bookshelfform').elements[i].name != 'checkkall' && document.getElementById('bookshelfform').elements[i].checked) {
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                this.msg('请选择要删除的数据');
+                return false;
+            }
+
+            if (confirm('确实要将本书移出书架么？')) {
+                document.getElementById('bookcasebnt').disabled = true;
+                document.getElementById('bookcasebnt').value = '提交中...';
+                this.msg('正在批量删除,请稍后...');
+                document.checkform.submit();
+            }
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/webdashubao/components/FenleiBnt.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['bid', 'cid', 'addbookcaseurl'],
   data: function data() {
     return {
-      loading: true,
-      items: [],
-      a: this.destroyurl, //删除地址
-      b: this.token,
-      c: this.bookcasecount,
-      d: "计算中...",
-      e: this.redurl
-
+      a: this.bid,
+      b: this.cid,
+      c: this.addbookcaseurl,
+      e: 0
     };
   },
 
+  components: {},
+  //每次变化触发函数
+  computed: {},
   //created 比 mounted早 钩子方法
-  created: function created() {
-    var self = this;
-    axios.post(self.getdataurl, {}).then(function (response) {
-      self.toggleShow();
-      if (response.data.error == 0) {
-        self.d = response.data.bakdata.length;
-        self.items = response.data.bakdata;
-      } else {
-        self.d = 0;
-        self.msg('没有获取到您的收藏,可能您还没有收藏！');
-      }
-    }).catch(function (response) {
-      console.log(response);
-      self.toggleShow();
-      self.msg('网络故障,稍后刷新页面再试验！');
-    });
-  },
+  created: function created() {},
   mounted: function mounted() {},
 
-  components: {},
   methods: {
-    toggleShow: function toggleShow() {
-      this.loading = !this.loading;
-    },
     msg: function msg(_msg) {
       var t = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3000;
 
@@ -3369,29 +3457,32 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
         duration: t
       });
     },
-    deljump: function deljump(caseid) {
-      if (confirm('确实要将本书移出书架么？')) {
-        this.msg('正在删除,请稍后...');
-        document.location = this.a + "/" + caseid;
-      }
-    },
-    delpiliang: function delpiliang() {
-      var flag = false;
-      for (var i = 0; i < document.getElementById('bookshelfform').elements.length; i++) {
-        if (document.getElementById('bookshelfform').elements[i].name != 'checkkall' && document.getElementById('bookshelfform').elements[i].checked) {
-          flag = true;
-        }
-      }
-      if (!flag) {
-        this.msg('请选择要删除的数据');
-        return false;
-      }
+    addbookcase: function addbookcase(cid, bid) {
+      var self = this;
+      if (self.e > 0) {
+        self.msg('你是不是癫痫发作了,反复点', 3500);
+        return;
+      } else {
+        self.msg('请求中请稍等...', 3500);
+        self.e = 1;
+        axios.post(self.c, {
+          bid: self.a,
+          cid: self.b
+        }).then(function (response) {
+          //console.log(response);
+          self.e = 0;
+          if (response.data.message) {
 
-      if (confirm('确实要将本书移出书架么？')) {
-        document.getElementById('bookcasebnt').disabled = true;
-        document.getElementById('bookcasebnt').value = '提交中...';
-        this.msg('正在批量删除,请稍后...');
-        document.checkform.submit();
+            self.msg(response.data.message);
+          } else {
+
+            self.msg('返回数据出错了');
+          }
+        }).catch(function (response) {
+          self.e = 0;
+          console.log(response);
+          self.msg('网络故障稍后再试');
+        });
       }
     }
   }
@@ -42339,6 +42430,31 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-78dc08c3\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/webdashubao/components/FenleiBnt.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "shujia"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.addbookcase(_vm.a, _vm.b)
+      }
+    }
+  }, [_vm._v("加入书架")])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-78dc08c3", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-b4fef3e6\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/webdashubao/components/Avatar.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -42358,7 +42474,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "field": "img",
       "width": 120,
       "height": 120,
-      "url": "/member/updateavatar",
+      "url": _vm.a,
       "params": _vm.params,
       "headers": _vm.headers,
       "img-format": "png"
@@ -42546,7 +42662,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_vm._v(_vm._s(item.chaptername))]) : _c('label', [_vm._v("无书签")])]), _vm._v(" "), _c('span', {
       staticClass: "gx"
-    }, [(item.relation_articles) ? _c('label', [_vm._v(_vm._s(item.relation_articles.Lastupdatef))]) : _c('label', [_vm._v("无")])]), _vm._v(" "), _c('span', {
+    }, [(item.relation_articles) ? _c('label', [_vm._v(_vm._s(_vm.get_Date(item.relation_articles.lastupdate)))]) : _c('label', [_vm._v("无")])]), _vm._v(" "), _c('span', {
       staticClass: "cz"
     }, [_c('a', {
       on: {
@@ -53188,6 +53304,7 @@ Vue.component('user-info', __webpack_require__("./resources/assets/js/webdashuba
 Vue.component('user-bookinfobnt', __webpack_require__("./resources/assets/js/webdashubao/components/BookInfoBnt.vue"));
 Vue.component('user-booknrbnt', __webpack_require__("./resources/assets/js/webdashubao/components/BookNrBnt.vue"));
 Vue.component('user-jilu', __webpack_require__("./resources/assets/js/webdashubao/components/Jilu.vue"));
+Vue.component('user-fenleibnt', __webpack_require__("./resources/assets/js/webdashubao/components/FenleiBnt.vue"));
 var app = new Vue({
   el: '#app'
 });
@@ -53370,6 +53487,47 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-d0f8aa46", Component.options)
   } else {
     hotAPI.reload("data-v-d0f8aa46", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/webdashubao/components/FenleiBnt.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/webdashubao/components/FenleiBnt.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-78dc08c3\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/webdashubao/components/FenleiBnt.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/sugyil/baobaoni/xiaoshuo/resources/assets/js/webdashubao/components/FenleiBnt.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] FenleiBnt.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-78dc08c3", Component.options)
+  } else {
+    hotAPI.reload("data-v-78dc08c3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

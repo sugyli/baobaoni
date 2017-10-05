@@ -47,10 +47,9 @@
 @endsection
 @section('usercontent')
 <div class="case_title">给管理员发消息</div>
-<form name="frmnewmessage" action="{{ route('outboxs.store') }}" method="post">
+<form name="frmnewmessage" action="{{ route('member.outboxs.store') }}" method="post">
   {{ csrf_field() }}
   <input type="hidden" name="title" value="{{ old($title) ?: $title }}">
-  <input type="hidden" name="from" value="{{ old($from) ?: $from }}">
   <textarea id="content" name="content" style="display:none"></textarea>
   @if( $errors->any())
     @foreach($errors->all() as $error)
@@ -71,8 +70,7 @@
 </form>
 @endsection
 
-@section('scripts')
-@parent
+@section('subscripts')
 <script src="/js/localforage.min.js"></script>
 <script type="text/javascript" src="/js/wangEditor.min.js"></script>
 <script type="text/javascript">
@@ -80,7 +78,7 @@ var E = window.wangEditor;
 var editor = new E('#editor');
 // 或者 var editor = new E( document.getElementById('#editor') )
 // 配置服务器端地址
-editor.customConfig.uploadImgServer = '{{ route('member.imageupload') }}';
+editor.customConfig.uploadImgServer = '{{ route('member.user.imageupload') }}';
 editor.customConfig.uploadImgParams = {
 
 };
@@ -90,6 +88,7 @@ editor.customConfig.uploadFileName = 'imageFile';
 editor.customConfig.uploadImgHeaders = {
     'X-CSRF-TOKEN': "{{ csrf_token() }}",
 }
+
 //editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 editor.create();
 $(function(){

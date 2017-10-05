@@ -54,47 +54,43 @@
 
 @section('usercontent')
 <div class="case_title">用户信息</div>
-<user-avatar avatar="{{ $user->portrait }}" _token="{{ csrf_token() }}"></user-avatar>
+<user-avatar
+  avatar="{{ $user->portrait }}"
+  updateavatar={{ route('member.user.updateavatar') }}
+  _token="{{ csrf_token() }}"
+  >
+</user-avatar>
 <ul class="yonghu">
 <li>通行证： {{ $user->uname }}</li>
 <li>昵称： {{ $user->name }}</li>
 <li>手机： {{ $user->mobile }} (找回密码需要)</li>
 <li>经验： {{ $user->score }}</li>
-<li>等级： {{ $user->getUserHonor()->getGrade() }}</li>
+<li>等级： {{ $user->caption }}</li>
 <li>书架容量：{{ $user->getUserHonor()->getBookcaseCount() }} 本</li>
 <li>日推荐票：{{ $user->getUserHonor()->getDayRecommendCount() }} 次</li>
 <li>注册日期：{{ $user->regdate }}</li>
 
 @if($allHonors && $allHonors->count()>0 )
-<li style="text-align: center;">等级划分</li>
-@foreach($allHonors as $allHonor)
-@if($allHonor->caption == $user->getUserHonor()->getGrade())
-<li id="isme">
-  <span class="a">等级：{{ $allHonor->caption }}</span>
-  <span class="b">经验：{{ $allHonor->minscore }} 到 {{ $allHonor->maxscore }}</span>
-  <span class="c">日票数：{{ $allHonor->getDayRecommendCount() }}/天</span>
-  <span class="d">书架量：{{ $allHonor->getBookcaseCount() }}/本</span>
-  <span class="e">收(发)箱量：{{ $allHonor->getMassageMaxCount() }}/封</span>
-</li>
-@else
-<li>
-  <span class="a">等级：{{ $allHonor->caption }}</span>
-  <span class="b">经验：{{ $allHonor->minscore }} 到 {{ $allHonor->maxscore }}</span>
-  <span class="c">日票数：{{ $allHonor->getDayRecommendCount() }}/天</span>
-  <span class="d">书架量：{{ $allHonor->getBookcaseCount() }}/本</span>
-  <span class="e">收(发)箱量：{{ $allHonor->getMassageMaxCount() }}/封</span>
-</li>
+  <li style="text-align: center;">等级划分</li>
+  @foreach($allHonors as $allHonor)
+    @if($allHonor->caption == $user->caption)
+    <li id="isme">
+      <span class="a">等级：{{ $allHonor->caption }}</span>
+      <span class="b">经验：{{ $allHonor->minscore }} 到 {{ $allHonor->maxscore }}</span>
+      <span class="c">日票数：{{ $allHonor->getDayRecommendCount() }}/天</span>
+      <span class="d">书架量：{{ $allHonor->getBookcaseCount() }}/本</span>
+      <span class="e">收(发)箱量：{{ $allHonor->getMassageMaxCount() }}/封</span>
+    </li>
+    @else
+    <li>
+      <span class="a">等级：{{ $allHonor->caption }}</span>
+      <span class="b">经验：{{ $allHonor->minscore }} 到 {{ $allHonor->maxscore }}</span>
+      <span class="c">日票数：{{ $allHonor->getDayRecommendCount() }}/天</span>
+      <span class="d">书架量：{{ $allHonor->getBookcaseCount() }}/本</span>
+      <span class="e">收(发)箱量：{{ $allHonor->getMassageMaxCount() }}/封</span>
+    </li>
+    @endif
+  @endforeach
 @endif
-
-@endforeach
-@endif
-
 </ul>
-
-@endsection
-
-@section('scripts')
-@parent
-<script src="{{ mix('/webdashubao/vue/app.js') }}"></script>
-
 @endsection

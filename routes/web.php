@@ -23,11 +23,11 @@ include_once('admin.php');
 Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
 
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
+Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
 # ------------------ajax路由处理------------------------
 
 Route::post('webajax/user/getuser', 'NovelsController\UsersController@getuser')->name('webajax.member.getuser');
-
-Route::post('ajax/bookshelf/getbookshelfs', 'NovelsController\BookshelfsController@getBookshelfsData')->name('ajax.bookshelf.ajaxbookshelf');
+Route::post('webajax/bookshelf/getbookshelfs', 'NovelsController\BookshelfsController@getBookshelfsData')->name('webajax.bookshelf.getbookshelfs');
 Route::post('webajax/bookshelf/addbookcase', 'NovelsController\BookshelfsController@addbookcase')->name('webajax.bookshelf.addbookcase');
 Route::post('webajax/user/recommend', 'NovelsController\UsersController@recommend')->name('webajax.user.recommend');
 # ------------------用户------------------------
@@ -59,36 +59,33 @@ Route::group([
   //  Route::resource('inboxs', InboxsController::class);
 
     Route::get('user', 'UsersController@show')->name('member.user.show');
-
-    Route::get('user/edit', 'UsersController@edit')->name('member.edit');
-    Route::post('user', 'UsersController@update')->name('member.update');
-    Route::get('user/passedit', 'UsersController@passedit')->name('member.passedit');
+    Route::post('user', 'UsersController@update');
+    Route::get('user/edit', 'UsersController@edit')->name('member.user.edit');
+    Route::get('user/passedit', 'UsersController@passedit')->name('member.user.passedit');
     Route::post('user/passedit', 'UsersController@passupdate');
 
 
     //附件上传地址
-    Route::post('users/imageupload', 'UsersController@imageUpload')->name('member.imageupload');
-    Route::post('users/updateavatar', 'UsersController@updateAvatar')->name('member.updateavatar');
+    Route::post('users/imageupload', 'UsersController@imageUpload')->name('member.user.imageupload');
+    Route::post('users/updateavatar', 'UsersController@updateAvatar')->name('member.user.updateavatar');
 
 
     //Route::get('bookshelf', 'BookshelfsController@show')->name('member.bookshelf.show');
     Route::get('bookshelf', 'BookshelfsController@index')->name('member.bookshelf.index');
-
-
-
-    Route::match(['get', 'post'] ,'bookshelf/{id?}', 'BookshelfsController@destroy')->name('bookshelf.destroy');
-    Route::get('bookshelf/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('bookshelf.clickbookshelf');
+    Route::match(['get', 'post'] ,'bookshelf/{id?}', 'BookshelfsController@destroy')->name('member.bookshelf.destroy');
+    Route::get('bookshelf/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('member.bookshelf.clickbookshelf');
 
     //收件箱
     Route::get('inboxs', 'InboxsController@index')->name('member.inboxs.index');
-    Route::get('inboxs/{id}', 'InboxsController@show')->name('inboxs.show');
-    Route::delete('inboxs/{id?}', 'InboxsController@destroy')->name('inboxs.destroy');
+    Route::get('inboxs/{id}', 'InboxsController@show')->name('member.inboxs.show');
+    Route::delete('inboxs', 'InboxsController@destroy')->name('member.inboxs.destroy');
     //发件箱
-    Route::get('outboxs', 'OutboxsController@index')->name('outboxs.index');
-    Route::get('outboxs/{id}', 'OutboxsController@show')->name('outboxs.show');
+    Route::get('outboxs', 'OutboxsController@index')->name('member.outboxs.index');
+    Route::post('outboxs', 'OutboxsController@store')->name('member.outboxs.store');
+    Route::get('outboxs/{id}', 'OutboxsController@show')->name('member.outboxs.show');
     Route::get('outboxs/create', 'OutboxsController@create')->name('member.outboxs.create');
-    Route::post('outboxs', 'OutboxsController@store')->name('outboxs.store');
-    Route::delete('outboxs/{id?}', 'OutboxsController@destroy')->name('outboxs.destroy');
+
+    Route::delete('outboxs', 'OutboxsController@destroy')->name('member.outboxs.destroy');
 
     Route::get('qiandao', 'UserSignInController@show')->name('member.qiandao.show');
     Route::get('qiandao/update', 'UserSignInController@update')->name('member.qiandao.update');
@@ -110,6 +107,8 @@ Route::group([
 
   Route::get('password','PasswordController@create')->name('web.password.create');
   Route::post('password','PasswordController@store')->name('password.store');
+
+
 
 });
 Route::get('storage/{one?}/{two?}/{three?}/{four?}/{five?}/{six?}/{seven?}/{eight?}/{nine?}',function(){

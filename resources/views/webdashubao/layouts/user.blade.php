@@ -55,39 +55,46 @@
 <div class="case_main re f-cb">
 
   <div class="case_left">
-    {{--
+
     <dl>
       <dt>会员中心</dt>
       <dd>
-        <a {{ Request::is('member/user') ? " href=javascript: class=active " : 'href='.route('member.show').' ' }} title="会员资料">会员资料</a>
+        <a {{ Request::is('member/user') ? " href=javascript: class=active " : 'href='.route('member.user.show').' ' }} title="会员资料">会员资料</a>
+      </dd>
+
+      <dd>
+        <a {{ Request::is('member/bookshelf') ? " href=javascript: class=active " : 'href='.route('member.bookshelf.index').' ' }} title="我的书架">我的书架</a>
+      </dd>
+
+      <dd>
+        <a {{ Request::is('member/user/edit') ? " href=javascript: class=active " : 'href='.route('member.user.edit').' ' }} title="修改资料">修改资料</a>
+      </dd>
+
+      <dd>
+        <a {{ Request::is('member/user/passedit') ? " href=javascript: class=active " : 'href='.route('member.user.passedit').' ' }} title="修改密码">修改密码</a>
       </dd>
       <dd>
-        <a {{ Request::is('member/bookshelf') ? " href=javascript: class=active " : 'href='.route('bookshelf.show').' ' }} title="我的书架">我的书架</a>
-      </dd>
-      <dd>
-        <a {{ Request::is('member/user/edit') ? " href=javascript: class=active " : 'href='.route('member.edit').' ' }} title="修改资料">修改资料</a>
-      </dd>
-      <dd>
-        <a {{ Request::is('member/user/passedit') ? " href=javascript: class=active " : 'href='.route('member.passedit').' ' }} title="修改密码">修改密码</a>
-      </dd>
-      <dd>
-        <a href="{{ route('login.destroy') }}" title="退出登录">退出登录</a>
+        <a href="{{ route('web.login.destroy') }}" title="退出登录">退出登录</a>
       </dd>
     </dl>
 
     <dl>
       <dt>消息中心</dt>
+
       <dd>
-        <a {{ Request::is('member/inboxs') ? " href=javascript: class=active " : 'href='.route('inboxs.index').' ' }} title="收件箱">收件箱</a>
+        <a {{ Request::is('member/inboxs') ? " href=javascript: class=active " : 'href='.route('member.inboxs.index').' ' }} title="收件箱">收件箱</a>
       </dd>
+
       <dd>
-        <a {{ Request::is('member/outboxs') ? " href=javascript: class=active " : 'href='.route('outboxs.index').' ' }} title="发件箱">发件箱</a>
+        <a {{ Request::is('member/outboxs') ? " href=javascript: class=active " : 'href='.route('member.outboxs.index').' ' }} title="发件箱">发件箱</a>
       </dd>
+
       <dd>
-        <a {{ Request::is('member/outboxs/create') ? " href=javascript: class=active " : 'href='.route('outboxs.create').' ' }} title="联系管理员">联系管理员</a>
+        <a {{ Request::is('member/outboxs/create') ? " href=javascript: class=active " : 'href='.route('member.outboxs.create').' ' }} title="联系管理员">联系管理员</a>
       </dd>
+
     </dl>
-    --}}
+
   </div>
 
 
