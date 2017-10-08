@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,7 +98,7 @@
             });
         });
     });
-
+    
     $(document).on('pjax:send', function(xhr) {
         if(xhr.relatedTarget && xhr.relatedTarget.tagName && xhr.relatedTarget.tagName.toLowerCase() === 'form') {
             $submit_btn = $('form[pjax-container] :submit');
@@ -107,7 +107,7 @@
             }
         }
     })
-
+    
     $(document).on('pjax:complete', function(xhr) {
         if(xhr.relatedTarget && xhr.relatedTarget.tagName && xhr.relatedTarget.tagName.toLowerCase() === 'form') {
             $submit_btn = $('form[pjax-container] :submit');
