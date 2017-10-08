@@ -25,24 +25,16 @@ class HomeController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('基本信息');
-            $content->description('列表');
+            $content->header('Dashboard');
+            $content->description('Description...');
 
             $content->row(function ($row) {
-                //$adminCount = \Encore\Admin\Auth\Database\Administrator::count();
-                //$beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
-                //$userCount = \App\Models\User::where('regdate','>=',$beginToday)->count();
-                //$articleCount = \App\Models\Article::where('postdate','>=',$beginToday)->count();
-                //$articleCount = \App\Models\Article::count();
-                //$chapterCount = \App\Models\Chapter::where('postdate','>=',$beginToday)->count();
-                //$chapterCount = \App\Models\Chapter::count();
-                $row->column(3, new InfoBox('管理员数', 'users', 'aqua', '/admin/auth/users', 1));
-                //$row->column(3, new InfoBox('New Orders', 'shopping-cart', 'green', '/admin/orders', $userCount));
-                $row->column(3, new InfoBox('今日新用户', 'users', 'green', '/admin/users', 1));
-                $row->column(3, new InfoBox('小说总数', 'book', 'yellow', '/admin/articles', 1));
-                $row->column(3, new InfoBox('章节总数', 'file', 'red', '/admin/files', 1));
+                $row->column(3, new InfoBox('New Users', 'users', 'aqua', '/admin/users', '1024'));
+                $row->column(3, new InfoBox('New Orders', 'shopping-cart', 'green', '/admin/orders', '150%'));
+                $row->column(3, new InfoBox('Articles', 'book', 'yellow', '/admin/articles', '2786'));
+                $row->column(3, new InfoBox('Documents', 'file', 'red', '/admin/files', '698726'));
             });
-            /*
+
             $content->row(function (Row $row) {
 
                 $row->column(6, function (Column $column) {
@@ -118,7 +110,6 @@ class HomeController extends Controller
             ];
 
             $content->row((new Box('Table', new Table($headers, $rows)))->style('info')->solid());
-            */
         });
     }
 }
