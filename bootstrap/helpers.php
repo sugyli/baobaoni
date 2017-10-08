@@ -28,12 +28,10 @@ function saveOrGetBookData($bid)
         if (empty($article)) {
             return redirect("/");
         }
-
         if(empty($article->slug)){
           $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
           $article->save();
         }
-
         $article->load('relationChapters');
         \Cache::put($key, $article, get_sys_set('cacheTime_z'));
         return $article;
@@ -214,13 +212,13 @@ function txtLog($txtDir,$attachment,$http_status_code)
 
 }
 
-function getChapterUrl($bid , $chapter)
+function getChapterUrl($chapter , \App\Models\Article $article)
 {
     if ($chapter instanceof \App\Models\Chapter) {
         return $chapter->link();
     }
 
-    return route('web.articles.show',['bid'=>$bid]);
+    return $article->link();
 
 }
 
@@ -295,7 +293,7 @@ function formatTime($t)
 }
 
 //使用回调函数筛选集合，只留下那些通过判断测试的项目
-function getUserHonor(App\Models\User $user){
+function getUserHonor(\App\Models\User $user){
 
     $honor = getHonor();
     if ($honor && $honor->count() >0) {

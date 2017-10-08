@@ -1,6 +1,6 @@
 <header class="main re f-cb" style="padding-top:35px">
   <div class="logo">
-    <a href="{{get_sys_set('weburi')}}" title="{{get_sys_set('webname')}}">{{get_sys_set('webname')}}</a>
+    <a href="/" title="{{get_sys_set('webname')}}">{{get_sys_set('webname')}}</a>
   </div>
   <div class="seach">
     <div class="seach-main">

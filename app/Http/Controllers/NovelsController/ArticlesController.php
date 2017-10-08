@@ -144,7 +144,7 @@ class ArticlesController extends Controller
             }
             //dd($previousChapter);
             //'article','chapter','previousChapter','nextChapter','content'  只有内容是字符串 其他都是对象 isimg 还没用到
-            return view('webdashubao.content', compact('sorts','chapter','previousChapter','nextChapter','content','isimg'));
+            return view('webdashubao.content', compact('sorts','chapter','previousChapter','nextChapter','content','isimg' ,'bookData'));
 
 
         }

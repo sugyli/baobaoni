@@ -36,12 +36,13 @@ class SortsController extends Controller
 
                 $row->column(6, function (Column $column) {
                     $form = new \Encore\Admin\Widgets\Form();
-                    $form->action(admin_url('adminresource/sorts'));
+                    $form->action(admin_url('sorts'));
 
                     $form->select('parent_id', trans('admin::lang.parent_id'))->options(Sort::selectOptions());
                     $form->text('title', trans('admin::lang.title'))->rules('required');
                   //  $form->icon('icon', trans('admin::lang.icon'))->default('fa-bars')->rules('required')->help($this->iconHelp());
                     $form->text('uri', trans('admin::lang.uri'));
+                    $form->number('sortid','对应小说sortid')->rules('integer');
                     //$form->multipleSelect('roles', trans('admin::lang.roles'))->options(Role::all()->pluck('name', 'id'));
                     $form->radio('is_hide','隐藏')->options(['yes' => '是', 'no'=> '否'])->default('no');
                     $column->append((new Box(trans('admin::lang.new'), $form))->style('success'));

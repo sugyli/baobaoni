@@ -29,18 +29,18 @@ class HomeController extends Controller
             $content->description('列表');
 
             $content->row(function ($row) {
-                $adminCount = \Encore\Admin\Auth\Database\Administrator::count();
-                $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
-                $userCount = \App\Models\User::where('regdate','>=',$beginToday)->count();
+                //$adminCount = \Encore\Admin\Auth\Database\Administrator::count();
+                //$beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
+                //$userCount = \App\Models\User::where('regdate','>=',$beginToday)->count();
                 //$articleCount = \App\Models\Article::where('postdate','>=',$beginToday)->count();
-                $articleCount = \App\Models\Article::count();
+                //$articleCount = \App\Models\Article::count();
                 //$chapterCount = \App\Models\Chapter::where('postdate','>=',$beginToday)->count();
-                $chapterCount = \App\Models\Chapter::count();
-                $row->column(3, new InfoBox('管理员数', 'users', 'aqua', '/admin/auth/users', $adminCount));
+                //$chapterCount = \App\Models\Chapter::count();
+                $row->column(3, new InfoBox('管理员数', 'users', 'aqua', '/admin/auth/users', 1));
                 //$row->column(3, new InfoBox('New Orders', 'shopping-cart', 'green', '/admin/orders', $userCount));
-                $row->column(3, new InfoBox('今日新用户', 'users', 'green', '/admin/users', $userCount));
-                $row->column(3, new InfoBox('小说总数', 'book', 'yellow', '/admin/articles', $articleCount));
-                $row->column(3, new InfoBox('章节总数', 'file', 'red', '/admin/files', $chapterCount));
+                $row->column(3, new InfoBox('今日新用户', 'users', 'green', '/admin/users', 1));
+                $row->column(3, new InfoBox('小说总数', 'book', 'yellow', '/admin/articles', 1));
+                $row->column(3, new InfoBox('章节总数', 'file', 'red', '/admin/files', 1));
             });
             /*
             $content->row(function (Row $row) {

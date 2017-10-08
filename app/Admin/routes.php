@@ -53,7 +53,7 @@ Route::group([
      $router->get('outboxs/{id}', 'OutboxsController@show')->name('admin-outboxs.show');
 
 
-     $router->resource('adminresource/sorts', 'SortsController', ['except' => ['create']]);
+     $router->resource('sorts', 'SortsController', ['except' => ['create']]);
 
      /*
      $router->get('sorts', 'SortsController@index')->name('admin-sorts.index');

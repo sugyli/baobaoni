@@ -19,7 +19,7 @@
 <div class="novel re">
   <h1>{{$chapter->chaptername}}</h1>
   <div class="pereview f-cb">
-    <a href="{{ getChapterUrl($chapter->articleid , $previousChapter) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">← 上一章</a><a class="back" href="{{ route('web.articles.show',['bid'=>$chapter->articleid]) }}" target="_top" title="{{$chapter->articlename}}">返回目录</a><a href="{{ getChapterUrl($chapter->articleid ,$nextChapter) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章 →</a>
+    <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">← 上一章</a><a class="back" href="{{$bookData->link()}}" target="_top" title="{{$bookData->articlename}}">返回目录</a><a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章 →</a>
   </div>
 
   <div class="yd_text2">
@@ -27,7 +27,7 @@
   </div>
 
   <div class="pereview f-cb">
-    <a href="{{ getChapterUrl($chapter->articleid , $previousChapter) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">← 上一章</a><a class="back" href="{{ route('web.articles.show',['bid'=>$chapter->articleid]) }}" target="_top" title="{{$chapter->articlename}}">返回目录</a><a href="{{ getChapterUrl($chapter->articleid ,$nextChapter) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章 →</a>
+    <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">← 上一章</a><a class="back" href="{{$bookData->link()}}" target="_top" title="{{$bookData->articlename}}">返回目录</a><a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章 →</a>
   </div>
 
 </div>
@@ -36,16 +36,16 @@
 
 @section('subscripts')
 <script type="text/javascript">
-var preview_page = "{{ getChapterUrl($chapter->articleid , $previousChapter) }}";
-var next_page = "{{ getChapterUrl($chapter->articleid ,$nextChapter) }}";
-var index_page = "{{ route('articles.show',['bid'=>$chapter->articleid]) }}";
+var preview_page = "{{ getChapterUrl($previousChapter ,$bookData) }}";
+var next_page = "{{ getChapterUrl($nextChapter , $bookData) }}";
+var index_page = "{{$bookData->link()}}";
 function jumpPage() {
   if (event.keyCode==37) location=preview_page;
   if (event.keyCode==39) location=next_page;
   if (event.keyCode==13) location=index_page;
 }
 document.onkeydown=jumpPage;
-baobaoni.LAST_READ_SET("{{ route('web.articles.show',['bid'=>$chapter->articleid]) }}", "{{request()->url()}}", "{{$chapter->articlename}}", "{{$chapter->chaptername}}");
+baobaoni.LAST_READ_SET("{{$bookData->link()}}", "{{request()->url()}}", "{{$chapter->articlename}}", "{{$chapter->chaptername}}");
 baobaoni.setStatus();
 baobaoni.toTop();
 </script>
