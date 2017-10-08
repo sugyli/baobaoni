@@ -13,11 +13,6 @@ define("SORTS", 'sorts');//KEY
 
 define("MINNR", 300);//最小内容
 
-
-
-
-
-
 //缓存小说 和目录
 function saveOrGetBookData($bid)
 {

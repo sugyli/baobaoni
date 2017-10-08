@@ -19,3 +19,5 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
+app('translator')->addNamespace('admin', resource_path('lang/admin'));
+app('view')->prependNamespace('admin', resource_path('views/admin'));
