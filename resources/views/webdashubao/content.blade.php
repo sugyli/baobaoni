@@ -13,7 +13,7 @@
   cid={{$chapter->chapterid}}
   addbookcaseurl="{{ route('webajax.bookshelf.addbookcase') }}"
   recommend="{{route('webajax.user.recommend')}}"
-  newmessageurl="{{route('member.outboxs.create')}}?title={{ $chapter->articlename}}_{{ $chapter->chaptername}}&amp;from={{request()->url()}}"
+  newmessageurl="{{route('member.outboxs.create')}}?title=书名：{{ $chapter->articlename}}_章节名：{{ $chapter->chaptername}}&amp;from=来路：{{request()->url()}}"
   ></user-booknrbnt>
 </div>
 <div class="novel re">

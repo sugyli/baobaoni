@@ -46,19 +46,25 @@ class OutboxsController extends Controller
     {
         $title = $request->title ?: '来源Web用户中心的问题';
         $from = $request->from;
-        $title = $title.'_'.$from;
-        return view('webdashubao.usermessagecreate',compact('title'));
+
+        return view('webdashubao.usermessagecreate',compact('title','from'));
     }
     public function store(OutboxRequest $request)
     {
-        $data = $request->only(['title','content']);
-        if ($this->isDuplicateMessage($data)) {
+        //$data = $request->only(['title','content']);
+        if ($this->isDuplicateMessage($request->content)) {
             return $this->creatorFailed('请不要发布重复内容。');
+        }
+        $from = $request->from;
+        if($from){
+          $title = $request->title ."_来路：" . $from;
         }
 
         $user = Auth::user();
         $data['postdate'] = time();
         $data['fromname'] = $user->uname;
+        $data['content'] = $request->content;
+        $data['title'] = $title;
         $data['toid'] = 0 ;
         $data['toname'] = '';
 

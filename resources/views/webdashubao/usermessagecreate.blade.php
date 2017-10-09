@@ -44,12 +44,25 @@
   font-size: 14px;
   padding-top: 5px;
 }
+.case_right .title{
+    margin:0 auto;
+    text-align:center;
+    padding-top: 10px;
+}
+.case_right .title input{
+  height: 30px;
+  line-height: 30px;
+  border: #c3e0c3 1px solid;
+  width:640px;
+  padding-left:10px;
+
+}
 @endsection
 @section('usercontent')
 <div class="case_title">给管理员发消息</div>
 <form name="frmnewmessage" action="{{ route('member.outboxs.store') }}" method="post">
   {{ csrf_field() }}
-  <input type="hidden" name="title" value="{{ old($title) ?: $title }}">
+  <input type="hidden" name="from" value="{{ old($from) ?: $from }}">
   <textarea id="content" name="content" style="display:none"></textarea>
   @if( $errors->any())
     @foreach($errors->all() as $error)
@@ -60,6 +73,10 @@
       </div>
     @endforeach
   @endif
+  <div class="title online">
+    <input type="text" name="title" value="{{ old($title) ?: $title }}">
+  </div>
+
   <div id="editor" style="width:650px; margin:0 auto; padding:20px">
     {!! old('content') !!}
   </div>

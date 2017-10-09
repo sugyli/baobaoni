@@ -112,11 +112,12 @@ class InboxsController extends Controller
               $showForm->display('fromname' ,'发件人');
               $showForm->display('toname', '收件人');
               $showForm->display('' ,'发件时间')->default(formatTime($message->postdate));
+              $showForm->display('title', '标题');
               $showForm->display('content', '内容');
             //  $showForm->fromname('fromname');
               $showForm->isNeedFoot = false;
 
-              $column->append((new Box('收件箱', $showForm))->collapsable()->style('success'));
+              $column->append((new Box('收件内容', $showForm))->collapsable()->style('success'));
 
           });
 
@@ -164,7 +165,8 @@ class InboxsController extends Controller
     {
 
       if(!$request->toid){
-          return redirect(admin_url('inboxs'));
+          $msg = $this->error('非法操作');
+          return redirect(admin_url('inboxs'))->with($msg);
       }
 
       $validator = Validator::make($request->all(), [

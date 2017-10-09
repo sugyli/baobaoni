@@ -21,7 +21,7 @@
           cid=0
           addbookcaseurl="{{route('webajax.bookshelf.addbookcase')}}"
           recommend="{{route('webajax.user.recommend')}}"
-          newmessageurl="{{route('member.outboxs.create')}}?title={{ $bookData->articlename}}&amp;from={{request()->url()}}"
+          newmessageurl="{{route('member.outboxs.create')}}?title=书名：{{ $bookData->articlename}}&amp;from=来路：{{request()->url()}}"
       ></user-bookinfobnt>
 
     </div>

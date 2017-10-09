@@ -90,7 +90,7 @@ class OutboxsController extends Controller
         return Admin::form(Message::class, function (Form $form) {
 
              $form->display('toname' ,'收件人');
-             $form->display('title' ,'标题');
+
              //更复杂的显示
               $form->display('postdate', '时间')->with(function ($postdate) {
                   return formatTime($postdate);;
@@ -99,6 +99,7 @@ class OutboxsController extends Controller
 
                   return $isread > 0 ? "<span style='color:red'>对方已读</span>" : "<span style='color:blue'>对方未读</span>";
               });
+              $form->display('title' ,'标题');
               $form->display('content', '内容');
               /*
               $form->display('content', '内容')->with(function ($content) {
