@@ -64,12 +64,12 @@ class Article extends Model
     {
       return
               $value > 0 ?
-                          config('app.xsfmdir')
+                          get_sys_set('xsfmdir')
                           . floor($this->articleid / 1000)
                           . '/' . $this->articleid . '/'
                           . $this->articleid . 's.jpg'
                         :
-                          config('app.dfxsfmdir');
+                          get_sys_set('dfxsfmdir');
 
 
     }
@@ -113,7 +113,7 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(WEEKHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
+            \Cache::remember(config('app.weekhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
 
                               $week_begin = mktime(0, 0, 0,date("m"),date("d")-date("w")+1,date("Y"));
                               $week_end = mktime(23,59,59,date("m"),date("d")-date("w")+7,date("Y"));
@@ -140,7 +140,7 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(MONTHHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
+            \Cache::remember(config('app.monthhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
                               $dt = Carbon::now();
                               $ranking =
                                           Ranking::select(\DB::raw('sum(hits) as h,articleid'))
@@ -165,7 +165,7 @@ class Article extends Model
 
       $articleid = $this->articleid;
       return
-            \Cache::remember(DAYHITS.$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
+            \Cache::remember(config('app.dayhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
                               $dt = Carbon::now();
                               $ranking =
                                           Ranking::select(\DB::raw('sum(hits) as h,articleid'))

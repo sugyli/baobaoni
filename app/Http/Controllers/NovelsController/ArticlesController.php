@@ -62,6 +62,7 @@ class ArticlesController extends Controller
             return redirect($bookData->link(), 301);
         }
         $sorts = $bookData->getSort();
+
         return view('webdashubao.info', compact('bookData','sorts'));
 
     }

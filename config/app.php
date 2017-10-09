@@ -4,6 +4,9 @@ return [
     'bookid' => 'bookid_',
     'sorts' => 'sorts_',
     'syskey' => 'syskey_',
+    'weekhits' => 'weekhits_',
+    'monthhits' => 'monthhits_',
+    'dayhits' => 'dayhits_',
 
     'weburi' => env('WEBURI'),//WEB地址结尾要加 /
     'webname' => env('WEBNAME'),
@@ -26,7 +29,6 @@ return [
     'txtlog' => false,//是否开启txt采集日记
     'minnr' => 300,
     'imagedir' => env('IMAGEDIR'),//图片地址
-
     'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
 
 
