@@ -66,7 +66,7 @@ class Article extends Model
               $value > 0 ?
                           config('app.xsfmdir')
                           . floor($this->articleid / 1000)
-                          . DS . $this->articleid . DS
+                          . '/' . $this->articleid . '/'
                           . $this->articleid . 's.jpg'
                         :
                           config('app.dfxsfmdir');

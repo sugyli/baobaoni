@@ -11,6 +11,8 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->get('systemsettings', 'SystemSettingsController@index');
+    $router->post('systemsettings', 'SystemSettingsController@seting');
 
     $router->resource('sorts', 'SortsController', ['except' => ['create']]);
 

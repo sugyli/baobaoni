@@ -158,7 +158,7 @@
 <header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt; {{$sorts['title'] or '未知分类'}}</header>
 <section class="list">
   <div class="ltop">
-    <h2>都市言情</h2>
+    <h2>{{$sorts['title'] or '未知分类'}}</h2>
   </div>
   <ul>
     @if ($fenleidatas->count() > 0)

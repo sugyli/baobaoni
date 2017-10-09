@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale('zh');
+
         //运行的 MySQL 版本低于 5.7.7
         Schema::defaultStringLength(191);
         \Validator::extend('zh_mobile', function ($attribute, $value) {

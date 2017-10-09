@@ -1,37 +1,26 @@
 <?php
-
-define("DS", DIRECTORY_SEPARATOR);
-define("SYSKEY", 'syskey');
-define("BOOKID", 'bookid_');
-define("HONORS", 'honors');
-define("WEEKHITS", 'getweekhits_');
-define("MONTHHITS", 'getMonthhits_');
-define("DAYHITS", 'getDayhits_');
-define("TXT", 'txt_');//内容前缀
-define("SORTS", 'sorts');//KEY
-
-
 //缓存小说 和目录
-function saveOrGetBookData($bid)
-{
-  $key = BOOKID . $bid;
-  $bookObj = \Cache::get($key);
-  if ( !$bookObj ) {//不存在
-        $article = \App\Models\Article::find($bid);
-        if (empty($article)) {
-            return redirect("/");
-        }
-        if(empty($article->slug)){
-          $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
-          $article->save();
-        }
-        $article->load('relationChapters');
-        \Cache::put($key, $article, get_sys_set('cacheTime_z'));
-        return $article;
+if (!function_exists('saveOrGetBookData')) {
+  function saveOrGetBookData($bid)
+  {
+    $key = config('app.bookid') . $bid;
+    $bookObj = \Cache::get($key);
+    if ( !$bookObj ) {//不存在
+          $article = \App\Models\Article::find($bid);
+          if (empty($article)) {
+              return redirect("/");
+          }
+          if(empty($article->slug)){
+            $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
+            $article->save();
+          }
+          $article->load('relationChapters');
+          \Cache::put($key, $article, get_sys_set('cacheTime_z'));
+          return $article;
+    }
+    return $bookObj;
   }
-  return $bookObj;
 }
-
 /*
 
 //保存的是对象
@@ -126,121 +115,133 @@ function saveOrGetBookChapterData($key , \App\Models\Article $article)
 
 }
 */
-
-function saveOrGetTxtData($key , $txtDir , $lastupdate ,$attachment)
-{
-    $outData = ['state'=>false ,'content'=>''];
-    $cacheDataArry = \Cache::get($key);
-    if ( !$cacheDataArry ) {//不存在
-        $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
-    }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
-        $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
-    }elseif ($cacheDataArry) {
-      $outData = $cacheDataArry;
-    }
-
-    return $outData;
-
-}
-function saveTxt($key,$txtDir,$lastupdate,$outData ,$attachment)
-{
-    $txt = curlTxt($txtDir,$attachment);
-    if (!empty($txt)) {
-      $outData = ['state'=>true , 'content'=>$txt , 'lastupdate' =>$lastupdate];
-      \Cache::put($key, $outData, get_sys_set('cacheTime_g'));
-    }
-
-    return $outData;
-}
-
-function curlTxt($txtDir,$attachment)
-{
-
-    $txt = '';
-    try {
-      $curl = new \Curl\Curl();
-      $curl->setOpt(CURLOPT_TIMEOUT, 5);
-      $curl->get($txtDir);
-      $curl->close();
-      if ($curl->http_status_code == '200') {
-          $txt = $curl->response;
-          $txt = trim($txt);
-          if (!empty($txt)) {
-              $txt = mb_convert_encoding($txt, 'utf-8', 'GBK,UTF-8,ASCII');
-          }else {
-              txtLog($txtDir,$attachment,$curl->http_status_code);
-          }
-
-      }else{
-          //记录获取错误的TXT 因为历史原因 可记录
-          txtLog($txtDir,$attachment,$curl->http_status_code);
-
-      }
-      return $txt;
-
-
-    } catch (Exception $e) {
-      \Log::error('采集异常报错了',['路径'=>$txtDir]);
-
-      return $txt;
-    }
-
-}
-
-
-function txtLog($txtDir,$attachment,$http_status_code)
-{
-
-  //记录获取错误的TXT 因为历史原因 可记录
-  if (get_sys_set('txtlog')) {
-
-      if (!empty($attachment)) {
-        $ms = 'txt内容获取失败 有附件提示可能是图片 状态码不是200 代表txt文件不存在';
-      }else{
-        $ms = 'txt内容获取失败 状态码不是200 代表txt文件可能不存在';
+if (!function_exists('saveOrGetTxtData')) {
+  function saveOrGetTxtData($key , $txtDir , $lastupdate ,$attachment)
+  {
+      $outData = ['state'=>false ,'content'=>''];
+      $cacheDataArry = \Cache::get($key);
+      if ( !$cacheDataArry ) {//不存在
+          $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
+      }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
+          $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
+      }elseif ($cacheDataArry) {
+        $outData = $cacheDataArry;
       }
 
-      \Log::info($ms,['路径'=>$txtDir ,'状态码'=>$http_status_code]);
+      return $outData;
+
   }
-
 }
 
-function getChapterUrl($chapter , \App\Models\Article $article)
-{
-    if ($chapter instanceof \App\Models\Chapter) {
-        return $chapter->link();
+if (!function_exists('saveTxt')) {
+  function saveTxt($key,$txtDir,$lastupdate,$outData ,$attachment)
+  {
+      $txt = curlTxt($txtDir,$attachment);
+      if (!empty($txt)) {
+        $outData = ['state'=>true , 'content'=>$txt , 'lastupdate' =>$lastupdate];
+        \Cache::put($key, $outData, get_sys_set('cacheTime_g'));
+      }
+
+      return $outData;
+  }
+}
+
+if (!function_exists('curlTxt')) {
+  function curlTxt($txtDir,$attachment)
+  {
+
+      $txt = '';
+      try {
+        $curl = new \Curl\Curl();
+        $curl->setOpt(CURLOPT_TIMEOUT, 5);
+        $curl->get($txtDir);
+        $curl->close();
+        if ($curl->http_status_code == '200') {
+            $txt = $curl->response;
+            $txt = trim($txt);
+            if (!empty($txt)) {
+                $txt = mb_convert_encoding($txt, 'utf-8', 'GBK,UTF-8,ASCII');
+            }else {
+                txtLog($txtDir,$attachment,$curl->http_status_code);
+            }
+
+        }else{
+            //记录获取错误的TXT 因为历史原因 可记录
+            txtLog($txtDir,$attachment,$curl->http_status_code);
+
+        }
+        return $txt;
+
+
+      } catch (Exception $e) {
+        \Log::error('采集异常报错了',['路径'=>$txtDir]);
+
+        return $txt;
+      }
+
+  }
+}
+
+if (!function_exists('txtLog')) {
+  function txtLog($txtDir,$attachment,$http_status_code)
+  {
+
+    //记录获取错误的TXT 因为历史原因 可记录
+    if (get_sys_set('txtlog')) {
+
+        if (!empty($attachment)) {
+          $ms = 'txt内容获取失败 有附件提示可能是图片 状态码不是200 代表txt文件不存在';
+        }else{
+          $ms = 'txt内容获取失败 状态码不是200 代表txt文件可能不存在';
+        }
+
+        \Log::info($ms,['路径'=>$txtDir ,'状态码'=>$http_status_code]);
     }
 
-    return $article->link();
-
+  }
 }
 
-function qiandaoList()
-{
-  return
-          \Cache::remember('qiandao', get_sys_set('cacheTime_d'), function (){
+if (!function_exists('getChapterUrl')) {
+  function getChapterUrl($chapter , \App\Models\Article $article)
+  {
+      if ($chapter instanceof \App\Models\Chapter) {
+          return $chapter->link();
+      }
 
-              return \App\Models\Qiandao::orderBy('last_dateline', 'DESC')
-                                  ->limit(50)
-                                  ->get();
+      return $article->link();
 
-           });
-
+  }
 }
 
+if (!function_exists('qiandaoList')) {
+  function qiandaoList()
+  {
+    return
+            \Cache::remember('qiandao', get_sys_set('cacheTime_d'), function (){
 
-function contentReplace($txt)
-{
+                return \App\Models\Qiandao::orderBy('last_dateline', 'DESC')
+                                    ->limit(50)
+                                    ->get();
 
-  $txt = preg_replace('/<br\\s*?\/??>/i',PHP_EOL,$txt);
-  $txt = preg_replace('/<\/br\\s*?\/??>/i',PHP_EOL,$txt);
-  $txt = preg_replace('/<p\\s*?\/??>/i',PHP_EOL,$txt);
-  $txt = preg_replace('/<\/p>/i',PHP_EOL,$txt);
-  $txt = @str_replace("&nbsp;"," ",$txt);
+             });
 
-  return $txt;
+  }
+}
+
+if (!function_exists('contentReplace')) {
+  function contentReplace($txt)
+  {
+
+    $txt = preg_replace('/<br\\s*?\/??>/i',PHP_EOL,$txt);
+    $txt = preg_replace('/<\/br\\s*?\/??>/i',PHP_EOL,$txt);
+    $txt = preg_replace('/<p\\s*?\/??>/i',PHP_EOL,$txt);
+    $txt = preg_replace('/<\/p>/i',PHP_EOL,$txt);
+    $txt = @str_replace("&nbsp;"," ",$txt);
+
+    return $txt;
 
 
+  }
 }
 
 
@@ -252,101 +253,111 @@ function contentReplace($txt)
  * @author Seven Du <lovevipdsw@vip.qq.com>
  **/
 
-function getstrlength($string)
-{
-    $length = strlen($string);
-    $index  = $num = 0;
-    while ($index < $length) {
-        $str = $string[$index];
-        if ($str < "\xC0") {
-            $index += 1;
-        } elseif ($str < "\xE0") {
-            $index += 2;
-        } elseif ($str < "\xF0") {
-            $index += 3;
-        } elseif ($str < "\xF8") {
-            $index += 4;
-        } elseif ($str < "\xFC") {
-            $index += 5;
-        } else {
-            $index += 6;
-        }
-        $num += 1;
-    }
-    return $num;
+if (!function_exists('getstrlength')) {
+  function getstrlength($string)
+  {
+      $length = strlen($string);
+      $index  = $num = 0;
+      while ($index < $length) {
+          $str = $string[$index];
+          if ($str < "\xC0") {
+              $index += 1;
+          } elseif ($str < "\xE0") {
+              $index += 2;
+          } elseif ($str < "\xF0") {
+              $index += 3;
+          } elseif ($str < "\xF8") {
+              $index += 4;
+          } elseif ($str < "\xFC") {
+              $index += 5;
+          } else {
+              $index += 6;
+          }
+          $num += 1;
+      }
+      return $num;
+  }
 }
 
-function formatTime($t)
-{
-  $t = date("Y-m-d H:i:s",$t);  //24小时
-  //dd($t);
-  //date("Y-m-d h:i:s");  //12小时
-  //$t =  date("Y-n-d h:i",$t);
-  return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $t)->diffForHumans();
+if (!function_exists('formatTime')) {
+  function formatTime($t)
+  {
+    $t = date("Y-m-d H:i:s",$t);  //24小时
+    //dd($t);
+    //date("Y-m-d h:i:s");  //12小时
+    //$t =  date("Y-n-d h:i",$t);
+    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $t)->diffForHumans();
+  }
 }
 
 //使用回调函数筛选集合，只留下那些通过判断测试的项目
-function getUserHonor(\App\Models\User $user){
+if (!function_exists('getUserHonor')) {
+  function getUserHonor(\App\Models\User $user){
 
-    $honor = getHonor();
-    if ($honor && $honor->count() >0) {
+      $honor = getHonor();
+      if ($honor && $honor->count() >0) {
 
-      $filtered = $honor->filter(function ($item, $key) use($user){
+        $filtered = $honor->filter(function ($item, $key) use($user){
 
-        return ($user->score >= $item->minscore && $user->score < $item->maxscore);
+          return ($user->score >= $item->minscore && $user->score < $item->maxscore);
 
-      });
-      return $filtered->first();
-    }
-    throw new \Exception('请设置用户等级');
+        });
+        return $filtered->first();
+      }
+      throw new \Exception('请设置用户等级');
+  }
+}
+if (!function_exists('getHonor')) {
+  function getHonor(){
+      $honor = \Cache::get(HONORS);
+      if ( !$honor ) {//不存在
+          $honor = \App\Models\Honor::orderBy('maxscore', 'asc')->get();
+          if ($honor->count() >0) {
+            \Cache::forever(HONORS, $honor);
+          }
+
+      }
+      return $honor;
+  }
 }
 
-function getHonor(){
-    $honor = \Cache::get(HONORS);
-    if ( !$honor ) {//不存在
-        $honor = \App\Models\Honor::orderBy('maxscore', 'asc')->get();
-        if ($honor->count() >0) {
-          \Cache::forever(HONORS, $honor);
-        }
-
-    }
-    return $honor;
+if (!function_exists('get_image_links')) {
+  function get_image_links($html)
+  {
+      $image_links = get_images_from_html($html);
+      $result = [];
+      foreach ($image_links as $url) {
+          if (strpos($url, config('app.url_static' ,'')) !== false) {
+              $result[] = strtok($url, '?');
+          }
+      }
+      return $result;
+  }
 }
 
+if (!function_exists('get_images_from_html')) {
+  function get_images_from_html($html)
+  {
+      $doc = new DOMDocument();
+      @$doc->loadHTML($html);
 
-function get_image_links($html)
-{
-    $image_links = get_images_from_html($html);
-    $result = [];
-    foreach ($image_links as $url) {
-        if (strpos($url, config('app.url_static' ,'')) !== false) {
-            $result[] = strtok($url, '?');
-        }
-    }
-    return $result;
+      $img_tags = $doc->getElementsByTagName('img');
+
+      $result = [];
+      foreach ($img_tags as $img) {
+          $result[] = $img->getAttribute('src');
+      }
+
+      return $result;
+  }
 }
-
-function get_images_from_html($html)
-{
-    $doc = new DOMDocument();
-    @$doc->loadHTML($html);
-
-    $img_tags = $doc->getElementsByTagName('img');
-
-    $result = [];
-    foreach ($img_tags as $img) {
-        $result[] = $img->getAttribute('src');
-    }
-
-    return $result;
-}
-
 
 /**
  * t函数用于过滤标签，输出没有html的干净的文本
  * @param string text 文本内容
  * @return string 处理后内容
  */
+
 if (!function_exists('t')) {
     function t($text)
     {
@@ -367,17 +378,19 @@ if (!function_exists('real_strip_tags')) {
     }
 }
 
+
+//分类
 if (!function_exists('get_all_sorts')) {
     function get_all_sorts()
     {
-      $sorts = \Cache::get(SORTS);
+      $sorts = \Cache::get(config('app.sorts'));
       if ( !$sorts ) {//不存在
           $sorts = \App\Models\Sort::where('is_hide','no')
                                   ->orderBy('parent_id', 'asc')
                                   ->orderBy('order', 'asc')
                                   ->get();
           if ($sorts->count() >0) {
-            \Cache::forever(SORTS, $sorts);
+            \Cache::forever(config('app.sorts'), $sorts);
           }
 
       }
@@ -424,7 +437,7 @@ if (!function_exists('get_sort')) {
       function get_sort($str)
       {
         $key = 'get_sort_'.$str;
-        if (!\Cache::has(SORTS)) {
+        if (!\Cache::has(config('app.sorts'))) {
 
             \Cache::forget($key);
 
@@ -473,12 +486,12 @@ if (!function_exists('del_hits_cache')) {
       }
 
 }
-
+//获取系统设置
 if (!function_exists('get_sys_set')) {
 
       function get_sys_set($key)
       {
-         $data = \Cache::get(SYSKEY);
+         $data = \Cache::get(config('app.syskey'));
          return  (isset($data[$key]) && !empty($data[$key])) ? $data[$key] : config('app.'.$key);
 
       }

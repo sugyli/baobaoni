@@ -134,7 +134,7 @@ class SortsController extends Controller
     protected function delCache()
     {
       //删除缓存
-      \Cache::forget(SORTS);
+      \Cache::forget(config('app.sorts'));
 
     }
 }

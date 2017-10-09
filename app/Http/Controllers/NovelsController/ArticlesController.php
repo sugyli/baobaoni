@@ -159,11 +159,14 @@ class ArticlesController extends Controller
     public function showfenlei()
     {
       $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',15);
-      $sorts = get_sort('webnovel');
-      if($sorts){
-        $sorts = collect($sorts)->where('sortid',request()->id)->first();
+      if($fenleidatas->count() > 0){
+        $sorts = get_sort('webnovel');
+        if($sorts){
+          $sorts = collect($sorts)->where('sortid',request()->id)->first();
+        }
+        return view('webdashubao.fenlei', compact('fenleidatas','sorts'));
       }
-      return view('webdashubao.fenlei', compact('fenleidatas','sorts'));
+      return redirect('/');
     }
 
 

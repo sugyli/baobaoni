@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'bookid' => 'bookid_',
+    'sorts' => 'sorts_',
+    'syskey' => 'syskey_',
 
     'weburi' => env('WEBURI'),//WEB地址结尾要加 /
     'webname' => env('WEBNAME'),
@@ -24,7 +27,7 @@ return [
     'minnr' => 300,
     'imagedir' => env('IMAGEDIR'),//图片地址
 
-    'xsfmdir' => env('XSFMDIR',DS),//小说封面路径
+    'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
 
 
 
