@@ -115,6 +115,8 @@ function saveOrGetBookChapterData($key , \App\Models\Article $article)
 
 }
 */
+
+//获取小说内容
 if (!function_exists('saveOrGetTxtData')) {
   function saveOrGetTxtData($key , $txtDir , $lastupdate ,$attachment)
   {
@@ -479,12 +481,11 @@ if (!function_exists('del_hits_cache')) {
 
       function del_hits_cache($bid)
       {
-        \Cache::forget(WEEKHITS.$bid);
-        \Cache::forget(MONTHHITS.$bid);
-        \Cache::forget(DAYHITS.$bid);
+        \Cache::forget(config('app.weekhits').$bid);
+        \Cache::forget(config('app.monthhits').$bid);
+        \Cache::forget(config('app.dayhits').$bid);
 
       }
-
 }
 //获取系统设置
 if (!function_exists('get_sys_set')) {

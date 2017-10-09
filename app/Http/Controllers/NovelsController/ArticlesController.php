@@ -62,7 +62,6 @@ class ArticlesController extends Controller
             return redirect($bookData->link(), 301);
         }
         $sorts = $bookData->getSort();
-
         return view('webdashubao.info', compact('bookData','sorts'));
 
     }
@@ -107,7 +106,7 @@ class ArticlesController extends Controller
             //下面是获取TXT的部分
             $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
             $txtDir = get_sys_set('txtdir') . $path;
-            $keyTxt = TXT . $path;
+            $keyTxt = config('app.txt') . $path;
 
             $txtObj = saveOrGetTxtData($keyTxt , $txtDir, $chapter->lastupdate ,$chapter->attachment);
             //获取到了内容 $txtObj['state'] == true 百分百有内容

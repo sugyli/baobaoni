@@ -1,11 +1,11 @@
 @extends('webdashubao.layouts.default')
-@section('title'){{$chapter->chaptername}}_{{$chapter->articlename}}_{{$sorts->title or '未知分类'}}-{{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
+@section('title'){{$chapter->chaptername}}_{{$chapter->articlename}}_{{$sorts['title'] or '未知分类'}}-{{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
 @section('keywords'){{$chapter->chaptername}},{{$chapter->articlename}}@endsection
-@section('description'){{$chapter->articlename}}是一本{{$sorts->title or '未知分类'}}类小说，{{$chapter->chaptername}}是小说{{$chapter->articlename}}的最新章节。@endsection
+@section('description'){{$chapter->articlename}}是一本{{$sorts['title'] or '未知分类'}}类小说，{{$chapter->chaptername}}是小说{{$chapter->articlename}}的最新章节。@endsection
 @section('content')
 @include('webdashubao.packaging.logo-nav-qiandao')
 <div class="read_t">
-当前位置：<a href="/">首页</a> &gt; <a href="{{ $sorts->uri or '/'}}">{{$sorts->title or '未知分类'}}</a> &gt; <a href="{{ route('web.articles.show',['bid'=>$chapter->articleid]) }}">{{ $chapter->articlename }}</a> &gt;  {{$chapter->chaptername}}
+当前位置：<a href="/">首页</a> &gt; <a href="{{ $sorts['uri'] or '/'}}">{{$sorts['title'] or '未知分类'}}</a> &gt; <a href="{{$bookData->link()}}">{{ $chapter->articlename }}</a> &gt;  {{$chapter->chaptername}}
 </div>
 <div class="read_b re f-cb">
   <user-booknrbnt

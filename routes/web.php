@@ -111,6 +111,10 @@ Route::group([
 
 
 });
+/*
 Route::get('storage/{one?}/{two?}/{three?}/{four?}/{five?}/{six?}/{seven?}/{eight?}/{nine?}',function(){
     \App\Libraries\ImageRoute::imageStorageRoute();
 });
+*/
+
+Route::get('storage/{one?}/{two?}/{three?}/{four?}/{five?}/{six?}/{seven?}/{eight?}/{nine?}','\App\Libraries\ImageRoute@imageStorageRoute');

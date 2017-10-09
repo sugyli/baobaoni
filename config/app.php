@@ -7,6 +7,7 @@ return [
     'weekhits' => 'weekhits_',
     'monthhits' => 'monthhits_',
     'dayhits' => 'dayhits_',
+    'txt' =>'txt_',
 
     'weburi' => env('WEBURI'),//WEB地址结尾要加 /
     'webname' => env('WEBNAME'),
