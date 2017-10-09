@@ -179,7 +179,7 @@
           ></user-fenleibnt>
 
           <span class="read">
-            <a href="{{$fenleidata->link()}}" target="_blank" title="{{$fenleidata->articlename}}">在线阅读</a>
+            <a href="{{$fenleidata->link()}}" title="{{$fenleidata->articlename}}">在线阅读</a>
           </span>
         </div>
         <div class="status">连载中<span>最新章节：<a href="{{route('web.articles.content', ['bid' => $fenleidata->articleid , 'cid' => $fenleidata->lastchapterid])}}">{{$fenleidata->lastchapter}}</a></span></div>
