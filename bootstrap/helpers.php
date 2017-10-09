@@ -222,7 +222,7 @@ if (!function_exists('qiandaoList')) {
             \Cache::remember('qiandao', get_sys_set('cacheTime_d'), function (){
 
                 return \App\Models\Qiandao::orderBy('last_dateline', 'DESC')
-                                    ->limit(50)
+                                    ->limit(30)
                                     ->get();
 
              });
@@ -309,13 +309,14 @@ if (!function_exists('getUserHonor')) {
       throw new \Exception('请设置用户等级');
   }
 }
+//获取头衔
 if (!function_exists('getHonor')) {
   function getHonor(){
-      $honor = \Cache::get(HONORS);
+      $honor = \Cache::get(config('app.honors'));
       if ( !$honor ) {//不存在
           $honor = \App\Models\Honor::orderBy('maxscore', 'asc')->get();
           if ($honor->count() >0) {
-            \Cache::forever(HONORS, $honor);
+            \Cache::forever(config('app.honors'), $honor);
           }
 
       }
