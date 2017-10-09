@@ -182,8 +182,6 @@ class InboxsController extends Controller
         return back()->with($msg);
 
       }
-
-
       $data = $request->only(['toname', 'toid','title','content']);
       $page = $request->page ?: 1;
       $data = array_merge($data,['fromid'=>0,'fromname'=>'','postdate'=>time()]);

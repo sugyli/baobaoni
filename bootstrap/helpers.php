@@ -323,7 +323,7 @@ if (!function_exists('getHonor')) {
       return $honor;
   }
 }
-
+//没有用到
 if (!function_exists('get_image_links')) {
   function get_image_links($html)
   {
