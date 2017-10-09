@@ -158,7 +158,7 @@ class ArticlesController extends Controller
 
     public function showfenlei()
     {
-      $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',15);
+      $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',12);
       if($fenleidatas->count() > 0){
         $sorts = get_sort('webnovel');
         if($sorts){
