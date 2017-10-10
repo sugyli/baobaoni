@@ -205,8 +205,12 @@ class ArticlesController extends Controller
 
     public function search(Request $request)
     {
+        $this->validate($request,[
+            'q' => 'required'
+        ]);
         $query = $request->q;
-        dd($query);
+        $searchDatas = $this->article->search($query)->paginate(10);
+        return view('webdashubao.search', compact('query', 'searchDatas'));
     }
 
 }
