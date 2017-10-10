@@ -63,6 +63,7 @@ class Article extends Model
         return [
           'articlename'=>$this->articlename,
           'author'=>$this->author,
+          'slug' => $this->slug,
         ];
     }
 

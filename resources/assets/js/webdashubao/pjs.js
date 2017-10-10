@@ -41,7 +41,8 @@
 
         $('#search-suggest').css({
         	top:$('#search-form').offset().top+$('#search-form').height(),
-        	left:$('#search-form').offset().left-1
+        	left:$('#search-form').offset().left-1,
+          position: 'absolute'
         }).show();
 
 
