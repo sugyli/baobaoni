@@ -33,7 +33,20 @@
                     q: searchText,
                 })
                 .then(function (response) {
-                   console.log(response);
+                  console.log(response);
+                  if(response.data.error == 0){
+                    var data = response.data.bakdata.data;
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                      html += '<li>书名:'+data.articlename+'</li>';
+                    }
+                    $("#search-result").html(html);
+                    $('#search-suggest').css({
+                      top:$('#search-form').offset().top+$('#search-form').height(),
+                      left:$('#search-form').offset().left-1,
+                      position: 'absolute'
+                    }).show();
+                  }
 
                 })
                 .catch(function (response) {
@@ -44,11 +57,7 @@
             }
         });
 
-        $('#search-suggest').css({
-        	top:$('#search-form').offset().top+$('#search-form').height(),
-        	left:$('#search-form').offset().left-1,
-          position: 'absolute'
-        }).show();
+
 
 
 

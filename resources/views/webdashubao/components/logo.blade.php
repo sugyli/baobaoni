@@ -13,7 +13,5 @@
 </header>
 <div class="suggest" id="search-suggest" style="display:none">
  <ul id="search-result">
-   <li> 搜索内容 </li>
-   <li> 搜索内容 </li>
  </ul>
 </div>
