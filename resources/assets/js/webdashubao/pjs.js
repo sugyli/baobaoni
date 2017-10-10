@@ -38,7 +38,7 @@
                     var data = response.data.bakdata.data;
                     var html = "";
                     for (var i = 0; i < data.length; i++) {
-                      html += '<li>书名:'+data.articlename+'</li>';
+                      html += '<li>书名:'+data[i].articlename+'</li>';
                     }
                     $("#search-result").html(html);
                     $('#search-suggest').css({
