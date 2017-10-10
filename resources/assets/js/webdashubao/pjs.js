@@ -69,6 +69,7 @@
       },
       searchSubmit: function(){
         $('#search-form').submit(function(){
+                $('#search-suggest').hide();
                 var folder= $("#search_input").val();
                 if($.trim(folder)==""){
                     alert("搜索内容不能为空");

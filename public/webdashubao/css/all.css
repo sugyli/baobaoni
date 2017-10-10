@@ -478,7 +478,7 @@ em {
 .suggest{z-index:9999;width:561px; background-color:#fff;position:absolute;margin:0;padding:0;border-width:1px;border-style:solid;border-color: #999;overflow: hidden;}
 .suggest ul{list-style:none;display:block;margin:0;padding:0}
 .suggest ul li {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;padding:3px;line-height:25px;font-size: 14px;color: #777;cursor: pointer;padding:3px;}
-.suggest ul li:hover{background-color:#e5e5e5;text-decoration: underline;}
+.suggest ul li:hover{background-color:#e5e5e5;}
 .suggest ul li span{color: red; padding-right: 5px;}
 .suggest strong{color:#000;}
 
