@@ -171,8 +171,9 @@ class ArticlesController extends Controller
 
     public function testindex()
     {
-        $a = $this->article->where('articleid', '63643')->searchable();
-        dd($a);
+        $posts = $this->article->search('比的异')->paginate(10);
+
+        dd($posts);
     }
 
 
