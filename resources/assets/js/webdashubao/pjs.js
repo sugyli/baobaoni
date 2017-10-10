@@ -63,8 +63,8 @@
         });
 
         $(document).delegate('li','click',function(){
-            var a = $(this).children("span:first-child").text();
-            console.log(a);
+            var keyword= $(this).children("span:first-child").text();
+            location.href = '/search?q=' + keyword;
         });
       },
       toTop: function(){

@@ -23,6 +23,7 @@ include_once('admin.php');
 Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
 Route::get('/mytest', 'NovelsController\ArticlesController@testindex');
 Route::post('/searchinput', 'NovelsController\ArticlesController@searchInput');
+Route::match(['get', 'post'] ,'/search', 'NovelsController\ArticlesController@search');
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
 Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
 # ------------------ajax路由处理------------------------

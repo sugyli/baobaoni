@@ -203,4 +203,10 @@ class ArticlesController extends Controller
         return response()->json($result);
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->q;
+        dd($query);
+    }
+
 }

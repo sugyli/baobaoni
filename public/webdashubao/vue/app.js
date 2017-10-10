@@ -53661,7 +53661,7 @@ module.exports = Component.exports
                             var data = response.data.bakdata.data;
                             var html = "";
                             for (var i = 0; i < data.length; i++) {
-                                html += '<li>书名:<span>' + data[i].articlename + '</span> 作者:' + data[i].author + '</li>';
+                                html += '<li>书名：<span>' + data[i].articlename + '</span> 作者：' + data[i].author + '</li>';
                             }
                             $("#search-result").html(html);
                             $('#search-suggest').css({
@@ -53682,8 +53682,8 @@ module.exports = Component.exports
             });
 
             $(document).delegate('li', 'click', function () {
-                var a = $(this).children("span:first-child").text();
-                console.log(a);
+                var keyword = $(this).children("span:first-child").text();
+                location.href = '/search?q=' + keyword;
             });
         },
         toTop: function toTop() {
