@@ -43,7 +43,6 @@ class ESInit extends Command
         $this->createIndex($client);
 
     }
-
     protected function createTemplate(Client $client)
     {
       // 创建模版
