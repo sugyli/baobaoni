@@ -4,6 +4,7 @@
           var self = this;
           self.qiandao();
           self.searchApi();
+          self.searchSubmit();
       },
       setCookies: function(cookieName,cookieValue){
         var today = new Date();
@@ -57,7 +58,6 @@
             }
         });
 
-
         $(document).bind('click',function(){
             $('#search-suggest').hide();
         });
@@ -65,6 +65,15 @@
         $(document).delegate('li','click',function(){
             var keyword= $(this).children("span:first-child").text();
             location.href = '/search?q=' + keyword;
+        });
+      },
+      searchSubmit: function(){
+        $('#search-form').submit(function(){
+                var folder= $("#search_input").val();
+                if($.trim(folder)==""){
+                    alert("搜索内容不能为空");
+                    return false;
+                }
         });
       },
       toTop: function(){

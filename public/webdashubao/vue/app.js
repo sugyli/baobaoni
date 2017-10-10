@@ -53630,6 +53630,7 @@ module.exports = Component.exports
             var self = this;
             self.qiandao();
             self.searchApi();
+            self.searchSubmit();
         },
         setCookies: function setCookies(cookieName, cookieValue) {
             var today = new Date();
@@ -53684,6 +53685,15 @@ module.exports = Component.exports
             $(document).delegate('li', 'click', function () {
                 var keyword = $(this).children("span:first-child").text();
                 location.href = '/search?q=' + keyword;
+            });
+        },
+        searchSubmit: function searchSubmit() {
+            $('#search-form').submit(function () {
+                var folder = $("#search_input").val();
+                if ($.trim(folder) == "") {
+                    alert("搜索内容不能为空");
+                    return false;
+                }
             });
         },
         toTop: function toTop() {
