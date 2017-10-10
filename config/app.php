@@ -226,6 +226,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelPinyin\ServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
