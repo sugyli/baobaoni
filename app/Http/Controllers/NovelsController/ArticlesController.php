@@ -209,8 +209,8 @@ class ArticlesController extends Controller
             'q' => 'required'
         ]);
         $q = $request->q;
-        $searchDatas = $this->article->search($q)->paginate(10);
-        $searchDatas->withPath('?q='.$q);
+        $searchDatas = $this->article->search($q)->paginate(10,false,['query'=>array('q' => $q]);
+
         dd($searchDatas);
         return view('webdashubao.search', compact('q', 'searchDatas'));
     }
