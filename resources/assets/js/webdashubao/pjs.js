@@ -31,7 +31,7 @@
                 return  false;
             }else{
               axios.post('/searchinput', {
-                    query: searchText,
+                    q: searchText,
                 })
                 .then(function (response) {
 
@@ -64,7 +64,7 @@
 
         $(document).delegate('li','click',function(){
             var keyword= $(this).children("span:first-child").text();
-            location.href = '/search?query=' + keyword;
+            location.href = '/search?q=' + keyword;
         });
       },
       searchSubmit: function(){
