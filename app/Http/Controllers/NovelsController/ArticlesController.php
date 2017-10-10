@@ -189,7 +189,7 @@ class ArticlesController extends Controller
           $result['message'] = '搜索关键词不能为空';
           return response()->json($result);
         }
-        $data = $this->article->search($query)->limit(10)->get();
+        $data = $this->article->search($query)->paginate(10);
         if($data->count() <= 0)
         {
           $result['message'] = '没有搜索到内容';
