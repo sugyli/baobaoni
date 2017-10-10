@@ -172,7 +172,7 @@ class ArticlesController extends Controller
     public function testindex()
     {
         $posts = $this->article->find(63643);
-        $posts->allvisit = 377;
+        $posts->allvisit = 367;
         $posts->save();
     }
 
