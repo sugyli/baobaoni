@@ -180,9 +180,9 @@ class ArticlesController extends Controller
     /*
      * 搜索页面
      */
-    public function searchInput(Request $request)
+    public function searchInput()
     {
-        $query = $request->q;
+        $query = request('query');
         $query = trim($query);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         if(empty($query)){
@@ -203,16 +203,14 @@ class ArticlesController extends Controller
         return response()->json($result);
     }
 
-    public function search(Request $request)
+    public function search()
     {
-        $this->validate($request,[
-            'q' => 'required'
+        $this->validate(request(),[
+            'query' => 'required'
         ]);
-        $q = $request->q;
-        $searchDatas = $this->article->search($q)->paginate(10,false,['query'=>array('q' => $q)]);
-
-        dd($searchDatas);
-        return view('webdashubao.search', compact('q', 'searchDatas'));
+        $query = request('query');
+        $searchDatas = $this->article->search($query)->paginate(12);
+        return view('webdashubao.search', compact('query', 'searchDatas'));
     }
 
 }
