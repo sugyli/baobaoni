@@ -53682,8 +53682,8 @@ module.exports = Component.exports
             });
 
             $(document).delegate('li', 'click', function () {
-                var a = $(this).find("span");
-                console.log(a[0].text());
+                var a = $(this).children("span:first-child").text();
+                console.log(a);
             });
         },
         toTop: function toTop() {
