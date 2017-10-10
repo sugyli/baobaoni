@@ -48,7 +48,7 @@ class ESInit extends Command
     {
       // 创建模版
       $url = config('scout.elasticsearch.hosts')[0] . '/_template/rtf';
-      $client->delete($url);
+      //$client->delete($url);
       $client->put($url, [
           'json' => [
               //'template' => config('scout.elasticsearch.index'),
@@ -88,7 +88,7 @@ class ESInit extends Command
     protected function createIndex(Client $client)
     {
         $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
-        $client->delete($url);
+        //$client->delete($url);
         $client->put($url, [
             'json' => [
                 'settings' => [
