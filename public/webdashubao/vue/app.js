@@ -53656,12 +53656,13 @@ module.exports = Component.exports
                     axios.post('/searchinput', {
                         q: searchText
                     }).then(function (response) {
-                        console.log(response);
+
                         if (response.data.error == 0) {
                             var data = response.data.bakdata.data;
+                            console.log(data);
                             var html = "";
                             for (var i = 0; i < data.length; i++) {
-                                html += '<li>书名:' + data.articlename + '</li>';
+                                html += '<li>书名:' + data[i].articlename + '</li>';
                             }
                             $("#search-result").html(html);
                             $('#search-suggest').css({
