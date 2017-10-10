@@ -61,7 +61,9 @@
         $(document).bind('click',function(){
             $('#search-suggest').hide();
         });
-
+        $("#search_input").blur(function(){
+            $('#search-suggest').hide();
+        });
 
       },
       toTop: function(){
