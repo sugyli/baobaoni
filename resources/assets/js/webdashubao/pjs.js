@@ -22,22 +22,27 @@
       },
       searchApi: function() {
         $('#search_input').bind('keyup',function(){
-         var jqueryInput = $(this);
-         var searchText = jqueryInput.val();
-         axios.post('/searchinput', {
-               q: searchText,
-           })
-           .then(function (response) {
-              console.log(response);
+           var jqueryInput = $(this);
+           var searchText = jqueryInput.val();
+           searchText = $.trim(searchText);
 
-           })
-           .catch(function (response) {
+           if(searchText==undefined || searchText== "" || searchText ==null){
+                return  false;
+            }else{
+              axios.post('/searchinput', {
+                    q: searchText,
+                })
+                .then(function (response) {
+                   console.log(response);
 
-               console.log(response);
+                })
+                .catch(function (response) {
 
-           });
+                    console.log(response);
+
+                });
+            }
         });
-
 
         $('#search-suggest').css({
         	top:$('#search-form').offset().top+$('#search-form').height(),

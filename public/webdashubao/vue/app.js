@@ -53648,19 +53648,26 @@ module.exports = Component.exports
             $('#search_input').bind('keyup', function () {
                 var jqueryInput = $(this);
                 var searchText = jqueryInput.val();
-                axios.post('/searchinput', {
-                    q: searchText
-                }).then(function (response) {
-                    console.log(response);
-                }).catch(function (response) {
+                searchText = $.trim(searchText);
 
-                    console.log(response);
-                });
+                if (searchText == undefined || searchText == "" || searchText == null) {
+                    return false;
+                } else {
+                    axios.post('/searchinput', {
+                        q: searchText
+                    }).then(function (response) {
+                        console.log(response);
+                    }).catch(function (response) {
+
+                        console.log(response);
+                    });
+                }
             });
 
             $('#search-suggest').css({
                 top: $('#search-form').offset().top + $('#search-form').height(),
-                left: $('#search-form').offset().left - 1
+                left: $('#search-form').offset().left - 1,
+                position: 'absolute'
             }).show();
         },
         toTop: function toTop() {
