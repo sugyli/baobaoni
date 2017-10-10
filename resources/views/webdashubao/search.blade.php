@@ -158,7 +158,7 @@
 <header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt;  搜索页面</header>
 <section class="list">
   <div class="ltop">
-    <h2>{{$query}} 搜索结果如下</h2>
+    <h2>搜索词：{{$query}}</h2>
   </div>
   <ul>
     @if ($searchDatas->count() > 0)
