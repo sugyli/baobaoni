@@ -194,7 +194,7 @@
       @endforeach
     @endif
   </ul>
-  {{ $searchData->links('vendor.pagination.bootstrap-4') }}
+  {{ $searchDatas->links('vendor.pagination.bootstrap-4') }}
 </section>
 @endsection
 @section('subscripts')
