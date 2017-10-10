@@ -169,7 +169,12 @@ class ArticlesController extends Controller
       return redirect('/');
     }
 
-
+    public function testindex()
+    {
+        $a = $this->article->find('63643');
+        $a->save();
+        dd($a);
+    }
 
 
 

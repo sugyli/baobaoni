@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Carbon\Carbon;
+use Laravel\Scout\Searchable;
 class Article extends Model
 {
-    use Traits\ArticleFilterable , SoftDeletes;
+    use Traits\ArticleFilterable , SoftDeletes ,Searchable;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
@@ -41,6 +42,31 @@ class Article extends Model
     {
         return 'articleid';
     }
+
+    /**
+     * 得到该模型索引的名称。
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'articles_index';
+    }
+
+    /**
+     * 得到该模型可索引数据的数组。
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+          'articlename'=>$this->articlename,
+          'author'=>$this->author,
+        ];
+    }
+
+
     public function getFullflagAttribute($value)
     {
         return $value > 0 ? '完本' : '连载';
