@@ -5,7 +5,7 @@
   <div class="seach">
     <div class="seach-main">
       <form action="/search" method="get" target="_blank" id="search-form">
-        <input id="search_input" type="text" class="search-text" placeholder="请输入小说名和作者名来搜索，千万别输错字了！" autocomplete="off" style="height: 34px; line-height: 34px;">
+        <input id="search_input" name="q" type="text" class="search-text" placeholder="请输入小说名和作者名来搜索，千万别输错字了！" autocomplete="off" style="height: 34px; line-height: 34px;">
         <input type="submit" class="search-bnt"  value="搜索">
       </form>
     </div>
