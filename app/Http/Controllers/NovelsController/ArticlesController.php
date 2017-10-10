@@ -171,8 +171,7 @@ class ArticlesController extends Controller
 
     public function testindex()
     {
-        $a = $this->article->find('63643');
-        $a->save();
+        $a = $this->article->where('articleid', '63643')->searchable();
         dd($a);
     }
 
