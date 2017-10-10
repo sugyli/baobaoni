@@ -225,6 +225,8 @@ return [
         Encore\Admin\Providers\AdminServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelPinyin\ServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*

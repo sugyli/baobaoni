@@ -29,5 +29,7 @@ Route::group([
     patch('/users/{id}', 'UsersController@update')->name('users.update');
     delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
      */
+     $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 
 });
