@@ -208,9 +208,9 @@ class ArticlesController extends Controller
         $this->validate($request,[
             'q' => 'required'
         ]);
-        $query = $request->q;
-        $searchDatas = $this->article->search($query)->paginate(10);
-        return view('webdashubao.search', compact('query', 'searchDatas'));
+        $q = $request->q;
+        $searchDatas = $this->article->search($q)->paginate(10);
+        return view('webdashubao.search', compact('q', 'searchDatas'));
     }
 
 }
