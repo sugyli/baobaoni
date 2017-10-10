@@ -58,7 +58,7 @@
         });
 
 
-        $('#search_input').bind('click',function(){
+        $(document).bind('click',function(){
             $('#search-suggest').hide();
         });
 
