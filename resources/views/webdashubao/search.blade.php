@@ -155,10 +155,10 @@
 @endsection
 @section('content')
 @include('webdashubao.packaging.logo-nav-jilu-qiandao')
-<header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt; 搜索结果</header>
+<header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt;  搜索页面</header>
 <section class="list">
   <div class="ltop">
-    <h2>{{$query}}</h2>
+    <h2>{{$query}} 搜索结果如下</h2>
   </div>
   <ul>
     @if ($searchDatas->count() > 0)

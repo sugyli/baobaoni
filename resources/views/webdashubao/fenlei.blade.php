@@ -155,7 +155,7 @@
 @endsection
 @section('content')
 @include('webdashubao.packaging.logo-nav-jilu-qiandao')
-<header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt; {{$sorts['title'] or '未知分类'}}</header>
+<header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt;  {{$sorts['title'] or '未知分类'}}</header>
 <section class="list">
   <div class="ltop">
     <h2>{{$sorts['title'] or '未知分类'}}</h2>
