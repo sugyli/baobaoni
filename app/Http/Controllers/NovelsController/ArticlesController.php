@@ -182,7 +182,7 @@ class ArticlesController extends Controller
      */
     public function searchInput(Request $request)
     {
-        $query = $request->q;
+        $query = $request->query('query');
         $query = trim($query);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         if(empty($query)){
@@ -206,12 +206,11 @@ class ArticlesController extends Controller
     public function search(Request $request)
     {
         $this->validate($request,[
-            'q' => 'required'
+            'query' => 'required'
         ]);
-        $q = $request->q;
-        $searchDatas = $this->article->search($q)->paginate(10);
-        dd($searchDatas);
-        return view('webdashubao.search', compact('q', 'searchDatas'));
+        $query = $request->query('query');;
+        $searchDatas = $this->article->search($query)->paginate(10);
+        return view('webdashubao.search', compact('query', 'searchDatas'));
     }
 
 }

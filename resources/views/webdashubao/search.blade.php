@@ -1,7 +1,7 @@
 @extends('webdashubao.layouts.default')
-@section('title'){{$q}}_搜索结果-{{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
-@section('keywords'){{$q}}@endsection
-@section('description'){{$q}}@endsection
+@section('title'){{$query}}_搜索结果-{{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
+@section('keywords'){{$query}}@endsection
+@section('description'){{$query}}@endsection
 @section('style')
 <style>
 .breadnav {
@@ -158,7 +158,7 @@
 <header class="breadnav">当前位置： <a href="/" title="{{get_sys_set('webname')}}">首页</a> &gt;  搜索页面</header>
 <section class="list">
   <div class="ltop">
-    <h2>搜索词：{{$q}}</h2>
+    <h2>搜索词：{{$query}}</h2>
   </div>
   <ul>
     @if ($searchDatas->count() > 0)

@@ -53655,7 +53655,7 @@ module.exports = Component.exports
                     return false;
                 } else {
                     axios.post('/searchinput', {
-                        q: searchText
+                        query: searchText
                     }).then(function (response) {
 
                         if (response.data.error == 0) {
@@ -53684,7 +53684,7 @@ module.exports = Component.exports
 
             $(document).delegate('li', 'click', function () {
                 var keyword = $(this).children("span:first-child").text();
-                location.href = '/search?q=' + keyword;
+                location.href = '/search?query=' + keyword;
             });
         },
         searchSubmit: function searchSubmit() {
