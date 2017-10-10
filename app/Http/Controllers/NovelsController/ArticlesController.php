@@ -210,6 +210,7 @@ class ArticlesController extends Controller
         ]);
         $q = $request->q;
         $searchDatas = $this->article->search($q)->paginate(10);
+        dd($searchDatas);
         return view('webdashubao.search', compact('q', 'searchDatas'));
     }
 
