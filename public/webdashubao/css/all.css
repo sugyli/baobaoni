@@ -423,7 +423,6 @@ em {
   overflow: visible;
   position: relative;
   border-style: solid;
-
   width: 561px;
   height: 36px;
   overflow: hidden;
@@ -452,6 +451,7 @@ em {
   font-size: 14px;
   border-radius: 0px;
   background-color: #FFFFFF;
+	outline: none;
 
 }
 .search-bnt{
@@ -474,6 +474,13 @@ em {
   line-height: 34px;
 
 }
+
+.suggest{z-index:9999;width:561px; background-color:#fff;position:absolute;margin:0;padding:0;border-width:1px;border-style:solid;border-color: #999;}
+.suggest ul{list-style:none;display:block;margin:0;padding:0}
+.suggest ul li {padding:3px;line-height:25px;font-size: 14px;color: #777;cursor: pointer;padding:3px;}
+.suggest ul li:hover{background-color:#e5e5e5;text-decoration: underline;}
+.suggest strong{color:#000;}
+
 .footer {
     border-top: 2px solid #49a9a9;
     margin: 0 auto;

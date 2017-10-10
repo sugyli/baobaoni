@@ -53629,6 +53629,7 @@ module.exports = Component.exports
         init: function init() {
             var self = this;
             self.qiandao();
+            self.searchApi();
         },
         setCookies: function setCookies(cookieName, cookieValue) {
             var today = new Date();
@@ -53642,6 +53643,25 @@ module.exports = Component.exports
             }
             var LRRead = muluurl + "#" + neirongurl + "#" + booktitle + "#" + texttitle;
             this.setCookies("BLR", LRRead);
+        },
+        searchApi: function searchApi() {
+            $('#search_input').bind('keyup', function () {
+                var jqueryInput = $(this);
+                var searchText = jqueryInput.val();
+                axios.post('/searchinput', {
+                    q: searchText
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (response) {
+
+                    console.log(response);
+                });
+            });
+
+            $('#search-suggest').css({
+                top: $('#search-form').offset().top + $('#search-form').height(),
+                left: $('#search-form').offset().left - 1
+            }).show();
         },
         toTop: function toTop() {
             var a = {

@@ -177,6 +177,30 @@ class ArticlesController extends Controller
     }
 
 
+    /*
+     * 搜索页面
+     */
+    public function searchInput(Request $request)
+    {
+        $query = $request->q;
+        $query = trim($query);
+        $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+        if(empty($query)){
+          $result['message'] = '搜索关键词不能为空';
+          return response()->json($result);
+        }
+        $data = $this->article->search($query)->limit(10)->get();
+        if($data->count() <= 0)
+        {
+          $result['message'] = '没有搜索到内容';
+          return response()->json($result);
 
+        }
+
+        $result['error'] = 0;
+        $result['message'] = '获取成功';
+        $result['bakdata'] = $data;
+        return response()->json($result);
+    }
 
 }
