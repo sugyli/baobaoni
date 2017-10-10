@@ -61,9 +61,7 @@
         $(document).bind('click',function(){
             $('#search-suggest').hide();
         });
-        $("#search_input").blur(function(){
-            $('#search-suggest').hide();
-        });
+
         $(document).delegate('li','click',function(){
             var a = $(this).find("span");
             console.log(a);
