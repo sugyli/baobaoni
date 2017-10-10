@@ -64,7 +64,7 @@
 
         $(document).delegate('li','click',function(){
             var a = $(this).find("span");
-            console.log(a);
+            console.log(a[0].text());
         });
       },
       toTop: function(){
