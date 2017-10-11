@@ -5,7 +5,7 @@
     <a :href="d" target="_blank" rel="nofollow">错误举报</a>
     <a v-on:click.stop="openModel('voteAlert')" rel="nofollow">投推荐票</a>
     <sweet-modal title="提交推荐票" ref="voteAlert">
-            <form>
+            <form id="tuijianForm">
                 <ul class="tuijianwrapper">
                     <li>
                         <input type="radio" name="num" id="num" value="1" checked="checked">1张
@@ -213,10 +213,11 @@
           },
           onSubmit(){
             this.closeModel('voteAlert');
-            //var jsonData = $("form").serialize();
-            var jsonData = $("form").serializeArray();
-            //console.log(jsonData[0].value)
+            //var jsonData = $("#tuijianForm").serialize();
+            var jsonData = $("#tuijianForm").serializeArray();
+            console.log(jsonData)
             var self = this;
+
 
             if(self.f > 0){
               self.msg('你是不是癫痫发作了,反复点',3500);

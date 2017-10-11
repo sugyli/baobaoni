@@ -4,7 +4,8 @@
           var self = this;
           self.qiandao();
           self.searchApi();
-          self.searchSubmit();
+          //self.searchSubmit();
+
       },
       setCookies: function(cookieName,cookieValue){
         var today = new Date();
@@ -62,7 +63,7 @@
             $('#search-suggest').hide();
         });
 
-        $(document).delegate('li','click',function(){
+        $('#search-result').delegate('li','click',function(){
             var keyword= $(this).children("span:first-child").text();
             location.href = '/search?query=' + keyword;
         });

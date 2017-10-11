@@ -30,7 +30,7 @@ return [
     /*
      * Laravel-admin html title.
      */
-    'title'  => 'Admin',
+    'title'  => '后台管理',
 
     /*
      * Laravel-admin auth setting.
@@ -54,7 +54,7 @@ return [
         ],
 
         //'host' => 'http://localhost:8000/upload/',
-        'host' => 'http://www.sugyli.com/upload/',
+        'host' => '/upload/',
     ],
 
     /*

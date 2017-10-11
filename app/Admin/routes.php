@@ -20,6 +20,7 @@ Route::group([
     $router->post('inboxs/imageupload', 'InboxsController@imageUpload');
 
     $router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
+    $router->resource('articles', ArticlesController::class);
     /*
     get('/users', 'UsersController@index')->name('users.index');
     get('/users/{id}', 'UsersController@show')->name('users.show');

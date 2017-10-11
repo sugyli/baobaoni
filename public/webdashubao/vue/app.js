@@ -2975,7 +2975,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onSubmit: function onSubmit() {
       this.closeModel('voteAlert');
       //var jsonData = $("form").serialize();
-      var jsonData = $("form").serializeArray();
+      var jsonData = $("#tuijianForm").serializeArray();
       //console.log(jsonData[0].value)
       var self = this;
 
@@ -3227,9 +3227,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     onSubmit: function onSubmit() {
       this.closeModel('voteAlert');
-      //var jsonData = $("form").serialize();
-      var jsonData = $("form").serializeArray();
-      //console.log(jsonData[0].value)
+      //var jsonData = $("#tuijianForm").serialize();
+      var jsonData = $("#tuijianForm").serializeArray();
+      console.log(jsonData);
       var self = this;
 
       if (self.f > 0) {
@@ -41568,7 +41568,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": "提交推荐票"
     }
-  }, [_c('form', [_c('ul', {
+  }, [_c('form', {
+    attrs: {
+      "id": "tuijianForm"
+    }
+  }, [_c('ul', {
     staticClass: "tuijianwrapper"
   }, [_c('li', [_c('input', {
     attrs: {
@@ -41927,7 +41931,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": "提交推荐票"
     }
-  }, [_c('form', [_c('ul', {
+  }, [_c('form', {
+    attrs: {
+      "id": "tuijianForm"
+    }
+  }, [_c('ul', {
     staticClass: "tuijianwrapper"
   }, [_c('li', [_c('input', {
     attrs: {
@@ -53630,7 +53638,7 @@ module.exports = Component.exports
             var self = this;
             self.qiandao();
             self.searchApi();
-            self.searchSubmit();
+            //self.searchSubmit();
         },
         setCookies: function setCookies(cookieName, cookieValue) {
             var today = new Date();
@@ -53682,13 +53690,14 @@ module.exports = Component.exports
                 $('#search-suggest').hide();
             });
 
-            $(document).delegate('li', 'click', function () {
+            $('#search-result').delegate('li', 'click', function () {
                 var keyword = $(this).children("span:first-child").text();
                 location.href = '/search?query=' + keyword;
             });
         },
         searchSubmit: function searchSubmit() {
             $('#search-form').submit(function () {
+                $('#search-suggest').hide();
                 var folder = $("#search_input").val();
                 if ($.trim(folder) == "") {
                     alert("搜索内容不能为空");
