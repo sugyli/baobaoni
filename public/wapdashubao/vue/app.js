@@ -1772,19 +1772,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (index == 0) {
               self.searchItems = data;
             } else {
-              self.searchItems.push(data);
+              for (var i = 0; i < data.length; i++) {
+                self.searchItems.push(data[i]);
+              }
             }
             console.log(self.searchItems);
             if (response.data.bakdata.next_page_url) {
               self.next_page_url = response.data.bakdata.next_page_url;
-              self.$refs.searchScroller.resize();
+              //self.$refs.searchScroller.resize();
             } else {
               self.searchNoDataText = "已经最后一页了";
-              self.$refs.searchScroller.resize();
-              //self.$refs.searchScroller.finishInfinite(true);
+              //self.$refs.searchScroller.resize();
+              self.$refs.searchScroller.finishInfinite(true);
             }
             self.setStorageSearchItems(searchKeyword);
-            //self.$refs.searchScroller.resize();
+            self.$refs.searchScroller.resize();
           } else {
             self.searchItems = [];
             self.storageSearchItems = [];
