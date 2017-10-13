@@ -97,17 +97,28 @@
                     keyword = $.trim(keyword);
                     if (keyword) {
                       this.searchKeyword = keyword;
+                      this.$refs.searchScroller.triggerPullToRefresh();
                       //this.isShowSearch = true;
-                      this.setStorageSearchItems(keyword);
+                      //this.setStorageSearchItems(keyword);
                     //  this.infinite();
                     }
 
                 },
                 refresh (done) {
-                  setTimeout(function () {
-                    console.log("0000");
-                    done();
-                  }, 1500)
+                  if (this.searchKeyword) {
+                    console.log('dd');
+                    axios.post('/searchinput', {
+                          query: this.searchKeyword,
+                      })
+                      .then(function (response) {
+                        console.log(response);
+
+
+                      })
+                      .catch(function (response) {
+                          console.log(response);
+                      });
+                  }
 
                 },
                 infinite (done) {
