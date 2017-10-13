@@ -1757,8 +1757,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getData: function getData() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
+      var self = this;
       if (this.searchKeyword) {
-        var self = this;
+
         var searchKeyword = this.searchKeyword;
         var url = index == 0 ? self.url : self.next_page_url;
 
@@ -1776,26 +1777,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (response.data.bakdata.next_page_url) {
               self.next_page_url = response.data.bakdata.next_page_url;
             } else {
-              this.searchNoDataText = "已经最后一页了";
-              this.$refs.searchScroller.finishInfinite(true);
+              self.searchNoDataText = "已经最后一页了";
+              self.$refs.searchScroller.finishInfinite(true);
             }
             self.setStorageSearchItems(searchKeyword);
-            this.$refs.searchScroller.resize();
+            self.$refs.searchScroller.resize();
           } else {
             self.searchItems = [];
             self.storageSearchItems = [];
-            this.searchNoDataText = "抱歉，没有找到相关内容";
-            this.$refs.searchScroller.finishInfinite(true);
+            self.searchNoDataText = "抱歉，没有找到相关内容";
+            self.$refs.searchScroller.finishInfinite(true);
           }
         }).catch(function (response) {
           console.log(response);
-          this.searchNoDataText = "搜索出现了故障";
-          this.$refs.searchScroller.finishInfinite(true);
+          self.searchNoDataText = "搜索出现了故障";
+          self.$refs.searchScroller.finishInfinite(true);
         });
       } else {
-        this.getStorageSearchItems();
-        this.searchNoDataText = "没有相应的搜索结果";
-        this.$refs.searchScroller.finishInfinite(true);
+        self.getStorageSearchItems();
+        self.searchNoDataText = "没有相应的搜索结果";
+        self.$refs.searchScroller.finishInfinite(true);
       }
     }
   }
