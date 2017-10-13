@@ -1683,6 +1683,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1692,7 +1695,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       storageSearchItems: [],
       searchItems: [],
       searchNoDataText: "没有更多数据",
-      searchKeyword: ""
+      searchKeyword: "",
+      top: 0,
+      bottom: 0,
+      url: '/searchinput',
+      next_page_url: '/searchinput'
     };
   },
   mounted: function mounted() {},
@@ -1742,22 +1749,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     refresh: function refresh(done) {
-      console.log('fff');
-      this.$refs.searchScroller.finishInfinite(false);
+      this.getData(0);
     },
     infinite: function infinite(done) {
+      this.getData(1);
+    },
+    getData: function getData() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
       if (this.searchKeyword) {
         var self = this;
-        axios.post('/searchinput', {
-          query: this.searchKeyword
+        var searchKeyword = this.searchKeyword;
+        var url = index == 0 ? self.url : next_page_url;
+
+        axios.post(url, {
+          query: searchKeyword
         }).then(function (response) {
           console.log(response);
-
           if (response.data.error == 0) {
-            self.searchItems = response.data.bakdata.data;
+            var data = response.data.bakdata.data;
+            if (index == 0) {
+              self.searchItems = data;
+            } else {
+              self.searchItems.push(data);
+            }
+            if (response.data.bakdata.next_page_url) {
+              self.next_page_url = response.data.bakdata.next_page_url;
+            } else {
+              this.searchNoDataText = "已经最后一页了";
+              this.$refs.searchScroller.finishInfinite(true);
+            }
+            self.setStorageSearchItems(searchKeyword);
+            this.$refs.searchScroller.resize();
+          } else {
+            self.searchItems = [];
+            self.storageSearchItems = [];
+            this.searchNoDataText = "抱歉，没有找到相关内容";
+            this.$refs.searchScroller.finishInfinite(true);
           }
         }).catch(function (response) {
           console.log(response);
+          this.searchNoDataText = "搜索出现了故障";
+          this.$refs.searchScroller.finishInfinite(true);
         });
       } else {
         this.getStorageSearchItems();
@@ -29473,7 +29506,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("搜索")])])]), _vm._v(" "), _c('div', {
     staticClass: "top__bd",
-    style: ('height:' + (_vm.screen_height - 45) + 'px;')
+    style: ('height:' + _vm.screen_height + 'px;')
   }, [_c('scroller', {
     ref: "searchScroller",
     staticStyle: {
@@ -29511,7 +29544,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "i-cl-list-main-right-author"
     }, [_vm._v("\n                          " + _vm._s(item['author']) + "\n                      ")]), _vm._v(" "), _c('p', {
       staticClass: "i-cl-list-main-right-info"
-    }, [_vm._v("\n                        " + _vm._s(item['intro']) + "\n                      ")])])])])])
+    }, [_vm._v("\n                        " + _vm._s(item['intro']) + "\n                      ")]), _vm._v(" "), _c('div', {
+      staticClass: "i-cl-list-main-right-tags"
+    }, [_c('div', {
+      staticClass: "i-cl-list-main-right-tags-tag"
+    }, [_vm._v(_vm._s(item['articlefenlei']))])])])])])])
   }))]) : _c('div', [_c('ul', {
     staticClass: "m-tag -color search-tag"
   }, _vm._l((_vm.storageSearchItems), function(item, index) {
@@ -39869,46 +39906,6 @@ module.exports = Component.exports
               //  this.infinite();
             }
           },
-          refresh: function refresh(done) {
-            if (this.searchKeyword) {
-              console.log('dd');
-              axios.post('/searchinput', {
-                query: this.searchKeyword
-              }).then(function (response) {
-                console.log(response);
-              }).catch(function (response) {
-                console.log(response);
-              });
-            }
-          },
-          infinite: function infinite(done) {
-
-            if (this.searchKeyword) {
-              axios.post('/searchinput', {
-                query: this.searchKeyword
-              }).then(function (response) {
-                console.log(response);
-              }).catch(function (response) {
-                console.log(response);
-              });
-            } else {
-
-              this.isShowSearch = false;
-            }
-
-            if (keyword) {
-              axios.post('/searchinput', {
-                query: keyword
-              }).then(function (response) {
-                console.log(response);
-              }).catch(function (response) {
-                self.e = 0;
-                console.log(response);
-              });
-            }
-            //  this.$refs.searchScroller.finishInfinite(true);
-          },
-
           tabSwitch: function tabSwitch(pos) {
             //this.duration = 0.5;
             this.header_duration = 0.5;

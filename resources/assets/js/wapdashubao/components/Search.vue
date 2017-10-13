@@ -39,6 +39,9 @@
                       <p class="i-cl-list-main-right-info">
                         {{item['intro']}}
                       </p>
+                      <div class="i-cl-list-main-right-tags">
+                        <div class="i-cl-list-main-right-tags-tag">{{item['articlefenlei']}}</div>
+                      </div>
                     </div>
                   </a>
                 </div>
@@ -71,6 +74,10 @@
         searchItems: [],
         searchNoDataText: "没有更多数据",
         searchKeyword: "",
+        top: 0,
+        bottom: 0,
+        url: '/searchinput',
+        next_page_url : '/searchinput',
       }
     },
 
@@ -123,45 +130,67 @@
 
       },
       refresh (done) {
-      console.log('fff');
-      this.$refs.searchScroller.finishInfinite(false);
+        this.getData(0);
+
       },
       infinite (done) {
-        if(this.searchKeyword){
-            var self = this;
-            axios.post('/searchinput', {
-                  query: this.searchKeyword,
-              })
-              .then(function (response) {
-                console.log(response);
+        this.getData(1);
 
-                if(response.data.error == 0){
-                    self.searchItems = response.data.bakdata.data;
+      },
+      getData(index=0){
+          if(this.searchKeyword){
+              var self = this;
+              var searchKeyword = this.searchKeyword;
+              var url = index==0 ? self.url : next_page_url;
 
-
-
-                }
-
-
-
-              })
-              .catch(function (response) {
+              axios.post(url, {
+                    query: searchKeyword,
+                })
+                .then(function (response) {
                   console.log(response);
-              });
+                  if(response.data.error == 0){
+                      var data = response.data.bakdata.data;
+                      if(index==0){
+                        self.searchItems = data;
+                      }else{
+                        self.searchItems.push(data);
+                      }
+                      if(response.data.bakdata.next_page_url){
+                          self.next_page_url = response.data.bakdata.next_page_url;
+                      }else{
+                          this.searchNoDataText = "已经最后一页了";
+                          this.$refs.searchScroller.finishInfinite(true);
 
+                      }
+                      self.setStorageSearchItems(searchKeyword);
+                      this.$refs.searchScroller.resize();
+                  }else{
+                      self.searchItems = [];
+                      self.storageSearchItems = [];
+                      this.searchNoDataText = "抱歉，没有找到相关内容";
+                      this.$refs.searchScroller.finishInfinite(true);
 
+                  }
 
-        }else{
-            this.getStorageSearchItems();
-            this.searchNoDataText = "没有相应的搜索结果";
-            this.$refs.searchScroller.finishInfinite(true);
+                })
+                .catch(function (response) {
+                    console.log(response);
+                    this.searchNoDataText = "搜索出现了故障";
+                    this.$refs.searchScroller.finishInfinite(true);
+                });
 
-        }
+          }else{
+              this.getStorageSearchItems();
+              this.searchNoDataText = "没有相应的搜索结果";
+              this.$refs.searchScroller.finishInfinite(true);
 
-
-
+          }
 
       }
+
+
+
+
     }
   }
 </script>
