@@ -51,7 +51,7 @@
 @endsection
 @section('usercontent')
 <div class="case_title">编辑资料</div>
-<form name="formtable" action="{{ route('member.user.show') }}" method="post">
+<form name="formtable" action="{{ route('member.user.show') }}" method="post" id="useredit">
   {{ csrf_field() }}
   <div class="msg_left">修改昵称：</div>
   <div class="msg_right">
@@ -65,7 +65,7 @@
   </div>
   <div class="msg_left"></div>
   <div class="msg_right">
-    <input type="submit" class="button" onclick="javascript:{this.disabled=true;this.value='提交中...';document.formtable.submit();}" value="保 存">
+    <input type="button" class="button" onclick="javascript:{this.disabled=true;this.value='提交中...';document.getElementById('useredit').submit();}" value="保 存">
   </div>
 </form>
 

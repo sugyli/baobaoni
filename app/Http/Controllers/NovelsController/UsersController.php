@@ -136,7 +136,7 @@ class UsersController extends Controller
             'name' => 'required|max:30',
             'mobile' => 'required|zh_mobile|unique:jieqi_system_users,mobile,'.$user->uid .',uid',
         ]);
-        try {
+        try { 
             $user->name = $request->name;
             $user->mobile = $request->mobile;
             $user->save();

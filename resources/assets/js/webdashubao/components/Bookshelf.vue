@@ -1,11 +1,11 @@
 <template>
-<form :action="a" method="post" name="checkform" class="Displayanimation" id= "bookshelfform">
+<form :action="a" method="post" name="checkform" class="Displayanimation" id="checkform">
   <div class="case_title">您的书架可收藏  {{ c }} 本，已收藏 {{ d }} 本。 如越界请清理才能继续添加</div>
   <input type="hidden" name="_token" :value="b">
   <ul style="min-height:300px;">
     <li class="top">
       <span class="fk">
-        <input class="input" type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }">
+        <input class="input" type="checkbox" id="checkall" name="checkall" value="checkall" />
       </span>
       <span class="wz">文章名称</span>
       <span class="zx">最新章节</span>
@@ -130,9 +130,10 @@
             },
             delpiliang: function(){
                 var flag = false;
-                for (var i=0;i< document.getElementById('bookshelfform').elements.length;i++){
-                  if (document.getElementById('bookshelfform').elements[i].name != 'checkkall' && document.getElementById('bookshelfform').elements[i].checked){
-                   flag = true;
+                var bookshelfform = document.getElementById('checkform');
+                for (var i=0;i< bookshelfform.elements.length;i++){
+                  if (bookshelfform.elements[i].name != 'checkkall' && bookshelfform.elements[i].checked){
+                      flag = true;
                    }
                 }
                 if(!flag) {
@@ -141,10 +142,11 @@
                 }
 
                 if(confirm('确实要将本书移出书架么？')){
-                  document.getElementById('bookcasebnt').disabled=true;
-                  document.getElementById('bookcasebnt').value='提交中...';
-                  this.msg('正在批量删除,请稍后...');
-                  document.checkform.submit();
+                    document.getElementById('bookcasebnt').disabled=true;
+                    document.getElementById('bookcasebnt').value='提交中...';
+                    this.msg('正在批量删除,请稍后...');
+                    //document.checkform.submit();
+                    bookshelfform.submit();
                 }
 
             }

@@ -13,6 +13,7 @@
         "encore/laravel-admin": "1.4.*",
         "guzzlehttp/guzzle": "~6.0",
         "intervention/image": "^2.4",
+        "jenssegers/agent": "^2.5",
         "laravel/framework": "5.4.*",
         "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",

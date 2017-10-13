@@ -20,7 +20,47 @@ class ArticlesController extends Controller
 
     }
 
-    public function index()
+    public function index(){
+      if(\Agent::isMobile()){
+
+          return $this->isMobileIndex();
+      }
+
+      return $this->isDesktopIndex();
+    }
+    protected function isMobileIndex()
+    {
+
+      $newBookDatas =
+                    \Cache::remember('index_newbook', get_sys_set('cacheTime_d'), function (){
+
+                        return $this->article->getArticlesWithFilter('newdata',6);
+
+                     });
+       $weekdates =
+                     \Cache::remember('index_weekdate', get_sys_set('cacheTime_d'), function (){
+
+                          return  Ranking::getWeekBookHits(31);
+
+                      });
+
+      $monthdates =
+                    \Cache::remember('index_monthdate', get_sys_set('cacheTime_d'), function (){
+
+                         return  Ranking::getMonthBookHits(31);
+
+                     });
+
+     $updataBooks = \Cache::remember('index_updatabook', get_sys_set('cacheTime_d'), function (){
+
+                       return  $this->article->getArticlesWithFilter('updatedata',20);
+
+                    });
+      return view('wapdashubao.index', compact('newBookDatas','weekdates','monthdates','updataBooks'));
+
+    }
+
+    protected function isDesktopIndex()
     {
 
       $newBookDatas =

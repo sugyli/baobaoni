@@ -70,7 +70,7 @@
   </div>
   <div class="msg_left"></div>
   <div class="msg_right">
-    <input type="submit" class="button" onclick="javascript:{this.disabled=true;this.value='提交中...';document.formtable.submit();}" value="保 存">
+    <input type="button" class="button" onclick="javascript:{this.disabled=true;this.value='提交中...';document.formtable.submit();}" value="保 存">
   </div>
 </form>
 

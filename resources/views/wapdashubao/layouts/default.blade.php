@@ -8,16 +8,22 @@
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="stylesheet" type="text/css" href="/wapdashubao/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="/wapdashubao/css/index.css">
     <title>@section('title')标题@show</title>
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />
+    <link rel="shortcut icon" href="/favicon.ico"/>
   </head>
   <body>
-    @yield('content')
+  @yield('style')
+  <div id="app" v-bind:style="'width:'+ screen_width + 'px;'">
+      @yield('content')
+  </div>
+
   </body>
   @section('scripts')
-    <script src="/wapdashubao/js/vue.js"></script>
-    <script src="/wapdashubao/js/zepto.js"></script>
+  <script src="{{ mix('/wapdashubao/vue/app.js') }}"></script>
+  @show
+  @section('subscripts')
+
   @show
 </html>

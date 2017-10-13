@@ -2,35 +2,62 @@
 
 @section('content')
 
-<div id="app" v-bind:style="{overflow:'hidden' , width:screen_width + 'px'}">
-  @include('wapdashubao.include.header')
-  <div v-bind:style="{
-        width: double_screen_width + 'px',
-        'transition-duration':'.5s',
-        transform:'translate3d('+ position +'px,0px,0px)'
-      }">
+@include('wapdashubao.include.header')
 
-      <div class="container-warp"
-          v-bind:style="{width: screen_width + 'px',float:'left'}">
-
+<div v-bind:style="'width:'+ double_screen_width +
+                  'px;transition-duration:.5s;transform:translate3d('+
+                  position + 'px,0px,0px);'">
+  <div style="padding-top: 45px;" class="container-warp"
+        v-bind:style="'width:'+ screen_width + 'px;float:left'">
+          <div v-bind:class="{ ishide: !ishide}">
             @include('wapdashubao.include.index-top')
-
             @include('wapdashubao.include.index-hot')
-
-            @include('wapdashubao.include.index-clicklist')
-
+            @include('wapdashubao.include.index-weeklist')
+            @include('wapdashubao.include.index-monthlist')
             @include('wapdashubao.include.index-update')
+          </div>
+          @include('wapdashubao.include.foot')
+  </div>
+  <div class="container-warp" v-bind:style="'overflow: hidden;width:'+ screen_width +'px;float:left;'">
+    {{--<div class="topbox" v-bind:class="{ ishide: ishide }">
+      <a class="top__back" v-on:click.stop="tabSwitch(3)"></a>
+      <span class="top__title">返回</span>
+    </div>
+    --}}
+        <div class="right-search" v-bind:class="{ ishide: ishide}">
+          <a v-on:click.stop="tabSwitch(3)" class="top__back"></a>
+          <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
+            <input type="text" value="" ref="search_box" placeholder="输入书名/作者/关键字">
+            <div class="search-input__btn" v-on:click="search">搜索</div>
+          </div>
+        </div>
+        <div class="top__bd" :style="'height:'+(screen_height-45)+'px;'">
+          <scroller
+            v-if="isShowSearch"
+            ref="searchScroller"
+            :on-refresh="refresh"
+            :on-infinite="infinite"
+            :no-data-text="searchNoDataText"
+            >
 
-            @include('wapdashubao.include.foot')
-      </div>
-</div>
+            <div v-for="(item, index) in searchItems" class="row" :class="{'grey-bg': index % 2 == 0}">
+              @{{ item }}
+            </div>
 
-@stop
 
-@section('scripts')
-@parent
-<script src="/wapdashubao/js/index.js"></script>
-@stop
+
+          </scroller>
+            <div v-if="!isShowSearch">
+              <ul class="m-tag -color search-tag" >
+                <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">@{{item}}</li>
+              </ul>
+              <div  v-if="isArray(storageSearchItems)" class="his-dele">
+                <a v-on:click.stop="delStorageSearchItems">
+                <img src="/wapdashubao/images/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;">清除记录
+                </a>
+              </div>
+          </div>
+        </div>
 
 
 
@@ -41,6 +68,132 @@
 
 
 {{--
+
+    <div class="right-search">
+			<div class="top">
+        <a href="javascript:history.back()" class="top__back"></a>
+				<div id="search-input" class="search-input"> <b class="search-input__mi"></b>
+					<input type="text" value="" id="search_box" placeholder="输入书名/作者/关键字">
+					<div class="search-input__btn">搜索</div>
+				</div>
+			</div>
+		</div>
+    <div class="top__bd">
+										<div>
+											<ul class="m-tag -color search-tag">
+												<li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+												<li class="u-tag" id="Tag__129">复仇千金</li>
+												<li class="u-tag" id="Tag__130">盗墓</li>
+												<li class="u-tag" id="Tag__131">豪门小老婆</li>
+												<li class="u-tag" id="Tag__132">庶女</li>
+												<li class="u-tag" id="Tag__133">神医</li>
+												<li class="u-tag" id="Tag__134">魔兽</li>
+												<li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+
+                        <li class="u-tag" id="Tag__128">我的绝美女神老婆</li>
+                        <li class="u-tag" id="Tag__129">复仇千金</li>
+                        <li class="u-tag" id="Tag__130">盗墓</li>
+                        <li class="u-tag" id="Tag__131">豪门小老婆</li>
+                        <li class="u-tag" id="Tag__132">庶女</li>
+                        <li class="u-tag" id="Tag__133">神医</li>
+                        <li class="u-tag" id="Tag__134">魔兽</li>
+                        <li class="u-tag" id="Tag__135">我的老婆是双胞胎</li>
+											</ul>
+										</div>
+									</div>
+--}}
+
+  </div>
+</div>
+
+
+
+
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+{{--
+
+
+  <div id="app" v-bind:style="{overflow:'hidden' , width:screen_width + 'px'}">
+    @include('wapdashubao.include.header')
+    <div class="tow-warp" v-bind:style="{
+          width: double_screen_width + 'px',
+          'transition-duration':'.5s',
+          transform:'translate3d('+ position +'px,0px,0px)'
+        }">
+
+        <div class="container-warp"
+            v-bind:style="{width: screen_width + 'px',float:'left'}">
+
+              @include('wapdashubao.include.index-top')
+
+              @include('wapdashubao.include.index-hot')
+
+              @include('wapdashubao.include.index-clicklist')
+
+              @include('wapdashubao.include.index-update')
+
+              @include('wapdashubao.include.foot')
+        </div>
+  </div>
 <!DOCTYPE html>
 <html>
   <head>

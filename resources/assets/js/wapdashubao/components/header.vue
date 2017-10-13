@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div>
     <div class="header">
-      <h1 class="title">Refresh & Infinite</h1>
+      <h1 class="title" v-on:click="test(4)">Refresh & Infinite</h1>
     </div>
 
     <scroller style="top: 44px"
@@ -52,7 +52,6 @@
   }
 </style>
 <script>
-  import Vue from 'vue'
   import VueScroller from 'vue-scroller'
   Vue.use(VueScroller)
   export default {
@@ -63,14 +62,15 @@
     },
 
     mounted() {
-    	for (var i = 1; i <= 20; i++) {
+    	for (var i = 1; i <= 2; i++) {
         this.items.push(i + ' - keep walking, be 2 with you.')
       }
       this.top = 1
-      this.bottom = 20
+      this.bottom = 2
     },
     methods: {
       refresh (done) {
+      console.log("kk");
         setTimeout(() => {
           var start = this.top - 1
           for (var i = start; i > start - 10; i--) {
@@ -81,14 +81,16 @@
         }, 1500)
       },
       infinite (done) {
-        setTimeout(() => {
+        console.log('333');
+        //setTimeout(() => {
           var start = this.bottom + 1
-          for (var i = start; i < start + 10; i++) {
+          for (var i = start; i < start + 3; i++) {
             this.items.push(i + ' - keep walking, be 2 with you.')
           }
-          this.bottom = this.bottom + 10
-          done()
-        }, 1500)
+          this.bottom = this.bottom + 3
+         done()
+         return;
+        //}, 1500)
       }
     }
   }

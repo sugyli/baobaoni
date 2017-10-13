@@ -82,7 +82,7 @@
   <ul>
     <li class="top">
       <span class="fk">
-        <input class="input" type="checkbox" id="checkall" name="checkall" value="checkall" onclick="javascript: for(var i=0;i<this.form.elements.length;i++){ if(this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }">
+        <input class="input" type="checkbox" id="checkall" name="checkall" value="checkall" />
       </span>
       <span class="wz">发件人</span>
       <span class="bt">标题</span>
@@ -93,7 +93,7 @@
       @foreach($user->relationInboxs as $message)
       <li>
         <span class="fk">
-          <input class="input" type="checkbox" id="checkid[]" name="checkid[]" value="{{$message->messageid}}">
+          <input class="input" type="checkbox" name="checkid[]" value="{{$message->messageid}}">
         </span>
         <span class="wz">
           <font color="#FF0000">{{ $message->fromname }}</font>
@@ -113,9 +113,9 @@
       @endforeach
     @endif
     <li class="bottom">
-      <input type="button" name="allcheck" value="全部选中" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = true; }">
-      <input type="button" name="nocheck" value="全部取消" class="button" onclick="javascript: for (var i=0;i<this.form.elements.length;i++){ this.form.elements[i].checked = false; }">
-      <input type="button" name="delcheck" value="删除选中记录" class="button" onclick="javascript:var flag = false;for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall' && this.form.elements[i].checked){ flag = true; } } if(!flag) { alert('请选择需要删除的数据！'); return false;} if(confirm('确实要删除选中记录么？')){ this.disabled=true;this.value='提交中...'; this.form.submit();}">
+      <input type="button" id="allcheck" name="allcheck" value="全部选中" class="button" />
+      <input type="button" id="nocheck" name="nocheck" value="全部取消" class="button" />
+      <input type="button" id="delcheck" name="delcheck" value="删除选中记录" class="button" />
     </li>
   </ul>
 </form>

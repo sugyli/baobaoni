@@ -16,6 +16,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
 */
 mix.js('resources/assets/js/webdashubao/app.js', 'public/webdashubao/vue')
       .version();
+mix.js('resources/assets/js/wapdashubao/app.js', 'public/wapdashubao/vue')
+      .version();
 
 /*
 if (mix.config.inProduction) {

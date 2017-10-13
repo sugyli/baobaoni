@@ -3395,8 +3395,9 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
         },
         delpiliang: function delpiliang() {
             var flag = false;
-            for (var i = 0; i < document.getElementById('bookshelfform').elements.length; i++) {
-                if (document.getElementById('bookshelfform').elements[i].name != 'checkkall' && document.getElementById('bookshelfform').elements[i].checked) {
+            var bookshelfform = document.getElementById('checkform');
+            for (var i = 0; i < bookshelfform.elements.length; i++) {
+                if (bookshelfform.elements[i].name != 'checkkall' && bookshelfform.elements[i].checked) {
                     flag = true;
                 }
             }
@@ -3409,7 +3410,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_toasted___default.a);
                 document.getElementById('bookcasebnt').disabled = true;
                 document.getElementById('bookcasebnt').value = '提交中...';
                 this.msg('正在批量删除,请稍后...');
-                document.checkform.submit();
+                //document.checkform.submit();
+                bookshelfform.submit();
             }
         }
     }
@@ -42606,7 +42608,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "action": _vm.a,
       "method": "post",
       "name": "checkform",
-      "id": "bookshelfform"
+      "id": "checkform"
     }
   }, [_c('div', {
     staticClass: "case_title"
@@ -42707,8 +42709,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "checkbox",
       "id": "checkall",
       "name": "checkall",
-      "value": "checkall",
-      "onclick": "javascript: for (var i=0;i<this.form.elements.length;i++){ if (this.form.elements[i].name != 'checkkall') this.form.elements[i].checked = form.checkall.checked; }"
+      "value": "checkall"
     }
   })]), _vm._v(" "), _c('span', {
     staticClass: "wz"
@@ -53276,6 +53277,27 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/assets/js/base.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+window._ = __webpack_require__("./node_modules/lodash/lodash.js");
+try {
+  window.$ = window.jQuery = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+} catch (e) {}
+window.axios = __webpack_require__("./node_modules/axios/index.js");
+/*
+x-requested-with  XMLHttpRequest是Ajax 异步请求方式
+
+使用
+request.getHeader("x-requested-with");
+ 为 null，则为传统同步请求；
+为 XMLHttpRequest，则为 Ajax 异步请求。
+*/
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+
+/***/ }),
+
 /***/ "./resources/assets/js/webdashubao/app.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -53293,7 +53315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 //require('./bootstrap');
-__webpack_require__("./resources/assets/js/webdashubao/base.js");
+__webpack_require__("./resources/assets/js/base.js");
 //window.Vue = require('vue');
 
 /**
@@ -53318,27 +53340,6 @@ var app = new Vue({
 });
 
 __webpack_require__("./resources/assets/js/webdashubao/pjs.js");
-
-/***/ }),
-
-/***/ "./resources/assets/js/webdashubao/base.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-window._ = __webpack_require__("./node_modules/lodash/lodash.js");
-try {
-  window.$ = window.jQuery = __webpack_require__("./node_modules/jquery/dist/jquery.js");
-} catch (e) {}
-window.axios = __webpack_require__("./node_modules/axios/index.js");
-/*
-x-requested-with  XMLHttpRequest是Ajax 异步请求方式
-
-使用
-request.getHeader("x-requested-with");
- 为 null，则为传统同步请求；
-为 XMLHttpRequest，则为 Ajax 异步请求。
-*/
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
 /***/ }),
 
@@ -53638,7 +53639,8 @@ module.exports = Component.exports
             var self = this;
             self.qiandao();
             self.searchApi();
-            //self.searchSubmit();
+            self.searchSubmit();
+            self.checkbox();
         },
         setCookies: function setCookies(cookieName, cookieValue) {
             var today = new Date();
@@ -53702,6 +53704,50 @@ module.exports = Component.exports
                 if ($.trim(folder) == "") {
                     alert("搜索内容不能为空");
                     return false;
+                }
+            });
+        },
+        checkbox: function checkbox() {
+            $("#checkall").change(function () {
+                var checkform = document.getElementById('checkform');
+                for (var i = 0; i < checkform.elements.length; i++) {
+                    if (checkform.elements[i].name != 'checkkall') {
+
+                        checkform.elements[i].checked = this.checked;
+                    }
+                }
+            });
+
+            $("#allcheck").bind('click', function () {
+                var checkform = document.getElementById('checkform');
+                for (var i = 0; i < checkform.elements.length; i++) {
+                    checkform.elements[i].checked = true;
+                }
+            });
+            $("#nocheck").bind('click', function () {
+                var checkform = document.getElementById('checkform');
+                for (var i = 0; i < checkform.elements.length; i++) {
+                    checkform.elements[i].checked = false;
+                }
+            });
+
+            $("#delcheck").bind('click', function () {
+                var checkform = document.getElementById('checkform');
+                var flag = false;
+                for (var i = 0; i < checkform.elements.length; i++) {
+                    if (checkform.elements[i].name != 'checkkall' && checkform.elements[i].checked) {
+                        flag = true;
+                    }
+                }
+
+                if (!flag) {
+                    alert('请选择需要删除的数据！');
+                    return false;
+                }
+                if (confirm('确实要删除选中记录么？')) {
+                    this.disabled = true;
+                    this.value = '提交中...';
+                    checkform.submit();
                 }
             });
         },

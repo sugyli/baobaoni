@@ -26,6 +26,7 @@
     "vue-image-crop-upload": "^2.0.4",
     "vue-multiple-button": "^1.0.3",
     "vue-occupy": "^0.0.9",
+    "vue-scroller": "^2.2.4",
     "vue-toasted": "^1.1.17"
   }
 }

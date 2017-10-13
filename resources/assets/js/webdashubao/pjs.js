@@ -4,8 +4,8 @@
           var self = this;
           self.qiandao();
           self.searchApi();
-          //self.searchSubmit();
-
+          self.searchSubmit();
+          self.checkbox();
       },
       setCookies: function(cookieName,cookieValue){
         var today = new Date();
@@ -77,6 +77,51 @@
                     return false;
                 }
         });
+      },
+      checkbox: function(){
+        $("#checkall").change(function(){
+            var checkform = document.getElementById('checkform');
+            for(var i=0;i<checkform.elements.length;i++){
+               if(checkform.elements[i].name != 'checkkall'){
+
+                  checkform.elements[i].checked = this.checked;
+               }
+            }
+        });
+
+        $("#allcheck").bind('click',function(){
+            var checkform = document.getElementById('checkform');
+            for (var i=0;i<checkform.elements.length;i++){
+                 checkform.elements[i].checked = true;
+            }
+        });
+        $("#nocheck").bind('click',function(){
+            var checkform = document.getElementById('checkform');
+            for (var i=0;i<checkform.elements.length;i++){
+                 checkform.elements[i].checked = false;
+            }
+        });
+
+        $("#delcheck").bind('click',function(){
+            var checkform = document.getElementById('checkform');
+            var flag = false;
+            for (var i=0;i<checkform.elements.length;i++){
+               if (checkform.elements[i].name != 'checkkall' && checkform.elements[i].checked){
+                  flag = true;
+               }
+            }
+
+            if(!flag) {
+              alert('请选择需要删除的数据！');
+              return false;
+            }
+            if(confirm('确实要删除选中记录么？')){
+              this.disabled=true;
+              this.value='提交中...';
+              checkform.submit();
+            }
+        });
+
       },
       toTop: function(){
         var a = {
