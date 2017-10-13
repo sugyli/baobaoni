@@ -1,0 +1,132 @@
+<template>
+<div>
+  <div class="right-search">
+    <a  href="javascript:history.back()" class="top__back"></a>
+    <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
+      <input type="text" value="" ref="search_box" placeholder="输入书名/作者/关键字">
+      <div class="search-input__btn" v-on:click="search">搜索</div>
+    </div>
+  </div>
+  <div class="top__bd" :style="'height:'+(screen_height-45)+'px;'">
+      <scroller
+        style="top: 45px"
+        ref="searchScroller"
+        :on-refresh="refresh"
+        :on-infinite="infinite"
+        :no-data-text="searchNoDataText"
+        >
+
+        <div v-if="isArray(searchItems)" v-for="(item, index) in searchItems" class="row" :class="{'grey-bg': index % 2 == 0}">
+          @{{ item }}
+        </div>
+        <div v-else>
+            <ul class="m-tag -color search-tag">
+              <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">@{{item}}</li>
+            </ul>
+
+            <div class="his-dele" v-if="isArray(storageSearchItems)">
+              <a v-on:click.stop="delStorageSearchItems">
+              <img src="/wapdashubao/images/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;">清除记录
+              </a>
+            </div>
+        </div>
+      </scroller>
+  </div>
+</div>
+</template>
+
+<script>
+
+  export default {
+    data() {
+      return {
+        screen_height: Util.windowHeight,
+        items: [],
+        storageSearchItems: [],
+        searchItems: [],
+        searchNoDataText: "没有更多数据",
+        searchKeyword: "",
+      }
+    },
+
+    mounted() {
+
+    },
+    methods: {
+      getStorageSearchItems(){
+          var searchItems = Util.StorageGetter('StorageSearchItems');
+          if(searchItems){
+             this.storageSearchItems =  JSON.parse(searchItems);
+          }else{
+            this.storageSearchItems = [];
+          }
+      },
+      setStorageSearchItems(keyword){
+          Array.prototype.unique3 = function(){
+            var res = [];
+            var json = {};
+            for(var i = 0; i < this.length; i++){
+              if(!json[this[i]]){
+                res.push(this[i]);
+                json[this[i]] = 1;
+              }
+            }
+            return res;
+          }
+
+        this.storageSearchItems.splice(0, 0,keyword);
+        this.storageSearchItems = this.storageSearchItems.unique3();
+        //this.storageSearchItems.push(keyword)
+        Util.StorageSetter('StorageSearchItems',JSON.stringify(this.storageSearchItems));
+
+      },
+      delStorageSearchItems(){
+        Util.StorageDel('StorageSearchItems');
+        this.getStorageSearchItems();
+      },
+      isArray(t){
+        return (t.constructor==Array) && t.length > 0;
+      },
+      search:function() {
+
+          var keyword =  this.$refs.search_box.value;
+          keyword = $.trim(keyword);
+          if (keyword) {
+            this.searchKeyword = keyword;
+            this.$refs.searchScroller.finishInfinite(false);
+          }
+
+      },
+      refresh (done) {
+      console.log('fff');
+      this.$refs.searchScroller.finishInfinite(false);
+      },
+      infinite (done) {
+
+        if(this.searchKeyword){
+            axios.post('/searchinput', {
+                  query: this.searchKeyword,
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (response) {
+                  console.log(response);
+              });
+
+
+
+        }else{
+            this.getStorageSearchItems();
+            this.searchNoDataText = "没有相应的搜索结果";
+            this.$refs.searchScroller.finishInfinite(true);
+
+        }
+
+
+
+
+      }
+    }
+  }
+</script>

@@ -1,5 +1,5 @@
 <section class="i-top">
-  <a v-on:click.stop="tabSwitch(2)">
+  <a href="/search">
 		<div class="i-top-search">输入书名/作者/关键字</div>
 	</a>
   <ul class="i-top-bnt">

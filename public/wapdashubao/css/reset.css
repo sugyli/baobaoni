@@ -97,7 +97,7 @@ body{
 
 }
 
-.header-tab a:first-child:before{
+.header a:first-child:before{
      content: '\4e66\57ce';
 }
 .Swipe-tab{
@@ -675,6 +675,7 @@ body{
     right: 0;
     font: 15px/45px a;
     color: rgba(0,0,0,0.7);
+    z-index: 999;
 }
     .right-search .top__back {
       float: left;
@@ -734,7 +735,7 @@ body{
     .top__bd {
       position: relative;
       overflow: hidden;
-      margin-top: 45px;
+      padding-top: 45px;
     }
     .top__bd .search-tag {
         padding: 17px;
