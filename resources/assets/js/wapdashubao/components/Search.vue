@@ -159,9 +159,11 @@
                       console.log(self.searchItems);
                       if(response.data.bakdata.next_page_url){
                           self.next_page_url = response.data.bakdata.next_page_url;
+                          self.$refs.searchScroller.resize();
                       }else{
                           self.searchNoDataText = "已经最后一页了";
-                          self.$refs.searchScroller.finishInfinite(true);
+                          self.$refs.searchScroller.resize();
+                          //self.$refs.searchScroller.finishInfinite(true);
 
                       }
                       self.setStorageSearchItems(searchKeyword);
