@@ -1657,13 +1657,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       screen_height: Util.windowHeight,
-      items: [],
       storageSearchItems: [],
       searchItems: [],
       searchNoDataText: "没有更多数据",
@@ -1727,6 +1752,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           query: this.searchKeyword
         }).then(function (response) {
           console.log(response);
+
+          if (response.data.error == 0) {
+            this.searchItems = response.data.bakdata.data;
+          }
         }).catch(function (response) {
           console.log(response);
         });
@@ -29455,41 +29484,62 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "on-infinite": _vm.infinite,
       "no-data-text": _vm.searchNoDataText
     }
+  }, [(_vm.isArray(_vm.searchItems)) ? _c('section', {
+    staticClass: "i-cl"
+  }, [_c('ul', {
+    staticClass: "i-cl-list Displayanimation"
   }, _vm._l((_vm.searchItems), function(item, index) {
-    return (_vm.isArray(_vm.searchItems)) ? _c('div', {
-      staticClass: "row",
-      class: {
-        'grey-bg': index % 2 == 0
-      }
-    }, [_vm._v("\n          @" + _vm._s(item) + "\n        ")]) : _c('div', [_c('ul', {
-      staticClass: "m-tag -color search-tag"
-    }, _vm._l((_vm.storageSearchItems), function(item, index) {
-      return _c('li', {
-        staticClass: "u-tag",
-        attrs: {
-          "id": "Tag__128"
-        }
-      }, [_vm._v("@" + _vm._s(item))])
-    })), _vm._v(" "), (_vm.isArray(_vm.storageSearchItems)) ? _c('div', {
-      staticClass: "his-dele"
+    return _c('li', [_c('div', {
+      staticClass: "i-cl-list-main"
     }, [_c('a', {
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.delStorageSearchItems($event)
-        }
-      }
-    }, [_c('img', {
-      staticStyle: {
-        "width": ".98rem",
-        "height": ".92rem",
-        "display": "inline-block"
-      },
       attrs: {
-        "src": "/wapdashubao/images/icon_search_del.png"
+        "href": "/"
       }
-    }), _vm._v("清除记录\n              ")])]) : _vm._e()])
-  }))], 1)])
+    }, [_c('div', {
+      staticClass: "i-cl-list-main-left"
+    }, [_c('img', {
+      attrs: {
+        "src": item['imgflag']
+      }
+    }), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-left-state"
+    }, [_vm._v("\n                        " + _vm._s(item['fullflag']) + "\n                      ")])]), _vm._v(" "), _c('div', {
+      staticClass: "i-cl-list-main-right"
+    }, [_c('p', {
+      staticClass: "i-cl-list-main-right-bookname"
+    }, [_vm._v("\n                        " + _vm._s(item['articlename']) + "\n                      ")]), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-right-author"
+    }, [_vm._v("\n                          " + _vm._s(item['author']) + "\n                      ")]), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-right-info"
+    }, [_vm._v("\n                        " + _vm._s(item['intro']) + "\n                      ")])])])])])
+  }))]) : _c('div', [_c('ul', {
+    staticClass: "m-tag -color search-tag"
+  }, _vm._l((_vm.storageSearchItems), function(item, index) {
+    return _c('li', {
+      staticClass: "u-tag",
+      attrs: {
+        "id": "Tag__128"
+      }
+    }, [_vm._v("@" + _vm._s(item))])
+  })), _vm._v(" "), (_vm.isArray(_vm.storageSearchItems)) ? _c('div', {
+    staticClass: "his-dele"
+  }, [_c('a', {
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.delStorageSearchItems($event)
+      }
+    }
+  }, [_c('img', {
+    staticStyle: {
+      "width": ".98rem",
+      "height": ".92rem",
+      "display": "inline-block"
+    },
+    attrs: {
+      "src": "/wapdashubao/images/icon_search_del.png"
+    }
+  }), _vm._v("清除记录\n              ")])]) : _vm._e()])])], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

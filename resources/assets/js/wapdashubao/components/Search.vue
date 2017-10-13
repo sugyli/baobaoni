@@ -16,9 +16,35 @@
         :no-data-text="searchNoDataText"
         >
 
-        <div v-if="isArray(searchItems)" v-for="(item, index) in searchItems" class="row" :class="{'grey-bg': index % 2 == 0}">
-          @{{ item }}
-        </div>
+        <section class="i-cl" v-if="isArray(searchItems)">
+          <ul class="i-cl-list Displayanimation">
+              <li v-for="(item, index) in searchItems">
+                <div class="i-cl-list-main">
+                  <a href="/">
+                    <div class="i-cl-list-main-left">
+                      <img :src="item['imgflag']"/>
+                      <p class="i-cl-list-main-left-state">
+                        {{item['fullflag']}}
+                      </p>
+                    </div>
+                    <div class="i-cl-list-main-right">
+                      <p class="i-cl-list-main-right-bookname">
+                        {{item['articlename']}}
+                      </p>
+
+                      <p class="i-cl-list-main-right-author">
+                          {{item['author']}}
+                      </p>
+
+                      <p class="i-cl-list-main-right-info">
+                        {{item['intro']}}
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </li>
+          </ul>
+        </section>
         <div v-else>
             <ul class="m-tag -color search-tag">
               <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">@{{item}}</li>
@@ -41,7 +67,6 @@
     data() {
       return {
         screen_height: Util.windowHeight,
-        items: [],
         storageSearchItems: [],
         searchItems: [],
         searchNoDataText: "没有更多数据",
@@ -109,6 +134,16 @@
               })
               .then(function (response) {
                 console.log(response);
+
+                if(response.data.error == 0){
+                    this.searchItems = response.data.bakdata.data;
+
+
+
+                }
+
+
+
               })
               .catch(function (response) {
                   console.log(response);

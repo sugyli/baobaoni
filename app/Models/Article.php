@@ -19,7 +19,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $appends = ['lastupdatef'];
+    protected $appends = ['lastupdatef','articlelink'];
     /**
      * 数据模型的启动方法
      *
@@ -80,6 +80,11 @@ class Article extends Model
     public function getLastupdatefAttribute()
     {
         return  $this->attributes['lastupdatef']  = $this->attributes['lastupdate'] > 0 ? formatTime($this->attributes['lastupdate']) : '未知';
+    }
+    public function getArticlelinkAttribute()
+    {
+        return  $this->attributes['articlelink']  = $this->link();
+
     }
     /*
     public function setLastupdatefAttribute($value)
