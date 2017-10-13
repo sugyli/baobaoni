@@ -127,8 +127,8 @@
       this.$refs.searchScroller.finishInfinite(false);
       },
       infinite (done) {
-
         if(this.searchKeyword){
+            var self = this;
             axios.post('/searchinput', {
                   query: this.searchKeyword,
               })
@@ -136,7 +136,7 @@
                 console.log(response);
 
                 if(response.data.error == 0){
-                    this.searchItems = response.data.bakdata.data;
+                    self.searchItems = response.data.bakdata.data;
 
 
 

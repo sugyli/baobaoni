@@ -1746,15 +1746,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs.searchScroller.finishInfinite(false);
     },
     infinite: function infinite(done) {
-
       if (this.searchKeyword) {
+        var self = this;
         axios.post('/searchinput', {
           query: this.searchKeyword
         }).then(function (response) {
           console.log(response);
 
           if (response.data.error == 0) {
-            this.searchItems = response.data.bakdata.data;
+            self.searchItems = response.data.bakdata.data;
           }
         }).catch(function (response) {
           console.log(response);
