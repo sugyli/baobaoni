@@ -39492,29 +39492,33 @@ __webpack_require__("./resources/assets/js/wapdashubao/pjs.js");
             var keyword = this.$refs.search_box.value;
             keyword = $.trim(keyword);
             if (keyword) {
-              //this.searchKeyword = keyword;
+              this.searchKeyword = keyword;
+              this.$refs.searchScroller.triggerPullToRefresh();
               //this.isShowSearch = true;
-              this.setStorageSearchItems(keyword);
+              //this.setStorageSearchItems(keyword);
               //  this.infinite();
             }
           },
           refresh: function refresh(done) {
-            setTimeout(function () {
-              console.log("0000");
-              done();
-            }, 1500);
-          },
-          infinite: function infinite(done) {
-            var keyword = this.$refs.search_box.value;
-            console.log('f');
-            keyword = $.trim(keyword);
-            if (keyword) {
+            if (this.searchKeyword) {
+              console.log('dd');
               axios.post('/searchinput', {
-                query: keyword
+                query: this.searchKeyword
               }).then(function (response) {
                 console.log(response);
               }).catch(function (response) {
-                self.e = 0;
+                console.log(response);
+              });
+            }
+          },
+          infinite: function infinite(done) {
+
+            if (this.searchKeyword) {
+              axios.post('/searchinput', {
+                query: this.searchKeyword
+              }).then(function (response) {
+                console.log(response);
+              }).catch(function (response) {
                 console.log(response);
               });
             } else {
