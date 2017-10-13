@@ -19,7 +19,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $appends = ['lastupdatef','articlelink'];
+    protected $appends = ['lastupdatef','articlelink','articlefenlei'];
     /**
      * 数据模型的启动方法
      *
@@ -84,6 +84,12 @@ class Article extends Model
     public function getArticlelinkAttribute()
     {
         return  $this->attributes['articlelink']  = $this->link();
+
+    }
+    public function getArticlefenleiAttribute()
+    {
+        $sorts = $this->getSort();
+        return $sorts['title'] ?? '未知分类';
 
     }
     /*

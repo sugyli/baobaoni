@@ -7,7 +7,7 @@
       <div class="search-input__btn" v-on:click="search">搜索</div>
     </div>
   </div>
-  <div class="top__bd" :style="'height:'+(screen_height-45)+'px;'">
+  <div class="top__bd" :style="'height:'+screen_height+'px;'">
       <scroller
         style="top: 45px"
         ref="searchScroller"
