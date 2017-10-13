@@ -15,7 +15,7 @@
   </head>
   <body>
   @yield('style')
-  <div id="app" v-bind:style="'width:'+ screen_width + 'px;'">
+  <div id="app">
       @yield('content')
   </div>
 
