@@ -1699,9 +1699,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     getStorageSearchItems: function getStorageSearchItems() {
-      var searchItems = Util.StorageGetter('StorageSearchItems');
-      if (searchItems) {
-        this.storageSearchItems = JSON.parse(searchItems);
+      var storageSearchItems = Util.StorageGetter('StorageSearchItems');
+      if (storageSearchItems) {
+        this.storageSearchItems = JSON.parse(storageSearchItems);
       } else {
         this.storageSearchItems = [];
       }
