@@ -156,6 +156,7 @@
                       }else{
                         self.searchItems.push(data);
                       }
+                      console.log(self.searchItems);
                       if(response.data.bakdata.next_page_url){
                           self.next_page_url = response.data.bakdata.next_page_url;
                       }else{
