@@ -168,7 +168,7 @@
 
                       }
                       self.setStorageSearchItems(searchKeyword);
-                      self.$refs.searchScroller.resize();
+                      //self.$refs.searchScroller.resize();
                   }else{
                       self.searchItems = [];
                       self.storageSearchItems = [];

@@ -1783,7 +1783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               self.$refs.searchScroller.finishInfinite(true);
             }
             self.setStorageSearchItems(searchKeyword);
-            self.$refs.searchScroller.resize();
+            //self.$refs.searchScroller.resize();
           } else {
             self.searchItems = [];
             self.storageSearchItems = [];
