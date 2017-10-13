@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    {{--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />}}
+    {{--<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />--}}
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
     <meta name="format-detection" content="telephone=no" />
     <meta name="applicable-device" content="mobile" />

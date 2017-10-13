@@ -96,6 +96,7 @@
                     var keyword =  this.$refs.search_box.value;
                     keyword = $.trim(keyword);
                     if (keyword) {
+                      console.log("kkk");
                       this.searchKeyword = keyword;
                       this.$refs.searchScroller.triggerPullToRefresh();
                       //this.isShowSearch = true;
