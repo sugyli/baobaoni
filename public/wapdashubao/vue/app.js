@@ -1760,7 +1760,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.searchKeyword) {
         var self = this;
         var searchKeyword = this.searchKeyword;
-        var url = index == 0 ? self.url : next_page_url;
+        var url = index == 0 ? self.url : self.next_page_url;
 
         axios.post(url, {
           query: searchKeyword
