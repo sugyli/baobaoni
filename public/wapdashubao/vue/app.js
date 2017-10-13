@@ -1754,12 +1754,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     infinite: function infinite(done) {
       this.getData(1);
     },
-    getData: function getData() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-
+    getData: function getData(index) {
       var self = this;
       if (this.searchKeyword) {
-
         var searchKeyword = this.searchKeyword;
         var url = index == 0 ? self.url : self.next_page_url;
 
@@ -1795,10 +1792,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         }).catch(function (response) {
           console.log(response);
+          self.storageSearchItems = [];
+          self.getStorageSearchItems();
           self.searchNoDataText = "搜索出现了故障";
           self.$refs.searchScroller.finishInfinite(true);
         });
       } else {
+        self.searchItems = [];
+        self.storageSearchItems = [];
         self.getStorageSearchItems();
         self.searchNoDataText = "没有相应的搜索结果";
         self.$refs.searchScroller.finishInfinite(true);

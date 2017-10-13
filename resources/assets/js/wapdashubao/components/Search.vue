@@ -137,10 +137,9 @@
         this.getData(1);
 
       },
-      getData(index=0){
+      getData(index){
           var self = this;
           if(this.searchKeyword){
-
               var searchKeyword = this.searchKeyword;
               var url = index==0 ? self.url : self.next_page_url;
 
@@ -181,11 +180,15 @@
                 })
                 .catch(function (response) {
                     console.log(response);
+                    self.storageSearchItems = [];
+                    self.getStorageSearchItems();
                     self.searchNoDataText = "搜索出现了故障";
                     self.$refs.searchScroller.finishInfinite(true);
                 });
 
           }else{
+              self.searchItems = [];
+              self.storageSearchItems = [];
               self.getStorageSearchItems();
               self.searchNoDataText = "没有相应的搜索结果";
               self.$refs.searchScroller.finishInfinite(true);
