@@ -3,13 +3,15 @@
 @section('content')
 
 @include('wapdashubao.include.header')
-<div v-bind:style="'width:'+ double_screen_width +
-                  'px;transition-duration:.5s;transform:translate3d('+
-                  position + 'px,0px,0px);'">
-  <div style="padding-top: 45px;" v-bind:style="'width:'+ screen_width + 'px;'">
-    @include('wapdashubao.include.index-top')
-  </div>
+<div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
+  @include('wapdashubao.include.index-top')
+  @include('wapdashubao.include.index-hot')
+  @include('wapdashubao.include.index-weeklist')
+  @include('wapdashubao.include.index-monthlist')
+  @include('wapdashubao.include.index-update')
+  @include('wapdashubao.include.foot')  
 </div>
+
 
 
 
