@@ -74,11 +74,7 @@
         searchItems: [],
         searchNoDataText: "没有更多数据",
         searchKeyword: "",
-        top: 0,
-        bottom: 0,
         url: '/searchinput',
-        next_page_url : '/searchinput',
-        type: 0,
       }
     },
 
@@ -121,13 +117,9 @@
         return (t.constructor==Array) && t.length > 0;
       },
       search:function() {
-
-          //var keyword =  this.$refs.search_box.value;
-          var keyword =  this.searchKeyword;
-
+          var keyword =  this.getKeyWord();
           keyword = $.trim(keyword);
           if (keyword) {
-              this.type = 1;
               this.$refs.searchScroller.finishInfinite(false);
           }
 
@@ -138,53 +130,38 @@
 
       },
       refresh (done) {
-        if(this.getKeyWord()){
-          this.type = 0;
-          this.getData();
-
-        }else{
 
           this.$refs.searchScroller.finishPullToRefresh();
-        }
 
-
+          return;
       },
       infinite (done) {
-        this.type = 1;
-        this.getData();
-
+          setTimeout(() => {
+              this.getData();
+              done();
+          }, 1500)
       },
       getData(){
           var self = this;
           var searchKeyword = self.getKeyWord();
-          if(searchKeyword){
-              var url = this.type == 0 ? self.url : self.next_page_url;
-
-              axios.post(url, {
+          if(searchKeyword && self.url){
+              axios.post(self.url, {
                     query: searchKeyword,
                 })
                 .then(function (response) {
                   console.log(response);
                   if(response.data.error == 0){
                       var data = response.data.bakdata.data;
-                      if(self.type == 0){
-                          for (var i = (data.length-1); i >= 0; i--) {
-                              self.searchItems.splice(0, 0, data[i]);
-                          }
-                      }else{
-                          for (var i = 0; i < data.length; i++) {
-                              self.searchItems.push(data[i]);
-                          }
-                          if(response.data.bakdata.next_page_url){
-                              self.next_page_url = response.data.bakdata.next_page_url;
-                          }else{
-                              self.searchNoDataText = "已经最后一页了";
-                              self.$refs.searchScroller.finishInfinite(true);
-
-                          }
-
+                      for (var i = 0; i < data.length; i++) {
+                          self.searchItems.push(data[i]);
                       }
-
+                      if(response.data.bakdata.next_page_url){
+                          self.url = response.data.bakdata.next_page_url;
+                      }else{
+                          self.url = '';
+                          self.searchNoDataText = "已经最后一页了";
+                          self.$refs.searchScroller.finishInfinite(true);
+                      }
                       self.setStorageSearchItems(searchKeyword);
                       //self.$refs.searchScroller.resize();
                   }else{
@@ -193,7 +170,6 @@
                       self.searchNoDataText = "抱歉，没有找到相关内容";
                       self.$refs.searchScroller.finishInfinite(true);
                       self.$refs.searchScroller.finishPullToRefresh();
-
                   }
 
                 })

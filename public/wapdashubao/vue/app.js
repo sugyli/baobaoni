@@ -1689,140 +1689,125 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      screen_height: Util.windowHeight,
-      storageSearchItems: [],
-      searchItems: [],
-      searchNoDataText: "没有更多数据",
-      searchKeyword: "",
-      top: 0,
-      bottom: 0,
-      url: '/searchinput',
-      next_page_url: '/searchinput',
-      type: 0
-    };
-  },
-  mounted: function mounted() {},
-
-  methods: {
-    getStorageSearchItems: function getStorageSearchItems() {
-      var storageSearchItems = Util.StorageGetter('StorageSearchItems');
-      if (storageSearchItems) {
-        this.storageSearchItems = JSON.parse(storageSearchItems);
-      } else {
-        this.storageSearchItems = [];
-      }
+    data: function data() {
+        return {
+            screen_height: Util.windowHeight,
+            storageSearchItems: [],
+            searchItems: [],
+            searchNoDataText: "没有更多数据",
+            searchKeyword: "",
+            url: '/searchinput'
+        };
     },
-    setStorageSearchItems: function setStorageSearchItems(keyword) {
-      Array.prototype.unique3 = function () {
-        var res = [];
-        var json = {};
-        for (var i = 0; i < this.length; i++) {
-          if (!json[this[i]]) {
-            res.push(this[i]);
-            json[this[i]] = 1;
-          }
-        }
-        return res;
-      };
+    mounted: function mounted() {},
 
-      this.storageSearchItems.splice(0, 0, keyword);
-      this.storageSearchItems = this.storageSearchItems.unique3();
-      //this.storageSearchItems.push(keyword)
-      Util.StorageSetter('StorageSearchItems', JSON.stringify(this.storageSearchItems));
-    },
-    delStorageSearchItems: function delStorageSearchItems() {
-      Util.StorageDel('StorageSearchItems');
-      this.getStorageSearchItems();
-    },
-    isArray: function isArray(t) {
-      return t.constructor == Array && t.length > 0;
-    },
-
-    search: function search() {
-
-      //var keyword =  this.$refs.search_box.value;
-      var keyword = this.searchKeyword;
-
-      keyword = $.trim(keyword);
-      if (keyword) {
-        this.type = 1;
-        this.$refs.searchScroller.finishInfinite(false);
-      }
-    },
-    getKeyWord: function getKeyWord() {
-
-      return $.trim(this.searchKeyword);
-    },
-    refresh: function refresh(done) {
-      if (this.getKeyWord()) {
-        this.type = 0;
-        this.getData();
-      } else {
-
-        this.$refs.searchScroller.finishPullToRefresh();
-      }
-    },
-    infinite: function infinite(done) {
-      this.type = 1;
-      this.getData();
-    },
-    getData: function getData() {
-      var self = this;
-      var searchKeyword = self.getKeyWord();
-      if (searchKeyword) {
-        var url = this.type == 0 ? self.url : self.next_page_url;
-
-        axios.post(url, {
-          query: searchKeyword
-        }).then(function (response) {
-          console.log(response);
-          if (response.data.error == 0) {
-            var data = response.data.bakdata.data;
-            if (self.type == 0) {
-              for (var i = data.length - 1; i >= 0; i--) {
-                self.searchItems.splice(0, 0, data[i]);
-              }
+    methods: {
+        getStorageSearchItems: function getStorageSearchItems() {
+            var storageSearchItems = Util.StorageGetter('StorageSearchItems');
+            if (storageSearchItems) {
+                this.storageSearchItems = JSON.parse(storageSearchItems);
             } else {
-              for (var i = 0; i < data.length; i++) {
-                self.searchItems.push(data[i]);
-              }
-              if (response.data.bakdata.next_page_url) {
-                self.next_page_url = response.data.bakdata.next_page_url;
-              } else {
-                self.searchNoDataText = "已经最后一页了";
-                self.$refs.searchScroller.finishInfinite(true);
-              }
+                this.storageSearchItems = [];
             }
+        },
+        setStorageSearchItems: function setStorageSearchItems(keyword) {
+            Array.prototype.unique3 = function () {
+                var res = [];
+                var json = {};
+                for (var i = 0; i < this.length; i++) {
+                    if (!json[this[i]]) {
+                        res.push(this[i]);
+                        json[this[i]] = 1;
+                    }
+                }
+                return res;
+            };
 
-            self.setStorageSearchItems(searchKeyword);
-            //self.$refs.searchScroller.resize();
-          } else {
-            self.searchItems = [];
-            self.storageSearchItems = [];
-            self.searchNoDataText = "抱歉，没有找到相关内容";
-            self.$refs.searchScroller.finishInfinite(true);
-            self.$refs.searchScroller.finishPullToRefresh();
-          }
-        }).catch(function (response) {
-          console.log(response);
-          self.storageSearchItems = [];
-          self.searchItems = [];
-          //self.getStorageSearchItems();
-          self.searchNoDataText = "搜索出现了故障";
-          self.$refs.searchScroller.finishInfinite(true);
-          self.$refs.searchScroller.finishPullToRefresh();
-        });
-      } else {
-        self.searchItems = [];
-        self.storageSearchItems = [];
-        self.getStorageSearchItems();
-        self.searchNoDataText = "没有相应的搜索结果";
-        self.$refs.searchScroller.finishInfinite(true);
-      }
+            this.storageSearchItems.splice(0, 0, keyword);
+            this.storageSearchItems = this.storageSearchItems.unique3();
+            //this.storageSearchItems.push(keyword)
+            Util.StorageSetter('StorageSearchItems', JSON.stringify(this.storageSearchItems));
+        },
+        delStorageSearchItems: function delStorageSearchItems() {
+            Util.StorageDel('StorageSearchItems');
+            this.getStorageSearchItems();
+        },
+        isArray: function isArray(t) {
+            return t.constructor == Array && t.length > 0;
+        },
+
+        search: function search() {
+            var keyword = this.getKeyWord();
+            keyword = $.trim(keyword);
+            if (keyword) {
+                this.$refs.searchScroller.finishInfinite(false);
+            }
+        },
+        getKeyWord: function getKeyWord() {
+
+            return $.trim(this.searchKeyword);
+        },
+        refresh: function refresh(done) {
+
+            this.$refs.searchScroller.finishPullToRefresh();
+
+            return;
+        },
+        infinite: function infinite(done) {
+            var _this = this;
+
+            setTimeout(function () {
+                _this.getData();
+                done();
+            }, 1500);
+        },
+        getData: function getData() {
+            var self = this;
+            var searchKeyword = self.getKeyWord();
+            if (searchKeyword && self.url) {
+                axios.post(self.url, {
+                    query: searchKeyword
+                }).then(function (response) {
+                    console.log(response);
+                    if (response.data.error == 0) {
+                        var data = response.data.bakdata.data;
+                        for (var i = 0; i < data.length; i++) {
+                            self.searchItems.push(data[i]);
+                        }
+                        if (response.data.bakdata.next_page_url) {
+                            self.url = response.data.bakdata.next_page_url;
+                        } else {
+                            self.url = '';
+                            self.searchNoDataText = "已经最后一页了";
+                            self.$refs.searchScroller.finishInfinite(true);
+                        }
+                        self.setStorageSearchItems(searchKeyword);
+                        //self.$refs.searchScroller.resize();
+                    } else {
+                        self.searchItems = [];
+                        self.storageSearchItems = [];
+                        self.searchNoDataText = "抱歉，没有找到相关内容";
+                        self.$refs.searchScroller.finishInfinite(true);
+                        self.$refs.searchScroller.finishPullToRefresh();
+                    }
+                }).catch(function (response) {
+                    console.log(response);
+                    self.storageSearchItems = [];
+                    self.searchItems = [];
+                    //self.getStorageSearchItems();
+                    self.searchNoDataText = "搜索出现了故障";
+                    self.$refs.searchScroller.finishInfinite(true);
+                    self.$refs.searchScroller.finishPullToRefresh();
+                });
+            } else {
+                self.searchItems = [];
+                self.storageSearchItems = [];
+                self.getStorageSearchItems();
+                self.searchNoDataText = "没有相应的搜索结果";
+                self.$refs.searchScroller.finishInfinite(true);
+            }
+        }
     }
-  }
 });
 
 /***/ }),
