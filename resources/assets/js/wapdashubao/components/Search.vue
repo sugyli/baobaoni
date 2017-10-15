@@ -143,8 +143,8 @@
           this.getData();
 
         }else{
-
-          return;
+          console.log('ff');
+          this.$refs.searchScroller.finishPullToRefresh();
         }
 
 
@@ -169,7 +169,7 @@
                       var data = response.data.bakdata.data;
                       if(this.type == 0){
                           for (var i = (data.length-1); i >= 0; i--) {
-                              this.items.splice(0, 0, data[i]);
+                              self.searchItems.splice(0, 0, data[i]);
                           }
                       }else{
                           for (var i = 0; i < data.length; i++) {
