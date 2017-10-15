@@ -1756,6 +1756,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         infinite: function infinite(done) {
             console.log("kaishi--");
             this.getData();
+            done();
         },
         getData: function getData() {
             var self = this;
@@ -1783,7 +1784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                         console.log("jiesu--");
                         self.setStorageSearchItems(searchKeyword);
-                        self.$refs.searchScroller.resize();
+                        //self.$refs.searchScroller.resize();
                     } else {
                         console.log('2222222222222');
                         self.searchItems = [];

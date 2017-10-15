@@ -138,6 +138,7 @@
       infinite (done) {
           console.log("kaishi--");
           this.getData();
+          done();
       },
       getData(){
           var self = this;
@@ -166,7 +167,7 @@
                       }
                       console.log("jiesu--");
                       self.setStorageSearchItems(searchKeyword);
-                      self.$refs.searchScroller.resize();
+                      //self.$refs.searchScroller.resize();
                   }else{
                         console.log('2222222222222')
                       self.searchItems = [];
