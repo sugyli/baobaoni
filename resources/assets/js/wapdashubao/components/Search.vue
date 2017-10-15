@@ -143,7 +143,7 @@
           this.getData();
 
         }else{
-          console.log('ff');
+
           this.$refs.searchScroller.finishPullToRefresh();
         }
 
@@ -186,7 +186,7 @@
                       }
 
                       self.setStorageSearchItems(searchKeyword);
-                      self.$refs.searchScroller.resize();
+                      //self.$refs.searchScroller.resize();
                   }else{
                       self.searchItems = [];
                       self.storageSearchItems = [];

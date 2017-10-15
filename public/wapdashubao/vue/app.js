@@ -1760,7 +1760,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.type = 0;
         this.getData();
       } else {
-        console.log('ff');
+
         this.$refs.searchScroller.finishPullToRefresh();
       }
     },
@@ -1797,7 +1797,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
 
             self.setStorageSearchItems(searchKeyword);
-            self.$refs.searchScroller.resize();
+            //self.$refs.searchScroller.resize();
           } else {
             self.searchItems = [];
             self.storageSearchItems = [];
