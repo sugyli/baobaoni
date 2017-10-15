@@ -136,6 +136,7 @@
           return;
       },
       infinite (done) {
+          console.log("pppppp");
           this.getData();
       },
       getData(){

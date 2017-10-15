@@ -1754,6 +1754,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return;
         },
         infinite: function infinite(done) {
+            console.log("pppppp");
             this.getData();
         },
         getData: function getData() {
