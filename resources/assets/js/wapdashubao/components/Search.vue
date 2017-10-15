@@ -78,6 +78,7 @@
         bottom: 0,
         url: '/searchinput',
         next_page_url : '/searchinput',
+        type: 0,
       }
     },
 
@@ -126,7 +127,8 @@
 
           keyword = $.trim(keyword);
           if (keyword) {
-             this.$refs.searchScroller.finishInfinite(false);
+              this.type = 1;
+              this.$refs.searchScroller.finishInfinite(false);
           }
 
       },
@@ -137,8 +139,8 @@
       },
       refresh (done) {
         if(this.getKeyWord()){
-
-          this.getData(0);
+          this.type = 0;
+          this.getData();
 
         }else{
 
@@ -148,16 +150,15 @@
 
       },
       infinite (done) {
-        this.getData(1);
+        this.type = 1;
+        this.getData();
 
       },
-      getData(index){
+      getData(){
           var self = this;
-          var searchKeyword = this.searchKeyword;
-          searchKeyword = $.trim(searchKeyword);
+          var searchKeyword = self.getKeyWord();
           if(searchKeyword){
-
-              var url = index==0 ? self.url : self.next_page_url;
+              var url = this.type == 0 ? self.url : self.next_page_url;
 
               axios.post(url, {
                     query: searchKeyword,
@@ -166,7 +167,7 @@
                   console.log(response);
                   if(response.data.error == 0){
                       var data = response.data.bakdata.data;
-                      if(index==0){
+                      if(this.type == 0){
                           for (var i = (data.length-1); i >= 0; i--) {
                               this.items.splice(0, 0, data[i]);
                           }
@@ -174,16 +175,16 @@
                           for (var i = 0; i < data.length; i++) {
                               self.searchItems.push(data[i]);
                           }
-                      }
-                      if(response.data.bakdata.next_page_url){
-                          self.next_page_url = response.data.bakdata.next_page_url;
-                          //self.$refs.searchScroller.resize();
-                      }else{
-                          self.searchNoDataText = "已经最后一页了";
-                          //self.$refs.searchScroller.resize();
-                          self.$refs.searchScroller.finishInfinite(true);
+                          if(response.data.bakdata.next_page_url){
+                              self.next_page_url = response.data.bakdata.next_page_url;
+                          }else{
+                              self.searchNoDataText = "已经最后一页了";
+                              self.$refs.searchScroller.finishInfinite(true);
+
+                          }
 
                       }
+
                       self.setStorageSearchItems(searchKeyword);
                       self.$refs.searchScroller.resize();
                   }else{
@@ -191,6 +192,7 @@
                       self.storageSearchItems = [];
                       self.searchNoDataText = "抱歉，没有找到相关内容";
                       self.$refs.searchScroller.finishInfinite(true);
+                      self.$refs.searchScroller.finishPullToRefresh();
 
                   }
 
@@ -212,8 +214,8 @@
               self.searchNoDataText = "没有相应的搜索结果";
               self.$refs.searchScroller.finishInfinite(true);
 
-
           }
+
 
       }
 
