@@ -1780,7 +1780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           console.log(response);
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
-            if (this.type == 0) {
+            if (self.type == 0) {
               for (var i = data.length - 1; i >= 0; i--) {
                 self.searchItems.splice(0, 0, data[i]);
               }
@@ -1808,7 +1808,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).catch(function (response) {
           console.log(response);
           self.storageSearchItems = [];
-          self.getStorageSearchItems();
+          self.searchItems = [];
+          //self.getStorageSearchItems();
           self.searchNoDataText = "搜索出现了故障";
           self.$refs.searchScroller.finishInfinite(true);
           self.$refs.searchScroller.finishPullToRefresh();
