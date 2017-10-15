@@ -3,7 +3,7 @@
   <div class="right-search">
     <a  href="javascript:history.back()" class="top__back"></a>
     <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
-      <input type="text" value="" ref="search_box" placeholder="输入书名/作者/关键字">
+      <input type="text" v-model="searchKeyword" ref="search_box" placeholder="输入书名/作者/关键字">
       <div class="search-input__btn" v-on:click="search">搜索</div>
     </div>
   </div>
@@ -121,11 +121,12 @@
       },
       search:function() {
 
-          var keyword =  this.$refs.search_box.value;
+          //var keyword =  this.$refs.search_box.value;
+          var keyword =  this.searchKeyword;
+
           keyword = $.trim(keyword);
           if (keyword) {
-            this.searchKeyword = keyword;
-            this.$refs.searchScroller.finishInfinite(false);
+             this.$refs.searchScroller.finishInfinite(false);
           }
 
       },
@@ -139,8 +140,10 @@
       },
       getData(index){
           var self = this;
-          if(this.searchKeyword){
-              var searchKeyword = this.searchKeyword;
+          var searchKeyword = this.searchKeyword;
+          searchKeyword = $.trim(searchKeyword);
+          if(searchKeyword){
+
               var url = index==0 ? self.url : self.next_page_url;
 
               axios.post(url, {
@@ -151,13 +154,14 @@
                   if(response.data.error == 0){
                       var data = response.data.bakdata.data;
                       if(index==0){
-                        self.searchItems = data;
+                          for (var i = (data.length-1); i >= 0; i--) {
+                              this.items.splice(0, 0, data[i]);
+                          }
                       }else{
                           for (var i = 0; i < data.length; i++) {
                               self.searchItems.push(data[i]);
                           }
                       }
-                      console.log(self.searchItems);
                       if(response.data.bakdata.next_page_url){
                           self.next_page_url = response.data.bakdata.next_page_url;
                           //self.$refs.searchScroller.resize();
@@ -168,7 +172,7 @@
 
                       }
                       self.setStorageSearchItems(searchKeyword);
-                      //self.$refs.searchScroller.resize();
+                      self.$refs.searchScroller.resize();
                   }else{
                       self.searchItems = [];
                       self.storageSearchItems = [];
@@ -184,6 +188,8 @@
                     self.getStorageSearchItems();
                     self.searchNoDataText = "搜索出现了故障";
                     self.$refs.searchScroller.finishInfinite(true);
+                    self.$refs.searchScroller.finishPullToRefresh();
+
                 });
 
           }else{
@@ -192,6 +198,7 @@
               self.getStorageSearchItems();
               self.searchNoDataText = "没有相应的搜索结果";
               self.$refs.searchScroller.finishInfinite(true);
+
 
           }
 

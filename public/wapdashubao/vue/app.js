@@ -1689,123 +1689,128 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      screen_height: Util.windowHeight,
-      storageSearchItems: [],
-      searchItems: [],
-      searchNoDataText: "没有更多数据",
-      searchKeyword: "",
-      top: 0,
-      bottom: 0,
-      url: '/searchinput',
-      next_page_url: '/searchinput'
-    };
-  },
-  mounted: function mounted() {},
-
-  methods: {
-    getStorageSearchItems: function getStorageSearchItems() {
-      var storageSearchItems = Util.StorageGetter('StorageSearchItems');
-      if (storageSearchItems) {
-        this.storageSearchItems = JSON.parse(storageSearchItems);
-      } else {
-        this.storageSearchItems = [];
-      }
+    data: function data() {
+        return {
+            screen_height: Util.windowHeight,
+            storageSearchItems: [],
+            searchItems: [],
+            searchNoDataText: "没有更多数据",
+            searchKeyword: "",
+            top: 0,
+            bottom: 0,
+            url: '/searchinput',
+            next_page_url: '/searchinput'
+        };
     },
-    setStorageSearchItems: function setStorageSearchItems(keyword) {
-      Array.prototype.unique3 = function () {
-        var res = [];
-        var json = {};
-        for (var i = 0; i < this.length; i++) {
-          if (!json[this[i]]) {
-            res.push(this[i]);
-            json[this[i]] = 1;
-          }
+    mounted: function mounted() {},
+
+    methods: {
+        getStorageSearchItems: function getStorageSearchItems() {
+            var storageSearchItems = Util.StorageGetter('StorageSearchItems');
+            if (storageSearchItems) {
+                this.storageSearchItems = JSON.parse(storageSearchItems);
+            } else {
+                this.storageSearchItems = [];
+            }
+        },
+        setStorageSearchItems: function setStorageSearchItems(keyword) {
+            Array.prototype.unique3 = function () {
+                var res = [];
+                var json = {};
+                for (var i = 0; i < this.length; i++) {
+                    if (!json[this[i]]) {
+                        res.push(this[i]);
+                        json[this[i]] = 1;
+                    }
+                }
+                return res;
+            };
+
+            this.storageSearchItems.splice(0, 0, keyword);
+            this.storageSearchItems = this.storageSearchItems.unique3();
+            //this.storageSearchItems.push(keyword)
+            Util.StorageSetter('StorageSearchItems', JSON.stringify(this.storageSearchItems));
+        },
+        delStorageSearchItems: function delStorageSearchItems() {
+            Util.StorageDel('StorageSearchItems');
+            this.getStorageSearchItems();
+        },
+        isArray: function isArray(t) {
+            return t.constructor == Array && t.length > 0;
+        },
+
+        search: function search() {
+
+            //var keyword =  this.$refs.search_box.value;
+            var keyword = this.searchKeyword;
+
+            keyword = $.trim(keyword);
+            if (keyword) {
+                this.$refs.searchScroller.finishInfinite(false);
+            }
+        },
+        refresh: function refresh(done) {
+            this.getData(0);
+        },
+        infinite: function infinite(done) {
+            this.getData(1);
+        },
+        getData: function getData(index) {
+            var self = this;
+            var searchKeyword = this.searchKeyword;
+            searchKeyword = $.trim(searchKeyword);
+            if (searchKeyword) {
+
+                var url = index == 0 ? self.url : self.next_page_url;
+
+                axios.post(url, {
+                    query: searchKeyword
+                }).then(function (response) {
+                    console.log(response);
+                    if (response.data.error == 0) {
+                        var data = response.data.bakdata.data;
+                        if (index == 0) {
+                            for (var i = data.length - 1; i >= 0; i--) {
+                                this.items.splice(0, 0, data[i]);
+                            }
+                        } else {
+                            for (var i = 0; i < data.length; i++) {
+                                self.searchItems.push(data[i]);
+                            }
+                        }
+                        if (response.data.bakdata.next_page_url) {
+                            self.next_page_url = response.data.bakdata.next_page_url;
+                            //self.$refs.searchScroller.resize();
+                        } else {
+                            self.searchNoDataText = "已经最后一页了";
+                            //self.$refs.searchScroller.resize();
+                            self.$refs.searchScroller.finishInfinite(true);
+                        }
+                        self.setStorageSearchItems(searchKeyword);
+                        self.$refs.searchScroller.resize();
+                    } else {
+                        self.searchItems = [];
+                        self.storageSearchItems = [];
+                        self.searchNoDataText = "抱歉，没有找到相关内容";
+                        self.$refs.searchScroller.finishInfinite(true);
+                    }
+                }).catch(function (response) {
+                    console.log(response);
+                    self.storageSearchItems = [];
+                    self.getStorageSearchItems();
+                    self.searchNoDataText = "搜索出现了故障";
+                    self.$refs.searchScroller.finishInfinite(true);
+                    self.$refs.searchScroller.finishPullToRefresh();
+                });
+            } else {
+                self.searchItems = [];
+                self.storageSearchItems = [];
+                self.getStorageSearchItems();
+                self.searchNoDataText = "没有相应的搜索结果";
+                self.$refs.searchScroller.finishInfinite(true);
+            }
         }
-        return res;
-      };
-
-      this.storageSearchItems.splice(0, 0, keyword);
-      this.storageSearchItems = this.storageSearchItems.unique3();
-      //this.storageSearchItems.push(keyword)
-      Util.StorageSetter('StorageSearchItems', JSON.stringify(this.storageSearchItems));
-    },
-    delStorageSearchItems: function delStorageSearchItems() {
-      Util.StorageDel('StorageSearchItems');
-      this.getStorageSearchItems();
-    },
-    isArray: function isArray(t) {
-      return t.constructor == Array && t.length > 0;
-    },
-
-    search: function search() {
-
-      var keyword = this.$refs.search_box.value;
-      keyword = $.trim(keyword);
-      if (keyword) {
-        this.searchKeyword = keyword;
-        this.$refs.searchScroller.finishInfinite(false);
-      }
-    },
-    refresh: function refresh(done) {
-      this.getData(0);
-    },
-    infinite: function infinite(done) {
-      this.getData(1);
-    },
-    getData: function getData(index) {
-      var self = this;
-      if (this.searchKeyword) {
-        var searchKeyword = this.searchKeyword;
-        var url = index == 0 ? self.url : self.next_page_url;
-
-        axios.post(url, {
-          query: searchKeyword
-        }).then(function (response) {
-          console.log(response);
-          if (response.data.error == 0) {
-            var data = response.data.bakdata.data;
-            if (index == 0) {
-              self.searchItems = data;
-            } else {
-              for (var i = 0; i < data.length; i++) {
-                self.searchItems.push(data[i]);
-              }
-            }
-            console.log(self.searchItems);
-            if (response.data.bakdata.next_page_url) {
-              self.next_page_url = response.data.bakdata.next_page_url;
-              //self.$refs.searchScroller.resize();
-            } else {
-              self.searchNoDataText = "已经最后一页了";
-              //self.$refs.searchScroller.resize();
-              self.$refs.searchScroller.finishInfinite(true);
-            }
-            self.setStorageSearchItems(searchKeyword);
-            //self.$refs.searchScroller.resize();
-          } else {
-            self.searchItems = [];
-            self.storageSearchItems = [];
-            self.searchNoDataText = "抱歉，没有找到相关内容";
-            self.$refs.searchScroller.finishInfinite(true);
-          }
-        }).catch(function (response) {
-          console.log(response);
-          self.storageSearchItems = [];
-          self.getStorageSearchItems();
-          self.searchNoDataText = "搜索出现了故障";
-          self.$refs.searchScroller.finishInfinite(true);
-        });
-      } else {
-        self.searchItems = [];
-        self.storageSearchItems = [];
-        self.getStorageSearchItems();
-        self.searchNoDataText = "没有相应的搜索结果";
-        self.$refs.searchScroller.finishInfinite(true);
-      }
     }
-  }
 });
 
 /***/ }),
@@ -29500,11 +29505,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('b', {
     staticClass: "search-input__mi"
   }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.searchKeyword),
+      expression: "searchKeyword"
+    }],
     ref: "search_box",
     attrs: {
       "type": "text",
-      "value": "",
       "placeholder": "输入书名/作者/关键字"
+    },
+    domProps: {
+      "value": (_vm.searchKeyword)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.searchKeyword = $event.target.value
+      }
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "search-input__btn",
