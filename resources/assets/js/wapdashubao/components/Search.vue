@@ -136,10 +136,7 @@
           return;
       },
       infinite (done) {
-          setTimeout(() => {
-              this.getData();
-              done();
-          }, 1500)
+          this.getData();
       },
       getData(){
           var self = this;
@@ -169,7 +166,7 @@
                       self.storageSearchItems = [];
                       self.searchNoDataText = "抱歉，没有找到相关内容";
                       self.$refs.searchScroller.finishInfinite(true);
-                      self.$refs.searchScroller.finishPullToRefresh();
+                      //self.$refs.searchScroller.finishPullToRefresh();
                   }
 
                 })
@@ -180,11 +177,12 @@
                     //self.getStorageSearchItems();
                     self.searchNoDataText = "搜索出现了故障";
                     self.$refs.searchScroller.finishInfinite(true);
-                    self.$refs.searchScroller.finishPullToRefresh();
+                    //self.$refs.searchScroller.finishPullToRefresh();
 
                 });
 
           }else{
+
               self.searchItems = [];
               self.storageSearchItems = [];
               self.getStorageSearchItems();

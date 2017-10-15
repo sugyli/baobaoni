@@ -1754,12 +1754,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return;
         },
         infinite: function infinite(done) {
-            var _this = this;
-
-            setTimeout(function () {
-                _this.getData();
-                done();
-            }, 1500);
+            this.getData();
         },
         getData: function getData() {
             var self = this;
@@ -1788,7 +1783,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         self.storageSearchItems = [];
                         self.searchNoDataText = "抱歉，没有找到相关内容";
                         self.$refs.searchScroller.finishInfinite(true);
-                        self.$refs.searchScroller.finishPullToRefresh();
+                        //self.$refs.searchScroller.finishPullToRefresh();
                     }
                 }).catch(function (response) {
                     console.log(response);
@@ -1797,9 +1792,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     //self.getStorageSearchItems();
                     self.searchNoDataText = "搜索出现了故障";
                     self.$refs.searchScroller.finishInfinite(true);
-                    self.$refs.searchScroller.finishPullToRefresh();
+                    //self.$refs.searchScroller.finishPullToRefresh();
                 });
             } else {
+
                 self.searchItems = [];
                 self.storageSearchItems = [];
                 self.getStorageSearchItems();
