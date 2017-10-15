@@ -1756,7 +1756,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         infinite: function infinite(done) {
             console.log("kaishi--");
             this.getData();
-            done();
         },
         getData: function getData() {
             var self = this;

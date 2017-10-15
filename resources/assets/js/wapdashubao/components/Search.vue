@@ -138,7 +138,6 @@
       infinite (done) {
           console.log("kaishi--");
           this.getData();
-          done();
       },
       getData(){
           var self = this;
