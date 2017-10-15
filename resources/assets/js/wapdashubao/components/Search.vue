@@ -136,7 +136,7 @@
           return;
       },
       infinite (done) {
-          console.log("pppppp");
+          console.log("kaishi--");
           this.getData();
       },
       getData(){
@@ -162,8 +162,9 @@
                           self.searchNoDataText = "已经最后一页了";
                           self.$refs.searchScroller.finishInfinite(true);
                       }
+                      console.log("jiesu--");
                       self.setStorageSearchItems(searchKeyword);
-                      //self.$refs.searchScroller.resize();
+                      self.$refs.searchScroller.resize();
                   }else{
                       self.searchItems = [];
                       self.storageSearchItems = [];
