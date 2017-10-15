@@ -141,7 +141,9 @@
       getData(){
           var self = this;
           var searchKeyword = self.getKeyWord();
+          console.log(self.url);
           if(searchKeyword && self.url){
+
               axios.post(self.url, {
                     query: searchKeyword,
                 })
