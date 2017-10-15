@@ -130,8 +130,21 @@
           }
 
       },
+      getKeyWord(){
+
+        return $.trim(this.searchKeyword);
+
+      },
       refresh (done) {
-        this.getData(0);
+        if(this.getKeyWord()){
+
+          this.getData(0);
+
+        }else{
+
+          return;
+        }
+
 
       },
       infinite (done) {
