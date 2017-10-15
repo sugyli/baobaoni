@@ -1773,8 +1773,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             self.searchItems.push(data[i]);
                         }
                         if (response.data.bakdata.next_page_url) {
+                            console.log('0000000000000');
                             self.url = response.data.bakdata.next_page_url;
                         } else {
+                            console.log('1111111111111111');
                             self.url = '';
                             self.searchNoDataText = "已经最后一页了";
                             self.$refs.searchScroller.finishInfinite(true);
@@ -1783,6 +1785,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         self.setStorageSearchItems(searchKeyword);
                         self.$refs.searchScroller.resize();
                     } else {
+                        console.log('2222222222222');
                         self.searchItems = [];
                         self.storageSearchItems = [];
                         self.searchNoDataText = "抱歉，没有找到相关内容";
