@@ -1784,7 +1784,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
           done();
         }, 1500);
       } else {
-        this.searchNoDataText = "没有数据了";
+        this.searchNoDataText = "没有搜索到数据";
         this.$refs.searchScroller.finishInfinite(true);
       }
     },
@@ -1810,11 +1810,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }
     },
     getData: function getData() {
-      console.log("fffffff1111");
       if (this.noData) {
         return;
       }
-      console.log("fffffff12222");
       var self = this;
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
@@ -1823,7 +1821,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
-          console.log(response);
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
             for (var i = 0; i < data.length; i++) {
