@@ -29663,7 +29663,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('div', {
     staticClass: "search-input__btn",
     on: {
-      "click": _vm.search
+      "click": _vm.search,
+      "keyup": function($event) {
+        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
+        _vm.search($event)
+      }
     }
   }, [_vm._v("搜索")])])]), _vm._v(" "), _c('scroller', {
     ref: "searchScroller",
