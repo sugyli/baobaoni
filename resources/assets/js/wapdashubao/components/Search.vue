@@ -108,7 +108,7 @@
       },
 
       infinite (done) {
-
+        console.log('fff11');
         if(this.isNotNullArray(this.searchItems)){
             console.log('fff');
 

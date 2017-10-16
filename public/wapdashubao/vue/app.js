@@ -1740,6 +1740,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     infinite: function infinite(done) {
       var _this3 = this;
 
+      console.log('fff11');
       if (this.isNotNullArray(this.searchItems)) {
         console.log('fff');
 
