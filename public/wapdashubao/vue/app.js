@@ -1738,22 +1738,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }, 1500);
     },
     infinite: function infinite(done) {
-      var _this3 = this;
-
       console.log('fff11');
-      if (this.isNotNullArray(this.searchItems)) {
-        console.log('fff');
-
-        setTimeout(function () {
-          var start = _this3.bottom + 1;
-          for (var i = start; i < start + 3; i++) {
-            _this3.items.push(i + ' - keep walking, be 2 with you.');
-          }
-          console.log('ff');
-          _this3.bottom = _this3.bottom + 3;
-          done();
-        }, 1500);
-      }
     },
     isNotNullArray: function isNotNullArray(t) {
       return t.constructor == Array && t.length > 0;

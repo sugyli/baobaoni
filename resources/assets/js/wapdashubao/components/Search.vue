@@ -109,23 +109,7 @@
 
       infinite (done) {
         console.log('fff11');
-        if(this.isNotNullArray(this.searchItems)){
-            console.log('fff');
 
-            setTimeout(() => {
-              var start = this.bottom + 1
-              for (var i = start; i < start + 3; i++) {
-                this.items.push(i + ' - keep walking, be 2 with you.')
-              }
-              console.log('ff')
-              this.bottom = this.bottom + 3
-              done()
-            }, 1500)
-
-
-
-
-        }
 
 
       },
