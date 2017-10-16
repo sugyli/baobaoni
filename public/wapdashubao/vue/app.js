@@ -1771,7 +1771,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         // 保证在DOM渲染完毕后初始化better-scroll
         setTimeout(function () {
-            //this._initScroll()
+            _this._initScroll();
             _this.getStorageSearchItems();
         }, 20);
     },
