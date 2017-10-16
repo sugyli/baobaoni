@@ -46,7 +46,7 @@
             </li>
         </ul>
       </section>
-      <div :class="{ishide:isshowtag}">
+      <div :class="{ishide:ishide}">
           <ul class="m-tag -color search-tag">
             <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">{{item}}</li>
           </ul>
@@ -79,7 +79,7 @@
         url:'/searchinput?page=',
         page: 0,
         noData: false,
-        isshowtag: false,
+        ishide: false,
         searchNoDataText: "没有更多数据",
         frist:0
       }
@@ -139,14 +139,9 @@
         this.getStorageSearchItems();
       },
       refresh (done) {
-        setTimeout(() => {
-          var start = this.top - 1
-          for (var i = start; i > start - 10; i--) {
-            this.items.splice(0, 0, i + ' - keep walking, be 2 with you.')
-          }
-          this.top = this.top - 10
-          done()
-        }, 1500)
+        this.$refs.searchScroller.finishPullToRefresh();
+
+        return;
       },
 
       infinite (done) {
@@ -154,7 +149,6 @@
         if(this.frist <=0){
           return;
         }
-        console.log('2222ff');
         if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
@@ -162,13 +156,10 @@
             }, 1500)
 
         }else{
-            console.log('1111ff');
             this.searchNoDataText = "没有数据了";
             this.$refs.searchScroller.finishInfinite(true);
 
         }
-
-        console.log('ff');
       },
       isNotNullArray(t){
         return (t.constructor==Array) && t.length > 0;
@@ -185,8 +176,10 @@
               this.noData = false;
               this.storageSearchItems = [];
               this.searchItems = [];
-              this.isshowtag = true;
+              this.ishide = true;
+              this.setStorageSearchItems(searchKeyword);
               this.$refs.searchScroller.finishInfinite(false);
+
           }
 
       },
@@ -208,7 +201,6 @@
                           self.searchItems.push(data[i]);
                       }
                       if(Number(response.data.bakdata.last_page) <= self.page){
-                        console.log('node');
                         self.searchNoDataText = "没有数据了";
                         self.$refs.searchScroller.finishInfinite(true);
                         self.noData = true;

@@ -1705,7 +1705,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       url: '/searchinput?page=',
       page: 0,
       noData: false,
-      isshowtag: false,
+      ishide: false,
       searchNoDataText: "没有更多数据",
       frist: 0
     };
@@ -1766,36 +1766,25 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       this.getStorageSearchItems();
     },
     refresh: function refresh(done) {
-      var _this2 = this;
+      this.$refs.searchScroller.finishPullToRefresh();
 
-      setTimeout(function () {
-        var start = _this2.top - 1;
-        for (var i = start; i > start - 10; i--) {
-          _this2.items.splice(0, 0, i + ' - keep walking, be 2 with you.');
-        }
-        _this2.top = _this2.top - 10;
-        done();
-      }, 1500);
+      return;
     },
     infinite: function infinite(done) {
-      var _this3 = this;
+      var _this2 = this;
 
       if (this.frist <= 0) {
         return;
       }
-      console.log('2222ff');
       if (this.frist > 0 && !this.noData) {
         setTimeout(function () {
-          _this3.getData();
+          _this2.getData();
           done();
         }, 1500);
       } else {
-        console.log('1111ff');
         this.searchNoDataText = "没有数据了";
         this.$refs.searchScroller.finishInfinite(true);
       }
-
-      console.log('ff');
     },
     isNotNullArray: function isNotNullArray(t) {
       return t.constructor == Array && t.length > 0;
@@ -1813,7 +1802,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         this.noData = false;
         this.storageSearchItems = [];
         this.searchItems = [];
-        this.isshowtag = true;
+        this.ishide = true;
+        this.setStorageSearchItems(searchKeyword);
         this.$refs.searchScroller.finishInfinite(false);
       }
     },
@@ -1834,7 +1824,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
               self.searchItems.push(data[i]);
             }
             if (Number(response.data.bakdata.last_page) <= self.page) {
-              console.log('node');
               self.searchNoDataText = "没有数据了";
               self.$refs.searchScroller.finishInfinite(true);
               self.noData = true;
@@ -29720,7 +29709,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v(_vm._s(item['articlefenlei']))])])])])])])
   }))]) : _vm._e(), _vm._v(" "), _c('div', {
     class: {
-      ishide: _vm.isshowtag
+      ishide: _vm.ishide
     }
   }, [_c('ul', {
     staticClass: "m-tag -color search-tag"
