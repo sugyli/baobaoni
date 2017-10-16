@@ -1903,6 +1903,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.error == 0) {
                     var data = response.data.bakdata.data;
                     self.searchItems = data;
+                    self.scroll.refresh();
                     self.setStorageSearchItems(searchKeyword);
                 } else {
                     console.log('2222222222222');
