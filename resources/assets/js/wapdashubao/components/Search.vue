@@ -177,7 +177,7 @@
               this.storageSearchItems = [];
               this.searchItems = [];
               this.ishide = true;
-              this.setStorageSearchItems(searchKeyword);
+              this.setStorageSearchItems(keyword);
               this.$refs.searchScroller.finishInfinite(false);
 
           }

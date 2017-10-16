@@ -1803,7 +1803,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         this.storageSearchItems = [];
         this.searchItems = [];
         this.ishide = true;
-        this.setStorageSearchItems(searchKeyword);
+        this.setStorageSearchItems(keyword);
         this.$refs.searchScroller.finishInfinite(false);
       }
     },
