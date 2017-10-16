@@ -80,6 +80,7 @@
         page: 0,
         isshowtag: false,
         searchNoDataText: "没有更多数据",
+        frist:0
       }
     },
     computed: {
@@ -148,8 +149,7 @@
       },
 
       infinite (done) {
-        if(this.searchItems.length > 0){
-
+        if(this.frist > 0){
             setTimeout(() => {
               this.getData();
               console.log('ff');
@@ -170,9 +170,12 @@
           var keyword =  this.getKeyWord();
           keyword = $.trim(keyword);
           if (keyword) {
+              this.frist = 1;
+              self.page = 0;
               this.storageSearchItems = [];
+              this.searchItems = [];
               this.isshowtag = true;
-              this.getData();
+              this.$refs.searchScroller.finishInfinite(false);
           }
 
       },

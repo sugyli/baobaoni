@@ -1705,7 +1705,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       url: '/searchinput?page=',
       page: 0,
       isshowtag: false,
-      searchNoDataText: "没有更多数据"
+      searchNoDataText: "没有更多数据",
+      frist: 0
     };
   },
 
@@ -1778,8 +1779,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     infinite: function infinite(done) {
       var _this3 = this;
 
-      if (this.searchItems.length > 0) {
-
+      if (this.frist > 0) {
         setTimeout(function () {
           _this3.getData();
           console.log('ff');
@@ -1798,9 +1798,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var keyword = this.getKeyWord();
       keyword = $.trim(keyword);
       if (keyword) {
+        this.frist = 1;
+        self.page = 0;
         this.storageSearchItems = [];
+        this.searchItems = [];
         this.isshowtag = true;
-        this.getData();
+        this.$refs.searchScroller.finishInfinite(false);
       }
     },
     getData: function getData() {
