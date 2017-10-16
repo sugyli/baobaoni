@@ -1780,8 +1780,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     infinite: function infinite(done) {
       var _this3 = this;
 
-      console.log('ff');
-      if (this.frist > 0 && !this.noData) {
+      if (this.frist > 0) {
         setTimeout(function () {
           _this3.getData();
           done();
@@ -1814,7 +1813,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
       var url = self.url + self.page;
-      console.log(url);
+      if (this.noData) {
+        self.$refs.searchScroller.finishInfinite(true);
+        return;
+      }
       if (searchKeyword) {
         axios.post(url, {
           query: searchKeyword

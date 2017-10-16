@@ -150,8 +150,8 @@
       },
 
       infinite (done) {
-        console.log('ff');
-        if(this.frist > 0 && !this.noData){
+
+        if(this.frist > 0){
             setTimeout(() => {
               this.getData();
               done()
@@ -187,7 +187,10 @@
           var searchKeyword = self.getKeyWord();
           self.page = self.page + 1;
           var url  = self.url + self.page;
-          console.log(url);
+          if(this.noData){
+            self.$refs.searchScroller.finishInfinite(true);
+            return;
+          }
           if(searchKeyword){
               axios.post(url, {
                     query: searchKeyword,
