@@ -1,5 +1,5 @@
 <template>
-  <div class="top__bd" :style="'height:'+screen_height+'px;'" ref="scroll_wrapper">
+  <div class="top__bd" :style="'height:'+screen_height+'px;'">
     <div class="right-search">
       <a  href="javascript:history.back()" class="top__back"></a>
       <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
@@ -8,29 +8,59 @@
       </div>
     </div>
     <scroller
-      :style="ishide"
+      style="top: 45px"
+      ref="searchScroller"
       :on-refresh="refresh"
-      :on-infinite="infinite">
-      <div v-for="(item, index) in searchItems">
-        {{ item }}
+      :on-infinite="infinite"
+      :no-data-text="searchNoDataText"
+      >
+      <section class="i-cl" v-if="isNotNullArray(searchItems)">
+        <ul class="i-cl-list Displayanimation">
+            <li v-for="(item, index) in searchItems">
+              <div class="i-cl-list-main">
+                <a href="/">
+                  <div class="i-cl-list-main-left">
+                    <img :src="item['imgflag']"/>
+                    <p class="i-cl-list-main-left-state">
+                      {{item['fullflag']}}
+                    </p>
+                  </div>
+                  <div class="i-cl-list-main-right">
+                    <p class="i-cl-list-main-right-bookname">
+                      {{item['articlename']}}
+                    </p>
+
+                    <p class="i-cl-list-main-right-author">
+                        {{item['author']}}
+                    </p>
+
+                    <p class="i-cl-list-main-right-info">
+                      {{item['intro']}}
+                    </p>
+                    <div class="i-cl-list-main-right-tags">
+                      <div class="i-cl-list-main-right-tags-tag">{{item['articlefenlei']}}</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </li>
+        </ul>
+      </section>
+      <div :class="{ishide:isshowtag}">
+          <ul class="m-tag -color search-tag">
+            <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">{{item}}</li>
+          </ul>
+
+          <div class="his-dele" v-if="isNotNullArray(storageSearchItems)">
+            <a v-on:click.stop="delStorageSearchItems">
+            <img src="/wapdashubao/images/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;">清除记录
+            </a>
+          </div>
       </div>
     </scroller>
-    <div class="tag" :style="ishidetag">
-      <ul class="m-tag -color search-tag">
-        <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">{{item}}</li>
-      </ul>
-      <div class="his-dele" v-if="isNotNullArray(storageSearchItems)">
-        <a v-on:click.stop="delStorageSearchItems">
-        <img src="/wapdashubao/images/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;">清除记录
-        </a>
-      </div>
-    </div>
   </div>
 </template>
 <style>
-.top__bd .tag{
-  padding-top: 45px;
-}
 
 </style>
 <script>
@@ -46,10 +76,10 @@
         searchKeyword: '',
         items: [],
         storageSearchItems: [],
-        ishide: "display:none;",
-        ishidetag: "",
         url:'/searchinput?page=',
-        page: 1,
+        page: 0,
+        isshowtag: false,
+        searchNoDataText: "没有更多数据",
       }
     },
     computed: {
@@ -58,11 +88,21 @@
     },
     mounted() {
       setTimeout(() => {
-          this.getStorageSearchItems();
+          this._initScroll();
       }, 20)
     },
 
     methods: {
+      _initScroll() {
+          this.getStorageSearchItems();
+          if (!this.$refs.searchScroller) {
+              return;
+          }
+          this.searchNoDataText = "没有相应的搜索结果";
+          this.$refs.searchScroller.finishInfinite(true);
+
+      },
+
       getStorageSearchItems(){
           var storageSearchItems = Util.StorageGetter('StorageSearchItems');
           if(storageSearchItems){
@@ -108,8 +148,15 @@
       },
 
       infinite (done) {
-        console.log('fff11');
+        if(this.searchItems.length > 0){
 
+            setTimeout(() => {
+              this.getData();
+              console.log('ff');
+              done()
+            }, 1500)
+
+        }
 
 
       },
@@ -123,19 +170,20 @@
           var keyword =  this.getKeyWord();
           keyword = $.trim(keyword);
           if (keyword) {
-              this.ishide = "";
+              this.storageSearchItems = [];
+              this.isshowtag = true;
               this.getData();
-
           }
 
       },
       getData(){
-          this.ishidetag ="display:none;";
-          this.storageSearchItems = [];
+
           var self = this;
           var searchKeyword = self.getKeyWord();
+          self.page = self.page + 1;
           var url  = self.url + self.page;
-          if(searchKeyword && url){
+          console.log(url);
+          if(searchKeyword){
               axios.post(url, {
                     query: searchKeyword,
                 })

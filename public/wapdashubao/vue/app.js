@@ -1659,6 +1659,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1672,10 +1702,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       searchKeyword: '',
       items: [],
       storageSearchItems: [],
-      ishide: "display:none;",
-      ishidetag: "",
       url: '/searchinput?page=',
-      page: 1
+      page: 0,
+      isshowtag: false,
+      searchNoDataText: "没有更多数据"
     };
   },
 
@@ -1687,12 +1717,20 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     var _this = this;
 
     setTimeout(function () {
-      _this.getStorageSearchItems();
+      _this._initScroll();
     }, 20);
   },
 
 
   methods: {
+    _initScroll: function _initScroll() {
+      this.getStorageSearchItems();
+      if (!this.$refs.searchScroller) {
+        return;
+      }
+      this.searchNoDataText = "没有相应的搜索结果";
+      this.$refs.searchScroller.finishInfinite(true);
+    },
     getStorageSearchItems: function getStorageSearchItems() {
       var storageSearchItems = Util.StorageGetter('StorageSearchItems');
       if (storageSearchItems) {
@@ -1738,7 +1776,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }, 1500);
     },
     infinite: function infinite(done) {
-      console.log('fff11');
+      var _this3 = this;
+
+      if (this.searchItems.length > 0) {
+
+        setTimeout(function () {
+          _this3.getData();
+          console.log('ff');
+          done();
+        }, 1500);
+      }
     },
     isNotNullArray: function isNotNullArray(t) {
       return t.constructor == Array && t.length > 0;
@@ -1751,17 +1798,19 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var keyword = this.getKeyWord();
       keyword = $.trim(keyword);
       if (keyword) {
-        this.ishide = "";
+        this.storageSearchItems = [];
+        this.isshowtag = true;
         this.getData();
       }
     },
     getData: function getData() {
-      this.ishidetag = "display:none;";
-      this.storageSearchItems = [];
+
       var self = this;
       var searchKeyword = self.getKeyWord();
+      self.page = self.page + 1;
       var url = self.url + self.page;
-      if (searchKeyword && url) {
+      console.log(url);
+      if (searchKeyword) {
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
@@ -1797,7 +1846,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.top__bd .tag{\n  padding-top: 45px;\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -29563,7 +29612,6 @@ module.exports = function normalizeComponent (
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    ref: "scroll_wrapper",
     staticClass: "top__bd",
     style: ('height:' + _vm.screen_height + 'px;')
   }, [_c('div', {
@@ -29607,16 +29655,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.search
     }
   }, [_vm._v("搜索")])])]), _vm._v(" "), _c('scroller', {
-    style: (_vm.ishide),
+    ref: "searchScroller",
+    staticStyle: {
+      "top": "45px"
+    },
     attrs: {
       "on-refresh": _vm.refresh,
-      "on-infinite": _vm.infinite
+      "on-infinite": _vm.infinite,
+      "no-data-text": _vm.searchNoDataText
     }
+  }, [(_vm.isNotNullArray(_vm.searchItems)) ? _c('section', {
+    staticClass: "i-cl"
+  }, [_c('ul', {
+    staticClass: "i-cl-list Displayanimation"
   }, _vm._l((_vm.searchItems), function(item, index) {
-    return _c('div', [_vm._v("\n      " + _vm._s(item) + "\n    ")])
-  })), _vm._v(" "), _c('div', {
-    staticClass: "tag",
-    style: (_vm.ishidetag)
+    return _c('li', [_c('div', {
+      staticClass: "i-cl-list-main"
+    }, [_c('a', {
+      attrs: {
+        "href": "/"
+      }
+    }, [_c('div', {
+      staticClass: "i-cl-list-main-left"
+    }, [_c('img', {
+      attrs: {
+        "src": item['imgflag']
+      }
+    }), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-left-state"
+    }, [_vm._v("\n                    " + _vm._s(item['fullflag']) + "\n                  ")])]), _vm._v(" "), _c('div', {
+      staticClass: "i-cl-list-main-right"
+    }, [_c('p', {
+      staticClass: "i-cl-list-main-right-bookname"
+    }, [_vm._v("\n                    " + _vm._s(item['articlename']) + "\n                  ")]), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-right-author"
+    }, [_vm._v("\n                      " + _vm._s(item['author']) + "\n                  ")]), _vm._v(" "), _c('p', {
+      staticClass: "i-cl-list-main-right-info"
+    }, [_vm._v("\n                    " + _vm._s(item['intro']) + "\n                  ")]), _vm._v(" "), _c('div', {
+      staticClass: "i-cl-list-main-right-tags"
+    }, [_c('div', {
+      staticClass: "i-cl-list-main-right-tags-tag"
+    }, [_vm._v(_vm._s(item['articlefenlei']))])])])])])])
+  }))]) : _vm._e(), _vm._v(" "), _c('div', {
+    class: {
+      ishide: _vm.isshowtag
+    }
   }, [_c('ul', {
     staticClass: "m-tag -color search-tag"
   }, _vm._l((_vm.storageSearchItems), function(item, index) {
@@ -29644,7 +29727,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": "/wapdashubao/images/icon_search_del.png"
     }
-  }), _vm._v("清除记录\n      ")])]) : _vm._e()])], 1)
+  }), _vm._v("清除记录\n          ")])]) : _vm._e()])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
