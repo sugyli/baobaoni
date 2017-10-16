@@ -29662,6 +29662,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "value": (_vm.searchKeyword)
     },
     on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && $event.keyCode !== 13) { return null; }
+        _vm.search($event)
+      },
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.searchKeyword = $event.target.value
