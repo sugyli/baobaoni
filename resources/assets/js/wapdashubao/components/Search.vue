@@ -187,7 +187,8 @@
           var searchKeyword = self.getKeyWord();
           self.page = self.page + 1;
           var url  = self.url + self.page;
-          if(this.noData){
+          if(self.noData){
+            self.searchNoDataText = "没有查询到数据了";
             self.$refs.searchScroller.finishInfinite(true);
             return;
           }

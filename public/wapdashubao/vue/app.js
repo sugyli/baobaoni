@@ -1813,7 +1813,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
       var url = self.url + self.page;
-      if (this.noData) {
+      if (self.noData) {
+        self.searchNoDataText = "没有查询到数据了";
         self.$refs.searchScroller.finishInfinite(true);
         return;
       }
