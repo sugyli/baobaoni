@@ -150,10 +150,10 @@
       },
 
       infinite (done) {
+        console.log('ff');
         if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
-              console.log('ff');
               done()
             }, 1500)
 
