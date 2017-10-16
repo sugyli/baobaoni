@@ -1689,6 +1689,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -1700,7 +1702,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       screen_height: Util.windowHeight,
       searchItems: [],
       searchKeyword: '',
-      items: [],
       storageSearchItems: [],
       url: '/searchinput?page=',
       page: 0,
@@ -1726,7 +1727,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
   methods: {
     _initScroll: function _initScroll() {
-      this.getStorageSearchItems();
+      this.storageSearchItems = this.getStorageSearchItems();
       if (!this.$refs.searchScroller) {
         return;
       }
@@ -1735,13 +1736,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     },
     getStorageSearchItems: function getStorageSearchItems() {
       var storageSearchItems = Util.StorageGetter('StorageSearchItems');
+      var itme = [];
       if (storageSearchItems) {
-        this.ishidetag = "";
-        this.storageSearchItems = JSON.parse(storageSearchItems);
+        itme = JSON.parse(storageSearchItems);
       } else {
-        this.ishidetag = "display:none;";
-        this.storageSearchItems = [];
+        itme = [];
       }
+
+      return itme;
     },
     setStorageSearchItems: function setStorageSearchItems(keyword) {
       Array.prototype.unique3 = function () {
@@ -1755,15 +1757,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         }
         return res;
       };
-
-      this.storageSearchItems.splice(0, 0, keyword);
-      this.storageSearchItems = this.storageSearchItems.unique3();
+      var storageSearchItems = this.getStorageSearchItems();
+      storageSearchItems.splice(0, 0, keyword);
+      storageSearchItems = storageSearchItems.unique3();
       //this.storageSearchItems.push(keyword)
-      Util.StorageSetter('StorageSearchItems', JSON.stringify(this.storageSearchItems));
+      Util.StorageSetter('StorageSearchItems', JSON.stringify(storageSearchItems));
     },
     delStorageSearchItems: function delStorageSearchItems() {
       Util.StorageDel('StorageSearchItems');
-      this.getStorageSearchItems();
+      this.storageSearchItems = [];
     },
     refresh: function refresh(done) {
       this.$refs.searchScroller.finishPullToRefresh();
@@ -1808,7 +1810,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }
     },
     getData: function getData() {
-
+      console("fffffff1111");
+      if (this.noData) {
+        return;
+      }
+      console("fffffff12222");
       var self = this;
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
@@ -1843,6 +1849,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         self.searchNoDataText = "搜索词不能为空";
         self.$refs.searchScroller.finishInfinite(true);
       }
+    },
+    tagclick: function tagclick(v) {
+      this.searchKeyword = v;
+      this.search();
     }
   }
 });
@@ -1857,7 +1867,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -29715,11 +29725,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "m-tag -color search-tag"
   }, _vm._l((_vm.storageSearchItems), function(item, index) {
     return _c('li', {
-      staticClass: "u-tag",
-      attrs: {
-        "id": "Tag__128"
+      staticClass: "u-tag"
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          $event.stopPropagation();
+          _vm.tagclick(item)
+        }
       }
-    }, [_vm._v(_vm._s(item))])
+    }, [_vm._v(_vm._s(item))])])
   })), _vm._v(" "), (_vm.isNotNullArray(_vm.storageSearchItems)) ? _c('div', {
     staticClass: "his-dele"
   }, [_c('a', {

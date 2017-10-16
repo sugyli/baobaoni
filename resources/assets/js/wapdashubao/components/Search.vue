@@ -48,7 +48,9 @@
       </section>
       <div :class="{ishide:ishide}">
           <ul class="m-tag -color search-tag">
-            <li v-for="(item, index) in storageSearchItems" class="u-tag" id="Tag__128">{{item}}</li>
+            <li v-for="(item, index) in storageSearchItems" class="u-tag">
+            <a v-on:click.stop="tagclick(item)">{{item}}</a>
+            </li>
           </ul>
 
           <div class="his-dele" v-if="isNotNullArray(storageSearchItems)">
@@ -74,7 +76,6 @@
         screen_height: Util.windowHeight,
         searchItems: [],
         searchKeyword: '',
-        items: [],
         storageSearchItems: [],
         url:'/searchinput?page=',
         page: 0,
@@ -96,7 +97,7 @@
 
     methods: {
       _initScroll() {
-          this.getStorageSearchItems();
+          this.storageSearchItems = this.getStorageSearchItems();
           if (!this.$refs.searchScroller) {
               return;
           }
@@ -107,13 +108,15 @@
 
       getStorageSearchItems(){
           var storageSearchItems = Util.StorageGetter('StorageSearchItems');
+          var itme = [];
           if(storageSearchItems){
-             this.ishidetag = "";
-             this.storageSearchItems =  JSON.parse(storageSearchItems);
+             itme =  JSON.parse(storageSearchItems);
+
           }else{
-            this.ishidetag ="display:none;";
-            this.storageSearchItems = [];
+             itme = [];
           }
+
+          return itme;
       },
       setStorageSearchItems(keyword){
           Array.prototype.unique3 = function(){
@@ -127,16 +130,16 @@
             }
             return res;
           }
-
-        this.storageSearchItems.splice(0, 0,keyword);
-        this.storageSearchItems = this.storageSearchItems.unique3();
+        var storageSearchItems = this.getStorageSearchItems();
+        storageSearchItems.splice(0, 0,keyword);
+        storageSearchItems = storageSearchItems.unique3();
         //this.storageSearchItems.push(keyword)
-        Util.StorageSetter('StorageSearchItems',JSON.stringify(this.storageSearchItems));
+        Util.StorageSetter('StorageSearchItems',JSON.stringify(storageSearchItems));
 
       },
       delStorageSearchItems(){
         Util.StorageDel('StorageSearchItems');
-        this.getStorageSearchItems();
+        this.storageSearchItems = [];
       },
       refresh (done) {
         this.$refs.searchScroller.finishPullToRefresh();
@@ -184,7 +187,11 @@
 
       },
       getData(){
-
+          console("fffffff1111")
+          if(this.noData){
+              return;
+          }
+          console("fffffff12222")
           var self = this;
           var searchKeyword = self.getKeyWord();
           self.page = self.page + 1;
@@ -226,6 +233,10 @@
               self.$refs.searchScroller.finishInfinite(true);
 
           }
+      },
+      tagclick(v){
+          this.searchKeyword = v;
+          this.search();
       }
 
     }
