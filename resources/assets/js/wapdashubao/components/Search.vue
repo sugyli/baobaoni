@@ -151,7 +151,7 @@
 
       infinite (done) {
 
-        if(this.frist > 0){
+        if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
               done()
@@ -159,7 +159,7 @@
 
         }
 
-
+        console.log('ff');
       },
       isNotNullArray(t){
         return (t.constructor==Array) && t.length > 0;
@@ -187,11 +187,6 @@
           var searchKeyword = self.getKeyWord();
           self.page = self.page + 1;
           var url  = self.url + self.page;
-          if(self.noData){
-            self.searchNoDataText = "没有查询到数据了";
-            self.$refs.searchScroller.finishInfinite(true);
-            return;
-          }
           if(searchKeyword){
               axios.post(url, {
                     query: searchKeyword,

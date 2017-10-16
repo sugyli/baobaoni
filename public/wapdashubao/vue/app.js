@@ -1780,12 +1780,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     infinite: function infinite(done) {
       var _this3 = this;
 
-      if (this.frist > 0) {
+      if (this.frist > 0 && !this.noData) {
         setTimeout(function () {
           _this3.getData();
           done();
         }, 1500);
       }
+
+      console.log('ff');
     },
     isNotNullArray: function isNotNullArray(t) {
       return t.constructor == Array && t.length > 0;
@@ -1813,11 +1815,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
       var url = self.url + self.page;
-      if (self.noData) {
-        self.searchNoDataText = "没有查询到数据了";
-        self.$refs.searchScroller.finishInfinite(true);
-        return;
-      }
       if (searchKeyword) {
         axios.post(url, {
           query: searchKeyword
