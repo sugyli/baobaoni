@@ -154,7 +154,7 @@
         if(this.frist <=0){
           return;
         }
-
+        console.log('2222ff');
         if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
@@ -162,8 +162,9 @@
             }, 1500)
 
         }else{
-            self.searchNoDataText = "没有数据了";
-            self.$refs.searchScroller.finishInfinite(true);
+            console.log('1111ff');
+            this.searchNoDataText = "没有数据了";
+            this.$refs.searchScroller.finishInfinite(true);
 
         }
 

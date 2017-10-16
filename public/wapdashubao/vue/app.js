@@ -1783,15 +1783,16 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       if (this.frist <= 0) {
         return;
       }
-
+      console.log('2222ff');
       if (this.frist > 0 && !this.noData) {
         setTimeout(function () {
           _this3.getData();
           done();
         }, 1500);
       } else {
-        self.searchNoDataText = "没有数据了";
-        self.$refs.searchScroller.finishInfinite(true);
+        console.log('1111ff');
+        this.searchNoDataText = "没有数据了";
+        this.$refs.searchScroller.finishInfinite(true);
       }
 
       console.log('ff');
