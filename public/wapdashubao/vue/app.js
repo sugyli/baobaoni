@@ -1810,11 +1810,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       }
     },
     getData: function getData() {
-      console("fffffff1111");
+      console.log("fffffff1111");
       if (this.noData) {
         return;
       }
-      console("fffffff12222");
+      console.log("fffffff12222");
       var self = this;
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
