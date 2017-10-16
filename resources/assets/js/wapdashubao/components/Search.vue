@@ -151,11 +151,19 @@
 
       infinite (done) {
 
+        if(this.frist <=0){
+          return;
+        }
+
         if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
               done()
             }, 1500)
+
+        }else{
+            self.searchNoDataText = "没有数据了";
+            self.$refs.searchScroller.finishInfinite(true);
 
         }
 

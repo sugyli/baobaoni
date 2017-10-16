@@ -1780,11 +1780,18 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     infinite: function infinite(done) {
       var _this3 = this;
 
+      if (this.frist <= 0) {
+        return;
+      }
+
       if (this.frist > 0 && !this.noData) {
         setTimeout(function () {
           _this3.getData();
           done();
         }, 1500);
+      } else {
+        self.searchNoDataText = "没有数据了";
+        self.$refs.searchScroller.finishInfinite(true);
       }
 
       console.log('ff');
