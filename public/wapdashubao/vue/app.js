@@ -1825,7 +1825,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
             for (var i = 0; i < data.length; i++) {
               self.searchItems.push(data[i]);
             }
-            if (Number(response.data.bakdata.last_page) >= self.page) {
+            if (Number(response.data.bakdata.last_page) <= self.page) {
               console.log('node');
               self.searchNoDataText = "没有数据了";
               self.$refs.searchScroller.finishInfinite(true);
