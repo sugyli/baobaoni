@@ -4,7 +4,7 @@
       <a  href="javascript:history.back()" class="top__back"></a>
       <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
         <input type="text" v-model="searchKeyword" ref="search_box" placeholder="输入书名/作者/关键字">
-        <div class="search-input__btn" v-on:click="search" @keyup.enter="search">搜索</div>
+        <div class="search-input__btn" v-on:click="search">搜索</div>
       </div>
     </div>
     <scroller
