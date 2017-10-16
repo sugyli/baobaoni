@@ -78,6 +78,7 @@
         storageSearchItems: [],
         url:'/searchinput?page=',
         page: 0,
+        noData: false,
         isshowtag: false,
         searchNoDataText: "没有更多数据",
         frist:0
@@ -149,7 +150,7 @@
       },
 
       infinite (done) {
-        if(this.frist > 0){
+        if(this.frist > 0 && !this.noData){
             setTimeout(() => {
               this.getData();
               console.log('ff');
@@ -171,7 +172,8 @@
           keyword = $.trim(keyword);
           if (keyword) {
               this.frist = 1;
-              self.page = 0;
+              this.page = 0;
+              this.noData = false;
               this.storageSearchItems = [];
               this.searchItems = [];
               this.isshowtag = true;
@@ -197,20 +199,29 @@
                       for (var i = 0; i < data.length; i++) {
                           self.searchItems.push(data[i]);
                       }
+                      if(Number(response.data.bakdata.last_page) >= self.page){
+                        console.log('node');
+                        self.searchNoDataText = "没有数据了";
+                        self.$refs.searchScroller.finishInfinite(true);
+                        self.noData = true;
+                      }
+
                   }else{
                     self.searchNoDataText = "没有数据了";
                     self.$refs.searchScroller.finishInfinite(true);
-
+                    self.noData = true;
                   }
 
                 })
                 .catch(function (response) {
+                    self.noData = true;
                     self.searchNoDataText = "请求出现故障";
                     self.$refs.searchScroller.finishInfinite(true);
 
                 });
 
           }else{
+              self.noData = true;
               self.searchNoDataText = "搜索词不能为空";
               self.$refs.searchScroller.finishInfinite(true);
 
