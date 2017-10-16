@@ -110,7 +110,7 @@
       infinite (done) {
 
         if(this.isNotNullArray(this.searchItems)){
-
+            console.log('fff');
 
             setTimeout(() => {
               var start = this.bottom + 1

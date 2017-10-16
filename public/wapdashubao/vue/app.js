@@ -1741,6 +1741,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var _this3 = this;
 
       if (this.isNotNullArray(this.searchItems)) {
+        console.log('fff');
 
         setTimeout(function () {
           var start = _this3.bottom + 1;
