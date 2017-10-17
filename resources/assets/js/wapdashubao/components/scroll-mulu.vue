@@ -52,6 +52,7 @@
         items: [],
         infinitePage: Number(this.page),
         stopinfinite:0,
+        refreshPage: Number(this.page),
       }
     },
     computed: {
@@ -91,11 +92,12 @@
               }
               self.$nextTick(() => {
                   // better-scroll的初始化
-                  var scroll = new BScroll(self.$refs.scroll_wrapper, {
+                  var  scroll = new BScroll(self.$refs.scroll_wrapper, {
                                         probeType: 1,
                                         click: true,
                                         scrollX: false, /** * 是否开启横向滚动 */
                                       });
+                      self.scroll = scroll;
                     // 滑动中
                     scroll.on('scroll', function (position) {
                       if(position.y > 30) {
@@ -105,15 +107,21 @@
                     // 是否派发顶部下拉事件，用于下拉刷新
                    scroll.on('touchEnd', function (position) {
                      if (position.y > 30) {
+
+                      if(self.refreshPage <= 0){
+                          self.refreshAlert('已经是第一页了');
+                          return;
+                      }
                        setTimeout(function () {
                          /*
                           * 这里发送ajax刷新数据
                           * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
                          */
+                         self.refresh();
+
                          // 恢复文本值
                          self.topTip = '下拉刷新';
-                         // 刷新成功后的提示
-                         self.refreshAlert('刷新成功');
+
                          // 刷新列表后,重新计算滚动区域高度
                          scroll.refresh();
                        }, 1000);
@@ -159,12 +167,48 @@
       isNotNullArray(t){
         return (t.constructor==Array) && t.length > 0;
       },
+      refresh(){
+        var self = this;
+        if(self.refreshPage <= 0){
+            self.refreshAlert('不需要刷新的已经第一页了');
+            return;
+        }
+        self.refreshPage = Number(self.refreshPage) - 1;
+        axios.post(self.url, {
+              bid: self.bid,
+              page: self.refreshPage,
+          })
+          .then(function (response) {
+            if(response.data.error == 0){
+                var datas = response.data.bakdata;
+
+                for (var i = (datas.length-1); i >= 0; i--) {
+                    self.items.splice(0, 0, datas[i]);
+                }
+                self.$nextTick(() => {
+                  // 刷新成功后的提示
+                  self.refreshAlert('刷新成功');
+                  self.scroll.refresh();
+                });
+            }else{
+              self.refreshPage = 0;
+              self.refreshAlert('没有数据了');
+              console.log(response);
+            }
+
+          })
+          .catch(function (response) {
+            self.refreshPage = 0;
+            self.refreshAlert('出错了！！！');
+            console.log(response)
+          });
+
+      },
       infinite() {
           var self = this;
           if(self.stopinfinite > 0){
               return;
           }
-
           self.infinitePage = Number(self.infinitePage) + 1;
           axios.post(self.url, {
                 bid: self.bid,
@@ -177,8 +221,11 @@
                   for (var i = 0; i < datas.length; i++) {
                     self.items.push(datas[i]);
                   }
-                  // 恢复文本值
-                  self.bottomTip = '查看更多';
+                  self.$nextTick(() => {
+                    // 恢复文本值
+                    self.bottomTip = '查看更多';
+                    self.scroll.refresh();
+                  });
               }else{
                 // 恢复文本值
                 self.bottomTip = '没有数据了';

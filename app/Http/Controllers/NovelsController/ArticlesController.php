@@ -136,18 +136,18 @@ class ArticlesController extends Controller
     }
     public function getMulu()
     {
-        $bid = request()->bid + 0;
-        $page = request()->page + 0;
+        $bid = (int)request()->bid + 0;
+        $page = (int)request()->page + 0;
         $bookData = saveOrGetBookData($bid);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         $total = $bookData->relationChapters->count();
-        $pageSize = 20;
+        $pageSize = 12;
         //计算总页数
-        $pagenum = ceil( $total / $pageSize );//当没有数据的时候 计算出来为0
-        if ($page > $pagenum)
+        $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
+        if ($page<=0 || $page > $pagenum)
         {
            // $page = $pagenum;//分页越界
-            $result['message'] = "分页越界或章节数为0";
+            $result['message'] = "总页数{$pagenum},请求页数{$page}";
             return response()->json($result);
         }
         //开始的索引

@@ -52,8 +52,8 @@ class UsersController extends Controller
           return response()->json($result);
         }
 
-        $num = $request->num + 0 ;
-        $articleid = $request->bid + 0 ;
+        $num = (int)$request->num + 0 ;
+        $articleid = (int)$request->bid + 0 ;
         if ($num <= 0 || $articleid<=0) {
           $result['message'] = '操作非法';
           return response()->json($result);
@@ -136,7 +136,7 @@ class UsersController extends Controller
             'name' => 'required|max:30',
             'mobile' => 'required|zh_mobile|unique:jieqi_system_users,mobile,'.$user->uid .',uid',
         ]);
-        try { 
+        try {
             $user->name = $request->name;
             $user->mobile = $request->mobile;
             $user->save();
