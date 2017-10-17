@@ -23,7 +23,12 @@ body{background:rgba(255, 255, 255, 0);position:relative;text-align:left;width:1
 body{
     -webkit-overflow-scrolling: touch;
 }
+.online{
+	overflow: hidden;
+	text-overflow: ellipsis;/*单行溢出文本显示省略号*/
+	white-space: nowrap;/*规定段落中的文本不进行换行*/
 
+}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -787,17 +792,4 @@ body{
       border-color: black;
       border-image: initial;
       margin: 1rem auto;
-  }
-  .row {
-    width: 100%;
-    height: 50px;
-    padding: 10px 0;
-    font-size: 16px;
-    line-height: 30px;
-    text-align: center;
-    color: #444;
-    background-color: #fff;
-  }
-  .grey-bg {
-    background-color: #eee;
   }

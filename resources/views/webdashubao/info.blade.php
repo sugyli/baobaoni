@@ -1,7 +1,7 @@
 @extends('webdashubao.layouts.default')
 @section('title'){{ $bookData->articlename }}全文阅读_{{ $bookData->articlename }}最新章节-{{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
 @section('keywords'){{$bookData->slug or ''}},{{ $bookData->articlename }},小说{{ $bookData->articlename }},{{ $bookData->articlename }}最新章节,{{ $bookData->articlename }}全文阅读@endsection
-@section('description'){{ $bookData->articlename }}是由{{ $bookData->author }}所写的{{$sorts['title'] or '未知分类'}}类小说，本站提供{{ $bookData->articlename }}最新章节观看,{{ $bookData->articlename }}全文阅读等服务，如果您发现{{ $bookData->articlename }}更新慢了,请第一时间联系{{get_sys_set('webname')}}。@endsection
+@section('description'){{ $bookData->articlename }}是由{{ $bookData->author }}所写的{{$bookData->getSort()['title'] or '未知分类'}}类小说，本站提供{{ $bookData->articlename }}最新章节观看,{{ $bookData->articlename }}全文阅读等服务，如果您发现{{ $bookData->articlename }}更新慢了,请第一时间联系{{get_sys_set('webname')}}。@endsection
 
 @section('content')
 @include('webdashubao.packaging.logo-nav-jilu-qiandao')
@@ -26,7 +26,7 @@
 
     </div>
     <div class="tags_wrap">
-  		<a href='{{ $sorts['uri'] or '/'}}'>{{ $sorts['title'] or '未知分类' }}</a>
+  		<a href='{{ $bookData->getSort()['uri'] or '/'}}'>{{ $bookData->getSort()['title'] or '未知分类' }}</a>
   	</div>
     <div class="intro">
         {{ $bookData->intro }}
@@ -49,7 +49,9 @@
   </dl>
 </div>
 @endif
+
 @endsection
+
 @section('subscripts')
 <script type="text/javascript">
 baobaoni.toTop();

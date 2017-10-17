@@ -92,7 +92,17 @@ class ArticlesController extends Controller
 
     }
 
-    public function show($bid)
+    public function show($bid){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShow($bid);
+      }
+
+      return $this->isDesktopShow($bid);
+    }
+
+    public function isDesktopShow($bid)
     {
         $bookData = saveOrGetBookData($bid);
         //$slug = $request->route('slug');
@@ -101,8 +111,21 @@ class ArticlesController extends Controller
         if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
             return redirect($bookData->link(), 301);
         }
-        $sorts = $bookData->getSort();
-        return view('webdashubao.info', compact('bookData','sorts'));
+
+        //$sorts = $bookData->getSort();
+        return view('webdashubao.info', compact('bookData'));
+
+    }
+    public function isMobileShow($bid)
+    {
+        $bookData = saveOrGetBookData($bid);
+        $slug = request()->slug;
+        $any = request()->any;
+        if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
+            return redirect($bookData->link(), 301);
+        }
+
+        return view('wapdashubao.info',compact('bookData'));
 
     }
 
@@ -217,6 +240,6 @@ class ArticlesController extends Controller
     }
 
 
-  
+
 
 }
