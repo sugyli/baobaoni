@@ -128,6 +128,12 @@ class ArticlesController extends Controller
         return view('wapdashubao.info',compact('bookData'));
 
     }
+    public function showMulu()
+    {
+
+      return view('wapdashubao.mulu');
+
+    }
 
     public function showContent($bid , $cid)
     {

@@ -27,11 +27,12 @@ var Util = (function () {
     }
 })();
 window.Util = Util;
+/*
 import VueScroller from 'vue-scroller'
 Vue.use(VueScroller)
-
-Vue.component('search-view', require('./components/Search.vue'));
-
+*/
+Vue.component('scroll-search', require('./components/scroll-search.vue'));
+Vue.component('scroll-mulu', require('./components/scroll-mulu.vue'));
 
 
 require('./pjs');

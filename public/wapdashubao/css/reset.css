@@ -29,6 +29,21 @@ body{
 	white-space: nowrap;/*规定段落中的文本不进行换行*/
 
 }
+/* 字体文件 */
+
+@font-face {font-family: "iconfont";
+  src: url('/fonts/iconfont.eot?t=1493438234518'); /* IE9*/
+  src: url('/fonts/iconfont.eot?t=1493438234518#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/fonts/iconfont.woff?t=1493438234518') format('woff'), /* chrome, firefox */
+  url('/fonts/iconfont.ttf?t=1493438234518') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('/fonts/iconfont.svg?t=1493438234518#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -793,3 +808,210 @@ body{
       border-image: initial;
       margin: 1rem auto;
   }
+
+
+
+
+.info_top {
+    position: relative;
+    height: 44px;
+    border-bottom: 1px solid #ddd;
+    font: 15px/45px a;
+    color: rgba(0,0,0,0.7);
+    background-color: #efeff0;
+}
+    .top__back {
+        float: left;
+        width: 42px;
+        height: 44px;
+    }
+    .top__back:before {
+        content: '';
+        display: block;
+        margin: 15px 0 0 16px;
+        width: 10px;
+        height: 16px;
+        background: url(/wapdashubao/images/back.png) no-repeat;
+        background-size: 10px 16px;
+    }
+    .header-right {
+        float: right;
+        height: 44px;
+        padding-right: 10px;
+    }
+
+
+    .info_book-page .u-book-detail {
+        padding: 40px;
+        display: table;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+    }
+    .info_book-page .u-book-detail .book-cover {
+        width: 100px;
+        height: 134px;
+        position: relative;
+        background: #eeece9;
+        box-shadow: 0px 6px 5px -3px #aaa;
+        border: 1px solid #f0f0f0;
+        border-bottom: none;
+        overflow: hidden;
+    }
+    .info_book-page .u-book-detail .book-cover img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .info_book-page .u-book-detail .info {
+        padding: 0 0 0 14px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .u-book-detail .info .title {
+        margin-bottom: :13px;
+        font-size: 16px;
+    }
+    .u-book-detail .info .author {
+        margin-right: 5px;
+        color: #4b99a7;
+    }
+
+    .u-book-detail .info .u-booktag-serial{
+        border: 1px solid #00a0e9;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 16px;
+        display: inline-block;
+        padding: 0 2px;
+        color: #63bd6e;
+        border-color: #63bd6e;
+    }
+    .main-card {
+        border-bottom: 10px solid #f5f5f5;
+
+    }
+    .info_book-page .main-card .wrap {
+        padding: 0 14px;
+        margin: 0 0 27px;
+    }
+    .info_book-page .main-card .wrap .btn-group {
+        width: 100%;
+        font-size: 0;
+        white-space: nowrap;
+    }
+    .info_book-page .main-card .wrap .btn-group li:first-child {
+        margin-right: 2%;
+    }
+    .info_book-page .main-card .wrap .btn-group li {
+        display: inline-block;
+        width: 49%;
+    }
+    .u-btn2, .u-btn3, .u-btn4, .u-btn-disable {
+        display: block;
+        height: 2.8em;
+        line-height: 2.8em;
+        text-align: center;
+        color: #737373;
+        border: 1px solid #ddd;
+        background: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        -webkit-box-sizing: border-box;
+    }
+    .u-btn2, .u-btn3 {
+        position: relative;
+    }
+    .u-btn2, .u-btn4 {
+        background: #f35d02;
+        border: 1px solid #e35109;
+        color: #fff;
+        padding: 0 10px;
+    }
+    .book-dash-text:after {
+        content: '\5f00\59cb\9605\8bfb';
+    }
+
+    .u-folder>.folder-cnt {
+        position: relative;
+        line-height: 1.6;
+        padding: 0 14px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #585858;
+    }
+    .u-folder>.folder-tail {
+        text-align: center;
+        font-size: 14px;
+        border-top: 1px solid #f0f0f0;
+        color: #8d8d8d;
+    }
+    .u-folder>.folder-tail>div {
+        padding: 10px 14px;
+    }
+    .u-folder>.folder-top {
+        font-size: 16px;
+        font-weight: normal;
+        color: #8d8d8d;
+        padding: 14px 14px 8px;
+    }
+    .folder-cnt .m-tag {
+        line-height: 1;
+        overflow: hidden;
+    }
+    .folder-cnt .m-tag .u-tag {
+        margin: 0 10px 5px 0;
+        display: inline-block;
+        width: auto;
+        line-height: 1.8em;
+        padding: 0 20px;
+        color: #766d5d;
+        border-radius: 4px;
+        background: #909da8;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid #d3d3d3;
+    }
+    .zxjz {
+        padding: 0px 10px;
+        background-color: #fff;
+        margin: 10px;
+
+    }
+    .zxjz .bk {
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        line-height: 35px;
+        height: 35px;
+        border-color: #CCC;
+        background-color: #fff;
+    }
+    .zxjz li {
+        position: relative;
+    }
+    .zxjz li a {
+        display: block;
+        line-height: 40px;
+        height: 40px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .zxjz .gengduo {
+        text-align: center;
+        line-height: 45px;
+        height: 45px;
+    }
+    .zxjz .gengduo a {
+        color: #666;
+        font-family: Verdana, Geneva, sans-serif;
+        display: block;
+    }
+    .zxjz li i {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 15px;
+        height: 40px;
+        background: center url(/wapdashubao/images/list.png) no-repeat;
+    }
