@@ -30,11 +30,11 @@
 .list-wrapper {
     position: fixed;
     z-index: 1;
-    top: 45px;
+    top: 44px;
     bottom: 50px;
     left: 0;
     width: 100%;
-    background: #ccc;
+    background: #fff;
     overflow: hidden;
 }
 .top-tip {
@@ -101,23 +101,28 @@
     color: #fff;
     text-align: center;
 }
+.mulu-alert {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    background: rgba(7, 17, 27, 0.7);
+}
 </style>
 @endsection
 @extends('wapdashubao.layouts.default')
 @section('content')
-<div class="mulu_header">
-	<a class="top__back" href="/"></a>
-	<span class="top__title online">标题</span>
-	<a class="mulu-header-right iconfont" href="/">&#xe73d;</a>
-</div>
-<scroll-mulu></scroll-mulu>
-  <!-- content end  -->
 
-  <!-- footer -->
-<div class="mulu-footer">
-  <span class="iconfont">&#xe73d;</span>
-  <span class="iconfont">&#xe73d;</span>
-  <span class="iconfont">&#xe73d;</span>
-</div>
+<scroll-mulu
+  bid={{$bid}}
+  page={{$id}}
+  url={{route('webajax.articles.getmulu')}}
+  ></scroll-mulu>
 
 @endsection

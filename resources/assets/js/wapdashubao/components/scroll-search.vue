@@ -201,6 +201,7 @@
                 .then(function (response) {
                   if(response.data.error == 0){
                       var data = response.data.bakdata.data;
+                      console.log(data)
                       for (var i = 0; i < data.length; i++) {
                           self.searchItems.push(data[i]);
                       }

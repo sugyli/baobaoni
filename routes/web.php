@@ -25,13 +25,14 @@ Route::get('/search', 'NovelsController\SearchController@search');
 Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
 Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
-Route::get('/mulu','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
+Route::get('/mulu/{bid}/{id}','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
 # ------------------ajax路由处理------------------------
 
 Route::post('webajax/user/getuser', 'NovelsController\UsersController@getuser')->name('webajax.member.getuser');
 Route::post('webajax/bookshelf/getbookshelfs', 'NovelsController\BookshelfsController@getBookshelfsData')->name('webajax.bookshelf.getbookshelfs');
 Route::post('webajax/bookshelf/addbookcase', 'NovelsController\BookshelfsController@addbookcase')->name('webajax.bookshelf.addbookcase');
 Route::post('webajax/user/recommend', 'NovelsController\UsersController@recommend')->name('webajax.user.recommend');
+Route::post('webajax/articles/getmulu','NovelsController\ArticlesController@getMulu')->name('webajax.articles.getmulu');
 # ------------------用户------------------------
 Route::group([
     'prefix'        => 'member',

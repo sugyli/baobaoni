@@ -1,6 +1,6 @@
 @extends('wapdashubao.layouts.default')
 
 @section('content')
-<search-view></search-view>
+<scroll-search></scroll-search>
 
 @endsection

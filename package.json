@@ -28,6 +28,7 @@
     "vue-multiple-button": "^1.0.3",
     "vue-occupy": "^0.0.9",
     "vue-scroller": "^2.2.4",
+    "vue-spinner": "^1.0.3",
     "vue-toasted": "^1.1.17"
   }
 }

@@ -128,12 +128,41 @@ class ArticlesController extends Controller
         return view('wapdashubao.info',compact('bookData'));
 
     }
-    public function showMulu()
+    public function showMulu($bid , $id)
     {
 
-      return view('wapdashubao.mulu');
+      return view('wapdashubao.mulu',compact('bid','id'));
 
     }
+    public function getMulu()
+    {
+        $bid = request()->bid + 0;
+        $page = request()->page + 0;
+        $bookData = saveOrGetBookData($bid);
+        $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+        $total = $bookData->relationChapters->count();
+        $pageSize = 20;
+        //计算总页数
+        $pagenum = ceil( $total / $pageSize );//当没有数据的时候 计算出来为0
+        if ($page > $pagenum)
+        {
+           // $page = $pagenum;//分页越界
+            $result['message'] = "分页越界或章节数为0";
+            return response()->json($result);
+        }
+        //开始的索引
+        $offset = ($page - 1) * $pageSize;
+
+        $chapters =  $bookData->relationChapters->reject(function ($value, $key) {
+                                                return $value->chaptertype >0;
+                                            })->slice($offset, $pageSize);
+        $result['message'] = "请求第{$page}页数据成功";
+        $result['error'] = 0;
+        $result['bakdata'] =  $chapters;
+        return response()->json($result);
+
+    }
+
 
     public function showContent($bid , $cid)
     {

@@ -8,7 +8,7 @@ if (!function_exists('saveOrGetBookData')) {
     if ( !$bookObj ) {//不存在
           $article = \App\Models\Article::find($bid);
           if (empty($article)) {
-              return redirect("/");
+              dd('本书不存在');
           }
           if(empty($article->slug)){
             $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
