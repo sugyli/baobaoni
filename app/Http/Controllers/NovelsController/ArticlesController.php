@@ -155,10 +155,11 @@ class ArticlesController extends Controller
 
         $chapters =  $bookData->relationChapters->reject(function ($value, $key) {
                                                 return $value->chaptertype >0;
-                                            })->slice($offset, $pageSize);
+                                            })->slice($offset, $pageSize)->values();
         $result['message'] = "请求第{$page}页数据成功";
         $result['error'] = 0;
         $result['bakdata'] =  $chapters;
+
         return response()->json($result);
 
     }

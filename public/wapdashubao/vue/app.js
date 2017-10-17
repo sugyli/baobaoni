@@ -1730,7 +1730,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       ishide: true,
       loading: false,
       items: [],
-      infinitePage: this.page
+      infinitePage: Number(this.page),
+      stopinfinite: 0
     };
   },
 
@@ -1768,52 +1769,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
           var datas = response.data.bakdata;
 
-          console.log(datas);
+          for (var i = 0; i < datas.length; i++) {
+            self.items.push(datas[i]);
+          }
+          self.$nextTick(function () {
+            // better-scroll的初始化
+            var scroll = new __WEBPACK_IMPORTED_MODULE_0_better_scroll___default.a(self.$refs.scroll_wrapper, {
+              probeType: 1,
+              click: true,
+              scrollX: false /** * 是否开启横向滚动 */
+            });
+            // 滑动中
+            scroll.on('scroll', function (position) {
+              if (position.y > 30) {
+                self.topTip = '释放立即刷新';
+              }
+            });
+            // 是否派发顶部下拉事件，用于下拉刷新
+            scroll.on('touchEnd', function (position) {
+              if (position.y > 30) {
+                setTimeout(function () {
+                  /*
+                   * 这里发送ajax刷新数据
+                   * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
+                  */
+                  // 恢复文本值
+                  self.topTip = '下拉刷新';
+                  // 刷新成功后的提示
+                  self.refreshAlert('刷新成功');
+                  // 刷新列表后,重新计算滚动区域高度
+                  scroll.refresh();
+                }, 1000);
+              }
+            });
 
-          // better-scroll的初始化
-          var scroll = new __WEBPACK_IMPORTED_MODULE_0_better_scroll___default.a(self.$refs.scroll_wrapper, {
-            probeType: 1,
-            click: true,
-            scrollX: false /** * 是否开启横向滚动 */
-          });
-          // 滑动中
-          scroll.on('scroll', function (position) {
-            if (position.y > 30) {
-              self.topTip = '释放立即刷新';
-            }
-          });
-          // 是否派发顶部下拉事件，用于下拉刷新
-          scroll.on('touchEnd', function (position) {
-            if (position.y > 30) {
-              setTimeout(function () {
-                /*
-                 * 这里发送ajax刷新数据
-                 * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
-                */
-                // 恢复文本值
-                self.topTip = '下拉刷新';
-                // 刷新成功后的提示
-                self.refreshAlert('刷新成功');
-                // 刷新列表后,重新计算滚动区域高度
-                scroll.refresh();
-              }, 1000);
-            }
-          });
-
-          // 是否派发滚动到底部事件，用于上拉加载
-          scroll.on('scrollEnd', function (position) {
-            // 滚动到底部
-            if (position.y <= scroll.maxScrollY + 30) {
-              self.bottomTip = '加载中...';
-              setTimeout(function () {
-                // 恢复文本值
-                self.bottomTip = '查看更多';
-                // 向列表添加数据
-                //reloadData();
-                // 加载更多后,重新计算滚动区域高度
-                scroll.refresh();
-              }, 1000);
-            }
+            // 是否派发滚动到底部事件，用于上拉加载
+            scroll.on('scrollEnd', function (position) {
+              // 滚动到底部
+              if (position.y <= scroll.maxScrollY + 30) {
+                if (self.stopinfinite == 0) {
+                  self.bottomTip = '加载中...';
+                  setTimeout(function () {
+                    // 向列表添加数据
+                    self.infinite();
+                    // 加载更多后,重新计算滚动区域高度
+                    scroll.refresh();
+                  }, 1000);
+                }
+              }
+            });
           });
         } else {
           console.log(response);
@@ -1836,16 +1840,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     infinite: function infinite() {
       var self = this;
+      if (self.stopinfinite > 0) {
+        return;
+      }
+
+      self.infinitePage = Number(self.infinitePage) + 1;
       axios.post(self.url, {
         bid: self.bid,
         page: self.infinitePage
       }).then(function (response) {
         if (response.data.error == 0) {
-          var data = response.data.bakdata.data;
+          var datas = response.data.bakdata;
+
+          for (var i = 0; i < datas.length; i++) {
+            self.items.push(datas[i]);
+          }
+          // 恢复文本值
+          self.bottomTip = '查看更多';
         } else {
+          // 恢复文本值
+          self.bottomTip = '没有数据了';
+          self.stopinfinite = 1;
           console.log(response);
         }
       }).catch(function (response) {
+        self.bottomTip = '出现故障了';
+        self.stopinfinite = 1;
         console.log(response);
       });
     }
@@ -2062,7 +2082,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         }).then(function (response) {
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
-            console.log(data);
             for (var i = 0; i < data.length; i++) {
               self.searchItems.push(data[i]);
             }
@@ -31889,8 +31908,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', [_c('a', {
       staticClass: "online",
       attrs: {
-        "href": "http://www.sugyli.com/content/46398/20606041",
-        "title": item['chaptername']
+        "href": "http://www.sugyli.com/content/46398/20606041"
       }
     }, [_vm._v(_vm._s(item['chaptername']))]), _c('i')])
   })), _vm._v(" "), _c('div', {
