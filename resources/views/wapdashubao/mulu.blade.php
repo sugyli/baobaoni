@@ -121,7 +121,6 @@
 
 <scroll-mulu
   bid={{$bid}}
-  page={{$id}}
   url={{route('webajax.articles.getmulu')}}
   ></scroll-mulu>
 

@@ -128,10 +128,11 @@ class ArticlesController extends Controller
         return view('wapdashubao.info',compact('bookData'));
 
     }
-    public function showMulu($bid , $id)
-    {
 
-      return view('wapdashubao.mulu',compact('bid','id'));
+
+    public function showMulu($bid)
+    {
+      return view('wapdashubao.mulu',compact('bid'));
 
     }
     public function getMulu()
@@ -141,7 +142,7 @@ class ArticlesController extends Controller
         $bookData = saveOrGetBookData($bid);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         $total = $bookData->relationChapters->count();
-        $pageSize = 12;
+        $pageSize = 20;
         //计算总页数
         $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
         if ($page<=0 || $page > $pagenum)
@@ -165,7 +166,25 @@ class ArticlesController extends Controller
     }
 
 
-    public function showContent($bid , $cid)
+    public function showContent($bid , $cid){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShowContent($bid , $cid);
+      }
+
+      return $this->isDesktopShowContent($bid , $cid);
+    }
+
+    public function isMobileShowContent($bid , $cid)
+    {
+
+        return view('wapdashubao.reader');
+
+
+    }
+
+    public function isDesktopShowContent($bid , $cid)
     {
         //注释  过滤只在 内容获取到的时候
         //内容不存在默认提示语句
@@ -267,14 +286,6 @@ class ArticlesController extends Controller
       }
       return redirect('/');
     }
-
-    public function testindex()
-    {
-        $posts = $this->article->find(63643);
-        $posts->allvisit = 367;
-        $posts->save();
-    }
-
 
 
 

@@ -1721,7 +1721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bid', 'page', 'url'],
+  props: ['bid', 'url'],
   data: function data() {
     return {
       topTip: '下拉刷新',
@@ -1730,9 +1730,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       ishide: true,
       loading: false,
       items: [],
-      infinitePage: Number(this.page),
+      infinitePage: 1,
       stopinfinite: 0,
-      refreshPage: Number(this.page)
+      refreshPage: 1
     };
   },
 
@@ -1750,6 +1750,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mounted: function mounted() {
     var _this = this;
 
+    var pageItem = Util.StorageGetter('mulubooid_' + this.bid);
+    if (pageItem) {
+      this.infinitePage = JSON.parse(pageItem);
+      this.refreshPage = JSON.parse(pageItem);
+    }
     // 保证在DOM渲染完毕后初始化 better-scroll
     setTimeout(function () {
       _this._initScroll();
@@ -1783,6 +1788,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             self.scroll = scroll;
             // 滑动中
             scroll.on('scroll', function (position) {
+              console.log(position.y);
               if (position.y > 30) {
                 self.topTip = '释放立即刷新';
               }
@@ -1849,7 +1855,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     refresh: function refresh() {
       var self = this;
       if (self.refreshPage <= 0) {
-        self.refreshAlert('不需要刷新的已经第一页了');
+        self.refreshAlert('已经第一页了,如有问题刷新页面');
         return;
       }
       self.refreshPage = Number(self.refreshPage) - 1;
@@ -31951,7 +31957,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('li', [_c('a', {
       staticClass: "online",
       attrs: {
-        "href": "http://www.sugyli.com/content/46398/20606041"
+        "href": item['chapterlink']
       }
     }, [_vm._v(_vm._s(item['chaptername']))]), _c('i')])
   })), _vm._v(" "), _c('div', {

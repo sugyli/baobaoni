@@ -15,7 +15,7 @@
     <!-- 列表 -->
     <ul class="list-content list-content-hook Displayanimation">
       <li v-for="item in items">
-        <a class="online" href="http://www.sugyli.com/content/46398/20606041">{{item['chaptername']}}</a><i></i>
+        <a class="online" :href="item['chapterlink']">{{item['chaptername']}}</a><i></i>
       </li>
     </ul>
     <!--
@@ -41,7 +41,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
   export default {
-    props:['bid','page','url'],
+    props:['bid','url'],
     data() {
       return {
         topTip:'下拉刷新',
@@ -50,9 +50,9 @@
         ishide: true,
         loading: false,
         items: [],
-        infinitePage: Number(this.page),
+        infinitePage: 1,
         stopinfinite:0,
-        refreshPage: Number(this.page),
+        refreshPage: 1,
       }
     },
     computed: {
@@ -67,6 +67,11 @@
       }
     },
     mounted() {
+        var pageItem = Util.StorageGetter('mulubooid_'+this.bid);
+        if(pageItem){
+           this.infinitePage =  JSON.parse(pageItem);
+           this.refreshPage =  JSON.parse(pageItem);
+        }
       // 保证在DOM渲染完毕后初始化 better-scroll
       setTimeout(() => {
         this._initScroll()
@@ -100,6 +105,7 @@
                       self.scroll = scroll;
                     // 滑动中
                     scroll.on('scroll', function (position) {
+                      console.log(position.y);
                       if(position.y > 30) {
                         self.topTip = '释放立即刷新';
                       }
@@ -108,23 +114,23 @@
                    scroll.on('touchEnd', function (position) {
                      if (position.y > 30) {
 
-                      if(self.refreshPage <= 0){
-                          self.refreshAlert('已经是第一页了');
-                          return;
-                      }
-                       setTimeout(function () {
-                         /*
-                          * 这里发送ajax刷新数据
-                          * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
-                         */
-                         self.refresh();
+                        if(self.refreshPage <= 0){
+                            self.refreshAlert('已经是第一页了');
+                            return;
+                        }
+                         setTimeout(function () {
+                             /*
+                              * 这里发送ajax刷新数据
+                              * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
+                             */
+                             self.refresh();
 
-                         // 恢复文本值
-                         self.topTip = '下拉刷新';
+                             // 恢复文本值
+                             self.topTip = '下拉刷新';
 
-                         // 刷新列表后,重新计算滚动区域高度
-                         scroll.refresh();
-                       }, 1000);
+                             // 刷新列表后,重新计算滚动区域高度
+                             scroll.refresh();
+                           }, 1000);
                      }
                    });
 
@@ -140,11 +146,12 @@
                                 // 加载更多后,重新计算滚动区域高度
                                 scroll.refresh();
                               }, 1000);
-                          }
+                           }
 
-                       }
-                     });
-              });
+                         }
+                    });
+
+                });
 
             }else{
               console.log(response)
@@ -170,7 +177,7 @@
       refresh(){
         var self = this;
         if(self.refreshPage <= 0){
-            self.refreshAlert('不需要刷新的已经第一页了');
+            self.refreshAlert('已经第一页了,如有问题刷新页面');
             return;
         }
         self.refreshPage = Number(self.refreshPage) - 1;
@@ -239,8 +246,7 @@
               self.stopinfinite = 1;
               console.log(response)
             });
-
-      }
+      },
 
     },
   }

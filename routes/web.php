@@ -25,7 +25,7 @@ Route::get('/search', 'NovelsController\SearchController@search');
 Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
 Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
-Route::get('/mulu/{bid}/{id}','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
+Route::get('/mulu/{bid}','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
 # ------------------ajax路由处理------------------------
 
 Route::post('webajax/user/getuser', 'NovelsController\UsersController@getuser')->name('webajax.member.getuser');

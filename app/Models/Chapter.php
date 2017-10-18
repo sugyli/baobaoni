@@ -27,6 +27,7 @@ class Chapter extends Model
         });
     }
     */
+    protected $appends = ['chapterlink'];
     /**
      * 为路由模型获取键名
      *
@@ -41,6 +42,11 @@ class Chapter extends Model
       public function link()
       {
         return route('web.articles.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
+
+      }
+      public function getChapterlinkAttribute()
+      {
+          return  $this->attributes['chapterlink']  =  $this->link();
 
       }
 }
