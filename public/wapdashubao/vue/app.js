@@ -43531,6 +43531,7 @@ module.exports = Component.exports
                         $(this).children('.bk-container-current').css('display', 'block');
                         initBackground = $(this).attr('data-background');
                         Body.css('background', initBackground);
+                        $('#action_mid').css('background', 'none');
                         Util.StorageSetter('background', initBackground);
                         if (initBackground == '#283548') {
                             $('#night_icon').show();
