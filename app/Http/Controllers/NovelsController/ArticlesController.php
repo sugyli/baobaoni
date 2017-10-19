@@ -178,6 +178,86 @@ class ArticlesController extends Controller
 
     public function isMobileShowContent($bid , $cid)
     {
+        $content  = get_sys_set('dfnr');
+        $bakUrl = route('web.articles.show', ['bid' => $bid]);
+        $isimg = 0;//判断是否图片
+        $bookData = saveOrGetBookData($bid);
+        $chapter = $bookData->relationChapters->where('chapterid', $cid)->first();
+
+        if ($chapter) {
+            $any = request()->any;
+            if (!empty($any)) {
+                return redirect($chapter->link(), 301);
+            }
+            //获取上下页对象 要以chapterorder排序获取
+            $chapterorder = $chapter->chapterorder;
+            //不存在返回NULL
+            $previousChapter = $bookData->relationChapters->last(function ($item, $key) use($chapterorder) {
+                                            return ($item->chapterorder < $chapterorder && $item->chaptertype <= 0);
+                                      });
+
+            //下一页
+            $nextChapter  =    $bookData->relationChapters->first(function ($item, $key) use($chapterorder) {
+                                            return ($item->chapterorder > $chapterorder && $item->chaptertype <= 0);
+                                      });
+
+
+            //下面是获取TXT的部分
+            $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
+            $txtDir = get_sys_set('txtdir') . $path;
+            $keyTxt = config('app.txt') . $path;
+
+            $txtObj = saveOrGetTxtData($keyTxt , $txtDir, $chapter->lastupdate ,$chapter->attachment);
+
+
+            //获取到了内容 $txtObj['state'] == true 百分百有内容
+            if ($txtObj['state']) {
+                //判断附件 如果替换了文字就不会走这个
+                if (!empty($chapter->attachment) && getstrlength($txtObj['content']) <= get_sys_set('minnr')){
+                  $imgobj = unserialize($chapter->attachment);
+                  $imghtml = '';
+                  foreach ($imgobj as  $item) {
+                      $img = get_sys_set('imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
+                      $imghtml .= '<div class="divimage"><img src="'. $img .'" /></div>';
+                  }
+                  $content = $imghtml;
+                  $isimg = 1;
+                }else {
+                  //$content = contentReplace($txtObj['content']);
+                  $content = \Purifier::clean($txtObj['content'],'xiaoshuo_body');
+
+                }
+
+            }else{
+              //防止有图片但是txt丢失的问题
+              if (!empty($chapter->attachment)){
+                    $imgobj = unserialize($chapter->attachment);
+                    $imghtml = '';
+                    foreach ($imgobj as  $item) {
+                        $img = get_sys_set('imagedir') . intval($bid/1000) .'/'.$bid ."/". $cid . "/" .$item['name'];
+                        $imghtml .= '<div class="divimage"><img src="'. $img .'" /></div>';
+                    }
+                    $content = $imghtml;
+                    $isimg = 1;
+              }
+
+
+            }
+            return view('wapdashubao.reader', compact('chapter','previousChapter','nextChapter','content','isimg' ,'bookData'));
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
 
         return view('wapdashubao.reader');
 
