@@ -43429,7 +43429,8 @@ module.exports = Component.exports
                 $('#day_icon').show();
             }
             $('[data-background="' + initBackground + '"]').children('.bk-container-current').css('display', 'block');
-            Body.css('background', initBackground);
+            //Body.css('background', initBackground);
+            VM.$refs.appBox.style.background = initBackground;
             /*todo 入口函数*/
             function main() {
                 /*
@@ -43512,7 +43513,8 @@ module.exports = Component.exports
                         Dom.bk_container_current.css('display', 'none');
                         $('#first_day').children('.bk-container-current').css('display', 'block');
                         initBackground = '#f7eee5';
-                        Body.css('background', initBackground);
+                        //Body.css('background', initBackground);
+                        VM.$refs.appBox.style.background = initBackground;
                         Util.StorageSetter('background', initBackground);
                     } else {
                         //白变黑
@@ -43521,7 +43523,8 @@ module.exports = Component.exports
                         Dom.bk_container_current.css('display', 'none');
                         $('#last_night').children('.bk-container-current').css('display', 'block');
                         initBackground = '#283548';
-                        Body.css('background', initBackground);
+                        //Body.css('background', initBackground);
+                        VM.$refs.appBox.style.background = initBackground;
                         Util.StorageSetter('background', initBackground);
                     }
                 });
@@ -43531,7 +43534,7 @@ module.exports = Component.exports
                         $(this).children('.bk-container-current').css('display', 'block');
                         initBackground = $(this).attr('data-background');
                         //Body.css('background', initBackground);
-                        VM.$refs.mybox.style.background = initBackground;
+                        VM.$refs.appBox.style.background = initBackground;
                         Util.StorageSetter('background', initBackground);
                         if (initBackground == '#283548') {
                             $('#night_icon').show();
