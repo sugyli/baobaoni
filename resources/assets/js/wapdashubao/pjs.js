@@ -61,13 +61,13 @@
                                     if(response.data.message){
                                       setTimeout(function () {
                                           self.$toast.center(response.data.message);
-                                      }, 1000);
+                                      }, 500);
 
                                     }else{
                                       console.log(response);
                                       setTimeout(function () {
                                           self.$toast.center('返回数据出错了');
-                                      }, 1000);
+                                      }, 500);
                                     }
 
                                   })
@@ -77,7 +77,7 @@
                                       console.log(response);
                                       setTimeout(function () {
                                           self.$toast.center('网络故障稍后再试');
-                                      }, 1000);
+                                      }, 500);
                                   });
 
                                 }
@@ -102,14 +102,14 @@
                                       if(response.data.message){
                                         setTimeout(function () {
                                             self.$toast.center(response.data.message);
-                                        }, 1000);
+                                        }, 500);
 
 
                                       }else{
                                         console.log(response);
                                         setTimeout(function () {
                                             self.$toast.center('返回数据出错了');
-                                        }, 1000);
+                                        }, 500);
 
                                       }
 
@@ -120,7 +120,7 @@
                                         console.log(response);
                                         setTimeout(function () {
                                             self.$toast.center('网络故障稍后再试');
-                                        }, 1000);
+                                        }, 500);
 
                                     });
                               }
