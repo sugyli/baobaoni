@@ -1709,216 +1709,127 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['bid', 'url'],
-  data: function data() {
-    return {
-      topTip: '下拉刷新',
-      alert: '刷新成功',
-      bottomTip: '查看更多',
-      ishide: true,
-      loading: false,
-      items: [],
-      infinitePage: 1,
-      stopinfinite: 0,
-      refreshPage: 1
-    };
-  },
+	props: ['bid', 'url'],
+	data: function data() {
+		return {
+			screen_height: Util.windowHeight,
+			infinitePage: 1,
+			refreshPage: 1,
+			weizhi: '',
+			searchNoDataText: "没有更多数据",
+			noData: false,
+			frist: 0,
+			items: [],
+			refreshText: "下拉刷新"
 
-  computed: {
-    classObject: function classObject() {
-      if (this.isNotNullArray(this.items)) {
-        this.loading = false;
-        return '';
-      } else {
-        this.loading = true;
-        return 'display: none;';
-      }
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
+		};
+	},
 
-    var pageItem = Util.StorageGetter('mulubooid_' + this.bid);
-    if (pageItem) {
-      this.infinitePage = JSON.parse(pageItem);
-      this.refreshPage = JSON.parse(pageItem);
-    }
-    // 保证在DOM渲染完毕后初始化 better-scroll
-    setTimeout(function () {
-      _this._initScroll();
-    }, 20);
-  },
+	computed: {},
+	mounted: function mounted() {
+		var pageItem = Util.StorageGetter('muluobj_' + this.bid);
 
-  methods: {
-    _initScroll: function _initScroll() {
-      var self = this;
-      axios.post(self.url, {
-        bid: self.bid,
-        page: self.infinitePage
-      }).then(function (response) {
-        if (response.data.error == 0) {
-          if (!self.$refs.scroll_wrapper) {
-            return;
-          }
+		if (pageItem) {
+			this.infinitePage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
+			this.refreshPage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
+			this.weizhi = pageItem.weizhi;
+		}
+	},
 
-          var datas = response.data.bakdata;
+	methods: {
+		refresh: function refresh(done) {
+			var _this = this;
 
-          for (var i = 0; i < datas.length; i++) {
-            self.items.push(datas[i]);
-          }
-          self.$nextTick(function () {
-            // better-scroll的初始化
-            var scroll = new __WEBPACK_IMPORTED_MODULE_0_better_scroll___default.a(self.$refs.scroll_wrapper, {
-              probeType: 1,
-              click: true,
-              scrollX: false /** * 是否开启横向滚动 */
-            });
-            self.scroll = scroll;
-            // 滑动中
-            scroll.on('scroll', function (position) {
-              console.log(position.y);
-              if (position.y > 30) {
-                self.topTip = '释放立即刷新';
-              }
-            });
-            // 是否派发顶部下拉事件，用于下拉刷新
-            scroll.on('touchEnd', function (position) {
-              if (position.y > 30) {
+			this.refreshPage = Number(this.refreshPage) - 1;
+			if (this.refreshPage <= 0) {
+				this.refreshText = "已经是第一页了";
+				this.$refs.searchScroller.finishPullToRefresh();
+				return;
+			} else {
 
-                if (self.refreshPage <= 0) {
-                  self.refreshAlert('已经是第一页了');
-                  return;
-                }
-                setTimeout(function () {
-                  /*
-                   * 这里发送ajax刷新数据
-                   * 刷新后,后台只返回第1页的数据,无论用户是否已经上拉加载了更多
-                  */
-                  self.refresh();
+				setTimeout(function () {
+					_this.getData(_this.refreshPage, 1);
+					done();
+				}, 1500);
+			}
+		},
+		infinite: function infinite(done) {
+			var _this2 = this;
 
-                  // 恢复文本值
-                  self.topTip = '下拉刷新';
+			if (this.frist > 0) {
+				this.infinitePage = Number(this.infinitePage) + 1;
+			} else {
+				this.frist = 1;
+			}
+			if (!this.noData) {
+				setTimeout(function () {
+					_this2.getData(_this2.infinitePage);
+					if (_this2.isNotNullArray(_this2.items) && _this2.weizhi) {
+						_this2.$refs.searchScroller.scrollTo(0, _this2.weizhi, true);
+						_this2.weizhi = '';
+					}
+					done();
+				}, 1500);
+			} else {
+				this.searchNoDataText = "没有搜索到数据了";
+				this.$refs.searchScroller.finishInfinite(true);
+			}
+		},
+		getData: function getData(page) {
+			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-                  // 刷新列表后,重新计算滚动区域高度
-                  scroll.refresh();
-                }, 1000);
-              }
-            });
+			console.log(page);
+			if (page <= 0 && type > 0) {
+				console.log('1111');
+				return;
+			}
+			if (this.noData && type == 0) {
+				console.log('122222');
+				return;
+			}
+			console.log('21');
+			var self = this;
+			console.log(self.url);
+			axios.post(self.url, {
+				bid: self.bid,
+				page: page
+			}).then(function (response) {
 
-            // 是否派发滚动到底部事件，用于上拉加载
-            scroll.on('scrollEnd', function (position) {
-              // 滚动到底部
-              if (position.y <= scroll.maxScrollY + 30) {
-                if (self.stopinfinite == 0) {
-                  self.bottomTip = '加载中...';
-                  setTimeout(function () {
-                    // 向列表添加数据
-                    self.infinite();
-                    // 加载更多后,重新计算滚动区域高度
-                    scroll.refresh();
-                  }, 1000);
-                }
-              }
-            });
-          });
-        } else {
-          console.log(response);
-        }
-      }).catch(function (response) {
-        console.log(response);
-      });
-    },
-    refreshAlert: function refreshAlert(text) {
-      text = text || '操作成功';
-      this.alert = text;
-      this.ishide = false;
-      var me = this;
-      setTimeout(function () {
-        me.ishide = true;
-      }, 1000);
-    },
-    isNotNullArray: function isNotNullArray(t) {
-      return t.constructor == Array && t.length > 0;
-    },
-    refresh: function refresh() {
-      var self = this;
-      if (self.refreshPage <= 0) {
-        self.refreshAlert('已经第一页了,如有问题刷新页面');
-        return;
-      }
-      self.refreshPage = Number(self.refreshPage) - 1;
-      axios.post(self.url, {
-        bid: self.bid,
-        page: self.refreshPage
-      }).then(function (response) {
-        if (response.data.error == 0) {
-          var datas = response.data.bakdata;
-
-          for (var i = datas.length - 1; i >= 0; i--) {
-            self.items.splice(0, 0, datas[i]);
-          }
-          self.$nextTick(function () {
-            // 刷新成功后的提示
-            self.refreshAlert('刷新成功');
-            self.scroll.refresh();
-          });
-        } else {
-          self.refreshPage = 0;
-          self.refreshAlert('没有数据了');
-          console.log(response);
-        }
-      }).catch(function (response) {
-        self.refreshPage = 0;
-        self.refreshAlert('出错了！！！');
-        console.log(response);
-      });
-    },
-    infinite: function infinite() {
-      var self = this;
-      if (self.stopinfinite > 0) {
-        return;
-      }
-      self.infinitePage = Number(self.infinitePage) + 1;
-      axios.post(self.url, {
-        bid: self.bid,
-        page: self.infinitePage
-      }).then(function (response) {
-        if (response.data.error == 0) {
-          var datas = response.data.bakdata;
-
-          for (var i = 0; i < datas.length; i++) {
-            self.items.push(datas[i]);
-          }
-          self.$nextTick(function () {
-            // 恢复文本值
-            self.bottomTip = '查看更多';
-            self.scroll.refresh();
-          });
-        } else {
-          // 恢复文本值
-          self.bottomTip = '没有数据了';
-          self.stopinfinite = 1;
-          console.log(response);
-        }
-      }).catch(function (response) {
-        self.bottomTip = '出现故障了';
-        self.stopinfinite = 1;
-        console.log(response);
-      });
-    }
-  }
+				if (response.data.error == 0) {
+					var datas = response.data.bakdata;
+					if (type == 0) {
+						//上拉
+						for (var i = 0; i < datas.length; i++) {
+							self.items.push(datas[i]);
+						}
+					} else {
+						for (var i = datas.length - 1; i >= 0; i--) {
+							self.items.splice(0, 0, datas[i]);
+						}
+					}
+				} else {
+					if (type == 0) {
+						self.searchNoDataText = "没有数据了";
+						self.$refs.searchScroller.finishInfinite(true);
+						self.noData = true;
+					} else {
+						self.refreshText = "没有数据了";
+						self.$refs.searchScroller.finishPullToRefresh();
+					}
+				}
+			}).catch(function (response) {
+				self.noData = true;
+				self.searchNoDataText = "请求出现故障";
+				self.$refs.searchScroller.finishInfinite(true);
+			});
+		},
+		isNotNullArray: function isNotNullArray(t) {
+			return t.constructor == Array && t.length > 0;
+		}
+	}
 });
 
 /***/ }),
@@ -2005,13 +1916,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_scroller___default.a);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['searchinput'],
   data: function data() {
     return {
       screen_height: Util.windowHeight,
       searchItems: [],
       searchKeyword: '',
       storageSearchItems: [],
-      url: '/searchinput?page=',
+      url: this.searchinput + '?page=',
       page: 0,
       noData: false,
       ishide: false,
@@ -2046,7 +1958,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       var storageSearchItems = Util.StorageGetter('StorageSearchItems');
       var itme = [];
       if (storageSearchItems) {
-        itme = JSON.parse(storageSearchItems);
+        itme = storageSearchItems;
       } else {
         itme = [];
       }
@@ -2069,7 +1981,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       storageSearchItems.splice(0, 0, keyword);
       storageSearchItems = storageSearchItems.unique3();
       //this.storageSearchItems.push(keyword)
-      Util.StorageSetter('StorageSearchItems', JSON.stringify(storageSearchItems));
+      Util.StorageSetter('StorageSearchItems', storageSearchItems);
     },
     delStorageSearchItems: function delStorageSearchItems() {
       Util.StorageDel('StorageSearchItems');
@@ -4027,6 +3939,21 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 // module
 exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n", ""]);
 
 // exports
 
@@ -32417,12 +32344,21 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._m(0), _vm._v(" "), _c('div', {
-    ref: "scroll_wrapper",
-    staticClass: "list-wrapper"
-  }, [_c('div', [_c('div', {
-    staticClass: "top-tip"
-  }, [_vm._v("\n      " + _vm._s(_vm.topTip) + "\n    ")]), _vm._v(" "), _c('ul', {
+  return _c('div', {
+    staticClass: "mulu__bd",
+    style: ('height:' + _vm.screen_height + 'px;')
+  }, [_vm._m(0), _vm._v(" "), _c('scroller', {
+    ref: "searchScroller",
+    staticStyle: {
+      "top": "45px"
+    },
+    attrs: {
+      "on-refresh": _vm.refresh,
+      "on-infinite": _vm.infinite,
+      "no-data-text": _vm.searchNoDataText,
+      "refresh-text": _vm.refreshText
+    }
+  }, [_c('ul', {
     staticClass: "list-content list-content-hook Displayanimation"
   }, _vm._l((_vm.items), function(item) {
     return _c('li', [_c('a', {
@@ -32431,24 +32367,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "href": item['chapterlink']
       }
     }, [_vm._v(_vm._s(item['chaptername']))]), _c('i')])
-  })), _vm._v(" "), _c('div', {
-    staticClass: "bottom-tip",
-    style: (_vm.classObject)
-  }, [_vm._v("\n      " + _vm._s(_vm.bottomTip) + "\n    ")])]), _vm._v(" "), _c('rotate-loade', {
-    staticStyle: {
-      "position": "absolute",
-      "top": "50%",
-      "left": "50%"
-    },
-    attrs: {
-      "loading": _vm.loading
-    }
-  })], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
-    staticClass: "mulu-alert",
-    class: {
-      ishide: _vm.ishide
-    }
-  }, [_vm._v(_vm._s(_vm.alert))])])
+  }))])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "mulu_header"
@@ -32464,16 +32383,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/"
     }
-  }, [_vm._v("")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "mulu-footer"
-  }, [_c('span', {
-    staticClass: "iconfont"
-  }, [_vm._v("")]), _vm._v(" "), _c('span', {
-    staticClass: "iconfont"
-  }, [_vm._v("")]), _vm._v(" "), _c('span', {
-    staticClass: "iconfont"
   }, [_vm._v("")])])
 }]}
 module.exports.render._withStripped = true
@@ -32595,6 +32504,33 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b4dcf2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroll-search.vue", function() {
      var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-07b4dcf2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroll-search.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("5260da7e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroll-mulu.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./scroll-mulu.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -43206,9 +43142,10 @@ var Util = function () {
     //本地存储 加prefix区别
     var prefix = 'html5_';
     var StorageGetter = function StorageGetter(key) {
-        return localStorage.getItem(prefix + key);
+        return JSON.parse(localStorage.getItem(prefix + key));
     };
     var StorageSetter = function StorageSetter(key, val) {
+        var val = JSON.stringify(val);
         return localStorage.setItem(prefix + key, val);
     };
     var StorageDel = function StorageDel(key) {
@@ -43254,13 +43191,17 @@ __webpack_require__("./resources/assets/js/wapdashubao/pjs.js");
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d8253f0a\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue")
+}
 var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
   /* script */
   __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue"),
   /* template */
   __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-d8253f0a\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/wapdashubao/components/scroll-mulu.vue"),
   /* styles */
-  null,
+  injectStyle,
   /* scopeId */
   null,
   /* moduleIdentifier (server only) */
@@ -43504,6 +43445,7 @@ module.exports = Component.exports
             $('[data-background="' + initBackground + '"]').children('.bk-container-current').css('display', 'block');
             //Body.css('background', initBackground);
             VM.$refs.appBox.style.background = initBackground;
+
             /*todo 入口函数*/
             function main() {
                 /*
@@ -43635,6 +43577,11 @@ module.exports = Component.exports
 
             main(); //调用入口函数
 
+        },
+        saveMuluHistory: function saveMuluHistory(bid, page, weizhi) {
+            var key = 'muluobj_' + bid;
+            var obj = { 'page': page, 'weizhi': weizhi };
+            Util.StorageSetter(key, obj);
         }
 
     };

@@ -19,7 +19,7 @@ include_once('admin.php');
 
 # ------------------小说路由处理------------------------
 Route::get('/mytest', 'NovelsController\ArticlesController@testindex');
-Route::post('/searchinput', 'NovelsController\SearchController@searchInput');
+Route::post('/searchinput', 'NovelsController\SearchController@searchInput')->name('web.searchinput');
 Route::get('/search', 'NovelsController\SearchController@search');
 
 Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');

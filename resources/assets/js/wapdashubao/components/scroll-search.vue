@@ -71,13 +71,14 @@
   Vue.use(VueScroller)
 
   export default {
+    props:['searchinput'],
     data() {
       return {
         screen_height: Util.windowHeight,
         searchItems: [],
         searchKeyword: '',
         storageSearchItems: [],
-        url:'/searchinput?page=',
+        url: this.searchinput +  '?page=',
         page: 0,
         noData: false,
         ishide: false,
@@ -110,7 +111,7 @@
           var storageSearchItems = Util.StorageGetter('StorageSearchItems');
           var itme = [];
           if(storageSearchItems){
-             itme =  JSON.parse(storageSearchItems);
+             itme =  storageSearchItems;
 
           }else{
              itme = [];
@@ -134,7 +135,7 @@
         storageSearchItems.splice(0, 0,keyword);
         storageSearchItems = storageSearchItems.unique3();
         //this.storageSearchItems.push(keyword)
-        Util.StorageSetter('StorageSearchItems',JSON.stringify(storageSearchItems));
+        Util.StorageSetter('StorageSearchItems',storageSearchItems);
 
       },
       delStorageSearchItems(){

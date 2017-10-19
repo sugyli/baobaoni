@@ -1,6 +1,9 @@
 @extends('wapdashubao.layouts.default')
 
 @section('content')
-<scroll-search></scroll-search>
+<scroll-search
+  searchinput={{route('web.searchinput')}}
+
+></scroll-search>
 
 @endsection

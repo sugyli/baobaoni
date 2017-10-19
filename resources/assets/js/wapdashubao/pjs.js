@@ -131,8 +131,6 @@
 
                         },
 
-
-
                     });
 
       },
@@ -181,6 +179,13 @@
           $('[data-background="' + initBackground + '"]').children('.bk-container-current').css('display', 'block');
           //Body.css('background', initBackground);
           VM.$refs.appBox.style.background = initBackground;
+
+
+
+
+
+
+
           /*todo 入口函数*/
           function main() {
             /*
@@ -317,6 +322,12 @@
 
 
       },
+      saveMuluHistory: function(bid , page ,weizhi) {
+        var key = 'muluobj_' + bid;
+        var obj = {'page':page,'weizhi':weizhi}
+        Util.StorageSetter(key, obj);
+
+      }
 
 
   }

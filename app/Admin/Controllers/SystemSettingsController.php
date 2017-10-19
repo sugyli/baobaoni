@@ -31,6 +31,10 @@ class SystemSettingsController extends Controller
                 $form->textarea('weblink','web网站友情链接')->rows(10)->default(get_sys_set('weblink'))->help('直接输入代码就行');
                 $form->textarea('webfoot','web网站版权信息')->rows(10)->default(get_sys_set('webfoot'))->help('直接输入代码就行');
                 $form->divide();
+
+                $form->number('wapmululiebiao', 'wap目录分页数')->default(get_sys_set('wapmululiebiao'))->help('默认20');
+
+                $form->divide();
                 $form->text('dfxsfmdir', '小说默认封面')->default(get_sys_set('dfxsfmdir'))->help('全局通用,结尾要加 /');
                 $form->text('xsfmdir', '小说封面路径')->default(get_sys_set('xsfmdir'))->help('全局通用,结尾要加 / ,本地就直接/');
                 $form->text('imagedir', '小说内容附件地址')->default(get_sys_set('imagedir'))->help('全局通用,结尾要加 /');
@@ -79,6 +83,7 @@ class SystemSettingsController extends Controller
           $data['bookcasemaxcount'] =   (isset($data['bookcasemaxcount']) && $data['bookcasemaxcount']>0) ? $data['bookcasemaxcount'] : 20;
           $data['dayrecommendmaxcount'] =   (isset($data['dayrecommendmaxcount']) && $data['dayrecommendmaxcount']>0) ? $data['dayrecommendmaxcount'] : 20;
           $data['recommendscore'] =   (isset($data['recommendscore']) && $data['recommendscore']>0) ? $data['recommendscore'] : 1;
+          $data['wapmululiebiao'] =   (isset($data['wapmululiebiao']) && $data['wapmululiebiao']>0) ? $data['wapmululiebiao'] : 20;
           $msg = $this->success('设置成功');
           \Cache::forever(config('app.syskey'), $data);
       }else{

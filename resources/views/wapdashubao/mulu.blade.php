@@ -49,26 +49,21 @@
     text-align: center;
     color: #555;
 }
-.list-wrapper .list-content {
-    background: #fff;
-}
 
-.list-content li {
+.mulu__bd li {
     position: relative;
     padding: 0px 10px;
 }
 
-.list-content  li a {
+.mulu__bd li a {
     display: block;
     line-height: 40px;
     height: 40px;
     border-bottom: 1px solid #eee;
 }
 
-.list-content  li:last-child a{
-  border-bottom: none;
-}
-.list-content li i {
+
+.mulu__bd li i {
     position: absolute;
     top: 0px;
     right: 5px;
@@ -76,44 +71,7 @@
     height: 40px;
     background: center url(/wapdashubao/images/list.png) no-repeat;
 }
-.bottom-tip {
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
-    color: #777;
-    background: #f2f2f2;
-}
-.mulu-footer {
-    bottom: 0;
-    height: 50px;
-    line-height: 50px;
-    background: #1a1a1a;
-    position: fixed;
-    z-index: 2;
-    left: 0;
-    display: flex;
-    width: 100%;
-}
-.mulu-footer span {
-    flex: 1;
-    font-size: 20px;
-    color: #fff;
-    text-align: center;
-}
-.mulu-alert {
-    position: fixed;
-    top: 44px;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    text-align: center;
-    color: #fff;
-    font-size: 12px;
-    background: rgba(7, 17, 27, 0.7);
-}
+
 </style>
 @endsection
 @extends('wapdashubao.layouts.default')

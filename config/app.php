@@ -32,10 +32,8 @@ return [
     'minnr' => 300,
     'imagedir' => env('IMAGEDIR'),//图片地址
     'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
-
-
-
     'txtlog' => env('TXTLOG',false),//是否开启txt采集日记
+    'wapmululiebiao' => 20,//目录每页数量
 
 
     'title_index'=>env('TITLE_INDEX'),

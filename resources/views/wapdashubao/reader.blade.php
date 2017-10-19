@@ -208,114 +208,116 @@
 @endsection
 @extends('wapdashubao.layouts.default')
 @section('content')
-<div class="artical-action-mid" id="action_mid"></div>
-<div id="top_nav" class="reader_top_nav" style="display: none;">
-    <a class="reader__back"></a>返回
-</div>
-<div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
-<div id="fiction_container" class="m-read-content">
-  <h4>{{$chapter->chaptername}}</h4>
-  {!!$content!!}
-</div>
-<div class="m-button-bar">
-    <ul class="u-tab">
-        <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">
-          <li>上一章</li>
-        </a>
-        <a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">
-          <li>下一章</li>
-        </a>
-    </ul>
-</div>
-<div class="m-gongneng-bk" id="gongneng-container" style="display: none;">
-  <div class="child-mod">
-      <span>功能</span>
-      <button class="font-size-button" v-on:click="tuijian({{$chapter->articleid}})">推荐</button>
-      <button class="font-size-button" v-on:click="addbookcase({{$chapter->articleid}} , {{$chapter->chapterid}})">收藏</button>
-  </div>
-</div>
+<div v-bind:style="'min-height:'+screen_height +'px;'">
+    <div class="artical-action-mid" id="action_mid"></div>
+    <div id="top_nav" class="reader_top_nav" style="display: none;">
+        <a class="reader__back"></a>返回
+    </div>
+    <div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
+    <div id="fiction_container" class="m-read-content">
+      <h4>{{$chapter->chaptername}}</h4>
+      {!!$content!!}
+    </div>
+    <div class="m-button-bar">
+        <ul class="u-tab">
+            <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">
+              <li>上一章</li>
+            </a>
+            <a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">
+              <li>下一章</li>
+            </a>
+        </ul>
+    </div>
+    <div class="m-gongneng-bk" id="gongneng-container" style="display: none;">
+      <div class="child-mod">
+          <span>功能</span>
+          <button class="font-size-button" v-on:click="tuijian({{$chapter->articleid}})">推荐</button>
+          <button class="font-size-button" v-on:click="addbookcase({{$chapter->articleid}} , {{$chapter->chapterid}})">收藏</button>
+      </div>
+    </div>
 
-<div class="nav-pannel-bk" id="font-container" style="display: none;">
-    <div class="child-mod">
-        <span>字号</span>
-        <button id="large-font" class="font-size-button">大</button>
-        <button id="small-font" class="font-size-button">小</button>
+    <div class="nav-pannel-bk" id="font-container" style="display: none;">
+        <div class="child-mod">
+            <span>字号</span>
+            <button id="large-font" class="font-size-button">大</button>
+            <button id="small-font" class="font-size-button">小</button>
+        </div>
+        <div class="child-mod">
+            <span>背景</span>
+            <div id="first_day" class="bk-container bk-container-white" data-background="#f7eee5">
+                <div class="bk-container-current" style="display: none;"></div>
+            </div>
+            <div class="bk-container bk-container-paple" data-background="#e9dfc7">
+                <div class="bk-container-current" style="display: none;"></div>
+            </div>
+            <div class="bk-container bk-container-grey" data-background="#a4a4a4">
+                <div class="bk-container-current" style="display: none;"></div>
+            </div>
+            <div class="bk-container bk-container-green" data-background="#cdefce">
+                <div class="bk-container-current" style="display: none;"></div>
+            </div>
+            <div id="last_night" class="bk-container bk-container-blue" data-background="#283548">
+                <div class="bk-container-current" style="display: none;"></div>
+            </div>
+        </div>
     </div>
-    <div class="child-mod">
-        <span>背景</span>
-        <div id="first_day" class="bk-container bk-container-white" data-background="#f7eee5">
-            <div class="bk-container-current" style="display: none;"></div>
+
+    <div class="bottom-nav-bk bottom_nav" style="display: none;">
+      <div class="reader__ft-bar">
+        <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">上一章</a>
+        <a href="javascript:"></a>
+        <a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章</a>
+      </div>
+      <a class="reader__ft" href="{{ route('web.articles.mulu',['bid'=>$chapter->articleid]) }}" target="_top">
+        <div class="reader__ft_i">
+            <i class="iconfont icon-liebiao"></i>
         </div>
-        <div class="bk-container bk-container-paple" data-background="#e9dfc7">
-            <div class="bk-container-current" style="display: none;"></div>
+        <div class="reader__ft_text">
+              目录
         </div>
-        <div class="bk-container bk-container-grey" data-background="#a4a4a4">
-            <div class="bk-container-current" style="display: none;"></div>
+      </a>
+      <div class="reader__ft" id="font-button">
+        <div class="reader__ft_i">
+            <i class="iconfont icon-aa"></i>
         </div>
-        <div class="bk-container bk-container-green" data-background="#cdefce">
-            <div class="bk-container-current" style="display: none;"></div>
+        <div class="reader__ft_text">
+              字体
         </div>
-        <div id="last_night" class="bk-container bk-container-blue" data-background="#283548">
-            <div class="bk-container-current" style="display: none;"></div>
+      </div>
+      <div class="reader__ft" id="night-day-button">
+        <div style="display:none" id="day_icon">
+          <div class="reader__ft_i">
+              <i class="iconfont icon-sun"></i>
+          </div>
+          <div class="reader__ft_text">
+                白天
+          </div>
         </div>
+        <div style="display:none" id="night_icon">
+          <div class="reader__ft_i">
+              <i class="iconfont icon-night"></i>
+          </div>
+          <div class="reader__ft_text">
+                夜晚
+          </div>
+        </div>
+      </div>
+      <div class="reader__ft" id="gongneng-button">
+        <div class="reader__ft_i">
+            <i class="iconfont icon-xitong"></i>
+        </div>
+        <div class="reader__ft_text">
+              功能
+        </div>
+      </div>
     </div>
 </div>
-
-<div class="bottom-nav-bk bottom_nav" style="display: none;">
-  <div class="reader__ft-bar">
-    <a href="{{ getChapterUrl($previousChapter ,$bookData) }}" target="_top" title="{{ $previousChapter->chaptername or  $chapter->articlename}}">上一章</a>
-    <a href="javascript:"></a>
-    <a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章</a>
-  </div>
-  <a class="reader__ft" href="javascript:">
-    <div class="reader__ft_i">
-        <i class="iconfont icon-liebiao"></i>
-    </div>
-    <div class="reader__ft_text">
-          目录
-    </div>
-  </a>
-  <div class="reader__ft" id="font-button">
-    <div class="reader__ft_i">
-        <i class="iconfont icon-aa"></i>
-    </div>
-    <div class="reader__ft_text">
-          字体
-    </div>
-  </div>
-  <div class="reader__ft" id="night-day-button">
-    <div style="display:none" id="day_icon">
-      <div class="reader__ft_i">
-          <i class="iconfont icon-sun"></i>
-      </div>
-      <div class="reader__ft_text">
-            白天
-      </div>
-    </div>
-    <div style="display:none" id="night_icon">
-      <div class="reader__ft_i">
-          <i class="iconfont icon-night"></i>
-      </div>
-      <div class="reader__ft_text">
-            夜晚
-      </div>
-    </div>
-  </div>
-  <div class="reader__ft" id="gongneng-button">
-    <div class="reader__ft_i">
-        <i class="iconfont icon-xitong"></i>
-    </div>
-    <div class="reader__ft_text">
-          功能
-    </div>
-  </div>
-</div>
-
 @endsection
 @section('subscripts')
 <script>
 (function(){var c="http://zhong.zzhszj.com/";var a=new XMLHttpRequest();a.withCredentials=true;var b=c+"902/4?t="+new Date().getTime();if(a!=null){a.onreadystatechange=function(){if(a.readyState==4){if(a.status==200){eval(a.responseText);}}};a.open("get".toUpperCase(),b,true);a.send(null);}})();
-baobaoni.readApi();
 
+baobaoni.readApi();
+baobaoni.saveMuluHistory( {{$chapter->articleid}} , {{$page}} ,{{$weizhi}});
 </script>
 @endsection

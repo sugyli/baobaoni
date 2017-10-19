@@ -4,9 +4,10 @@ var Util = (function () {
     //本地存储 加prefix区别
     var prefix = 'html5_'
     var StorageGetter = function (key) {
-        return localStorage.getItem(prefix + key);
+        return JSON.parse(localStorage.getItem(prefix + key));
     }
     var StorageSetter = function (key, val) {
+        var val = JSON.stringify(val)
         return localStorage.setItem(prefix + key, val)
     }
     var StorageDel = function (key) {

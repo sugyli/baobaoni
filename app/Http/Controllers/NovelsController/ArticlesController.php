@@ -142,7 +142,7 @@ class ArticlesController extends Controller
         $bookData = saveOrGetBookData($bid);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         $total = $bookData->relationChapters->count();
-        $pageSize = 20;
+        $pageSize = (int)get_sys_set('wapmululiebiao');
         //计算总页数
         $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
         if ($page<=0 || $page > $pagenum)
@@ -182,7 +182,14 @@ class ArticlesController extends Controller
         $bakUrl = route('web.articles.show', ['bid' => $bid]);
         $isimg = 0;//判断是否图片
         $bookData = saveOrGetBookData($bid);
-        $chapter = $bookData->relationChapters->where('chapterid', $cid)->first();
+        $pKey;
+        $chapter = $bookData->relationChapters->first(function ($value, $key) use($cid , &$pKey){
+            if($value->chapterid == $cid){
+              $pKey = $key + 1;
+              return true;
+            }
+        });
+        //$chapter = $bookData->relationChapters->where('chapterid', $cid)->first();
 
         if ($chapter) {
             $any = request()->any;
@@ -190,6 +197,11 @@ class ArticlesController extends Controller
 
                 return redirect($chapter->link(), 301);
             }
+            //获取章节所在的分页数
+            $pageSize = (int)get_sys_set('wapmululiebiao');
+            $page = (int)ceil($pKey/$pageSize);
+
+            $weizhi = ($pKey % $pageSize) * 40 -40;
 
             //获取上下页对象 要以chapterorder排序获取
             $chapterorder = $chapter->chapterorder;
@@ -245,7 +257,7 @@ class ArticlesController extends Controller
 
 
             }
-            return view('wapdashubao.reader', compact('chapter','previousChapter','nextChapter','content','isimg' ,'bookData'));
+            return view('wapdashubao.reader', compact('chapter','previousChapter','nextChapter','content','isimg' ,'bookData','page','weizhi'));
 
 
 
