@@ -59,10 +59,15 @@
                                     //console.log(response);
                                     self.read_f = 0;
                                     if(response.data.message){
-                                      self.$toast.center(response.data.message);
+                                      setTimeout(function () {
+                                          self.$toast.center(response.data.message);
+                                      }, 1000);
 
                                     }else{
-                                      self.$toast.center('返回数据出错了');
+                                      console.log(response);
+                                      setTimeout(function () {
+                                          self.$toast.center('返回数据出错了');
+                                      }, 1000);
                                     }
 
                                   })
@@ -70,7 +75,9 @@
                                       self.$loading.close();
                                       self.read_f = 0;
                                       console.log(response);
-                                      self.$toast.center('网络故障稍后再试');
+                                      setTimeout(function () {
+                                          self.$toast.center('网络故障稍后再试');
+                                      }, 1000);
                                   });
 
                                 }
@@ -93,11 +100,17 @@
                                       self.$loading.close();
                                       self.read_e = 0;
                                       if(response.data.message){
+                                        setTimeout(function () {
+                                            self.$toast.center(response.data.message);
+                                        }, 1000);
 
-                                        self.$toast.center(response.data.message);
 
                                       }else{
-                                        self.$toast.center('返回数据出错了');
+                                        console.log(response);
+                                        setTimeout(function () {
+                                            self.$toast.center('返回数据出错了');
+                                        }, 1000);
+
                                       }
 
                                     })
@@ -105,7 +118,10 @@
                                         self.$loading.close();
                                         self.read_e = 0;
                                         console.log(response);
-                                        self.$toast.center('网络故障稍后再试');
+                                        setTimeout(function () {
+                                            self.$toast.center('网络故障稍后再试');
+                                        }, 1000);
+
                                     });
                               }
 

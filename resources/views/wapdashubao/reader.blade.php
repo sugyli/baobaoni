@@ -272,7 +272,7 @@
         <i class="iconfont icon-liebiao"></i>
     </div>
     <div class="reader__ft_text">
-          列表
+          目录
     </div>
   </a>
   <div class="reader__ft" id="font-button">
