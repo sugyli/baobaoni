@@ -17,6 +17,7 @@
     <script>
         var Config = {
             'recommend': "{{route('webajax.user.recommend')}}",
+            'addbookcaseurl': "{{ route('webajax.bookshelf.addbookcase') }}",
         };
     </script>
   @yield('style')

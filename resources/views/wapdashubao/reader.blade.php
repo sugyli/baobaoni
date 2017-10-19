@@ -212,8 +212,8 @@
 <div id="top_nav" class="reader_top_nav" style="display: none;">
     <a class="reader__back"></a>返回
 </div>
-<div class="online" style="padding-left:5px;color: #555555;">{{ $chapter->articlename }}</div>
-<div id="fiction_container" class="m-read-content" ref="fiction_container">
+<div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
+<div id="fiction_container" class="m-read-content">
   <h4>{{$chapter->chaptername}}</h4>
   {!!$content!!}
 </div>
@@ -231,7 +231,7 @@
   <div class="child-mod">
       <span>功能</span>
       <button class="font-size-button" v-on:click="tuijian({{$chapter->articleid}})">推荐</button>
-      <button class="font-size-button">收藏</button>
+      <button class="font-size-button" v-on:click="addbookcase({{$chapter->articleid}} , {{$chapter->chapterid}})">收藏</button>
   </div>
 </div>
 
@@ -267,7 +267,7 @@
     <a href="javascript:"></a>
     <a href="{{ getChapterUrl($nextChapter , $bookData) }}" target="_top" title="{{ $nextChapter->chaptername or  $chapter->articlename}}">下一章</a>
   </div>
-  <a class="reader__ft">
+  <a class="reader__ft" href="javascript:">
     <div class="reader__ft_i">
         <i class="iconfont icon-liebiao"></i>
     </div>

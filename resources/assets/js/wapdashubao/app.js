@@ -35,7 +35,7 @@ import 'vue2-toast/lib/toast.css';
 import Toast from 'vue2-toast';
 Vue.use(Toast, {
     defaultType: 'center',
-    duration: 2500,
+    duration: 2000,
     wordWrap: false,//不允许换行
     width: 'auto'
 });

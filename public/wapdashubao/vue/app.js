@@ -43237,7 +43237,7 @@ Vue.use(VueScroller)
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue2_toast___default.a, {
     defaultType: 'center',
-    duration: 2500,
+    duration: 2000,
     wordWrap: false, //不允许换行
     width: 'auto'
 });
@@ -43364,7 +43364,8 @@ module.exports = Component.exports
                     position: 0,
                     tab_1_class: 'Swipe-tab__on',
                     tab_2_class: '',
-                    read_f: 0
+                    read_f: 0,
+                    read_e: 0
                 },
                 methods: {
                     tabSwitch: function tabSwitch(pos) {
@@ -43387,10 +43388,10 @@ module.exports = Component.exports
 
                         bid = Number(bid);
                         var self = this;
-                        if (self.read_f > 0) {
+                        if (self.read_f > 0 || self.read_e > 0) {
                             return;
                         } else {
-                            self.$loading('请求中...');
+                            self.$loading('推荐请求中...');
                             self.read_f = 1;
                             axios.post(Config.recommend, {
                                 bid: bid,
@@ -43407,6 +43408,35 @@ module.exports = Component.exports
                             }).catch(function (response) {
                                 self.$loading.close();
                                 self.read_f = 0;
+                                console.log(response);
+                                self.$toast.center('网络故障稍后再试');
+                            });
+                        }
+                    },
+                    addbookcase: function addbookcase(bid, cid) {
+                        bid = Number(bid);
+                        cid = Number(cid);
+                        var self = this;
+                        if (self.read_e > 0 || self.read_f > 0) {
+                            return;
+                        } else {
+                            self.$loading('收藏请求中...');
+                            self.read_e = 1;
+                            axios.post(Config.addbookcaseurl, {
+                                bid: bid,
+                                cid: cid
+                            }).then(function (response) {
+                                self.$loading.close();
+                                self.read_e = 0;
+                                if (response.data.message) {
+
+                                    self.$toast.center(response.data.message);
+                                } else {
+                                    self.$toast.center('返回数据出错了');
+                                }
+                            }).catch(function (response) {
+                                self.$loading.close();
+                                self.read_e = 0;
                                 console.log(response);
                                 self.$toast.center('网络故障稍后再试');
                             });

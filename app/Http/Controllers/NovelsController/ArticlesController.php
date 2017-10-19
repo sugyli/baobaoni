@@ -187,8 +187,10 @@ class ArticlesController extends Controller
         if ($chapter) {
             $any = request()->any;
             if (!empty($any)) {
+
                 return redirect($chapter->link(), 301);
             }
+
             //获取上下页对象 要以chapterorder排序获取
             $chapterorder = $chapter->chapterorder;
             //不存在返回NULL

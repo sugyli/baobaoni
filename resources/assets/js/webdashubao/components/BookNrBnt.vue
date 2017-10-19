@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="shuqian">
-    <a v-on:click.stop="addbookcase(a,b)" rel="nofollow">添加书签</a>
+    <a v-on:click.stop="addbookcase" rel="nofollow">添加书签</a>
     <a :href="d" target="_blank" rel="nofollow">错误举报</a>
     <a v-on:click.stop="openModel('voteAlert')" rel="nofollow">投推荐票</a>
     <sweet-modal title="提交推荐票" ref="voteAlert">
@@ -165,7 +165,7 @@
                  duration : t
               });
           },
-          addbookcase(cid ,bid){
+          addbookcase(){
               var self = this;
               if(self.e > 0){
                 self.msg('你是不是癫痫发作了,反复点',3500);

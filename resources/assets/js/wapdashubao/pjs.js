@@ -24,6 +24,7 @@
                             tab_1_class:'Swipe-tab__on',
                             tab_2_class:'',
                             read_f:0,
+                            read_e:0,
                     	  },
                     	  methods:{
                           tabSwitch:function(pos){
@@ -44,10 +45,10 @@
                           tuijian(bid, num = 1){
                             bid = Number(bid);
                             var self = this;
-                            if(self.read_f > 0){
+                            if(self.read_f > 0 || self.read_e > 0){
                               return;
                             }else{
-                                self.$loading('请求中...');
+                                self.$loading('推荐请求中...');
                                 self.read_f = 1;
                                 axios.post(Config.recommend, {
                                       bid: bid,
@@ -75,6 +76,43 @@
                                 }
 
                           },
+                          addbookcase(bid ,cid){
+                              bid = Number(bid);
+                              cid = Number(cid);
+                              var self = this;
+                              if(self.read_e > 0 || self.read_f > 0){
+                                return;
+                              }else{
+                                  self.$loading('收藏请求中...');
+                                  self.read_e = 1;
+                                  axios.post(Config.addbookcaseurl, {
+                                        bid: bid,
+                                        cid: cid,
+                                    })
+                                    .then(function (response) {
+                                      self.$loading.close();
+                                      self.read_e = 0;
+                                      if(response.data.message){
+
+                                        self.$toast.center(response.data.message);
+
+                                      }else{
+                                        self.$toast.center('返回数据出错了');
+                                      }
+
+                                    })
+                                    .catch(function (response) {
+                                        self.$loading.close();
+                                        self.read_e = 0;
+                                        console.log(response);
+                                        self.$toast.center('网络故障稍后再试');
+                                    });
+                              }
+
+                          },
+
+
+
                         },
 
 

@@ -3184,7 +3184,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         duration: t
       });
     },
-    addbookcase: function addbookcase(cid, bid) {
+    addbookcase: function addbookcase() {
       var self = this;
       if (self.e > 0) {
         self.msg('你是不是癫痫发作了,反复点', 3500);
@@ -41546,7 +41546,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.stopPropagation();
-        _vm.addbookcase(_vm.a, _vm.b)
+        _vm.addbookcase($event)
       }
     }
   }, [_vm._v("添加书签")]), _vm._v(" "), _c('a', {
