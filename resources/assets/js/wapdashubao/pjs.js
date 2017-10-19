@@ -3,6 +3,13 @@
   var baobaoni = {
     init: function(){
         var self = this;
+        //第一次先清理下缓存
+        var first_del_v1 = Util.StorageGetter('first_del_v1');
+        if(!first_del_v1){
+            Util.StorageDelAll();
+            Util.StorageSetter('first_del_v1',1);
+        }
+
         self.vuefun();
     },
     vuefun:function(){

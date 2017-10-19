@@ -43155,6 +43155,9 @@ var Util = function () {
     var StorageDel = function StorageDel(key) {
         localStorage.removeItem(prefix + key);
     };
+    var StorageDelAll = function StorageDelAll() {
+        localStorage.clear();
+    };
     var windowWidth = $(window).width();
     if (windowWidth < 320) {
         windowWidth = 320;
@@ -43166,7 +43169,8 @@ var Util = function () {
         windowHeight: windowHeight,
         StorageGetter: StorageGetter,
         StorageSetter: StorageSetter,
-        StorageDel: StorageDel
+        StorageDel: StorageDel,
+        StorageDelAll: StorageDelAll
     };
 }();
 window.Util = Util;
@@ -43289,6 +43293,13 @@ module.exports = Component.exports
     var baobaoni = {
         init: function init() {
             var self = this;
+            //第一次先清理下缓存
+            var first_del_v1 = Util.StorageGetter('first_del_v1');
+            if (!first_del_v1) {
+                Util.StorageDelAll();
+                Util.StorageSetter('first_del_v1', 1);
+            }
+
             self.vuefun();
         },
         vuefun: function vuefun() {

@@ -13,6 +13,9 @@ var Util = (function () {
     var StorageDel = function (key) {
         localStorage.removeItem(prefix + key);
     }
+    var StorageDelAll = function () {
+         localStorage.clear();
+    }
     var windowWidth = $(window).width();
     if(windowWidth<320){
        windowWidth = 320;
@@ -25,6 +28,7 @@ var Util = (function () {
         StorageGetter: StorageGetter,
         StorageSetter: StorageSetter,
         StorageDel: StorageDel,
+        StorageDelAll: StorageDelAll
     }
 })();
 window.Util = Util;
