@@ -14,6 +14,11 @@
     <link rel="shortcut icon" href="/favicon.ico"/>
   </head>
   <body>
+    <script>
+        var Config = {
+            'recommend': "{{route('webajax.user.recommend')}}",
+        };
+    </script>
   @yield('style')
   <div id="app" v-bind:style="'width:'+ screen_width + 'px;position: relative'" ref="appBox">
       @yield('content')

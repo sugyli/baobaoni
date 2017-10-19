@@ -213,7 +213,7 @@
     <a class="reader__back"></a>返回
 </div>
 <div class="online" style="padding-left:5px;color: #555555;">{{ $chapter->articlename }}</div>
-<div id="fiction_container" class="m-read-content">
+<div id="fiction_container" class="m-read-content" ref="fiction_container">
   <h4>{{$chapter->chaptername}}</h4>
   {!!$content!!}
 </div>
@@ -230,7 +230,7 @@
 <div class="m-gongneng-bk" id="gongneng-container" style="display: none;">
   <div class="child-mod">
       <span>功能</span>
-      <button class="font-size-button">推荐</button>
+      <button class="font-size-button" v-on:click="tuijian({{$chapter->articleid}})">推荐</button>
       <button class="font-size-button">收藏</button>
   </div>
 </div>

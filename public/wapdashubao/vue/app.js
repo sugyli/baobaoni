@@ -43363,8 +43363,8 @@ module.exports = Component.exports
                     header_position: 0,
                     position: 0,
                     tab_1_class: 'Swipe-tab__on',
-                    tab_2_class: ''
-
+                    tab_2_class: '',
+                    read_f: 0
                 },
                 methods: {
                     tabSwitch: function tabSwitch(pos) {
@@ -43382,10 +43382,38 @@ module.exports = Component.exports
                             this.tab_1_class = "";
                         }
                     },
-                    test: function test() {
-                        console.log('f');
+                    tuijian: function tuijian(bid) {
+                        var num = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+
+                        bid = Number(bid);
+                        var self = this;
+                        if (self.read_f > 0) {
+                            return;
+                        } else {
+                            self.$loading('请求中...');
+                            self.read_f = 1;
+                            axios.post(Config.recommend, {
+                                bid: bid,
+                                num: num
+                            }).then(function (response) {
+                                self.$loading.close();
+                                //console.log(response);
+                                self.read_f = 0;
+                                if (response.data.message) {
+                                    self.$toast.center(response.data.message);
+                                } else {
+                                    self.$toast.center('返回数据出错了');
+                                }
+                            }).catch(function (response) {
+                                self.$loading.close();
+                                self.read_f = 0;
+                                console.log(response);
+                                self.$toast.center('网络故障稍后再试');
+                            });
+                        }
                     }
                 }
+
             });
         },
         readApi: function readApi() {
@@ -43411,12 +43439,14 @@ module.exports = Component.exports
 
             //本地存储字体大小
             var RootContainer = $('#fiction_container');
+
             var initFontSize = Util.StorageGetter('font_size');
             initFontSize = parseInt(initFontSize);
             if (!initFontSize) {
                 initFontSize = 14;
             }
             RootContainer.css('font-size', initFontSize);
+
             //本地存储背景颜色
             var Body = $('body');
             var initBackground = Util.StorageGetter('background');
@@ -43455,6 +43485,8 @@ module.exports = Component.exports
                         Dom.top_nav.hide();
                         Dom.font_container.hide();
                         $(Dom.font_button.find('i')[0]).removeClass('current');
+                        Dom.gongneng_container.hide();
+                        $(Dom.gongneng_button.find('i')[0]).removeClass('current');
                     }
                 });
 
