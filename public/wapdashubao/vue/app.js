@@ -43530,8 +43530,8 @@ module.exports = Component.exports
                         Dom.bk_container_current.css('display', 'none');
                         $(this).children('.bk-container-current').css('display', 'block');
                         initBackground = $(this).attr('data-background');
-                        Body.css('background', initBackground);
-                        $('#action_mid').css('background', initBackground);
+                        //Body.css('background', initBackground);
+                        VM.$refs.mybox.style.background = initBackground;
                         Util.StorageSetter('background', initBackground);
                         if (initBackground == '#283548') {
                             $('#night_icon').show();
