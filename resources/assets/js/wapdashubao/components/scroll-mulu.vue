@@ -86,7 +86,11 @@
 						setTimeout(() => {
 							this.getData(this.infinitePage);
 							if(this.isNotNullArray(this.items) && this.weizhi){
-								this.$refs.searchScroller.scrollTo(0, this.weizhi , true);
+								var weizhi = this.weizhi;
+								setTimeout(() => {
+									this.$refs.searchScroller.scrollTo(0, weizhi , true);
+								}, 500)
+
 								this.weizhi = '';
 							}
 							done()
