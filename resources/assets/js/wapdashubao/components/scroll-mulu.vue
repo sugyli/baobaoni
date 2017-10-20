@@ -21,12 +21,70 @@
 		</ul>
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
-			<p slot="button">ffff</p>
-      <p slot="default"><vm-button type="primary" id="subBnt">提交</vm-button></p>
+				<from>
+					<textarea name="textarea" class="textarea"></textarea>
+					<div class="input_el">
+		          <button type="submit" class="btn_small" value="submit">提　　交</button>
+		      </div>
+				</from>
+
     </sweet-modal>
 </div>
 </template>
 <style>
+textarea{
+		text-rendering: auto;
+		color: initial;
+		letter-spacing: normal;
+		word-spacing: normal;
+		text-transform: none;
+		text-indent: 0px;
+		text-shadow: none;
+		display: inline-block;
+		text-align: start;
+		margin: 0em;
+		font: 11px system-ui;
+		-webkit-appearance: textarea;
+		background-color: white;
+		-webkit-rtl-ordering: logical;
+		user-select: text;
+		flex-direction: column;
+		resize: auto;
+		cursor: auto;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		border-width: 1px;
+		border-style: solid;
+		border-color: initial;
+		border-image: initial;
+		padding: 2px;
+		width: 100%;
+		height: 300px;
+}
+.input_el {
+    margin: 0 8%;
+    margin-top: 0px;
+    margin-right: 8%;
+    margin-bottom: 0px;
+    margin-left: 8%;
+    text-align: center;
+    padding-bottom: 15px;
+}
+.btn_small {
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    width: 40%;
+    height: 35px;
+    line-height: 35px;
+    color: #100;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #FDFDFD;
+}
 .mulu__bd{
 	position: relative;
 	overflow: hidden;
@@ -105,6 +163,7 @@
 .mulu__bd .red-bg{
 	color:red;
 }
+
 
 </style>
 
