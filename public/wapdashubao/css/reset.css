@@ -1166,3 +1166,30 @@ body{
     		color: red;
 
     }
+.login_btn {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #bfcbd9;
+  border-color: #c4c4c4;
+  color: #1f2d3d;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 20px;
+  color: #fff;
+  background-color: #20a0ff;
+  border-color: #20a0ff;
+}

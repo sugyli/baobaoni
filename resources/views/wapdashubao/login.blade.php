@@ -64,18 +64,7 @@
     box-sizing: border-box;
     outline: 0;
 }
-.login_btn {
-  width: 100%;
-  border: 0;
-  display: block;
-  text-align: center;
-  color: #fff;
-  font-weight: bold;
-  height: 30px;
-  line-height: 30px;
-  margin-top: 20px;
-  background-color: #1ABC9C;
-}
+
 
 </style>
 
