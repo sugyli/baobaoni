@@ -2170,11 +2170,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -4473,7 +4468,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\ntextarea{\n\t\ttext-rendering: auto;\n\t\tcolor: initial;\n\t\tletter-spacing: normal;\n\t\tword-spacing: normal;\n\t\ttext-transform: none;\n\t\ttext-indent: 0px;\n\t\ttext-shadow: none;\n\t\tdisplay: inline-block;\n\t\ttext-align: start;\n\t\tmargin: 0em;\n\t\tfont: 11px system-ui;\n\t\t-webkit-appearance: textarea;\n\t\tbackground-color: white;\n\t\t-webkit-rtl-ordering: logical;\n\t\tuser-select: text;\n\t\tflex-direction: column;\n\t\tresize: auto;\n\t\tcursor: auto;\n\t\twhite-space: pre-wrap;\n\t\tword-wrap: break-word;\n\t\tborder-width: 1px;\n\t\tborder-style: solid;\n\t\tborder-color: initial;\n\t\tborder-image: initial;\n\t\tpadding: 2px;\n\t\twidth: 100%;\n\t\theight: 300px;\n}\n.input_el {\n    margin: 0 8%;\n    margin-top: 0px;\n    margin-right: 8%;\n    margin-bottom: 0px;\n    margin-left: 8%;\n    text-align: center;\n    padding-bottom: 15px;\n}\n.btn_small {\n    display: inline-block;\n    margin: 0 10px;\n    border: 1px solid #CCC;\n    border-radius: 5px;\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    width: 40%;\n    height: 35px;\n    line-height: 35px;\n    color: #100;\n    font-size: 16px;\n    cursor: pointer;\n    background-color: #FDFDFD;\n}\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n}\n.list-wrapper {\n    position: fixed;\n    z-index: 1;\n    top: 44px;\n    bottom: 50px;\n    left: 0;\n    width: 100%;\n    background: #fff;\n    overflow: hidden;\n}\n.top-tip {\n    position: absolute;\n    top: -40px;\n    left: 0;\n    bottom: 50px;\n    z-index: 1;\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #555;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
+exports.push([module.i, "\ntextarea{\n\t\ttext-rendering: auto;\n\t\tcolor: #100;\n\t\tletter-spacing: normal;\n\t\tword-spacing: normal;\n\t\ttext-transform: none;\n\t\ttext-indent: 0px;\n\t\ttext-shadow: none;\n\t\tdisplay: inline-block;\n\t\ttext-align: start;\n\t\tmargin: 0em;\n\t\tfont: 14px system-ui;\n\t\t-webkit-appearance: textarea;\n\t\tbackground-color: white;\n\t\t-webkit-rtl-ordering: logical;\n\t\tuser-select: text;\n\t\tflex-direction: column;\n\t\tresize: auto;\n\t\tcursor: auto;\n\t\twhite-space: pre-wrap;\n\t\tword-wrap: break-word;\n\t\tborder: 1px solid #CCC;\n\t\tpadding: 2px;\n}\n.input_el {\n    margin: 0 8%;\n    margin-top: 15px;\n    margin-right: 8%;\n    margin-bottom: 0px;\n    margin-left: 8%;\n    text-align: center;\n    padding-bottom: 15px;\n}\n.btn_small {\n    display: inline-block;\n    margin: 0 10px;\n    border: 1px solid #CCC;\n    border-radius: 5px;\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    width: 40%;\n    height: 35px;\n    line-height: 35px;\n    color: #100;\n    font-size: 16px;\n    cursor: pointer;\n    background-color: #FDFDFD;\n}\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n}\n.list-wrapper {\n    position: fixed;\n    z-index: 1;\n    top: 44px;\n    bottom: 50px;\n    left: 0;\n    width: 100%;\n    background: #fff;\n    overflow: hidden;\n}\n.top-tip {\n    position: absolute;\n    top: -40px;\n    left: 0;\n    bottom: 50px;\n    z-index: 1;\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #555;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
 
 // exports
 
@@ -33200,8 +33195,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('from', [_c('textarea', {
     staticClass: "textarea",
+    style: ('width:100%;height:' + (_vm.screen_height * 0.3) + 'px;'),
     attrs: {
-      "name": "textarea"
+      "name": "textarea",
+      "placeholder": "输入举报内容 来源地址 我们已经记录了"
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "input_el"

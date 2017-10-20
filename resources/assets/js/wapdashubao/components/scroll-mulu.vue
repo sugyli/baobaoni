@@ -22,7 +22,7 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
 				<from>
-					<textarea name="textarea" class="textarea"></textarea>
+					<textarea name="textarea" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.3)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
 		          <button type="submit" class="btn_small" value="submit">提　　交</button>
 		      </div>
@@ -34,7 +34,7 @@
 <style>
 textarea{
 		text-rendering: auto;
-		color: initial;
+		color: #100;
 		letter-spacing: normal;
 		word-spacing: normal;
 		text-transform: none;
@@ -43,7 +43,7 @@ textarea{
 		display: inline-block;
 		text-align: start;
 		margin: 0em;
-		font: 11px system-ui;
+		font: 14px system-ui;
 		-webkit-appearance: textarea;
 		background-color: white;
 		-webkit-rtl-ordering: logical;
@@ -53,17 +53,12 @@ textarea{
 		cursor: auto;
 		white-space: pre-wrap;
 		word-wrap: break-word;
-		border-width: 1px;
-		border-style: solid;
-		border-color: initial;
-		border-image: initial;
+		border: 1px solid #CCC;
 		padding: 2px;
-		width: 100%;
-		height: 300px;
 }
 .input_el {
     margin: 0 8%;
-    margin-top: 0px;
+    margin-top: 15px;
     margin-right: 8%;
     margin-bottom: 0px;
     margin-left: 8%;
