@@ -21,11 +21,7 @@
 		</ul>
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
-            <form id="cuowuForm">
-							1
-            </form>
       <p slot="button"><vm-button type="primary" id="subBnt">提交</vm-button></p>
-
     </sweet-modal>
 </div>
 </template>

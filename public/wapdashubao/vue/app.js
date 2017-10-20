@@ -2115,10 +2115,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -33142,11 +33138,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": "举报错误"
     }
-  }, [_c('form', {
-    attrs: {
-      "id": "cuowuForm"
-    }
-  }, [_vm._v("\n\t\t\t\t\t\t\t1\n            ")]), _vm._v(" "), _c('p', {
+  }, [_c('p', {
     slot: "button"
   }, [_c('vm-button', {
     attrs: {
