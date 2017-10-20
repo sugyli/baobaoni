@@ -22,7 +22,7 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
 				<from>
-					<textarea name="textarea" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.3)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
+					<textarea name="textarea" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.5)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
 		          <button type="submit" class="btn_small" value="submit">提　　交</button>
 		      </div>

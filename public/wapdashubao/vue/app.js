@@ -33195,7 +33195,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('from', [_c('textarea', {
     staticClass: "textarea",
-    style: ('width:100%;height:' + (_vm.screen_height * 0.3) + 'px;'),
+    style: ('width:100%;height:' + (_vm.screen_height * 0.5) + 'px;'),
     attrs: {
       "name": "textarea",
       "placeholder": "输入举报内容 来源地址 我们已经记录了"
