@@ -329,9 +329,9 @@
 
 
       },
-      saveMuluHistory: function(bid , page ,weizhi) {
+      saveMuluHistory: function(bid , page ,weizhi,cid) {
         var key = 'muluobj_' + bid;
-        var obj = {'page':page,'weizhi':weizhi}
+        var obj = {'page':page,'weizhi':weizhi ,'cid':cid}
         Util.StorageSetter(key, obj);
 
       }

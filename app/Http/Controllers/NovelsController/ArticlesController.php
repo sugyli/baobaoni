@@ -201,8 +201,8 @@ class ArticlesController extends Controller
             $pageSize = (int)get_sys_set('wapmululiebiao');
             $page = (int)ceil($pKey/$pageSize);
 
-            $weizhi = ($pKey % $pageSize) * 40 -40;
-
+            $weizhi = ((int)($pKey % $pageSize)) * 40 -40;
+            $weizhi = $weizhi < 0 ? 0 : $weizhi;
             //获取上下页对象 要以chapterorder排序获取
             $chapterorder = $chapter->chapterorder;
             //不存在返回NULL

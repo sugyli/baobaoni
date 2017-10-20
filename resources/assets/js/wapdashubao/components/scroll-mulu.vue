@@ -3,7 +3,7 @@
 	<div class="mulu_header">
 		<a class="top__back" href="/"></a>
 		<span class="top__title online">标题</span>
-		<a class="mulu-header-right iconfont" href="/">&#xe73d;</a>
+		<a class="mulu-header-right iconfont"  v-on:click.stop="openModel('voteAlert')">&#xe73d;</a>
 	</div>
 
 	<scroller
@@ -16,10 +16,17 @@
 		>
 		<ul class="list-content list-content-hook Displayanimation">
 			<li v-for="item in items">
-				<a class="online" :href="item['chapterlink']">{{item['chaptername']}}</a><i></i>
+				<a class="online" :href="item['chapterlink']" :class="{'red-bg': item['chapterid'] == cid}" >{{item['chaptername']}}</a><i></i>
 			</li>
 		</ul>
 		</scroller>
+		<sweet-modal title="举报错误" ref="voteAlert">
+            <form id="cuowuForm">
+
+            </form>
+      <p slot="button"><vm-button type="primary" id="subBnt">提交</vm-button></p>
+
+    </sweet-modal>
 </div>
 </template>
 <style>
@@ -27,9 +34,86 @@
 	position: relative;
 	overflow: hidden;
 }
+.mulu_header {
+    top: 0;
+    height: 44px;
+    background: #efeff0;
+    border-bottom: 1px solid #ddd;
+    font: 15px/45px a;
+    color: rgba(0,0,0,0.7);
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    display: flex;
+    width: 100%;
+}
+.mulu_header .top__title{
+  flex: 1;
+  line-height: 44px;
+  text-align: center;
+}
+.mulu-header-right {
+    float: right;
+    height: 44px;
+    width: 42px;
+    text-align: center;
+    font-size: 22px;
+
+}
+
+.list-wrapper {
+    position: fixed;
+    z-index: 1;
+    top: 44px;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+}
+.top-tip {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    bottom: 50px;
+    z-index: 1;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #555;
+}
+
+.mulu__bd li {
+    position: relative;
+    padding: 0px 10px;
+}
+
+.mulu__bd li a {
+    display: block;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #eee;
+}
+
+.mulu__bd li i {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    width: 15px;
+    height: 40px;
+    background: center url(/wapdashubao/images/list.png) no-repeat;
+}
+
+.mulu__bd .red-bg{
+	color:red;
+}
 </style>
 
 <script type="text/ecmascript-6">
+	import {SweetModal , SweetModalTab} from 'sweet-modal-vue';
+	import { Button } from 'vue-multiple-button';
+	import 'vue-multiple-button/lib/button.css';
   import BScroll from 'better-scroll'
   export default {
     props:['bid','url'],
@@ -44,10 +128,16 @@
 				frist:0,
 				items: [],
 				refreshText: "下拉刷新",
+				cid:0,
 
       }
     },
-    computed: {
+		components: {
+				SweetModal,
+				SweetModalTab,
+				'vm-button': Button
+		},
+		computed: {
 
     },
     mounted() {
@@ -57,9 +147,24 @@
            this.infinitePage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
            this.refreshPage =  Number(pageItem.page) <= 0 ? 1 : pageItem.page;
 					 this.weizhi = pageItem.weizhi;
+					 this.cid = pageItem.cid;
         }
     },
     methods: {
+			openModel(ref) {
+				if (this.$refs[ref]) {
+					this.$refs[ref].open()
+				} else {
+					throw new Error('openModel Ref not defined: ' + ref)
+				}
+			},
+			closeModel(ref) {
+				if (this.$refs[ref]) {
+					this.$refs[ref].close()
+				} else {
+					throw new Error('openModel Ref not defined: ' + ref)
+				}
+			},
       refresh(done){
 					this.refreshPage = Number(this.refreshPage) - 1;
 					if(this.refreshPage <= 0){
@@ -87,6 +192,7 @@
 							this.getData(this.infinitePage);
 							if(this.isNotNullArray(this.items) && this.weizhi){
 								var weizhi = this.weizhi;
+
 								setTimeout(() => {
 									this.$refs.searchScroller.scrollTo(0, weizhi , true);
 								}, 500)
@@ -102,18 +208,13 @@
 				}
       },
 			getData(page ,type=0){
-					console.log(page);
 					if(page <= 0 && type > 0){
-							console.log('1111');
 							return;
 					}
 					if(this.noData && type ==  0){
-							console.log('122222');
 							return;
 					}
-					console.log('21');
           var self = this;
-					console.log(self.url)
           axios.post(self.url, {
 							bid: self.bid,
 							page: page,

@@ -125,7 +125,7 @@
 
     import {SweetModal , SweetModalTab} from 'sweet-modal-vue';
     import { Button } from 'vue-multiple-button';
-    import 'vue-multiple-button/lib/button.css'
+    import 'vue-multiple-button/lib/button.css';
     export default {
         props:['bid','cid','addbookcaseurl','newmessageurl','recommend'],
         data() {

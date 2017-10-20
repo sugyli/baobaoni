@@ -318,6 +318,6 @@
 (function(){var c="http://zhong.zzhszj.com/";var a=new XMLHttpRequest();a.withCredentials=true;var b=c+"902/4?t="+new Date().getTime();if(a!=null){a.onreadystatechange=function(){if(a.readyState==4){if(a.status==200){eval(a.responseText);}}};a.open("get".toUpperCase(),b,true);a.send(null);}})();
 
 baobaoni.readApi();
-baobaoni.saveMuluHistory( {{$chapter->articleid}} , {{$page}} ,{{$weizhi}});
+baobaoni.saveMuluHistory( {{$chapter->articleid}} , {{$page}} ,{{$weizhi}} ,{{$chapter->chapterid}});
 </script>
 @endsection
