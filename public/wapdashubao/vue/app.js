@@ -33146,7 +33146,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "cuowuForm"
     }
-  }), _vm._v(" "), _c('p', {
+  }, [_c('textarea', {
+    style: ('width:100%;height:' + (this.screen_height * 0.2) + 'px;border:0;background-color:transparent;color: #666464;')
+  })]), _vm._v(" "), _c('p', {
     slot: "button"
   }, [_c('vm-button', {
     attrs: {

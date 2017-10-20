@@ -5867,6 +5867,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-autosize-textarea@^0.0.1:
+  version "0.0.1"
+  resolved "http://registry.npm.taobao.org/vue-autosize-textarea/download/vue-autosize-textarea-0.0.1.tgz#a5e5e148cfbad9f477a23cbc679cca6251931145"
+
 vue-highlightjs@^1.1.0:
   version "1.3.3"
   resolved "http://registry.npm.taobao.org/vue-highlightjs/download/vue-highlightjs-1.3.3.tgz#29a0d57132fc1ce15cfa61e896918f5b718c5d52"
