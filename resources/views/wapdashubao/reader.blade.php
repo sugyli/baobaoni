@@ -46,6 +46,19 @@
     letter-spacing: 0px;
     line-height: 24px;
 }
+.m-read-content .divimage{
+
+    text-align: center;
+}
+.m-read-content .divimage img{
+    max-width: 100%!important;
+    height: auto!important;
+}
+
+
+
+
+
 .m-button-bar {
     width: 70%;
     max-width: 800px;
