@@ -21,7 +21,8 @@
 		</ul>
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
-      <p slot="button"><vm-button type="primary" id="subBnt">提交</vm-button></p>
+			<p slot="button">ffff</p>
+      <p slot="default"><vm-button type="primary" id="subBnt">提交</vm-button></p>
     </sweet-modal>
 </div>
 </template>

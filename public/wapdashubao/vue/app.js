@@ -2115,6 +2115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -33140,6 +33141,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('p', {
     slot: "button"
+  }, [_vm._v("ffff")]), _vm._v(" "), _c('p', {
+    slot: "default"
   }, [_c('vm-button', {
     attrs: {
       "type": "primary",
