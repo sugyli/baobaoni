@@ -12,7 +12,7 @@
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_q6y5rc5tkry0hpvi.css" />
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_r17gmhb8p0cqh0k9.css" />
   </head>
   <body>
     <script>

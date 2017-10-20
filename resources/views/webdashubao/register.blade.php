@@ -17,7 +17,7 @@
         <ul>
           <li class="ckl">通行证账号：</li>
           <li class="ckz">
-            <input type="text" value="{{ old('uname') }}" name="uname" maxlength="30" />
+            <input type="text" value="{{ old('uname') }}" name="uname" maxlength="30" autocomplete="off" />
           </li>
           <li class="ckr">
             {!! $errors->first('uname', '<span><img border="0" height="13" width="13" src="/webdashubao/images/checkerror.gif"> :message</span>') !!}
@@ -46,7 +46,7 @@
         </ul>
 
         <div class="button">
-          <input type="submit" class="btn" value="注册通行证" onclick="javascript:{this.disabled=true;this.value='提交中...';document.frmregister.submit();}">
+          <input type="submit" class="btn" value="注册通行证" onclick="javascript:{this.disabled=true;this.value='提交中...';document.frmregister.submit();}" />
           <a href="{{ $passwordSubmitAddress }}" title="忘记密码">忘记密码?</a>
         </div>
       </form>

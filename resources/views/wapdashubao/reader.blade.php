@@ -216,11 +216,9 @@
 @section('content')
 <div v-bind:style="'min-height:'+screen_height +'px;'">
     <div class="artical-action-mid" id="action_mid"></div>
-    <user-report
-      from={{request()->url()}}
-      bookname={{ $chapter->articlename }}
-      chaptername={{$chapter->chaptername}}
-    >
+    <div id="top_nav" class="reader_top_nav" style="display: none;">
+    		<a class="reader__back" href="javascript:"></a>返回
+    </div>
     </user-report>
     <div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
     <div id="fiction_container" class="m-read-content">
@@ -245,7 +243,7 @@
       </div>
       <div class="child-mod">
           <span>功能2</span>
-          <button class="font-size-button" >举报</button>
+          <a class="font-size-button" href="{{route('member.outboxs.create')}}?title=书名：{{ $chapter->articlename}}_章节名：{{ $chapter->chaptername}}&amp;from=来路：{{request()->url()}}">举报</a>
           <button class="font-size-button" >书架</button>
       </div>
     </div>

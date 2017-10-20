@@ -22,8 +22,23 @@ class LoginController extends Controller
             'only' => ['create']
         ]);
     }
+    public function create(){
+      if(\Agent::isMobile()){
 
-    public function create()
+          return $this->isMobileCreate();
+      }
+
+      return $this->isDesktopCreate();
+    }
+    public function isMobileCreate()
+    {
+      $submitAddress = $this->getSubmitAddress();
+
+      return view('wapdashubao.login',$submitAddress);
+    }
+
+
+    public function isDesktopCreate()
     {
       $submitAddress = $this->getSubmitAddress();
 

@@ -32,38 +32,6 @@
 </template>
 <style>
 
-.mulu__bd{
-	position: relative;
-	overflow: hidden;
-}
-.mulu_header {
-    top: 0;
-    height: 44px;
-    background: #efeff0;
-    border-bottom: 1px solid #ddd;
-    font: 15px/45px a;
-    color: rgba(0,0,0,0.7);
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    display: flex;
-    width: 100%;
-}
-.mulu_header .top__title{
-  flex: 1;
-  line-height: 44px;
-  text-align: center;
-}
-.mulu-header-right {
-    float: right;
-    height: 44px;
-    width: 42px;
-    text-align: center;
-    font-size: 22px;
-		color: red;
-
-}
-
 .mulu__bd li {
     position: relative;
     padding: 0px 10px;

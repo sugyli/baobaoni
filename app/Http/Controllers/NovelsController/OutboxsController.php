@@ -40,9 +40,24 @@ class OutboxsController extends Controller
       return redirect()->route('member.outboxs.index');
     }
 
+    public function create(Request $request){
+      if(\Agent::isMobile()){
 
+          return $this->isMobileCreate($request);
+      }
 
-    public function create(Request $request)
+      return $this->isDesktopCreate($request);
+    }
+
+    public function isMobileCreate(Request $request)
+    {
+        $title = $request->title ?: '来源Wap用户中心的问题';
+        $from = $request->from ?: '来源不详';
+
+        return view('wapdashubao.jubao',compact('title','from'));
+    }
+
+    public function isDesktopCreate(Request $request)
     {
         $title = $request->title ?: '来源Web用户中心的问题';
         $from = $request->from ?: '来源不详';
