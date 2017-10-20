@@ -14,7 +14,7 @@
 		:no-data-text="searchNoDataText"
 		:refresh-text = "refreshText"
 		>
-		<ul class="list-content list-content-hook Displayanimation">
+		<ul class="list-content list-content-hook">
 			<li v-for="item in items">
 				<a class="online" :href="item['chapterlink']" :class="{'red-bg': item['chapterid'] == cid}" >{{item['chaptername']}}</a><i></i>
 			</li>

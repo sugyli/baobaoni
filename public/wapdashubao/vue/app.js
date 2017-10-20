@@ -33125,7 +33125,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "refresh-text": _vm.refreshText
     }
   }, [_c('ul', {
-    staticClass: "list-content list-content-hook Displayanimation"
+    staticClass: "list-content list-content-hook"
   }, _vm._l((_vm.items), function(item) {
     return _c('li', [_c('a', {
       staticClass: "online",
