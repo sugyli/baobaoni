@@ -33,6 +33,8 @@ Route::post('webajax/bookshelf/getbookshelfs', 'NovelsController\BookshelfsContr
 Route::post('webajax/bookshelf/addbookcase', 'NovelsController\BookshelfsController@addbookcase')->name('webajax.bookshelf.addbookcase');
 Route::post('webajax/user/recommend', 'NovelsController\UsersController@recommend')->name('webajax.user.recommend');
 Route::post('webajax/articles/getmulu','NovelsController\ArticlesController@getMulu')->name('webajax.articles.getmulu');
+
+Route::post('webajax/outboxs/mstore', 'NovelsController\OutboxsController@mStore')->name('webajax.outboxs.mstore');
 # ------------------用户------------------------
 Route::group([
     'prefix'        => 'member',

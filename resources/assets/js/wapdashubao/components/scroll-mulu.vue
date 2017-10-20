@@ -2,8 +2,8 @@
 <div class="mulu__bd" :style="'height:'+screen_height+'px;background: #fff;'">
 	<div class="mulu_header">
 		<a class="top__back" href="/"></a>
-		<span class="top__title online">标题</span>
-		<a class="mulu-header-right iconfont"  v-on:click.stop="openModel('voteAlert')">&#xe73d;</a>
+		<span class="top__title online">{{bookName}}</span>
+		<a class="mulu-header-right iconfont icon-warning"  v-on:click.stop="openModel('voteAlert')"></a>
 	</div>
 
 	<scroller
@@ -14,25 +14,24 @@
 		:no-data-text="searchNoDataText"
 		:refresh-text = "refreshText"
 		>
-		<ul class="list-content list-content-hook">
+		<ul class="Displayanimation">
 			<li v-for="item in items">
 				<a class="online" :href="item['chapterlink']" :class="{'red-bg': item['chapterid'] == cid}" >{{item['chaptername']}}</a><i></i>
 			</li>
 		</ul>
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
-				<from>
-					<textarea name="textarea" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.5)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
+				<form id="jubaoForm">
+					<textarea name="content" v-model="content" @keyup.13="submit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.5)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
-		          <button type="submit" class="btn_small" value="submit">提　　交</button>
+		          <button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
 		      </div>
-				</from>
-
+				</form>
     </sweet-modal>
 </div>
 </template>
 <style>
-textarea{
+#jubaoForm .textarea{
 		text-rendering: auto;
 		color: #100;
 		letter-spacing: normal;
@@ -108,30 +107,8 @@ textarea{
     width: 42px;
     text-align: center;
     font-size: 22px;
+		color: red;
 
-}
-
-.list-wrapper {
-    position: fixed;
-    z-index: 1;
-    top: 44px;
-    bottom: 50px;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    overflow: hidden;
-}
-.top-tip {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    bottom: 50px;
-    z-index: 1;
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    color: #555;
 }
 
 .mulu__bd li {
@@ -164,11 +141,9 @@ textarea{
 
 <script type="text/ecmascript-6">
 	import {SweetModal , SweetModalTab} from 'sweet-modal-vue';
-	import { Button } from 'vue-multiple-button';
-	import 'vue-multiple-button/lib/button.css';
   import BScroll from 'better-scroll'
   export default {
-    props:['bid','url'],
+    props:['bid','url','from'],
     data() {
       return {
 				screen_height: Util.windowHeight,
@@ -180,14 +155,15 @@ textarea{
 				frist:0,
 				items: [],
 				refreshText: "下拉刷新",
-				cid:0,
+				cid: 0,
+				bookName: '',
+				content:'',
 
       }
     },
 		components: {
 				SweetModal,
 				SweetModalTab,
-				'vm-button': Button
 		},
 		computed: {
 
@@ -274,6 +250,9 @@ textarea{
             .then(function (response) {
 
               if(response.data.error == 0){
+									if(!self.bookName){
+											self.bookName = response.data.bookName;
+									}
                   var datas = response.data.bakdata;
 									if(type == 0){
 										//上拉
@@ -303,6 +282,7 @@ textarea{
 
             })
             .catch(function (response) {
+								self.bookName = '本地址通过手机加载出错了';
                 self.noData = true;
                 self.searchNoDataText = "请求出现故障";
                 self.$refs.searchScroller.finishInfinite(true);
@@ -313,6 +293,44 @@ textarea{
 			isNotNullArray(t){
 				return (t.constructor==Array) && t.length > 0;
 			},
+			onSubmit(){
+				this.closeModel('voteAlert');
+				//$("textarea[name='content']").val("");
+				//var jsonData = $("#jubaoForm").serialize();
+				//var jsonData = $("#jubaoForm").serializeArray();
+				 var content =  $.trim(this.content);
+				 this.content = '';
+				 if(!content){
+				 		this.$toast.center('提交内容不能为空');
+						return
+				 }
+				 if(!this.bookName){
+						this.$toast.center('请等待数据加载完毕');
+						return;
+				 }
+				 var self = this;
+				 var from = self.from;
+				 var title = '来源手机_书名：'+ self.bookName;
+				 axios.post(Config.jubaourl, {
+							 content: content,
+							 title: title,
+							 from: from,
+					 })
+					 .then(function (response) {
+						 console.log(response);
+						 if(response.data.message){
+						 		self.$toast.center(response.data.message);
+						 }else{
+						 		self.$toast.center('返回数据出错了');
+						 }
+
+					 })
+					 .catch(function (response) {
+							 console.log(response);
+							 self.$toast.center('请刷新页面再尝试！');
+					 });
+
+				},
 
     },
   }

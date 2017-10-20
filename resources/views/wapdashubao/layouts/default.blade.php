@@ -12,12 +12,14 @@
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_q6y5rc5tkry0hpvi.css" />
   </head>
   <body>
     <script>
         var Config = {
             'recommend': "{{route('webajax.user.recommend')}}",
             'addbookcaseurl': "{{ route('webajax.bookshelf.addbookcase') }}",
+            'jubaourl': "{{ route('webajax.outboxs.mstore') }}"
         };
     </script>
   @yield('style')

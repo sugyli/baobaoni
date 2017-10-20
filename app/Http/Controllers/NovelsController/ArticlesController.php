@@ -160,7 +160,7 @@ class ArticlesController extends Controller
         $result['message'] = "请求第{$page}页数据成功";
         $result['error'] = 0;
         $result['bakdata'] =  $chapters;
-
+        $result['bookName'] =  $bookData->articlename;
         return response()->json($result);
 
     }

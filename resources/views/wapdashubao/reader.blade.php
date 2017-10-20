@@ -1,5 +1,4 @@
 @section('style')
-<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_q6y5rc5tkry0hpvi.css" />
 <style>
 
 .reader_top_nav{
@@ -20,6 +19,13 @@
   height: 23px;
   background: url(/wapdashubao/images/@EaSXPML.png) no-repeat;
   background-size: 23px 23px;
+}
+
+.reader_top_nav  .reader__more {
+    float: right;
+    color: red;
+    padding-right: 5px;
+    font-size: 20px;
 }
 .m-read-content {
     font-size: 14px;
@@ -211,7 +217,8 @@
 <div v-bind:style="'min-height:'+screen_height +'px;'">
     <div class="artical-action-mid" id="action_mid"></div>
     <div id="top_nav" class="reader_top_nav" style="display: none;">
-        <a class="reader__back"></a>返回
+        <a class="reader__back" href="javascript:"></a>返回
+        <a class="reader__more iconfont icon-warning" href="javascript:"></a>
     </div>
     <div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
     <div id="fiction_container" class="m-read-content">

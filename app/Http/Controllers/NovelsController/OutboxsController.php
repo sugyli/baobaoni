@@ -45,10 +45,12 @@ class OutboxsController extends Controller
     public function create(Request $request)
     {
         $title = $request->title ?: '来源Web用户中心的问题';
-        $from = $request->from ?: '来源不详'; 
+        $from = $request->from ?: '来源不详';
 
         return view('webdashubao.usermessagecreate',compact('title','from'));
     }
+
+
     public function store(OutboxRequest $request)
     {
         //$data = $request->only(['title','content']);
@@ -77,6 +79,52 @@ class OutboxsController extends Controller
         session()->flash('message', '发送消息成功');
         return redirect()->route('member.outboxs.index');
     }
+
+    public function mStore(Request $request)
+    {
+        $user = $request->user();
+        $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+
+        if (empty($user)) {
+            $result['message'] = '还没有登录';
+            return response()->json($result);
+        }
+
+        $content =trim($request->content);
+        $title = trim($request->title);
+        $from = trim($request->from);
+        if(empty($content) || empty($title)){
+            $result['message'] = '内容、标题有一项为空了';
+            return response()->json($result);
+        }
+        if ($this->isDuplicateMessage($content)) {
+            $result['message'] = '请不要发布重复内容。';
+            return response()->json($result);
+        }
+
+        if($from){
+            $title = $title ."_来路：" . $from;
+        }
+
+        $user = Auth::user();
+        $data['postdate'] = time();
+        $data['fromname'] = $user->uname;
+        $data['content'] = $content;
+        $data['title'] = $title;
+        $data['toid'] = 0 ;
+        $data['toname'] = '';
+        $message =  $user->relationOutboxs()
+                          ->create($data);
+        if (!$message) {
+            $result['message'] = '数据库繁忙稍后再试！';
+            return response()->json($result);
+        }
+
+        $result['message'] = '举报成功,回复请到邮箱查看';
+        $result['error'] = 0;
+        return response()->json($result);
+    }
+
 
     public function destroy(Request $request)
     {
