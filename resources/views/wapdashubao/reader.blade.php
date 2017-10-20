@@ -239,9 +239,14 @@
     </div>
     <div class="m-gongneng-bk" id="gongneng-container" style="display: none;">
       <div class="child-mod">
-          <span>功能</span>
+          <span>功能1</span>
           <button class="font-size-button" v-on:click="tuijian({{$chapter->articleid}})">推荐</button>
           <button class="font-size-button" v-on:click="addbookcase({{$chapter->articleid}} , {{$chapter->chapterid}})">收藏</button>
+      </div>
+      <div class="child-mod">
+          <span>功能2</span>
+          <button class="font-size-button" >举报</button>
+          <button class="font-size-button" >书架</button>
       </div>
     </div>
 

@@ -322,7 +322,6 @@
 
                   Dom.gongneng_container.hide();
                   $(Dom.gongneng_button.find('i')[0]).removeClass('current');
-
               });
 
           }

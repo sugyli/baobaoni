@@ -20,6 +20,7 @@
       return {
 				screen_height: Util.windowHeight,
 				content:'',
+
       }
     },
 		components: {
@@ -29,7 +30,7 @@
     methods: {
 				openModel(ref) {
 					if (this.$refs[ref]) {
-						this.$refs[ref].open()
+						this.$refs[ref].open();
 					} else {
 						throw new Error('openModel Ref not defined: ' + ref)
 					}
