@@ -347,10 +347,12 @@
 
         $('#gongneng-container').hide();
         $($('#gongneng-button').find('i')[0]).removeClass('current');
+        $('#action_mid').hide();
 
       },
       hideReadHDom:function(){
         $('#top_nav').hide();
+        $('#action_mid').show();
       }
 
 

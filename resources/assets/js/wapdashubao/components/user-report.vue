@@ -2,11 +2,13 @@
 <div id="top_nav" class="reader_top_nav" style="display: none;">
 		<a class="reader__back" href="javascript:"></a>返回
 		<a class="reader__more iconfont icon-warning" v-on:click.stop="openModel('voteAlert')"></a>
-		<sweet-modal title="举报错误" ref="voteAlert">
+		<sweet-modal title="举报错误" ref="voteAlert" hide-close-button=true>
 				<form id="jubaoForm">
 					<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
-							<button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
+
+							<button type="button" class="btn_small" v-on:click="onSubmit">提　　交</button>
+							<button type="button" class="btn_small" v-on:click="closeModel('voteAlert')">关　　闭</button>
 					</div>
 				</form>
 		</sweet-modal>
@@ -30,7 +32,7 @@
     methods: {
 				openModel(ref) {
 					if (this.$refs[ref]) {
-						baobaoni.hideReadBDom()
+						baobaoni.hideReadBDom();
 						this.$refs[ref].open();
 					} else {
 						throw new Error('openModel Ref not defined: ' + ref)
@@ -38,6 +40,7 @@
 				},
 				closeModel(ref) {
 					if (this.$refs[ref]) {
+						baobaoni.hideReadHDom();
 						this.$refs[ref].close()
 					} else {
 						throw new Error('openModel Ref not defined: ' + ref)

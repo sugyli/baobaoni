@@ -2544,6 +2544,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2571,6 +2573,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		closeModel: function closeModel(ref) {
 			if (this.$refs[ref]) {
+				baobaoni.hideReadHDom();
 				this.$refs[ref].close();
 			} else {
 				throw new Error('openModel Ref not defined: ' + ref);
@@ -33036,7 +33039,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('sweet-modal', {
     ref: "voteAlert",
     attrs: {
-      "title": "举报错误"
+      "title": "举报错误",
+      "hide-close-button": "true"
     }
   }, [_c('form', {
     attrs: {
@@ -33073,13 +33077,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('button', {
     staticClass: "btn_small",
     attrs: {
-      "type": "button",
-      "value": "submit"
+      "type": "button"
     },
     on: {
       "click": _vm.onSubmit
     }
-  }, [_vm._v("提　　交")])])])])], 1)
+  }, [_vm._v("提　　交")]), _vm._v(" "), _c('button', {
+    staticClass: "btn_small",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.closeModel('voteAlert')
+      }
+    }
+  }, [_vm._v("关　　闭")])])])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -44667,9 +44680,11 @@ module.exports = Component.exports
 
             $('#gongneng-container').hide();
             $($('#gongneng-button').find('i')[0]).removeClass('current');
+            $('#action_mid').hide();
         },
         hideReadHDom: function hideReadHDom() {
             $('#top_nav').hide();
+            $('#action_mid').show();
         }
 
     };
