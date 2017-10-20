@@ -2096,53 +2096,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2160,7 +2113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			items: [],
 			refreshText: "下拉刷新",
 			cid: 0,
-			bookName: '',
+			bookname: '',
 			content: ''
 
 		};
@@ -2256,8 +2209,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).then(function (response) {
 
 				if (response.data.error == 0) {
-					if (!self.bookName) {
-						self.bookName = response.data.bookName;
+					if (!self.bookname) {
+						self.bookname = response.data.bookName;
 					}
 					var datas = response.data.bakdata;
 					if (type == 0) {
@@ -2281,7 +2234,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 					}
 				}
 			}).catch(function (response) {
-				self.bookName = '本地址通过手机加载出错了';
+				self.bookname = '本地址通过手机加载出错了';
 				self.noData = true;
 				self.searchNoDataText = "请求出现故障";
 				self.$refs.searchScroller.finishInfinite(true);
@@ -2301,13 +2254,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				this.$toast.center('提交内容不能为空');
 				return;
 			}
-			if (!this.bookName) {
+			if (!this.bookname) {
 				this.$toast.center('请等待数据加载完毕');
 				return;
 			}
 			var self = this;
 			var from = self.from;
-			var title = '来源手机_书名：' + self.bookName;
+			var title = '来源手机_书名：' + self.bookname;
 			axios.post(Config.jubaourl, {
 				content: content,
 				title: title,
@@ -2567,6 +2520,87 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       this.search();
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/wapdashubao/components/user-report.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__ = __webpack_require__("./node_modules/sweet-modal-vue/src/main.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['from', 'bookname', 'chaptername'],
+	data: function data() {
+		return {
+			screen_height: Util.windowHeight,
+			content: ''
+		};
+	},
+
+	components: {
+		SweetModal: __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__["a" /* SweetModal */],
+		SweetModalTab: __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__["b" /* SweetModalTab */]
+	},
+	methods: {
+		openModel: function openModel(ref) {
+			if (this.$refs[ref]) {
+				this.$refs[ref].open();
+			} else {
+				throw new Error('openModel Ref not defined: ' + ref);
+			}
+		},
+		closeModel: function closeModel(ref) {
+			if (this.$refs[ref]) {
+				this.$refs[ref].close();
+			} else {
+				throw new Error('openModel Ref not defined: ' + ref);
+			}
+		},
+		onSubmit: function onSubmit() {
+			this.closeModel('voteAlert');
+			var content = $.trim(this.content);
+			this.content = '';
+			if (!content) {
+				this.$toast.center('提交内容不能为空');
+				return;
+			}
+			var self = this;
+			var from = self.from;
+			var title = '来源手机_书名：' + self.bookname + '_章节名：' + self.chaptername;
+			axios.post(Config.jubaourl, {
+				content: content,
+				title: title,
+				from: from
+			}).then(function (response) {
+				if (response.data.message) {
+					self.$toast.center(response.data.message);
+				} else {
+					self.$toast.center('返回数据出错了');
+				}
+			}).catch(function (response) {
+				console.log(response);
+				self.$toast.center('请刷新页面再尝试！');
+			});
+		}
+	}
 });
 
 /***/ }),
@@ -4478,7 +4512,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n#jubaoForm .textarea{\n\t\ttext-rendering: auto;\n\t\tcolor: #100;\n\t\tletter-spacing: normal;\n\t\tword-spacing: normal;\n\t\ttext-transform: none;\n\t\ttext-indent: 0px;\n\t\ttext-shadow: none;\n\t\tdisplay: inline-block;\n\t\ttext-align: start;\n\t\tmargin: 0em;\n\t\tfont: 14px system-ui;\n\t\t-webkit-appearance: textarea;\n\t\tbackground-color: white;\n\t\t-webkit-rtl-ordering: logical;\n\t\tuser-select: text;\n\t\tflex-direction: column;\n\t\tresize: auto;\n\t\tcursor: auto;\n\t\twhite-space: pre-wrap;\n\t\tword-wrap: break-word;\n\t\tborder: 1px solid #CCC;\n\t\tpadding: 2px;\n}\n.input_el {\n    margin: 0 8%;\n    margin-top: 15px;\n    margin-right: 8%;\n    margin-bottom: 0px;\n    margin-left: 8%;\n    text-align: center;\n    padding-bottom: 15px;\n}\n.btn_small {\n    display: inline-block;\n    margin: 0 10px;\n    border: 1px solid #CCC;\n    border-radius: 5px;\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    width: 40%;\n    height: 35px;\n    line-height: 35px;\n    color: #100;\n    font-size: 16px;\n    cursor: pointer;\n    background-color: #FDFDFD;\n}\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n\t\tcolor: red;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n\t\tcolor: red;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
 
 // exports
 
@@ -32972,6 +33006,89 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2e770980\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/wapdashubao/components/user-report.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "reader_top_nav",
+    staticStyle: {
+      "display": "none"
+    },
+    attrs: {
+      "id": "top_nav"
+    }
+  }, [_c('a', {
+    staticClass: "reader__back",
+    attrs: {
+      "href": "javascript:"
+    }
+  }), _vm._v("返回\n\t\t"), _c('a', {
+    staticClass: "reader__more iconfont icon-warning",
+    on: {
+      "click": function($event) {
+        $event.stopPropagation();
+        _vm.openModel('voteAlert')
+      }
+    }
+  }), _vm._v(" "), _c('sweet-modal', {
+    ref: "voteAlert",
+    attrs: {
+      "title": "举报错误"
+    }
+  }, [_c('form', {
+    attrs: {
+      "id": "jubaoForm"
+    }
+  }, [_c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.content),
+      expression: "content"
+    }],
+    staticClass: "textarea",
+    style: ('width:100%;height:' + (_vm.screen_height * 0.4) + 'px;'),
+    attrs: {
+      "name": "content",
+      "placeholder": "输入举报内容 来源地址 我们已经记录了"
+    },
+    domProps: {
+      "value": (_vm.content)
+    },
+    on: {
+      "keyup": function($event) {
+        if (!('button' in $event) && $event.keyCode !== 13) { return null; }
+        _vm.onSubmit($event)
+      },
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.content = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "input_el"
+  }, [_c('button', {
+    staticClass: "btn_small",
+    attrs: {
+      "type": "button",
+      "value": "submit"
+    },
+    on: {
+      "click": _vm.onSubmit
+    }
+  }, [_vm._v("提　　交")])])])])], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2e770980", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-3b76d7a2\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./node_modules/sweet-modal-vue/src/components/SweetModalTab.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33151,7 +33268,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "top__title online"
-  }, [_vm._v(_vm._s(_vm.bookName))]), _vm._v(" "), _c('a', {
+  }, [_vm._v(_vm._s(_vm.bookname))]), _vm._v(" "), _c('a', {
     staticClass: "mulu-header-right iconfont icon-warning",
     on: {
       "click": function($event) {
@@ -33199,7 +33316,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "content"
     }],
     staticClass: "textarea",
-    style: ('width:100%;height:' + (_vm.screen_height * 0.5) + 'px;'),
+    style: ('width:100%;height:' + (_vm.screen_height * 0.4) + 'px;'),
     attrs: {
       "name": "content",
       "placeholder": "输入举报内容 来源地址 我们已经记录了"
@@ -33210,7 +33327,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "keyup": function($event) {
         if (!('button' in $event) && $event.keyCode !== 13) { return null; }
-        _vm.submit($event)
+        _vm.onSubmit($event)
       },
       "input": function($event) {
         if ($event.target.composing) { return; }
@@ -44084,6 +44201,8 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue2_toast___default.a, {
 
 Vue.component('scroll-search', __webpack_require__("./resources/assets/js/wapdashubao/components/scroll-search.vue"));
 Vue.component('scroll-mulu', __webpack_require__("./resources/assets/js/wapdashubao/components/scroll-mulu.vue"));
+Vue.component('user-report', __webpack_require__("./resources/assets/js/wapdashubao/components/user-report.vue"));
+
 Vue.component('rotate-loade', __webpack_require__("./node_modules/vue-spinner/src/RotateLoader.vue"));
 
 __webpack_require__("./resources/assets/js/wapdashubao/pjs.js");
@@ -44169,6 +44288,47 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-07b4dcf2", Component.options)
   } else {
     hotAPI.reload("data-v-07b4dcf2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/wapdashubao/components/user-report.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/wapdashubao/components/user-report.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2e770980\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/wapdashubao/components/user-report.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/sugyil/baobaoni/xiaoshuo/resources/assets/js/wapdashubao/components/user-report.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] user-report.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2e770980", Component.options)
+  } else {
+    hotAPI.reload("data-v-2e770980", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -44473,6 +44633,7 @@ module.exports = Component.exports
                     }
                 });
                 Win.scroll(function () {
+
                     Dom.bottom_nav.hide();
                     Dom.top_nav.hide();
                     Dom.reader__ft_bar.hide();

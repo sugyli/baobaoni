@@ -2,7 +2,7 @@
 <div class="mulu__bd" :style="'height:'+screen_height+'px;background: #fff;'">
 	<div class="mulu_header">
 		<a class="top__back" href="/"></a>
-		<span class="top__title online">{{bookname}}</span>
+		<span class="top__title online">{{bookName}}</span>
 		<a class="mulu-header-right iconfont icon-warning"  v-on:click.stop="openModel('voteAlert')"></a>
 	</div>
 
@@ -22,7 +22,7 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
 				<form id="jubaoForm">
-					<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
+					<textarea name="content" v-model="content" @keyup.13="submit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.5)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
 		          <button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
 		      </div>
@@ -31,7 +31,54 @@
 </div>
 </template>
 <style>
-
+#jubaoForm .textarea{
+		text-rendering: auto;
+		color: #100;
+		letter-spacing: normal;
+		word-spacing: normal;
+		text-transform: none;
+		text-indent: 0px;
+		text-shadow: none;
+		display: inline-block;
+		text-align: start;
+		margin: 0em;
+		font: 14px system-ui;
+		-webkit-appearance: textarea;
+		background-color: white;
+		-webkit-rtl-ordering: logical;
+		user-select: text;
+		flex-direction: column;
+		resize: auto;
+		cursor: auto;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		border: 1px solid #CCC;
+		padding: 2px;
+}
+.input_el {
+    margin: 0 8%;
+    margin-top: 15px;
+    margin-right: 8%;
+    margin-bottom: 0px;
+    margin-left: 8%;
+    text-align: center;
+    padding-bottom: 15px;
+}
+.btn_small {
+    display: inline-block;
+    margin: 0 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    width: 40%;
+    height: 35px;
+    line-height: 35px;
+    color: #100;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #FDFDFD;
+}
 .mulu__bd{
 	position: relative;
 	overflow: hidden;
@@ -109,7 +156,7 @@
 				items: [],
 				refreshText: "下拉刷新",
 				cid: 0,
-				bookname: '',
+				bookName: '',
 				content:'',
 
       }
@@ -203,8 +250,8 @@
             .then(function (response) {
 
               if(response.data.error == 0){
-									if(!self.bookname){
-											self.bookname = response.data.bookName;
+									if(!self.bookName){
+											self.bookName = response.data.bookName;
 									}
                   var datas = response.data.bakdata;
 									if(type == 0){
@@ -235,7 +282,7 @@
 
             })
             .catch(function (response) {
-								self.bookname = '本地址通过手机加载出错了';
+								self.bookName = '本地址通过手机加载出错了';
                 self.noData = true;
                 self.searchNoDataText = "请求出现故障";
                 self.$refs.searchScroller.finishInfinite(true);
@@ -257,13 +304,13 @@
 				 		this.$toast.center('提交内容不能为空');
 						return
 				 }
-				 if(!this.bookname){
+				 if(!this.bookName){
 						this.$toast.center('请等待数据加载完毕');
 						return;
 				 }
 				 var self = this;
 				 var from = self.from;
-				 var title = '来源手机_书名：'+ self.bookname;
+				 var title = '来源手机_书名：'+ self.bookName;
 				 axios.post(Config.jubaourl, {
 							 content: content,
 							 title: title,

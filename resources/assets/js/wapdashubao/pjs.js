@@ -312,6 +312,7 @@
                   }
               });
               Win.scroll(function () {
+
                   Dom.bottom_nav.hide();
                   Dom.top_nav.hide();
                   Dom.reader__ft_bar.hide();
@@ -321,6 +322,7 @@
 
                   Dom.gongneng_container.hide();
                   $(Dom.gongneng_button.find('i')[0]).removeClass('current');
+
               });
 
           }
@@ -334,8 +336,7 @@
         var obj = {'page':page,'weizhi':weizhi ,'cid':cid}
         Util.StorageSetter(key, obj);
 
-      }
-
+      },
 
   }
 

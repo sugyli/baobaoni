@@ -216,10 +216,12 @@
 @section('content')
 <div v-bind:style="'min-height:'+screen_height +'px;'">
     <div class="artical-action-mid" id="action_mid"></div>
-    <div id="top_nav" class="reader_top_nav" style="display: none;">
-        <a class="reader__back" href="javascript:"></a>返回
-        <a class="reader__more iconfont icon-warning" href="javascript:"></a>
-    </div>
+    <user-report
+      from={{request()->url()}}
+      bookname={{ $chapter->articlename }}
+      chaptername={{$chapter->chaptername}}
+    >
+    </user-report>
     <div class="online" style="padding-left:5px;color: #555555;">书名：{{ $chapter->articlename }}</div>
     <div id="fiction_container" class="m-read-content">
       <h4>{{$chapter->chaptername}}</h4>

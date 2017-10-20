@@ -47,6 +47,9 @@ Vue.use(Toast, {
 
 Vue.component('scroll-search', require('./components/scroll-search.vue'));
 Vue.component('scroll-mulu', require('./components/scroll-mulu.vue'));
+Vue.component('user-report', require('./components/user-report.vue'));
+
 Vue.component('rotate-loade', require('vue-spinner/src/RotateLoader.vue'));
+
 
 require('./pjs');
