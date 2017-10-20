@@ -339,7 +339,7 @@
       //隐藏 阅读的一些元素
       hideReadBDom:function(){
         $('.bottom_nav').hide();
-        $('#top_nav').hide();
+        //$('#top_nav').hide();
         $('.reader__ft-bar').hide();
         //Dom.font_button.removeClass('current');
         $('#font-container').hide();
