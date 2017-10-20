@@ -2120,6 +2120,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -4418,7 +4419,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n}\n.list-wrapper {\n    position: fixed;\n    z-index: 1;\n    top: 44px;\n    bottom: 50px;\n    left: 0;\n    width: 100%;\n    background: #fff;\n    overflow: hidden;\n}\n.top-tip {\n    position: absolute;\n    top: -40px;\n    left: 0;\n    bottom: 50px;\n    z-index: 1;\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #555;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n", ""]);
+exports.push([module.i, "\n.mulu__bd{\n\tposition: relative;\n\toverflow: hidden;\n}\n.mulu_header {\n    top: 0;\n    height: 44px;\n    background: #efeff0;\n    border-bottom: 1px solid #ddd;\n    font: 15px/45px a;\n    color: rgba(0,0,0,0.7);\n    position: fixed;\n    z-index: 999;\n    left: 0;\n    display: flex;\n    width: 100%;\n}\n.mulu_header .top__title{\n  flex: 1;\n  line-height: 44px;\n  text-align: center;\n}\n.mulu-header-right {\n    float: right;\n    height: 44px;\n    width: 42px;\n    text-align: center;\n    font-size: 22px;\n}\n.list-wrapper {\n    position: fixed;\n    z-index: 1;\n    top: 44px;\n    bottom: 50px;\n    left: 0;\n    width: 100%;\n    background: #fff;\n    overflow: hidden;\n}\n.top-tip {\n    position: absolute;\n    top: -40px;\n    left: 0;\n    bottom: 50px;\n    z-index: 1;\n    width: 100%;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #555;\n}\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n", ""]);
 
 // exports
 
@@ -33148,12 +33149,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "cuowuForm"
     }
   }, [_c('textarea', {
-    staticStyle: {
-      "width": "100%"
-    },
-    attrs: {
-      "rows": "30"
-    }
+    style: ('width:100%;height:' + (this.screen_height - 200) + 'px;border:0;background-color:transparent;color: #666464;')
   }, [_vm._v("\t\t\t\t\t\t在w3school，你可以找到你所需要的所有的网站建设教程。\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('p', {
     slot: "button"
   }, [_c('vm-button', {

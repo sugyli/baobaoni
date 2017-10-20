@@ -22,7 +22,7 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
             <form id="cuowuForm">
-						<textarea rows="30" style="width:100%;">
+						<textarea :style="'width:100%;height:'+(this.screen_height - 200)+'px;border:0;background-color:transparent;color: #666464;'">
 						在w3school，你可以找到你所需要的所有的网站建设教程。
 						</textarea>
             </form>
@@ -110,6 +110,7 @@
 .mulu__bd .red-bg{
 	color:red;
 }
+
 </style>
 
 <script type="text/ecmascript-6">
