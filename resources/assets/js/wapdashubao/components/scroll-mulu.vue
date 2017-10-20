@@ -22,7 +22,7 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
             <form id="cuowuForm">
-							<textarea :style="'width:100%;height:'+(this.screen_height * 0.2)+'px;border:0;background-color:transparent;color: #666464;'"></textarea>
+							1
             </form>
       <p slot="button"><vm-button type="primary" id="subBnt">提交</vm-button></p>
 
