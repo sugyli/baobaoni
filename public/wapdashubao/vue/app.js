@@ -2118,6 +2118,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -33145,7 +33147,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "cuowuForm"
     }
-  }), _vm._v(" "), _c('p', {
+  }, [_c('textarea', {
+    staticStyle: {
+      "width": "100%"
+    },
+    attrs: {
+      "rows": "30"
+    }
+  }, [_vm._v("\t\t\t\t\t\t在w3school，你可以找到你所需要的所有的网站建设教程。\n\t\t\t\t\t\t")])]), _vm._v(" "), _c('p', {
     slot: "button"
   }, [_c('vm-button', {
     attrs: {

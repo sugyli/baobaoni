@@ -22,7 +22,9 @@
 		</scroller>
 		<sweet-modal title="举报错误" ref="voteAlert">
             <form id="cuowuForm">
-
+						<textarea rows="30" style="width:100%;">
+						在w3school，你可以找到你所需要的所有的网站建设教程。
+						</textarea>
             </form>
       <p slot="button"><vm-button type="primary" id="subBnt">提交</vm-button></p>
 
