@@ -336,6 +336,23 @@
         Util.StorageSetter(key, obj);
 
       },
+      //隐藏 阅读的一些元素
+      hideReadBDom:function(){
+        $('.bottom_nav').hide();
+        $('#top_nav').hide();
+        $('.reader__ft-bar').hide();
+        //Dom.font_button.removeClass('current');
+        $('#font-container').hide();
+        $($('#font-button').find('i')[0]).removeClass('current');
+
+        $('#gongneng-container').hide();
+        $($('#gongneng-button').find('i')[0]).removeClass('current');
+
+      },
+      hideReadHDom:function(){
+        $('#top_nav').hide();
+      }
+
 
   }
 

@@ -2563,6 +2563,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	methods: {
 		openModel: function openModel(ref) {
 			if (this.$refs[ref]) {
+				baobaoni.hideReadBDom();
 				this.$refs[ref].open();
 			} else {
 				throw new Error('openModel Ref not defined: ' + ref);
@@ -44654,6 +44655,21 @@ module.exports = Component.exports
             var key = 'muluobj_' + bid;
             var obj = { 'page': page, 'weizhi': weizhi, 'cid': cid };
             Util.StorageSetter(key, obj);
+        },
+        //隐藏 阅读的一些元素
+        hideReadBDom: function hideReadBDom() {
+            $('.bottom_nav').hide();
+            $('#top_nav').hide();
+            $('.reader__ft-bar').hide();
+            //Dom.font_button.removeClass('current');
+            $('#font-container').hide();
+            $($('#font-button').find('i')[0]).removeClass('current');
+
+            $('#gongneng-container').hide();
+            $($('#gongneng-button').find('i')[0]).removeClass('current');
+        },
+        hideReadHDom: function hideReadHDom() {
+            $('#top_nav').hide();
         }
 
     };

@@ -30,6 +30,7 @@
     methods: {
 				openModel(ref) {
 					if (this.$refs[ref]) {
+						baobaoni.hideReadBDom()
 						this.$refs[ref].open();
 					} else {
 						throw new Error('openModel Ref not defined: ' + ref)
