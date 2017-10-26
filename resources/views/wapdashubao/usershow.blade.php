@@ -196,7 +196,7 @@ p {
 .center-logout {
     line-height: 2.75rem;
     text-align: center;
-    font-size: .875rem;
+    font-size: 14px;
     display: block;
     color: #ed424b;
     background: 0 0;
