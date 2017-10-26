@@ -110,7 +110,7 @@ p {
     top: 50%;
     left: -3px;
     width: 5px;
-    height: 5px;
+    height: 6px;
     margin-top: -3px;
     content: '';
     -webkit-transform: rotate(45deg);
