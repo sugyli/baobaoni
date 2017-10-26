@@ -203,6 +203,7 @@
 
             })
             .catch(function (response) {
+								console.log(response);
 								self.bookname = '本地址通过手机加载出错了';
                 self.noData = true;
                 self.searchNoDataText = "请求出现故障";

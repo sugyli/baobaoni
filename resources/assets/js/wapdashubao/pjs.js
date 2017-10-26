@@ -17,38 +17,23 @@
           var windowWidth = Util.windowWidth;
           //var offset = $($('.Swipe-tab').find('a')[0]).offset();
           //var index_header_tab_width = offset.width;
-          var index_header_tab_width = $($('.Swipe-tab').find('a')[0]).width();
+          //var index_header_tab_width = $($('.Swipe-tab').find('a')[0]).width();
           window.VM =  new Vue({
                     	  el:'#app',
                     	  data :{
                     	  	  screen_width:windowWidth,
-                            double_screen_width:windowWidth*2,
+                            //double_screen_width:windowWidth*2,
                             screen_height:Util.windowHeight,
-                            index_header_tab_width:index_header_tab_width,
-                            header_duration:0,
-                            header_position:0,
-                            position:0,
-                            tab_1_class:'Swipe-tab__on',
-                            tab_2_class:'',
+                            //index_header_tab_width:index_header_tab_width,
+                            //header_duration:0,
+                            //header_position:0,
+                            //position:0,
+                            //tab_1_class:'Swipe-tab__on',
+                            //tab_2_class:'',
                             read_f:0,
                             read_e:0,
                     	  },
                     	  methods:{
-                          tabSwitch:function(pos){
-                            //this.duration = 0.5;
-                            this.header_duration = 0.5;
-                            if(pos == 0){
-                              this.position = 0;
-                              this.header_position = 0;
-                              this.tab_1_class = "Swipe-tab__on";
-                              this.tab_2_class = "";
-                            }else{
-                              this.position = (-windowWidth);
-                              this.header_position = index_header_tab_width;
-                              this.tab_2_class = "Swipe-tab__on";
-                              this.tab_1_class = "";
-                            }
-                          },
                           tuijian(bid, num = 1){
                             bid = Number(bid);
                             var self = this;
@@ -133,7 +118,11 @@
                               }
 
                           },
+                          qiandao(){
 
+                            alert('f');
+
+                          }
 
 
                         },
@@ -336,6 +325,8 @@
         Util.StorageSetter(key, obj);
 
       },
+
+
 
 
   }

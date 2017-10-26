@@ -11,7 +11,31 @@ use App\Http\Controllers\Traits\UsersTrait;
 class OutboxsController extends Controller
 {
     use UsersTrait;
-    public function index()
+
+    public function index(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileIndex();
+      }
+
+      return $this->isDesktopIndex();
+    }
+
+    public function isMobileIndex()
+    {
+      $user = Auth::user();
+      $limit = $user->getUserHonor()->getMassageMaxCount();
+      $user->load(['relationOutboxs' => function ($query) use ($limit){
+          $query->where('fromdel','!=',1)
+                ->orderBy('postdate', 'desc')
+                ->limit($limit);
+      }]);
+      //$supplement = ['title'=>'收件箱' ,'subTitle'=>'发件人'];
+      return view('wapdashubao.useroutbox' , compact('user'));
+
+    }
+    public function isDesktopIndex()
     {
       $user = Auth::user();
       $limit = $user->getUserHonor()->getMassageMaxCount();
@@ -25,7 +49,33 @@ class OutboxsController extends Controller
 
     }
 
-    public function show($id)
+    public function show($id){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShow($id);
+      }
+
+      return $this->isDesktopShow($id);
+    }
+    public function isMobileShow($id)
+    {
+      $messageData = Auth::user()->relationOutboxs()
+                                  ->where('messageid', $id)
+                                  ->where('fromdel','!=',1)
+                                  ->first();
+
+      if ($messageData) {
+          return view('wapdashubao.usermessageshow', compact('messageData'));
+      }
+
+      session()->flash('message', '您没有此消息');
+      return redirect()->route('member.outboxs.index');
+
+
+    }
+
+    public function isDesktopShow($id)
     {
       $messageData = Auth::user()->relationOutboxs()
                                   ->where('messageid', $id)

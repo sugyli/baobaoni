@@ -39,6 +39,11 @@ return [
     'title_index'=>env('TITLE_INDEX'),
     'keywords_index'=>env('KEYWORDS_INDEX'),
     'des_index'=>env('DES_INDEX'),
+
+    'wapuri' => env('WAPURI'),//WEB地址结尾要加 /
+    'wapname' => env('WAPNAME'),
+    'wapkeywords' => env('WAPKEYWORDS'),
+    'wapdes' => env('WAPDES'),
     /*
     |--------------------------------------------------------------------------
     | Application Name

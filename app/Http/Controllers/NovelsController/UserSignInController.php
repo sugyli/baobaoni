@@ -8,7 +8,28 @@ use App\Http\Controllers\Controller;
 use Auth;
 class UserSignInController extends Controller
 {
-    public function show()
+
+
+
+    public function show(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShow();
+      }
+
+      return $this->isDesktopShow();
+    }
+
+    public function isMobileShow()
+    {
+
+      return view('wapdashubao.userqiandao');
+
+
+    }
+
+    public function isDesktopShow()
     {
       $title = date('Y年m月d日 H时',time());
       $date = getdate(strtotime(date('Y-m-d')));
@@ -62,10 +83,11 @@ class UserSignInController extends Controller
         //检测用户今天是否已经签到
         $todaydate = date('Y-m-d',time());  //获取今天的日期
         $todayunix = strtotime($todaydate);
-
+        $m = "签到失败了";
         if ($qiandao) {
             if ($qiandao->last_dateline > $todayunix) {
-                session()->flash('message', '您今天已经签过到了！');
+                $m = '您今天已经签过到了！';
+                session()->flash('message', $m);
                 return redirect()->back();
             }
 
@@ -87,22 +109,26 @@ class UserSignInController extends Controller
           		if(($thisdateunix-$lastqiandaodateunix)<'172800'){//如果是连续天数签到
                 $qiandao->batchAssignment($nowtime);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励经验'. $jifenNums .'点');
+                $m = '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励经验'. $jifenNums .'点';
+                session()->flash('message', $m);
           		}else{
                 $qiandao->batchAssignment($nowtime ,false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点');
+                $m = '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点';
+                session()->flash('message', $m);
           		}
           	}else{
           		//如果不是当前月份
           		if(($thisdateunix-$lastqiandaodateunix)<'172800'){//如果是连续天数签到
                 $qiandao->batchAssignment($nowtime ,true, false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励经验'.$jifenNums.'点');
+                $m = '感谢您连续签到'.$qiandao->lianxu_days.'天，奖励经验'.$jifenNums.'点';
+                session()->flash('message', $m );
           		}else{
                 $qiandao->batchAssignment($nowtime ,false, false);
                 $user->increment('score', $jifenNums);
-                session()->flash('message', '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点');
+                $m = '感谢您的签到，连续签到有奖励哦！奖励经验'.$jifenNums.'点';
+                session()->flash('message', $m );
 
           		}
           	}
@@ -119,9 +145,12 @@ class UserSignInController extends Controller
 
 
             $user->increment('score', $newUser);
-            session()->flash('message', '您是新签到用户，奖励经验'.$newUser.'点');
+            $m = '您是新签到用户，奖励经验'.$newUser.'点';
+            session()->flash('message', $m);
         }
-
+        if(request()->ajax()){
+          return response()->json(['message'=>$m]);
+        }
         return redirect()->back();
 
     }

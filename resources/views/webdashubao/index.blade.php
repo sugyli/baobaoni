@@ -1,5 +1,6 @@
 @extends('webdashubao.layouts.default')
-@section('title'){{get_sys_set('webname')}}@endsection
+
+@section('title'){{get_sys_set('webname')}}-{{get_sys_set('weburi')}}@endsection
 @section('keywords'){{get_sys_set('webkeywords')}}@endsection
 @section('description'){{get_sys_set('webdes')}}@endsection
 

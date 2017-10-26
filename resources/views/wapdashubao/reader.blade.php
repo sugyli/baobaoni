@@ -257,7 +257,7 @@
       <div class="child-mod">
           <span>功能2</span>
           <a class="font-size-button" href="{{route('member.outboxs.create')}}?title=书名：{{ $chapter->articlename}}_章节名：{{ $chapter->chaptername}}&amp;from=来路：{{request()->url()}}">举报</a>
-          <button class="font-size-button" >书架</button>
+          <a class="font-size-button" href="{{route('member.bookshelf.index')}}">书架</a>
       </div>
     </div>
 

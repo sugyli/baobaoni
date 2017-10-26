@@ -13,6 +13,20 @@
 # ------------------ Page Route ------------------------
 Route::get('/', 'PagesController@home')->name('home');
 
+Route::group([
+    'namespace'     => 'NovelsController',
+    'middleware'    => ['novel'],
+], function () {
+    Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
+
+
+
+});
+
+
+
+
+
 include_once('jump.php');
 include_once('admin.php');
 
@@ -22,7 +36,7 @@ Route::get('/mytest', 'NovelsController\ArticlesController@testindex');
 Route::post('/searchinput', 'NovelsController\SearchController@searchInput')->name('web.searchinput');
 Route::get('/search', 'NovelsController\SearchController@search');
 
-Route::get('/articles/{bid}/{slug?}/{any?}', 'NovelsController\ArticlesController@show')->name('web.articles.show');
+
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
 Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
 Route::get('/mulu/{bid}','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
@@ -98,6 +112,12 @@ Route::group([
     Route::get('outboxs/create', 'OutboxsController@create')->name('member.outboxs.create');
 
     Route::delete('outboxs', 'OutboxsController@destroy')->name('member.outboxs.destroy');
+    Route::get('outboxs/del/{checkid}', 'OutboxsController@destroy')->name('member.outboxs.del.destroy');
+
+
+
+
+
 
     Route::get('qiandao', 'UserSignInController@show')->name('member.qiandao.show');
     Route::get('qiandao/update', 'UserSignInController@update')->name('member.qiandao.update');
@@ -106,7 +126,7 @@ Route::group([
 Route::group([
     'prefix'        => 'web',
     'namespace'     => 'NovelsController',
-    //'middleware'    => ['auth'],
+    'middleware'    => ['novel'],
 ], function () {
 
   Route::get('login', 'LoginController@create')->name('web.login.create');

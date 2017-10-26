@@ -44,7 +44,7 @@ trait AuthenticatesUsers
     $registerSubmitAddress = $redirect_url ? $registerUrl.'?redirect_url='.$redirect_url : $registerUrl;
     $passwordSubmitAddress = $redirect_url ? $passwordUrl.'?redirect_url='.$redirect_url : $passwordUrl;
 
-    return compact('loginSubmitAddress','registerSubmitAddress','passwordSubmitAddress');
+    return compact('loginSubmitAddress','registerSubmitAddress','passwordSubmitAddress' ,'redirect_url');
   }
 
   /**

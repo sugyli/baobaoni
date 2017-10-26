@@ -11,7 +11,24 @@ use App\Models\Article;
 use App\Models\Chapter;
 class BookshelfsController extends Controller
 {
-    public function index()
+
+    public function index(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileIndex();
+      }
+
+      return $this->isDesktopIndex();
+    }
+    public function isMobileIndex()
+    {
+
+       $user = Auth::user();
+       return view('wapdashubao.userbookshelf',compact('user'));
+    }
+
+    public function isDesktopIndex()
     {
 
        $user = Auth::user();
@@ -70,7 +87,6 @@ class BookshelfsController extends Controller
     public function destroy(Request $request , Bookcase $bookcase)
     {
         $user = Auth::user();
-
         if ($request->isMethod('post')) {
             $ids  =  $request->checkid;
             if (is_array($ids) && !empty($ids)) {
@@ -86,6 +102,7 @@ class BookshelfsController extends Controller
         }
 
         if ($request->isMethod('get')) {
+
             $id = $request->id;
             if ($id > 0) {
               $a =   $user->relationBookcases()
@@ -93,14 +110,26 @@ class BookshelfsController extends Controller
                           ->delete();
 
                 if($a){
-                  session()->flash('message', '删除单本书架成功');
-                  return redirect()->route('member.bookshelf.index');
+                  if($request->ajax()){
+
+                     return response()->json(['error'=>0,'message'=>'删除成功']);
+
+                  }else{
+
+                    session()->flash('message', '删除单本书架成功');
+                    return redirect()->route('member.bookshelf.index');
+
+                  }
+
+
                 }
 
             }
 
         }
-
+        if($request->ajax()){
+          return response()->json(['error'=>1,'message'=>'删除失败']);
+        }
         session()->flash('message', '删除书架失败');
         return redirect()->route('member.bookshelf.index');
 

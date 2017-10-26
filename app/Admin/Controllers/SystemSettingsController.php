@@ -32,6 +32,10 @@ class SystemSettingsController extends Controller
                 $form->textarea('webfoot','web网站版权信息')->rows(10)->default(get_sys_set('webfoot'))->help('直接输入代码就行');
                 $form->divide();
 
+                $form->text('wapuri', 'wap网站地址')->default(get_sys_set('wapuri'))->help('结尾要加 /');
+                $form->text('wapname', 'wap网站名称')->default(get_sys_set('wapname'));
+                $form->textarea('wapkeywords','wap网站关键字')->rows(5)->default(get_sys_set('wapkeywords'));
+                $form->textarea('wapdes','wap网站描述')->rows(5)->default(get_sys_set('wapdes'));
                 $form->number('wapmululiebiao', 'wap目录分页数')->default(get_sys_set('wapmululiebiao'))->help('默认20');
 
                 $form->divide();

@@ -44,10 +44,24 @@ Vue.use(Toast, {
     wordWrap: false,//不允许换行
     width: 'auto'
 });
+import VuejsDialog from "vuejs-dialog"
+Vue.use(VuejsDialog ,{
+    html: false,
+    loader: false,
+    okText: '确认',
+    cancelText: '取消',
+    animation: 'bounce',
+  }
+);
+
+Vue.component('mheader', require('./components/mheader.vue'));
 
 Vue.component('scroll-search', require('./components/scroll-search.vue'));
 Vue.component('scroll-mulu', require('./components/scroll-mulu.vue'));
 //Vue.component('user-report', require('./components/user-report.vue'));
+Vue.component('scroll-shujia', require('./components/scroll-shujia.vue'));
+
+
 
 Vue.component('rotate-loade', require('vue-spinner/src/RotateLoader.vue'));
 

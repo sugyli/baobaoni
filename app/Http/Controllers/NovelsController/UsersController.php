@@ -114,8 +114,22 @@ class UsersController extends Controller
         return response()->json($result);
     }
 
+    public function show(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShow();
+      }
+
+      return $this->isDesktopShow();
+    }
+    public function isMobileShow()
+    {
+      $user = Auth::user();
+      return view('wapdashubao.usershow',compact('user'));
+    }
     //用户首页
-    public function show()
+    public function isDesktopShow()
     {
       $user = Auth::user();
       $allHonors = getHonor();

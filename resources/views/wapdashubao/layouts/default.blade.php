@@ -7,19 +7,20 @@
     <meta name="applicable-device" content="mobile" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="stylesheet" type="text/css" href="/wapdashubao/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/wapdashubao/css/all.css">
     <title>@section('title')标题@show</title>
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_r17gmhb8p0cqh0k9.css" />
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_lbvvs5iikz5v1jor.css" />
   </head>
   <body>
     <script>
         var Config = {
             'recommend': "{{route('webajax.user.recommend')}}",
             'addbookcaseurl': "{{ route('webajax.bookshelf.addbookcase') }}",
-            'jubaourl': "{{ route('webajax.outboxs.mstore') }}"
+            'jubaourl': "{{ route('webajax.outboxs.mstore') }}",
+            'shujiaurl': "{{ route('webajax.bookshelf.getbookshelfs') }}",
         };
     </script>
   @yield('style')

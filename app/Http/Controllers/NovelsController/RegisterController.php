@@ -23,6 +23,7 @@ class RegisterController extends Controller
         ]);
     }
     public function create(){
+      
       if(\Agent::isMobile()){
 
           return $this->isMobileCreate();
