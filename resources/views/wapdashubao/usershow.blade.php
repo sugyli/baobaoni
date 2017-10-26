@@ -89,9 +89,11 @@ output {
 }
 .gray {
     color: #969ba3;
+
 }
 p {
     word-break: break-all;
+    font-size: 14px;
 }
 .center-pay {
     font-size: .75rem;
@@ -203,6 +205,7 @@ p {
 
 @endsection
 @section('content')
+
 <div class="user-box">
   <div class="center-header">
     <div class="user_header">
@@ -301,4 +304,5 @@ p {
 
 
 </div>
+
 @endsection
