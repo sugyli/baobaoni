@@ -18,8 +18,10 @@ Route::group([
     'middleware'    => ['novel'],
 ], function () {
     Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
+    Route::get('/search', 'SearchController@search');
+    Route::get('/fenlei/{id}','ArticlesController@showfenlei')->name('web.articles.fenlei');
 
-
+    Route::get('/mulu/{bid}','ArticlesController@showMulu')->name('web.articles.mulu');
 
 });
 
@@ -32,14 +34,13 @@ include_once('admin.php');
 
 
 # ------------------小说路由处理------------------------
-Route::get('/mytest', 'NovelsController\ArticlesController@testindex');
 Route::post('/searchinput', 'NovelsController\SearchController@searchInput')->name('web.searchinput');
-Route::get('/search', 'NovelsController\SearchController@search');
+
 
 
 Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
 Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
-Route::get('/mulu/{bid}','NovelsController\ArticlesController@showMulu')->name('web.articles.mulu');
+
 
 
 

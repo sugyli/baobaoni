@@ -2088,6 +2088,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2524,7 +2528,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_better_scroll__ = __webpack_require__("./node_modules/better-scroll/dist/bscroll.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_better_scroll___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_better_scroll__);
-//
 //
 //
 //
@@ -4581,7 +4584,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n\t\tborder-bottom: 1px solid #eee;\n}\n.mulu__bd li p {\n\tline-height: 32px;\n\theight: 32px;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;/*单行溢出文本显示省略号*/\n\twhite-space: nowrap;/*规定段落中的文本不进行换行*/\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.shujia li {\n    position: relative;\n    padding: 0px 10px;\n\t\tborder-bottom: 1px solid #eee;\n}\n.shujia li p {\n\tline-height: 32px;\n\theight: 32px;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;/*单行溢出文本显示省略号*/\n\twhite-space: nowrap;/*规定段落中的文本不进行换行*/\n}\n.shujia .red-bg{\n\tcolor:red;\n}\n\n", ""]);
 
 // exports
 
@@ -4611,7 +4614,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.mulu__bd li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu__bd li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu__bd li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu__bd .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.mulu li {\n    position: relative;\n    padding: 0px 10px;\n}\n.mulu li a {\n    display: block;\n    line-height: 40px;\n    height: 40px;\n    border-bottom: 1px solid #eee;\n}\n.mulu li i {\n    position: absolute;\n    top: 0px;\n    right: 5px;\n    width: 15px;\n    height: 40px;\n    background: center url(/wapdashubao/images/list.png) no-repeat;\n}\n.mulu .red-bg{\n\tcolor:red;\n}\n\n\n", ""]);
 
 // exports
 
@@ -33438,20 +33441,11 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "mulu__bd",
+    staticClass: "shujia",
     style: ('height:' + _vm.screen_height + 'px;background: #fff;')
   }, [_c('div', {
-    staticClass: "mulu_header"
-  }, [_c('a', {
-    staticClass: "top__back",
-    attrs: {
-      "href": "/"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "top__title online"
-  }, [_vm._v("书架已存(" + _vm._s(_vm.num) + ")本")]), _vm._v(" "), _c('div', {
-    staticClass: "mulu-header-right"
-  })]), _vm._v(" "), _c('scroller', {
+    staticClass: "header online HeaderTitlePosition"
+  }, [_vm._v("\n\t    书架已存(" + _vm._s(_vm.num) + ")本\n\t\t\t"), _vm._m(0)]), _vm._v(" "), _c('scroller', {
     ref: "searchScroller",
     staticStyle: {
       "top": "45px"
@@ -33511,7 +33505,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "red-bg"
     }, [_vm._v("删除本书")])])])])
   })], 2)])], 1)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "header-left",
+    attrs: {
+      "href": "javascript:",
+      "onclick": "javascript:history.go(-1);"
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-fanhui1"
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -33670,26 +33674,21 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "mulu__bd",
+    staticClass: "mulu",
     style: ('height:' + _vm.screen_height + 'px;background: #fff;')
   }, [_c('div', {
-    staticClass: "mulu_header"
-  }, [_c('a', {
-    staticClass: "top__back",
-    attrs: {
-      "href": "/"
-    }
-  }), _vm._v(" "), _c('span', {
-    staticClass: "top__title online"
-  }, [_vm._v(_vm._s(_vm.bookname))]), _vm._v(" "), _c('a', {
-    staticClass: "mulu-header-right iconfont icon-warning",
+    staticClass: "header online HeaderTitlePosition"
+  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.bookname) + "\n\t\t\t"), _vm._m(0), _vm._v(" "), _c('a', {
+    staticClass: "header-right",
     on: {
       "click": function($event) {
         $event.stopPropagation();
         _vm.openModel('voteAlert')
       }
     }
-  })]), _vm._v(" "), _c('scroller', {
+  }, [_c('i', {
+    staticClass: "iconfont icon-warning"
+  })])]), _vm._v(" "), _c('scroller', {
     ref: "searchScroller",
     staticStyle: {
       "top": "45px"
@@ -33714,6 +33713,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._v(_vm._s(item['chaptername']))]), _c('i')])
   }))]), _vm._v(" "), _c('sweet-modal', {
     ref: "voteAlert",
+    staticStyle: {
+      "margin-top": "45px"
+    },
     attrs: {
       "title": "举报错误"
     }
@@ -33759,7 +33761,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.onSubmit
     }
   }, [_vm._v("提　　交")])])])])], 1)
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "header-left",
+    attrs: {
+      "href": "javascript:",
+      "onclick": "javascript:history.go(-1);"
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-fanhui1"
+  })])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

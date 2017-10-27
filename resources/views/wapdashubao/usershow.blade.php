@@ -110,7 +110,7 @@ p {
     top: 50%;
     left: -3px;
     width: 5px;
-    height: 6px;
+    height: 5px;
     margin-top: -3px;
     content: '';
     -webkit-transform: rotate(45deg);
@@ -194,7 +194,7 @@ p {
     background-color: #fff;
 }
 .center-logout {
-    line-height: 2.75rem;
+    line-height: 3rem;
     text-align: center;
     font-size: 14px;
     display: block;
@@ -209,11 +209,10 @@ p {
 <div class="user-box">
   <div class="center-header">
     <div class="user_header">
-      <a href="/" class="user__back iconfont icon-fanhui1"></a>
+      <a href="javascript:" onclick="javascript:history.go(-1);" class="user__back iconfont icon-fanhui1"></a>
       用户中心
-
     </div>
-    <img src="//qidian.gtimg.com/qd/images/ico/default_user.0.2.png" class="center-header-img" alt="书友20171021021938860">
+    <img src="{{ $user->portrait }}" class="center-header-img" />
     <p class="center-header-p online">账户:{{ $user->uname }}</p>
   </div>
   <div class="user-module">
@@ -245,7 +244,7 @@ p {
             </li>
             <li class="btn-group-cell center-acc-li" role="link">
                 <a href="/user/ticket/recomm" role="option">
-                    <output>{{ $user->caption }}</output>
+                    <output>15</output>
                     <p class="gray">等级</p>
                 </a>
             </li>
@@ -257,7 +256,7 @@ p {
   <div class="user-module-nav">
     <ul class="center-nav-ol">
         <li class="book-li" role="link">
-            <a href="/user/msg/sys" class="book-layout" role="option">
+            <a href="{{route('member.bookshelf.index')}}" class="book-layout" role="option">
                 <h3 class="book-title"><i class="iconfont icon-weibiaoti3zhuanhuan" style="color:#d4237a;"></i>会员书架</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>

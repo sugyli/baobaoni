@@ -1,11 +1,14 @@
 <template>
-<div class="mulu__bd" :style="'height:'+screen_height+'px;background: #fff;'">
-	<div class="mulu_header">
-		<a class="top__back" href="/"></a>
-		<span class="top__title online">{{bookname}}</span>
-		<a class="mulu-header-right iconfont icon-warning"  v-on:click.stop="openModel('voteAlert')"></a>
+<div class="mulu" :style="'height:'+screen_height+'px;background: #fff;'">
+	<div class="header online HeaderTitlePosition">
+			{{bookname}}
+			<a href="javascript:" onclick="javascript:history.go(-1);" class="header-left">
+				<i class="iconfont icon-fanhui1"></i>
+			</a>
+			<a class="header-right" v-on:click.stop="openModel('voteAlert')">
+				<i class="iconfont icon-warning"></i>
+			</a>
 	</div>
-
 	<scroller
 		style="top: 45px"
 		ref="searchScroller"
@@ -20,31 +23,32 @@
 			</li>
 		</ul>
 		</scroller>
-		<sweet-modal title="举报错误" ref="voteAlert">
+		<sweet-modal title="举报错误" ref="voteAlert" style="margin-top:45px;">
 				<form id="jubaoForm">
 					<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 					<div class="input_el">
-		          <button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
-		      </div>
+							<button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
+					</div>
 				</form>
-    </sweet-modal>
+		</sweet-modal>
 </div>
+
 </template>
 <style>
 
-.mulu__bd li {
+.mulu li {
     position: relative;
     padding: 0px 10px;
 }
 
-.mulu__bd li a {
+.mulu li a {
     display: block;
     line-height: 40px;
     height: 40px;
     border-bottom: 1px solid #eee;
 }
 
-.mulu__bd li i {
+.mulu li i {
     position: absolute;
     top: 0px;
     right: 5px;
@@ -53,7 +57,7 @@
     background: center url(/wapdashubao/images/list.png) no-repeat;
 }
 
-.mulu__bd .red-bg{
+.mulu .red-bg{
 	color:red;
 }
 

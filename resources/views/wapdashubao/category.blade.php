@@ -1,6 +1,8 @@
 @extends('wapdashubao.layouts.default')
-
-@section('content')
+@section('title')分类列表-{{get_sys_set('wapname')}}-{{get_sys_set('wapuri')}}@endsection
+@section('keywords')分类列表@endsection
+@section('description')分类列表@endsection
+@section('style')
 <style>
 .category{
 
@@ -66,6 +68,38 @@
 }
 
 </style>
+@endsection
+
+@section('content')
+<div class="header online HeaderTitlePosition">
+    分类列表
+    <a href="javascript:" onclick="javascript:history.go(-1);" class="header-left">
+      <i class="iconfont icon-fanhui1"></i>
+    </a>
+</div>
+<div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
+  @if($sorts = get_sort('webnovel'))
+  <section class="category">
+    <div class="category-main">
+      <ul class="category-list">
+        @foreach($sorts as $sort)
+        <li>
+          <a href="{{$sort['uri']}}">
+            <div class="category-list-item" style="background-image:url(/wapdashubao/images/fenlei/xuanhuan.jpg);">
+              <h3>{{$sort['title']}}</h3>
+              <p class="num"></p>
+            </div>
+          </a>
+        </li>
+        @endforeach
+      </ul>
+    </div>
+  </section>
+  @endif
+@include('wapdashubao.include.foot')
+</div>
+
+{{--
 <div id="app">
   @include('wapdashubao.include.common-header')
 
@@ -258,6 +292,6 @@
   </section>
 
   @include('wapdashubao.include.foot')
-
+--}}
 </div>
 @stop

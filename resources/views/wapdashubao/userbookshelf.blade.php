@@ -3,14 +3,7 @@
 @section('title')我的书架@endsection
 @section('keywords')我的书架@endsection
 @section('description')我的书架@endsection
-@section('style')
-<style>
 
-
-</style>
-
-
-@endsection
 @section('content')
 
 <scroll-shujia

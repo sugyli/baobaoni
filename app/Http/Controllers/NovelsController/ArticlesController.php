@@ -366,8 +366,6 @@ class ArticlesController extends Controller
 
     }
 
-
-
     public function showfenlei()
     {
       $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',12);

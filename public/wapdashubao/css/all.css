@@ -646,6 +646,9 @@ body{
       color: #fff;
       padding: 0 10px;
   }
+  .book-dash-text{
+    color: #fff;
+  }
   .book-dash-text:after {
       content: '\5f00\59cb\9605\8bfb';
   }
@@ -741,8 +744,165 @@ body{
   .m-tag.-color .u-tag:nth-child(3n+3) {
       background-color: #e8f9db;
   }
+  .search-tag .u-tag {
+      background: #fff;
+      margin-bottom: 10px;
+  }
+  .right-search {
+      height: 44px;
+      background: #efeff0;
+      border-bottom: 1px solid #ddd;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      font: 15px/45px a;
+      color: rgba(0,0,0,0.7);
+      z-index: 999;
+  }
+      .right-search .top__back {
+        float: left;
+        width: 42px;
+        height: 44px;
+      }
+      .right-search .top__back:before {
+          content: '';
+          display: block;
+          margin: 15px 0 0 16px;
+          width: 10px;
+          height: 16px;
+          background: url(/wapdashubao/images/back.png) no-repeat;
+          background-size: 10px 16px;
+      }
+      .right-search .search-input {
+          position: relative;
+          margin: 5px 20px 5px 42px;
+          height: 35px;
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+      }
 
+      .right-search .search-input .search-input__mi {
+          background: url(/wapdashubao/images/PP13pEqhpChuay.png) no-repeat center;
+          background-size: 16px 16px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 36px;
+          height: 35px;
+          border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .right-search .search-input input {
+          border: none;
+          box-sizing: border-box;
+          display: block;
+          width: 100%;
+          height: 100%;
+          padding: 8px 52px 8px 42px;
+          font-size: 14px;
+          color: rgba(0, 0, 0, 0.8);
+          background: #fff;
 
+      }
+      .right-search .search-input .search-input__btn {
+          display: block;
+          line-height: 36px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          border-left: 1px solid #ddd;
+          padding: 0 8px;
+          font-size: 14px;
+          color: #666;
+      }
+
+      .top__bd {
+        position: relative;
+        overflow: hidden;
+      }
+      .top__bd .search-tag {
+          padding: 17px;
+      }
+      .top__bd .m-tag {
+          line-height: 1;
+          overflow: hidden;
+      }
+      .m-tag .u-tag {
+          display: inline-block;
+          width: auto;
+          line-height: 1.8em;
+          padding: 0 20px;
+          color: #766d5d;
+          border-radius: 4px;
+          background: #909da8;
+          font-size: 14px;
+          text-align: center;
+          border: 1px solid #d3d3d3;
+          margin: 0 10px 5px 0;
+      }
+      .his-dele {
+        width: 142px;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        font-family: 微软雅黑;
+        box-sizing: border-box;
+        display: block;
+        background: rgb(255, 255, 255);
+        border-width: 1px;
+        border-style: solid;
+        border-color: black;
+        border-image: initial;
+        margin: 1rem auto;
+    }
+#jubaoForm .textarea{
+		text-rendering: auto;
+		color: #100;
+		letter-spacing: normal;
+		word-spacing: normal;
+		text-transform: none;
+		text-indent: 0px;
+		text-shadow: none;
+		display: inline-block;
+		text-align: start;
+		margin: 0em;
+		font: 14px system-ui;
+		-webkit-appearance: textarea;
+		background-color: white;
+		-webkit-rtl-ordering: logical;
+		user-select: text;
+		flex-direction: column;
+		resize: auto;
+		cursor: auto;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		border: 1px solid #CCC;
+		padding: 2px;
+}
+    .input_el {
+        margin: 0 8%;
+        margin-top: 15px;
+        margin-right: 8%;
+        margin-bottom: 0px;
+        margin-left: 8%;
+        text-align: center;
+        padding-bottom: 15px;
+    }
+    .btn_small {
+        display: inline-block;
+        margin: 0 10px;
+        border: 1px solid #CCC;
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        width: 40%;
+        height: 35px;
+        line-height: 35px;
+        color: #100;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #FDFDFD;
+    }
 
 
 .login-nav-bk {

@@ -4,15 +4,12 @@
 @section('description'){{get_sys_set('wapdes')}}@endsection
 
 @section('content')
-
-<mheader
-  left_icon = ''
-  left_href = ''
-  right_icon = 'icon-huiyuan'
-  right_href ='{{ route('web.login.create') }}'
-  title = '书城'
-  title_position = 'HeaderTitlePosition'
-></mheader>
+<div class="header online HeaderTitlePosition">
+    书城
+    <a class="header-right" href="{{ route('web.login.create') }}">
+      <i class="iconfont icon-huiyuan"></i>
+    </a>
+</div>
 <div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
     @include('wapdashubao.include.index-top')
     @include('wapdashubao.include.index-hot')
@@ -21,18 +18,4 @@
     @include('wapdashubao.include.index-update')
     @include('wapdashubao.include.foot')
 </div>
-
-{{--
-<div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
-
-
-
-
-  @include('wapdashubao.include.index-update')
-  @include('wapdashubao.include.foot')
-</div>
---}}
-
-
-
 @endsection
