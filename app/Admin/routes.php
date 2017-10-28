@@ -21,6 +21,7 @@ Route::group([
 
     $router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
     $router->resource('articles', ArticlesController::class);
+    $router->resource('honors', HonorsController::class);
     /*
     get('/users', 'UsersController@index')->name('users.index');
     get('/users/{id}', 'UsersController@show')->name('users.show');

@@ -18,14 +18,14 @@ Route::group([
     'middleware'    => ['novel'],
 ], function () {
     Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
-    Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController\ArticlesController@showContent')->name('web.articles.content');
+    Route::get('/content/{bid}/{cid}/{any?}', 'ArticlesController@showContent')->name('web.articles.content');
 
     Route::get('/search', 'SearchController@search');
     Route::get('/fenlei/{id}','ArticlesController@showfenlei')->name('web.articles.fenlei');
 
     Route::get('/mulu/{bid}','ArticlesController@showMulu')->name('web.articles.mulu');
 
-    Route::get('/fenlei/{id}','NovelsController\ArticlesController@showfenlei')->name('web.articles.fenlei');
+    Route::get('/fenlei/{id}','ArticlesController@showfenlei')->name('web.articles.fenlei');
 });
 
 

@@ -23,9 +23,9 @@
 <div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
   <div class="login-nav-bk">
     <ul>
-      <li><a href="javascript:;" >登陆账户</a></li>
+      <li><a href="javascript:" >登陆账户</a></li>
       <li><a href="{{ $registerSubmitAddress }}" >注册账户</a></li>
-      <li><a href="{{ $passwordSubmitAddress }}" >找回密码</a></li>
+      <li><a href="javascript:" >找回密码</a></li>
     </ul>
   </div>
   <form name="frmlogin" action="{{ $loginSubmitAddress }}" method="post">

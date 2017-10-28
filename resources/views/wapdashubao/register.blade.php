@@ -16,8 +16,8 @@
   <div class="login-nav-bk">
     <ul>
       <li><a href="{{ $loginSubmitAddress }}" >登陆账户</a></li>
-      <li><a href="javascript:;"  style="color:#f85959;">注册账户</a></li>
-      <li><a href="{{ $passwordSubmitAddress }}" >找回密码</a></li>
+      <li><a href="javascript:"  style="color:#f85959;">注册账户</a></li>
+      <li><a href="javascript:" >找回密码</a></li>
     </ul>
   </div>
   <form name="frmregister" action="{{ $registerSubmitAddress }}" method="post">
