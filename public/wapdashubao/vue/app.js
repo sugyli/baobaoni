@@ -2486,7 +2486,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
-          console.log(response);
+
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
             for (var i = 0; i < data.length; i++) {
@@ -33315,7 +33315,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "i-cl-list-main"
     }, [_c('a', {
       attrs: {
-        "href": "/"
+        "href": item['articlelink']
       }
     }, [_c('div', {
       staticClass: "i-cl-list-main-left"

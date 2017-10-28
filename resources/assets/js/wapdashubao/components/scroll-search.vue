@@ -18,7 +18,7 @@
         <ul class="i-cl-list Displayanimation">
             <li v-for="(item, index) in searchItems">
               <div class="i-cl-list-main">
-                <a href="/">
+                <a :href="item['articlelink']">
                   <div class="i-cl-list-main-left">
                     <img :src="item['imgflag']"/>
                     <p class="i-cl-list-main-left-state">
@@ -200,7 +200,7 @@
                     query: searchKeyword,
                 })
                 .then(function (response) {
-                  console.log(response);
+
                   if(response.data.error == 0){
                       var data = response.data.bakdata.data;
                       for (var i = 0; i < data.length; i++) {
