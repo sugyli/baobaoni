@@ -73,7 +73,7 @@
 	        @break($loop->iteration >= 9)
 	        @endforeach
 	      </ul>
-	      <div class="gengduo"><a href="/wapbook-88047_1/">查看更多章节&gt;</a></div>
+	      <div class="gengduo"><a href="{{route('web.articles.mulu',['bid'=>$bookData->articleid])}}">查看更多章节&gt;</a></div>
 	    </section>
 	    @endif
 	</div>

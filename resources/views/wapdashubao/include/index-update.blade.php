@@ -57,8 +57,5 @@
       </li>
       @break($loop->iteration >= 6)
       @endforeach
-    <div class="i-up-foot">
-      <a href="javasrcipt">更多...</a>
-    </div>
 </section>
 @endif

@@ -59,7 +59,7 @@
 </div>
 <form action="{{ Request::is('member/inboxs/*') ? route('member.inboxs.destroy') : route('member.outboxs.destroy') }}" method="post">
   {{ csrf_field() }}
-  {{ method_field('DELETE') }}
+  {{-- method_field('DELETE') --}}
   <div class="msg_foot">
     @if(Request::is('member/inboxs/*'))
     <input type="button" value="回复邮件" class="button" onclick="javascript:document.location='{{ route('member.outboxs.create') }}'">

@@ -66,7 +66,7 @@
 @endsection
 <form action="{{ route('member.outboxs.destroy') }}" method="post" name="checkform" id="checkform">
   {{ csrf_field() }}
-  {{ method_field('DELETE') }}
+  {{-- method_field('DELETE') --}}
   <div class="case_title">发件箱（您的等级只显示发件箱数：{{$user->getUserHonor()->getMassageMaxCount()}}，现有消息数：{{$user->relationOutboxs->count()}}条） </div>
   <ul>
     <li class="top">

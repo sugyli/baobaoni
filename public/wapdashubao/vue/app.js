@@ -2604,7 +2604,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-		props: ['redurl', 'destroyurl', 'bookcasecount'],
+		props: ['redurl', 'destroyurl', 'bookcasecount', 'bkurl'],
 		data: function data() {
 				return {
 						num: '获取中...',
@@ -33445,7 +33445,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: ('height:' + _vm.screen_height + 'px;background: #fff;')
   }, [_c('div', {
     staticClass: "header online HeaderTitlePosition"
-  }, [_vm._v("\n\t    书架已存(" + _vm._s(_vm.num) + ")本\n\t\t\t"), _vm._m(0)]), _vm._v(" "), _c('scroller', {
+  }, [_vm._v("\n\t    书架已存(" + _vm._s(_vm.num) + ")本\n\t\t\t"), _c('a', {
+    staticClass: "header-left",
+    attrs: {
+      "href": _vm.bkurl
+    }
+  }, [_c('i', {
+    staticClass: "iconfont icon-fanhui1"
+  })])]), _vm._v(" "), _c('scroller', {
     ref: "searchScroller",
     staticStyle: {
       "top": "45px"
@@ -33505,17 +33512,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "red-bg"
     }, [_vm._v("删除本书")])])])])
   })], 2)])], 1)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "header-left",
-    attrs: {
-      "href": "javascript:",
-      "onclick": "javascript:history.go(-1);"
-    }
-  }, [_c('i', {
-    staticClass: "iconfont icon-fanhui1"
-  })])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -44658,7 +44655,7 @@ Vue.use(VueScroller)
 Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue2_toast___default.a, {
     defaultType: 'center',
     duration: 2000,
-    wordWrap: false, //不允许换行
+    wordWrap: true, //换行
     width: 'auto'
 });
 

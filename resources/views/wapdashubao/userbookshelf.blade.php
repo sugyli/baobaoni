@@ -8,6 +8,7 @@
 
 <scroll-shujia
   redurl={{route('member.bookshelf.clickbookshelf')}}
+  bkurl={{$bkurl}}
   destroyurl="{{ route('member.bookshelf.destroy') }}"
   bookcasecount = "{{ $user->getUserHonor()->getBookcaseCount() }}"
   ></scroll-shujia>

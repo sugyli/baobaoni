@@ -2,7 +2,7 @@
 	<div class="shujia" :style="'height:'+screen_height+'px;background: #fff;'">
 		<div class="header online HeaderTitlePosition">
 		    书架已存({{num}})本
-				<a href="javascript:" onclick="javascript:history.go(-1);" class="header-left">
+				<a :href="bkurl" class="header-left">
 					<i class="iconfont icon-fanhui1"></i>
 				</a>
 		</div>
@@ -74,7 +74,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
   export default {
-    props:['redurl','destroyurl','bookcasecount'],
+    props:['redurl','destroyurl','bookcasecount','bkurl'],
     data() {
       return {
 				num:'获取中...',

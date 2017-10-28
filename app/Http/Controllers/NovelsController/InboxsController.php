@@ -11,8 +11,37 @@ use Auth;
 class InboxsController extends Controller
 {
     //use PublicTrait;
-    //列出收件箱
-    public function index()
+    public function index(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileIndex();
+      }
+
+      return $this->isDesktopIndex();
+    }
+
+    public function isMobileIndex()
+    {
+      $user = Auth::user();
+      $limit = $user->getUserHonor()->getMassageMaxCount();
+      $user->load(['relationInboxs' => function ($query) use ($limit){
+          $query->where('todel','!=',1)
+                ->orderBy('postdate', 'desc')
+                ->limit($limit);
+      }]);
+      $user->markAdminemailAsRead();
+      $bkurl = request()->redirect_url ?: '/';
+      //$supplement = ['title'=>'收件箱' ,'subTitle'=>'发件人'];
+      return view('wapdashubao.userinbox' , compact('user','bkurl'));
+
+
+
+    }
+
+
+
+    public function isDesktopIndex()
     {
       $user = Auth::user();
       $limit = $user->getUserHonor()->getMassageMaxCount();
@@ -27,7 +56,39 @@ class InboxsController extends Controller
 
     }
 
-    public function show($id)
+
+    public function show($id){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileShow($id);
+      }
+
+      return $this->isDesktopShow($id);
+    }
+
+    public function isMobileShow($id)
+    {
+      $user = Auth::user();
+      $messageData = $user->relationInboxs()
+                    ->where('messageid', $id)
+                    ->where('todel','!=',1)
+                    ->first();
+
+      if ($messageData) {
+          $messageData->markAsRead();
+          $user->markAdminemailAsRead();
+          $bkurl = request()->redirect_url ?: '/';
+          return view('wapdashubao.usermessageshow', compact('messageData','bkurl'));
+      }
+
+      session()->flash('message', '您没有此消息');
+      return redirect()->route('member.inboxs.index');
+
+
+    }
+
+    public function isDesktopShow($id)
     {
 
       $user = Auth::user();

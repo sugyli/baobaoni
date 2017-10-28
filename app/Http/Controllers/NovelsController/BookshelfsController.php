@@ -25,7 +25,8 @@ class BookshelfsController extends Controller
     {
 
        $user = Auth::user();
-       return view('wapdashubao.userbookshelf',compact('user'));
+       $bkurl = request()->redirect_url ?: '/';
+       return view('wapdashubao.userbookshelf',compact('user','bkurl'));
     }
 
     public function isDesktopIndex()

@@ -31,8 +31,9 @@ class OutboxsController extends Controller
                 ->orderBy('postdate', 'desc')
                 ->limit($limit);
       }]);
+      $bkurl = request()->redirect_url ?: '/';
       //$supplement = ['title'=>'收件箱' ,'subTitle'=>'发件人'];
-      return view('wapdashubao.useroutbox' , compact('user'));
+      return view('wapdashubao.useroutbox' , compact('user','bkurl'));
 
     }
     public function isDesktopIndex()
@@ -66,7 +67,8 @@ class OutboxsController extends Controller
                                   ->first();
 
       if ($messageData) {
-          return view('wapdashubao.usermessageshow', compact('messageData'));
+          $bkurl = request()->redirect_url ?: '/';
+          return view('wapdashubao.usermessageshow', compact('messageData','bkurl'));
       }
 
       session()->flash('message', '您没有此消息');
@@ -103,8 +105,8 @@ class OutboxsController extends Controller
     {
         $title = $request->title ?: '来源Wap用户中心的问题';
         $from = $request->from ?: '来源不详';
-
-        return view('wapdashubao.jubao',compact('title','from'));
+        $bkurl = request()->redirect_url ?: '/';
+        return view('wapdashubao.jubao',compact('title','from','bkurl'));
     }
 
     public function isDesktopCreate(Request $request)
@@ -142,7 +144,9 @@ class OutboxsController extends Controller
         }
         $message->collectImages();
         session()->flash('message', '发送消息成功');
-        return redirect()->route('member.outboxs.index');
+        $url = $request->redirect_url ?: route('member.outboxs.index');
+        //return redirect($url)->route('member.outboxs.index');
+        return redirect($url);
     }
 
     public function mStore(Request $request)

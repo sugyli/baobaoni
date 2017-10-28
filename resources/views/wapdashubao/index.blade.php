@@ -6,8 +6,11 @@
 @section('content')
 <div class="header online HeaderTitlePosition">
     书城
-    <a class="header-right" href="{{ route('web.login.create') }}">
+    <a class="header-right" href="{{ route('member.user.show') }}">
       <i class="iconfont icon-huiyuan"></i>
+    </a>
+    <a href="{{route('member.qiandao.show')}}" class="header-left">
+      <i class="iconfont icon-qiandao"></i>
     </a>
 </div>
 <div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">

@@ -11,7 +11,6 @@
     border-bottom: 1px solid #eaeaea;
     padding-left: 32px;
     padding-right: 64px;
-    padding-top: 45px;
 }
 .jubao-title > h2 {
   text-overflow: ellipsis;
@@ -45,12 +44,14 @@
 
 @endsection
 @section('content')
-<div class="mulu__bd" :style="'height:'+screen_height+'px;background: #fff;'">
-	<div class="mulu_header">
-		<a class="top__back" href="javascript:history.go(-1);"></a>
-		返回
-	</div>
+<div class="header online HeaderTitlePosition">
+    发消息
+    <a href="{{$bkurl}}" class="header-left">
+      <i class="iconfont icon-fanhui1"></i>
+    </a>
+</div>
 
+<div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
   <div class="jubao-title">
     <h2>举报错误</h2>
   </div>
@@ -58,6 +59,7 @@
     {{ csrf_field() }}
     <input type="hidden" name="from" value="{{ old($from) ?: $from }}">
     <input type="hidden" name="title" value="{{ old($title) ?: $title }}">
+    <input type="hidden" name="redirect_url" value="{{ $bkurl }}">
     @if( $errors->any())
       @foreach($errors->all() as $error)
         <span style="padding-left:32px;height:35px;line-height:35px;color:red;">

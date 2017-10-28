@@ -68,7 +68,7 @@ class UsersController extends Controller
         $userRecommendCount = $honor->getDayRecommendCount();
 
         if($num > $userRecommendCount){
-          $result['message'] = "不好意思您今日的推荐票只有 {$userRecommendCount} 张";
+          $result['message'] = "不好意思您今日的推荐票一共只有 {$userRecommendCount} 张";
           return response()->json($result);
         }
 
@@ -86,10 +86,10 @@ class UsersController extends Controller
             $bak = $user->relationRankings()->create($data);
 
             if($bak){
-
+              $sheng = $userRecommendCount - $num;
               $user->increment('score' , $s);
               $result['error'] = 0;
-              $result['message'] = "推荐成功,并且获取 {$s} 点经验";
+              $result['message'] = "今日首推荐成功,获取 {$s} 点经验 剩余 {$sheng} 票";
               del_hits_cache($articleid);
               return response()->json($result);
             }
@@ -101,15 +101,18 @@ class UsersController extends Controller
           return response()->json($result);
         }
         $nb = $userRecommendCount - $ranking->hits;
-        if (($ranking->hits + $num) > $userRecommendCount) {
+        $zen = $ranking->hits + $num;
+        if ($zen > $userRecommendCount) {
             $result['message'] = "不好意思您今日的推荐票不够了还剩余 {$nb} 张";
             return response()->json($result);
         }
 
         $ranking->increment('hits' , $num);
+        $sheng = $userRecommendCount - $zen;
         $user->increment('score' , $s);
         $result['error'] = 0;
-        $result['message'] = "推荐本书成功！并且获取 {$s} 点经验";
+        $result['message'] = "推荐成功！获取 {$s} 点经验 剩余 {$sheng} 票";
+
         del_hits_cache($articleid);
         return response()->json($result);
     }
@@ -126,7 +129,8 @@ class UsersController extends Controller
     public function isMobileShow()
     {
       $user = Auth::user();
-      return view('wapdashubao.usershow',compact('user'));
+      $bkurl = request()->redirect_url ?: '/';
+      return view('wapdashubao.usershow',compact('user','bkurl'));
     }
     //用户首页
     public function isDesktopShow()
@@ -136,7 +140,24 @@ class UsersController extends Controller
       return view('webdashubao.usershow',compact('user','allHonors'));
     }
 
-    public function edit()
+    public function edit(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobileEdit();
+      }
+
+      return $this->isDesktopEdit();
+    }
+
+    public function isMobileEdit()
+    {
+      $user = Auth::user();
+      $bkurl = request()->redirect_url ?: '/';
+      return view('wapdashubao.useredit',compact('user','bkurl'));
+    }
+
+    public function isDesktopEdit()
     {
       $user = Auth::user();
       return view('webdashubao.useredit',compact('user'));
@@ -163,7 +184,24 @@ class UsersController extends Controller
 
     }
 
-    public function passedit()
+    public function passedit(){
+
+      if(\Agent::isMobile()){
+
+          return $this->isMobilePassedit();
+      }
+
+      return $this->isDesktopPassedit();
+    }
+
+    public function isMobilePassedit()
+    {
+      $bkurl = request()->redirect_url ?: '/';
+      return view('wapdashubao.userpassedit',compact('bkurl'));
+    }
+
+
+    public function isDesktopPassedit()
     {
       return view('webdashubao.userpassedit');
     }

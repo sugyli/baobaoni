@@ -61,7 +61,7 @@ Route::post('webajax/outboxs/mstore', 'NovelsController\OutboxsController@mStore
 Route::group([
     'prefix'        => 'member',
     'namespace'     => 'NovelsController',
-    'middleware'    => ['auth'],
+    'middleware'    => ['novel','auth'],
 ], function () {
 
 
@@ -105,15 +105,16 @@ Route::group([
     //收件箱
     Route::get('inboxs', 'InboxsController@index')->name('member.inboxs.index');
     Route::get('inboxs/{id}', 'InboxsController@show')->name('member.inboxs.show');
-    Route::delete('inboxs', 'InboxsController@destroy')->name('member.inboxs.destroy');
+    Route::match(['get', 'post'] ,'inboxs_del/{checkid?}', 'InboxsController@destroy')->name('member.inboxs.destroy');
+    //Route::delete('inboxs', 'InboxsController@destroy')->name('member.inboxs.destroy');
     //发件箱
     Route::get('outboxs', 'OutboxsController@index')->name('member.outboxs.index');
     Route::post('outboxs', 'OutboxsController@store')->name('member.outboxs.store');
     Route::get('outboxs/{id}', 'OutboxsController@show')->name('member.outboxs.show');
     Route::get('outboxs/create', 'OutboxsController@create')->name('member.outboxs.create');
-
-    Route::delete('outboxs', 'OutboxsController@destroy')->name('member.outboxs.destroy');
-    Route::get('outboxs/del/{checkid}', 'OutboxsController@destroy')->name('member.outboxs.del.destroy');
+    Route::match(['get', 'post'] ,'outboxs_del/{checkid?}', 'OutboxsController@destroy')->name('member.outboxs.destroy');
+    //Route::delete('outboxs', 'OutboxsController@destroy')->name('member.outboxs.destroy');
+    //Route::get('outboxs/del/{checkid}', 'OutboxsController@destroy')->name('member.outboxs.del.destroy');
 
 
 

@@ -23,8 +23,17 @@ class UserSignInController extends Controller
 
     public function isMobileShow()
     {
+      //检测用户今天是否已经签到
+      $todaydate = date('Y-m-d',time());  //获取今天的日期
+      $todayunix = strtotime($todaydate);
+      $isqiandao = false;
+      $qiandao = Auth::user()->relationQiandao;
+      if(isset($qiandao->id)){
+        $isqiandao = ($qiandao['last_dateline'] > $todayunix) ? true : false;
+      }
 
-      return view('wapdashubao.userqiandao');
+
+      return view('wapdashubao.userqiandao',compact('isqiandao'));
 
 
     }

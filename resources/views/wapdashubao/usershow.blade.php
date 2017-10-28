@@ -209,7 +209,7 @@ p {
 <div class="user-box">
   <div class="center-header">
     <div class="user_header">
-      <a href="javascript:" onclick="javascript:history.go(-1);" class="user__back iconfont icon-fanhui1"></a>
+      <a href="{{$bkurl}}" class="user__back iconfont icon-fanhui1"></a>
       用户中心
     </div>
     <img src="{{ $user->portrait }}" class="center-header-img" />
@@ -256,7 +256,7 @@ p {
   <div class="user-module-nav">
     <ul class="center-nav-ol">
         <li class="book-li" role="link">
-            <a href="{{route('member.bookshelf.index')}}" class="book-layout" role="option">
+            <a href="{{route('member.bookshelf.index')}}?redirect_url={{request()->url()}}" class="book-layout" role="option">
                 <h3 class="book-title"><i class="iconfont icon-weibiaoti3zhuanhuan" style="color:#d4237a;"></i>会员书架</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>
@@ -264,32 +264,32 @@ p {
             </a>
         </li>
         <li class="book-li" role="link">
-            <a href="/user/msg/sys" class="book-layout" role="option">
-                <h3 class="book-title"><i class="iconfont icon-xiaoxi" style="color:#1296db;"></i>消息中心</h3>
+            <a href="{{route('member.inboxs.index')}}?redirect_url={{request()->url()}}" class="book-layout" role="option">
+                <h3 class="book-title"><i class="iconfont icon-shoujianxiang" style="color:#1296db;"></i>收件箱 {{ $user->adminemail>0 ? "( <font color='red'>$user->adminemail</font> )" : "" }}</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>
                 </span>
             </a>
         </li>
         <li class="book-li" role="link">
-            <a href="/user/msg/sys" class="book-layout" role="option">
-                <h3 class="book-title"><i class="iconfont icon-xiaoxi" style="color:#1296db;"></i>消息中心</h3>
+            <a href="{{route('member.outboxs.index')}}?redirect_url={{request()->url()}}" class="book-layout" role="option">
+                <h3 class="book-title"><i class="iconfont icon-fajianxiang" style="color:#13227a;"></i>发件箱</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>
                 </span>
             </a>
         </li>
         <li class="book-li" role="link">
-            <a href="/user/msg/sys" class="book-layout" role="option">
-                <h3 class="book-title"><i class="iconfont icon-xiaoxi" style="color:#1296db;"></i>消息中心</h3>
+            <a href="{{route('member.user.edit')}}?redirect_url={{request()->url()}}" class="book-layout" role="option">
+                <h3 class="book-title"><i class="iconfont icon-bianji" style="color:#1296db;"></i>编辑资料</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>
                 </span>
             </a>
         </li>
         <li class="book-li" role="link">
-            <a href="/user/msg/sys" class="book-layout" role="option">
-                <h3 class="book-title"><i class="iconfont icon-xiaoxi" style="color:#1296db;"></i>消息中心</h3>
+            <a href="{{route('member.user.passedit')}}?redirect_url={{request()->url()}}" class="book-layout" role="option">
+                <h3 class="book-title"><i class="iconfont icon-buchongiconsvg06" style="color:#f4ea2a;"></i>修改密码</h3>
                 <span class="book-author">
                     <i class="iconfont icon-fanhui-copy"></i>
                 </span>
@@ -298,7 +298,7 @@ p {
     </ul>
   </div>
   <div class="user-logout">
-    <a href="javascript:" class="center-logout">退出登录</a>
+    <a href="{{ route('web.login.destroy') }}" class="center-logout">退出登录</a>
   </div>
 
 
