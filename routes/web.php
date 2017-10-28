@@ -11,6 +11,9 @@
 |
 */
 # ------------------ Page Route ------------------------
+include_once('jump.php');
+
+
 Route::get('/', 'PagesController@home')->name('home');
 
 Route::group([
@@ -27,13 +30,6 @@ Route::group([
 
     Route::get('/fenlei/{id}','ArticlesController@showfenlei')->name('web.articles.fenlei');
 });
-
-
-
-
-
-include_once('jump.php');
-include_once('admin.php');
 
 
 # ------------------小说路由处理------------------------

@@ -2,12 +2,7 @@
 @section('title'){{$chapter->chaptername}}_{{$chapter->articlename}}-{{get_sys_set('wapname')}}-{{get_sys_set('wapuri')}}@endsection
 @section('keywords'){{$chapter->chaptername}},{{$chapter->articlename}}@endsection
 @section('description'){{$chapter->chaptername}}是小说{{$chapter->articlename}}的最新章节。@endsection
-@section('style')
-<style>
 
-</style>
-
-@endsection
 @section('content')
 <div v-bind:style="'min-height:'+screen_height +'px;'">
     <div class="artical-action-mid" id="action_mid"></div>
@@ -39,8 +34,8 @@
       </div>
       <div class="child-mod">
           <span>功能2</span>
-          <a class="font-size-button" href="{{route('member.outboxs.create')}}?title=书名：{{ $chapter->articlename}}_章节名：{{ $chapter->chaptername}}&amp;from=来路：{{request()->url()}}&amp;redirect_url={{request()->url()}}">举报</a>
-          <a class="font-size-button" href="{{route('member.bookshelf.index')}}?redirect_url={{request()->url()}}">书架</a>
+          <button class="font-size-button" onclick="window.location.href='{{route('member.outboxs.create')}}?title=书名：{{ $chapter->articlename}}_章节名：{{ $chapter->chaptername}}&amp;from=来路：{{request()->url()}}&amp;redirect_url={{request()->url()}}'">举报</button>
+          <button class="font-size-button" onclick="window.location.href='{{route('member.bookshelf.index')}}?redirect_url={{request()->url()}}'">书架</button>
       </div>
     </div>
 

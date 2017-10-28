@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         //
 
-
+        Route::pattern('zid', '^[0-9]\d*');
         Route::pattern('id', '^[1-9]\d*');
         Route::pattern('bid', '^[1-9]\d*');
         Route::pattern('cid', '^[1-9]\d*');
