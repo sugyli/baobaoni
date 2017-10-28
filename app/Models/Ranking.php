@@ -46,5 +46,19 @@ class Ranking extends Model
         return $this->hasOne(Article::class ,'articleid' ,'articleid');
     }
 
+    static public function getUserTodayHits($uid,$date)
+    {
+      return
+            static::where('uid',$uid)
+                    ->where('ranking_date',$date)
+                    ->sum('hits');
+    }
+
+
+    public function updateHits($num)
+    {
+        $this->increment('hits' , $num);
+
+    }
 
 }

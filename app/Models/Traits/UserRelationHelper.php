@@ -15,9 +15,12 @@ trait UserRelationHelper
       return $this->hasOne(Qiandao::class ,'uid' ,'uid');
   }
   //第三个参数为中间模型的外键名称 而第四个参数为最终模型的外键名称，第五个参数则为本地键。
-  public function relationRankings()
+  public function relationRankings($articleid,$date)
   {
-      return $this->hasOne(Ranking::class ,'uid' ,'uid');
+      return $this->hasMany(Ranking::class ,'uid' ,'uid')
+                    ->where('articleid',$articleid)
+                    ->where('ranking_date',$date)
+                    ->first();
   }
 
   //关联收件箱  如果当属性用就是不加（）就是对象 加了是个关联的关系

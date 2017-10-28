@@ -8,12 +8,13 @@ use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\User;
 use App\Models\Honor;
-use App\Models\Message;
+//use App\Models\Message;
 use App\Models\Article;
+use App\Models\Ranking;
 use Illuminate\Support\MessageBag;
-use App\Http\Requests\StoreMessageRequest;
+//use App\Http\Requests\StoreMessageRequest;
 use App\Http\Controllers\Traits\UsersTrait;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 class UsersController extends Controller
 {
     use UsersTrait;
@@ -65,7 +66,7 @@ class UsersController extends Controller
         }
 
         $honor = $user->getUserHonor();
-        $userRecommendCount = $honor->getDayRecommendCount();
+        $userRecommendCount = (int)$honor->getDayRecommendCount();
 
         if($num > $userRecommendCount){
           $result['message'] = "不好意思您今日的推荐票一共只有 {$userRecommendCount} 张";
@@ -76,39 +77,45 @@ class UsersController extends Controller
         $date = strtotime($date);
         $s = get_sys_set('recommendscore');//增长的经验
         $s = $s * $num;
-        $ranking= $article->relationRankings($user->uid,$date);
-        if(empty($ranking)){
+
+        $userHits =  (int)(Ranking::getUserTodayHits($user->uid,$date)+0);
+
+        $ranking = $user->relationRankings($articleid,$date);
+        if(!$ranking){
             $data = [
+              'uid'=>$user->uid,
               'articleid' => $articleid,
               'ranking_date' => $date,
               'hits' => $num,
             ];
-            $bak = $user->relationRankings()->create($data);
+            $bak = Ranking::create($data);
 
             if($bak){
-              $sheng = $userRecommendCount - $num;
+              $sheng = $userRecommendCount - $num - $userHits;
               $user->increment('score' , $s);
               $result['error'] = 0;
-              $result['message'] = "今日首推荐成功,获取 {$s} 点经验 剩余 {$sheng} 票";
+              $result['message'] = "推荐成功,获取 {$s} 点经验 剩余 {$sheng} 票";
               del_hits_cache($articleid);
               return response()->json($result);
             }
             $result['message'] = '推荐出错了';
             return response()->json($result);
         }
-        if($ranking->hits >=  $userRecommendCount){
+        //$userHits =  (int)Ranking::getUserTodayHits($user->uid,$date);
+        if($userHits >=  $userRecommendCount){
           $result['message'] = '不好意思您今日的推荐票已经用完';
           return response()->json($result);
         }
-        $nb = $userRecommendCount - $ranking->hits;
-        $zen = $ranking->hits + $num;
+
+        $zen = (int)($userHits + $num);
         if ($zen > $userRecommendCount) {
+            $nb = $userRecommendCount - $userHits;
             $result['message'] = "不好意思您今日的推荐票不够了还剩余 {$nb} 张";
             return response()->json($result);
         }
 
         $ranking->increment('hits' , $num);
-        $sheng = $userRecommendCount - $zen;
+        $sheng = (int)($userRecommendCount - $zen);
         $user->increment('score' , $s);
         $result['error'] = 0;
         $result['message'] = "推荐成功！获取 {$s} 点经验 剩余 {$sheng} 票";

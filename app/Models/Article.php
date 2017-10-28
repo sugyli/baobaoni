@@ -248,13 +248,14 @@ class Article extends Model
                     ->where('userid',$uid)->first();
     }
 
+    /*
     public function relationRankings($uid,$date)
     {
         return $this->hasOne(Ranking::class ,'articleid' ,'articleid')
                     ->where('uid',$uid)
                     ->where('ranking_date',$date)
-                    ->first();
+                    ->sum('hits');
     }
-
+    */
 
 }
