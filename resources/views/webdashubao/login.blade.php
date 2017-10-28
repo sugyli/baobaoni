@@ -36,7 +36,8 @@
 
         <div class="button">
           <input type="submit" class="btn" value="登录通行证" onclick="javascript:{this.disabled=true;this.value='提交中...';document.frmlogin.submit();}">
-          <a href="{{ $passwordSubmitAddress }}" title="忘记密码">忘记密码?</a>
+          {{--<a href="{{ $passwordSubmitAddress }}" title="忘记密码">忘记密码?</a>--}}
+          <a href="javascript:" title="忘记密码">忘记密码?</a>
         </div>
 
       </form>

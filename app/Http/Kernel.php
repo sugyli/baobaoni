@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
 
 
         'novel' => \App\Http\Middleware\VerificationNovel::class,
+        'rps' => \App\Http\Middleware\ResponseLast::class,
     ];
 }
