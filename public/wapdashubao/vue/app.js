@@ -2486,6 +2486,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
+          console.log(response);
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
             for (var i = 0; i < data.length; i++) {
