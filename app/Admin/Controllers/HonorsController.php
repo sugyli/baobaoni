@@ -169,7 +169,7 @@ class HonorsController extends Controller
     protected function delCache()
     {
       //删除缓存
-      \Cache::forget(HONORS);
+      \Cache::forget(config('app.honors'));
 
     }
 }

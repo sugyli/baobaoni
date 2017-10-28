@@ -299,12 +299,12 @@ if (!function_exists('getUserHonor')) {
       $honor = getHonor();
       if ($honor && $honor->count() >0) {
 
-        $filtered = $honor->filter(function ($item, $key) use($user){
+        $filtered = $honor->first(function ($item, $key) use($user){
 
           return ($user->score >= $item->minscore && $user->score < $item->maxscore);
 
         });
-        return $filtered->first();
+        return $filtered;
       }
       throw new \Exception('请设置用户等级');
   }
@@ -313,6 +313,7 @@ if (!function_exists('getUserHonor')) {
 if (!function_exists('getHonor')) {
   function getHonor(){
       $honor = \Cache::get(config('app.honors'));
+
       if ( !$honor ) {//不存在
           $honor = \App\Models\Honor::orderBy('maxscore', 'asc')->get();
           if ($honor->count() >0) {

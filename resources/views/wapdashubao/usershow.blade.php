@@ -231,19 +231,19 @@ p {
     <div class="cell">
         <ul class="btn-group">
             <li class="btn-group-cell center-acc-li" role="link">
-                <a href="/user/ticket/month" role="option">
+                <a href="javascript:" role="option">
                     <output>{{ $user->getUserHonor()->getDayRecommendCount() }}</output>
                     <p class="gray">日票</p>
                 </a>
             </li>
             <li class="btn-group-cell center-acc-li" role="link">
-                <a href="/user/ticket/recomm" role="option">
+                <a href="javascript:" role="option">
                     <output>{{ $user->getUserHonor()->getBookcaseCount() }}</output>
                     <p class="gray">书架</p>
                 </a>
             </li>
             <li class="btn-group-cell center-acc-li" role="link">
-                <a href="/user/ticket/recomm" role="option">
+                <a href="javascript:" role="option">
                     <output>15</output>
                     <p class="gray">等级</p>
                 </a>
