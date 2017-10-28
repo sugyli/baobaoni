@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 
 //use Illuminate\Support\MessageBag;
-use App\Admin\Extensions\Tools\DelCacheForHonor;
+use App\Admin\Tools\DelCacheForHonor;
 //use Illuminate\Support\Facades\Request;
 class HonorsController extends Controller
 {
