@@ -14,10 +14,10 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');
 */
-mix.js('resources/assets/js/webdashubao/app.js', 'public/webdashubao/vue')
-      .version();
-mix.js('resources/assets/js/wapdashubao/app.js', 'public/wapdashubao/vue')
-      .version();
+mix.js('resources/assets/js/webdashubao/app.js', 'public/webdashubao/vue').version();
+
+mix.js('resources/assets/js/wapdashubao/app.js', 'public/wapdashubao/vue').version();
+
 
 /*
 if (mix.config.inProduction) {

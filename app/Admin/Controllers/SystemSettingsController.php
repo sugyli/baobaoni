@@ -40,8 +40,8 @@ class SystemSettingsController extends Controller
 
                 $form->divide();
                 $form->text('dfxsfmdir', '小说默认封面')->default(get_sys_set('dfxsfmdir'))->help('全局通用,结尾要加 /');
-                $form->text('xsfmdir', '小说封面路径')->default(get_sys_set('xsfmdir'))->help('全局通用,结尾要加 / ,本地就直接/');
-                $form->text('imagedir', '小说内容附件地址')->default(get_sys_set('imagedir'))->help('全局通用,结尾要加 /');
+                $form->text('xsfmdir', '小说封面url')->default(get_sys_set('xsfmdir'))->help('全局通用,结尾要加 / ,本地就直接/');
+                $form->text('imagedir', '小说内容附件url')->default(get_sys_set('imagedir'))->help('全局通用,结尾要加 /');
                 $form->text('txtdir', 'TXT域名前缀')->default(get_sys_set('txtdir'))->help('全局通用,结尾要加 /');
                 $form->number('cacheTime_d', '低缓存时间')->default(get_sys_set('cacheTime_d'))->help('常用于封推或者签到等');
                 $form->number('cacheTime_z', '中缓存时间')->default(get_sys_set('cacheTime_z'))->help('常用于介绍等');

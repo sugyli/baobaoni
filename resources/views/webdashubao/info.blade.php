@@ -5,6 +5,9 @@
 
 @section('content')
 @include('webdashubao.packaging.logo-nav-jilu-qiandao')
+<section id="muad1"> 
+
+</section>
 <section class="jieshao re f-cb">
   <div class="lf jieshao-cove">
     <img src="{{ $bookData->imgflag }}" alt="{{ $bookData->articlename }}" onerror="this.src='{{get_sys_set('dfxsfmdir')}}'" />

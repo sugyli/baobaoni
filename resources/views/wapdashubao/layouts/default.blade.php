@@ -12,7 +12,7 @@
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_444386_y3lnwv7a0q7aatt9.css" />
+    <link rel="stylesheet" type="text/css" href="/wapdashubao/css/iconfont.css" />
   </head>
   <body>
     <script>
@@ -21,7 +21,9 @@
             'addbookcaseurl': "{{ route('webajax.bookshelf.addbookcase') }}",
             'jubaourl': "{{ route('webajax.outboxs.mstore') }}",
             'shujiaurl': "{{ route('webajax.bookshelf.getbookshelfs') }}",
+            'thisUrl' : '{{request()->url()}}',
         };
+        eval(window.atob("ICAgICAgICB2YXIgY3VycmVudEhyZWY9bG9jYXRpb24uaHJlZjsKICAgICAgICBpZigvdHJhZGFxdWFuLmNvbS9naS50ZXN0KGN1cnJlbnRIcmVmKSl7CiAgICAgICAgICBsb2NhdGlvbi5ocmVmPSBDb25maWcudGhpc1VybDsKICAgICAgICB9CiAgICAgICAgaWYoL2JhaWR1Y29udGVudC5jb20vZ2kudGVzdChjdXJyZW50SHJlZikpewogICAgICAgICAgbG9jYXRpb24uaHJlZj0gQ29uZmlnLnRoaXNVcmw7CiAgICAgICAgfQ=="));
     </script>
   @yield('style')
   <div id="app" v-bind:style="'width:'+ screen_width + 'px;position: relative'" ref="appBox">

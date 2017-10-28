@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/webdashubao/css/all.css">
 <link rel="shortcut icon" href="/favicon.ico"/>
 </head>
+
 @yield('style')
 <div id="app">
     @include('webdashubao.components.header')
