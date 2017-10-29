@@ -40,9 +40,6 @@ class CacheBook extends Command
     {
         $curl = new \Curl\Curl();
         $curl->setOpt(CURLOPT_TIMEOUT, 5);
-        $url = route('web.articles.show', ['bid' => 1]);
-        echo $url;
-        /*
         for ($i=205; $i < 10000; $i++) {
           $url = route('web.articles.show', ['bid' => $i]);
           $curl->get($url);
@@ -53,7 +50,6 @@ class CacheBook extends Command
           }
 
         }
-        */
         $curl->close();
 
     }
