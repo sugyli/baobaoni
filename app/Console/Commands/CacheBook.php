@@ -40,16 +40,40 @@ class CacheBook extends Command
     {
         $curl = new \Curl\Curl();
         $curl->setOpt(CURLOPT_TIMEOUT, 5);
-        for ($i=205; $i < 100000; $i++) {
-          $url = route('web.articles.show', ['bid' => $i]);
-          $curl->get($url);
-          if($curl->http_status_code == '200'){
-              $this->info("========创建 {$i} 缓存成功==========");
-          }else{
-              $this->info("========创建 {$i} 缓存失败 状态码 {$curl->http_status_code}==========");
-          }
 
+        $total = \DB::table('jieqi_article_article')->count();
+
+        $pageSize = 200;
+        //计算总页数
+        $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
+        for ($page=1; $page <= $pagenum; $page++) {
+
+              //开始的索引
+              $offset = ($page - 1) * $pageSize;
+              $books = \DB::table('jieqi_article_article')
+                      ->where('lastchapterid','>',0)
+                      ->orderBy('articleid', 'asc')
+                      ->offset($offset)
+                      ->limit($pageSize)
+                      ->get();
+              foreach ($books as $key => $book) {
+                  if (empty($book->slug)) {
+                      $url =  route('web.articles.show', ['bid' => $book->articleid]);
+                  }else{
+                      $url = route('web.articles.show', ['bid' => $book->articleid ,'slug' => $book->slug]);
+
+                  }
+                  $key = 'bookid_'.$book->articleid;
+                  \Cache::forget($key);
+                  $curl->get($url);
+                  if($curl->http_status_code == '200'){
+                      $this->info("========创建 {$url} 缓存成功==========");
+                  }else{
+                      $this->info("========创建 {$url} 缓存失败 状态码 {$curl->http_status_code}==========");
+                  }
+              }
         }
+
         $curl->close();
 
     }
