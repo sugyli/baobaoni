@@ -35,6 +35,7 @@ class SearchController extends Controller
 
   public function search()
   {
+    dd('ff');
     if(\Agent::isMobile()){
 
         return $this->isMobileSearch();
@@ -45,6 +46,7 @@ class SearchController extends Controller
 
   protected function isDesktopSearch()
   {
+
       $this->validate(request(),[
           'query' => 'required'
       ]);

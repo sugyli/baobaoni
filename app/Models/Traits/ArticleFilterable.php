@@ -38,7 +38,7 @@ trait ArticleFilterable
           break;
       case 'fenleidata':
           $id = request()->id;
-          return $this->where('sortid',$id)->orderBy('lastupdate', 'desc')->remember(get_sys_set('cacheTime_d'));
+          return $this->where('sortid',$id)->orderBy('lastupdate', 'desc');
           break;
 
       default:
