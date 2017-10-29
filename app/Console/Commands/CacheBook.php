@@ -40,7 +40,7 @@ class CacheBook extends Command
     {
         $curl = new \Curl\Curl();
         $curl->setOpt(CURLOPT_TIMEOUT, 5);
-        for ($i=205; $i < 10000; $i++) {
+        for ($i=205; $i < 100000; $i++) {
           $url = route('web.articles.show', ['bid' => $i]);
           $curl->get($url);
           if($curl->http_status_code == '200'){
