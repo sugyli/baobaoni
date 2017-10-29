@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
-
+use Watson\Rememberable\Rememberable;
 class Article extends Model
 {
-    use Traits\ArticleFilterable , SoftDeletes ,Searchable;
+    use Traits\ArticleFilterable , SoftDeletes ,Searchable ,Rememberable;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
