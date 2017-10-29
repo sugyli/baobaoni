@@ -38,6 +38,7 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
+            'Watson\\Rememberable\\' => 20,
         ),
         'T' => 
         array (
@@ -156,6 +157,10 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Watson\\Rememberable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/watson/rememberable/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -459,13 +464,16 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'App\\Admin\\Controllers\\ArticlesController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ArticlesController.php',
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
+        'App\\Admin\\Controllers\\HonorsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HonorsController.php',
         'App\\Admin\\Controllers\\InboxsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/InboxsController.php',
         'App\\Admin\\Controllers\\OutboxsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/OutboxsController.php',
         'App\\Admin\\Controllers\\SortsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SortsController.php',
         'App\\Admin\\Controllers\\SystemSettingsController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SystemSettingsController.php',
+        'App\\Admin\\Tools\\DelCacheForHonor' => __DIR__ . '/../..' . '/app/Admin/Tools/DelCacheForHonor.php',
         'App\\Admin\\Tools\\Form1' => __DIR__ . '/../..' . '/app/Admin/Tools/Form1.php',
         'App\\Admin\\Tools\\WangEditor' => __DIR__ . '/../..' . '/app/Admin/Tools/WangEditor.php',
         'App\\Admin\\Traits\\PublicTrait' => __DIR__ . '/../..' . '/app/Admin/Traits/PublicTrait.php',
+        'App\\Console\\Commands\\CacheBook' => __DIR__ . '/../..' . '/app/Console/Commands/CacheBook.php',
         'App\\Console\\Commands\\ESInit' => __DIR__ . '/../..' . '/app/Console/Commands/ESInit.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -480,6 +488,7 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'App\\Http\\Controllers\\NovelsController\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/LoginController.php',
         'App\\Http\\Controllers\\NovelsController\\OutboxsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/OutboxsController.php',
         'App\\Http\\Controllers\\NovelsController\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/RegisterController.php',
+        'App\\Http\\Controllers\\NovelsController\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/SearchController.php',
         'App\\Http\\Controllers\\NovelsController\\UserSignInController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/UserSignInController.php',
         'App\\Http\\Controllers\\NovelsController\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/UsersController.php',
         'App\\Http\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PagesController.php',
@@ -488,7 +497,9 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\ResponseLast' => __DIR__ . '/../..' . '/app/Http/Middleware/ResponseLast.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
+        'App\\Http\\Middleware\\VerificationNovel' => __DIR__ . '/../..' . '/app/Http/Middleware/VerificationNovel.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/LoginRequest.php',
         'App\\Http\\Requests\\OutboxRequest' => __DIR__ . '/../..' . '/app/Http/Requests/OutboxRequest.php',
@@ -4778,6 +4789,8 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'Watson\\Rememberable\\Query\\Builder' => __DIR__ . '/..' . '/watson/rememberable/src/Query/Builder.php',
+        'Watson\\Rememberable\\Rememberable' => __DIR__ . '/..' . '/watson/rememberable/src/Rememberable.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',

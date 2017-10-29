@@ -5319,5 +5319,55 @@
             "user agent",
             "useragent"
         ]
+    },
+    {
+        "name": "watson/rememberable",
+        "version": "2.0.3",
+        "version_normalized": "2.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dwightwatson/rememberable.git",
+            "reference": "3e07db60fe86bc471a11589fb06b60bd0e59de71"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/dwightwatson/rememberable/3e07db60fe86bc471a11589fb06b60bd0e59de71.zip",
+            "reference": "3e07db60fe86bc471a11589fb06b60bd0e59de71",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/database": "~5.0",
+            "illuminate/support": "~5.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "4.2.*"
+        },
+        "time": "2017-08-24T12:27:32+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Watson\\Rememberable\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Dwight Watson",
+                "email": "dwight@studiousapp.com"
+            }
+        ],
+        "description": "Query caching for Laravel 5",
+        "keywords": [
+            "caching",
+            "eloquent",
+            "laravel",
+            "remember"
+        ]
     }
 ]

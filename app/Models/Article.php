@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
+
 class Article extends Model
 {
     use Traits\ArticleFilterable , SoftDeletes ,Searchable;
@@ -266,6 +267,7 @@ class Article extends Model
 
     static public function saveOrGetBookData(int $bid)
     {
+
         $key = config('app.bookid') . $bid;
         $bookObj ='';
         if (\Cache::has($key)) {
