@@ -17,7 +17,7 @@ class SearchController extends Controller
         $result['message'] = '搜索关键词不能为空';
         return response()->json($result);
       }
-      $data = Article::search($query)->remember(get_sys_set('cacheTime_d'))->paginate(10);
+      $data = Article::search($query)->paginate(10);
       if($data->count() <= 0)
       {
         $result['message'] = '没有搜索到内容';
@@ -50,7 +50,7 @@ class SearchController extends Controller
           'query' => 'required'
       ]);
       $query = request('query');
-      $searchDatas = Article::search($query)->remember(get_sys_set('cacheTime_d'))->paginate(12);
+      $searchDatas = Article::search($query)->paginate(12);
       return view('webdashubao.search', compact('query', 'searchDatas'));
   }
 
