@@ -1,5 +1,31 @@
 <?php
 
+
+Route::group([
+    'namespace'     => 'NovelsController',
+], function () {
+    Route::get('/jieshaoinfo/{zid}/{bid}.htm', 'RouteCacheJController@cache1');
+    Route::get('/book/{zid}/{bid}/index.html', 'RouteCacheJController@cache1');
+    Route::get('/book/{zid}/{bid}', 'RouteCacheJController@cache1');
+
+
+    Route::get('/info-{bid}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/wapbook-{bid}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
+
+
+
+    Route::get('/sort-{id}-{zid}/{any?}', 'RouteCacheJController@cache2');
+    Route::get('/fenlei/sort{id}/{zid}/{n}.htm', 'RouteCacheJController@cache2');
+
+
+
+    Route::get('/book/{zid}/{bid}/{cid}.html', 'RouteCacheJController@cache3');
+
+    Route::get('/wapbook-{bid}-{cid}/{any?}', 'RouteCacheJController@cache3');
+});
+/*
 # ------------------小说介绍路由处理------------------------
 Route::get('/jieshaoinfo/{zid}/{bid}.htm', function ($zid, $bid) {
     $bakUrl = route('web.articles.show', ['bid' => $bid]);
@@ -69,6 +95,6 @@ Route::get('/wapbook-{bid}-{cid}/{any?}', function ($bid ,$cid) {
     return redirect($bakUrl, 301);
 });
 
-
+*/
 
 ?>

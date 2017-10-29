@@ -63,7 +63,6 @@ class CacheBook extends Command
                       $url =  route('web.articles.show', ['bid' => $book->articleid]);
                   }else{
                       $url = route('web.articles.show', ['bid' => $book->articleid ,'slug' => $book->slug]);
-
                   }
                   $key = 'bookid_'.$book->articleid;
                   \Cache::forget($key);
