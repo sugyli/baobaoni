@@ -44,6 +44,8 @@ class CacheBook extends Command
         $total = \DB::table('jieqi_article_article')->count();
 
         $pageSize = 200;
+        $ok =0;
+        $err = 0;
         //计算总页数
         $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
         for ($page=1; $page <= $pagenum; $page++) {
@@ -68,12 +70,14 @@ class CacheBook extends Command
                   $curl->get($url);
                   if($curl->http_status_code == '200'){
                       $this->info("========创建 {$url} 缓存成功==========");
+                      $ok += 1;
                   }else{
                       $this->info("========创建 {$url} 缓存失败 状态码 {$curl->http_status_code}==========");
+                      $err += 1;
                   }
               }
         }
-
+        $this->info("总计连接 {$total} 成功 {$ok} 失败 {$err}");
         $curl->close();
 
     }
