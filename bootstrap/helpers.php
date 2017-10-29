@@ -1,26 +1,4 @@
 <?php
-//缓存小说 和目录
-if (!function_exists('saveOrGetBookData')) {
-  function saveOrGetBookData($bid)
-  {
-    $key = config('app.bookid') . $bid;
-    $bookObj = \Cache::get($key);
-    if ( !$bookObj ) {//不存在
-          $article = \App\Models\Article::find($bid);
-          if (empty($article)) {
-              dd('本书不存在');
-          }
-          if(empty($article->slug)){
-            $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
-            $article->save();
-          }
-          $article->load('relationChapters');
-          \Cache::put($key, $article, get_sys_set('cacheTime_z'));
-          return $article;
-    }
-    return $bookObj;
-  }
-}
 /*
 
 //保存的是对象

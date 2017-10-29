@@ -104,28 +104,40 @@ class ArticlesController extends Controller
 
     public function isDesktopShow($bid)
     {
-        $bookData = saveOrGetBookData($bid);
-        //$slug = $request->route('slug');
-        $slug = request()->slug;
-        $any = request()->any;
-        if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
-            return redirect($bookData->link(), 301);
-        }
 
-        //$sorts = $bookData->getSort();
-        return view('webdashubao.info', compact('bookData'));
+        $bookData = Article::saveOrGetBookData($bid);
+        if($bookData){
+          $slug = request()->slug;
+          $any = request()->any;
+          if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
+              return redirect($bookData->link(), 301);
+          }
+
+          //$sorts = $bookData->getSort();
+          return view('webdashubao.info', compact('bookData'));
+
+        }
+        return redirect('/');
 
     }
     public function isMobileShow($bid)
     {
-        $bookData = saveOrGetBookData($bid);
-        $slug = request()->slug;
-        $any = request()->any;
-        if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
-            return redirect($bookData->link(), 301);
+        $bookData = Article::saveOrGetBookData($bid);
+
+        if($bookData){
+
+          $slug = request()->slug;
+          $any = request()->any;
+          if ((!empty($bookData->slug) && $bookData->slug != $slug) || !empty($any)) {
+              return redirect($bookData->link(), 301);
+          }
+
+          return view('wapdashubao.info',compact('bookData'));
+
+
         }
 
-        return view('wapdashubao.info',compact('bookData'));
+        return redirect('/');
 
     }
 
@@ -139,8 +151,13 @@ class ArticlesController extends Controller
     {
         $bid = (int)request()->bid + 0;
         $page = (int)request()->page + 0;
-        $bookData = saveOrGetBookData($bid);
+        $bookData = Article::saveOrGetBookData($bid);
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+        if(!$bookData){
+          $result['message'] = "本书不存在";
+          return response()->json($result);
+
+        }
         $total = $bookData->relationChapters->count();
         $pageSize = (int)get_sys_set('wapmululiebiao');
         //计算总页数
@@ -181,7 +198,12 @@ class ArticlesController extends Controller
         $content  = get_sys_set('dfnr');
         $bakUrl = route('web.articles.show', ['bid' => $bid]);
         $isimg = 0;//判断是否图片
-        $bookData = saveOrGetBookData($bid);
+        $bookData = Article::saveOrGetBookData($bid);
+
+        if(!$bookData){
+
+            return redirect('/');
+        }
         $pKey;
         $chapter = $bookData->relationChapters->first(function ($value, $key) use($cid , &$pKey){
             if($value->chapterid == $cid){
@@ -259,19 +281,7 @@ class ArticlesController extends Controller
             }
             return view('wapdashubao.reader', compact('chapter','previousChapter','nextChapter','content','isimg' ,'bookData','page','weizhi'));
 
-
-
-
-
-
-
         }
-
-
-
-
-
-
 
         return view('wapdashubao.reader');
 
@@ -289,7 +299,13 @@ class ArticlesController extends Controller
         //  $keyChapter = BIDCID_ . $article->articleid;
         //$chapters = saveOrGetBookChapterData($keyChapter , $article);
         //在章节列表查这个内容是否存在
-        $bookData = saveOrGetBookData($bid);
+        $bookData = Article::saveOrGetBookData($bid);
+
+        if(!$bookData){
+
+            return redirect('/');
+        }
+
         //获取分类
         $sorts = $bookData->getSort();
         $chapter = $bookData->relationChapters->where('chapterid', $cid)->first();
@@ -311,6 +327,7 @@ class ArticlesController extends Controller
 
             //下一页
             $nextChapter  =    $bookData->relationChapters->first(function ($item, $key) use($chapterorder) {
+
                                             return ($item->chapterorder > $chapterorder && $item->chaptertype <= 0);
                                       });
 
@@ -370,10 +387,7 @@ class ArticlesController extends Controller
     {
       $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',12);
       if($fenleidatas->count() > 0){
-        $sorts = get_sort('webnovel');
-        if($sorts){
-          $sorts = collect($sorts)->where('sortid',request()->id)->first();
-        }
+        $sorts = $this->article->getSort(request()->id);
         return view('webdashubao.fenlei', compact('fenleidatas','sorts'));
       }
       return redirect('/');

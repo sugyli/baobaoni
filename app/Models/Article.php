@@ -86,12 +86,7 @@ class Article extends Model
         return  $this->attributes['articlelink']  = $this->link();
 
     }
-    public function getArticlefenleiAttribute()
-    {
-        $sorts = $this->getSort();
-        return $sorts['title'] ?? '未知分类';
 
-    }
     /*
     public function setLastupdatefAttribute($value)
     {
@@ -223,11 +218,22 @@ class Article extends Model
                            });
 
     }
-    public function getSort()
+
+    public function getArticlefenleiAttribute()
     {
+        $sorts = $this->getSort($this->sortid);
+        return $sorts['title'] ?? '未知分类';
+
+    }
+
+    public function getSort($sortid = '')
+    {
+        if(!$sortid){
+            $sortid = $this->sortid;
+        }
         $sorts = get_sort('webnovel');
         if($sorts){
-          return collect($sorts)->where('sortid',$this->sortid)->first();
+          return collect($sorts)->where('sortid',$sortid)->first();
         }
         return '';
 
@@ -257,5 +263,34 @@ class Article extends Model
                     ->sum('hits');
     }
     */
+
+    static public function saveOrGetBookData(int $bid)
+    {
+        $key = config('app.bookid') . $bid;
+        $bookObj ='';
+        if (\Cache::has($key)) {
+            $bookObj = \Cache::get($key);
+        }
+
+        if ( !$bookObj ) {//不存在
+
+            $article = static::find($bid);
+            if (empty($article)) {
+                return false;
+            }
+            if(empty($article->slug)){
+              $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
+              $article->save();
+            }
+            $article->load('relationChapters');
+            \Cache::put($key, $article, get_sys_set('cacheTime_z'));
+            return $article;
+        }
+        return $bookObj;
+
+    }
+
+
+
 
 }
