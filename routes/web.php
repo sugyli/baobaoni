@@ -42,7 +42,7 @@ Route::get('/', 'PagesController@home')->name('home');
 
 Route::group([
     'namespace'     => 'NovelsController',
-    'middleware'    => ['novel'],
+    //'middleware'    => ['novel'],
 ], function () {
     Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
     Route::get('/content/{bid}/{cid}/{any?}', 'ArticlesController@showContent')->name('web.articles.content');
@@ -72,7 +72,7 @@ Route::post('webajax/outboxs/mstore', 'NovelsController\OutboxsController@mStore
 Route::group([
     'prefix'        => 'member',
     'namespace'     => 'NovelsController',
-    'middleware'    => ['novel','auth'],
+    'middleware'    => ['auth'],
 ], function () {
 
 
@@ -139,7 +139,7 @@ Route::group([
 Route::group([
     'prefix'        => 'web',
     'namespace'     => 'NovelsController',
-    'middleware'    => ['novel'],
+    //'middleware'    => ['novel'],
 ], function () {
 
   Route::get('login', 'LoginController@create')->name('web.login.create');
