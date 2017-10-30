@@ -280,10 +280,12 @@ class Article extends Model
             if (empty($article)) {
                 return false;
             }
+            /*
             if(empty($article->slug)){
               $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
               $article->save();
             }
+            */
             $article->load('relationChapters');
             \Cache::put($key, $article, get_sys_set('cacheTime_z'));
             return $article;
