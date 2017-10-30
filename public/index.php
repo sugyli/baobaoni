@@ -1,5 +1,5 @@
 <?php
-
+die('f');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
