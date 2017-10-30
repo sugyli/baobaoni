@@ -18,6 +18,7 @@ class VerificationNovel
     public function handle($request, Closure $next)
     {
         $url = request()->url();
+        dd($url);
         $weburi = get_sys_set('weburi');
         $wapuri = get_sys_set('wapuri');
         if(str_contains($url, $weburi) || str_contains($url, $wapuri)){
