@@ -14,6 +14,7 @@ class CreateSessionsTable extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
+            $table->engine='MyISAM';
             $table->string('id')->unique();
             $table->unsignedInteger('user_id')->nullable();
             $table->string('ip_address', 45)->nullable();

@@ -14,6 +14,7 @@ class CreateSortsTable extends Migration
     public function up()
     {
         Schema::create('sorts', function (Blueprint $table) {
+            $table->engine='MyISAM';
             $table->increments('id');
             $table->integer('parent_id')->default(0);
             $table->integer('order')->default(0);

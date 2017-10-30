@@ -14,6 +14,7 @@ class CreateRankingsTable extends Migration
     public function up()
     {
         Schema::create('rankings', function (Blueprint $table) {
+            $table->engine='MyISAM';
             $table->increments('id');
             $table->unsignedInteger('articleid')->default(0);
             $table->unsignedInteger('uid')->default(0);

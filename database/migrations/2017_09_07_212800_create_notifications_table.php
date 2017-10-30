@@ -14,6 +14,7 @@ class CreateNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
+            $table->engine='MyISAM';
             $table->uuid('id')->primary();
             $table->string('type');
             $table->morphs('notifiable');

@@ -14,6 +14,7 @@ class CreateTrashesTable extends Migration
     public function up()
     {
         Schema::create('trashes', function (Blueprint $table) {
+            $table->engine='MyISAM';
             $table->increments('id');
             $table->string('body')->index();
             $table->morphs('trashestable');
