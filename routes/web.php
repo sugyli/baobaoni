@@ -11,6 +11,7 @@
 |
 */
 # ------------------ Page Route ------------------------
+/*
 Route::group([
     'namespace'     => 'NovelsController',
     'middleware'    => ['novel'],
@@ -36,7 +37,7 @@ Route::group([
 
     Route::get('/wapbook-{bid}-{cid}/{any?}', 'RouteCacheJController@cache3');
 });
-
+*/
 
 Route::get('/', 'PagesController@home')->name('home');
 
