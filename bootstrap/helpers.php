@@ -478,7 +478,7 @@ if (!function_exists('get_sys_set')) {
       }
 
 }
-if (!function_exists('get_sys_set')) {
+if (!function_exists('strFilter')) {
     function strFilter($str){
         $str = str_replace('`', '', $str);
         $str = str_replace('·', '', $str);
