@@ -11,10 +11,9 @@
 |
 */
 # ------------------ Page Route ------------------------
-/*
+
 Route::group([
     'namespace'     => 'NovelsController',
-    'middleware'    => ['novel'],
 ], function () {
     Route::get('/jieshaoinfo/{zid}/{bid}.htm', 'RouteCacheJController@cache1');
     Route::get('/book/{zid}/{bid}/index.html', 'RouteCacheJController@cache1');
@@ -37,13 +36,13 @@ Route::group([
 
     Route::get('/wapbook-{bid}-{cid}/{any?}', 'RouteCacheJController@cache3');
 });
-*/
+
 
 Route::get('/', 'PagesController@home')->name('home');
 
 Route::group([
     'namespace'     => 'NovelsController',
-    //'middleware'    => ['novel'],
+    'middleware'    => ['novel'],
 ], function () {
     Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
     Route::get('/content/{bid}/{cid}/{any?}', 'ArticlesController@showContent')->name('web.articles.content');
