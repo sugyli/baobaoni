@@ -51,7 +51,6 @@ Route::group([
 
     Route::get('/mulu/{bid}','ArticlesController@showMulu')->name('web.articles.mulu');
 
-    Route::get('/fenlei/{id}','ArticlesController@showfenlei')->name('web.articles.fenlei');
 });
 
 
