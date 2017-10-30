@@ -17,6 +17,7 @@ class SearchController extends Controller
         $result['message'] = '搜索关键词不能为空';
         return response()->json($result);
       }
+      $query = strFilter($query);
       $data = Article::search($query)->paginate(10);
       if($data->count() <= 0)
       {
@@ -50,6 +51,7 @@ class SearchController extends Controller
           'query' => 'required'
       ]);
       $query = request('query');
+      $query = strFilter($query);
       $searchDatas = Article::search($query)->paginate(12);
       return view('webdashubao.search', compact('query', 'searchDatas'));
   }

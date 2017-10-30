@@ -478,5 +478,60 @@ if (!function_exists('get_sys_set')) {
       }
 
 }
-
+if (!function_exists('get_sys_set')) {
+    function strFilter($str){
+        $str = str_replace('`', '', $str);
+        $str = str_replace('·', '', $str);
+        $str = str_replace('~', '', $str);
+        $str = str_replace('!', '', $str);
+        $str = str_replace('！', '', $str);
+        $str = str_replace('@', '', $str);
+        $str = str_replace('#', '', $str);
+        $str = str_replace('$', '', $str);
+        $str = str_replace('￥', '', $str);
+        $str = str_replace('%', '', $str);
+        $str = str_replace('^', '', $str);
+        $str = str_replace('……', '', $str);
+        $str = str_replace('&', '', $str);
+        $str = str_replace('*', '', $str);
+        $str = str_replace('(', '', $str);
+        $str = str_replace(')', '', $str);
+        $str = str_replace('（', '', $str);
+        $str = str_replace('）', '', $str);
+        $str = str_replace('-', '', $str);
+        $str = str_replace('_', '', $str);
+        $str = str_replace('——', '', $str);
+        $str = str_replace('+', '', $str);
+        $str = str_replace('=', '', $str);
+        $str = str_replace('|', '', $str);
+        $str = str_replace('\\', '', $str);
+        $str = str_replace('[', '', $str);
+        $str = str_replace(']', '', $str);
+        $str = str_replace('【', '', $str);
+        $str = str_replace('】', '', $str);
+        $str = str_replace('{', '', $str);
+        $str = str_replace('}', '', $str);
+        $str = str_replace(';', '', $str);
+        $str = str_replace('；', '', $str);
+        $str = str_replace(':', '', $str);
+        $str = str_replace('：', '', $str);
+        $str = str_replace('\'', '', $str);
+        $str = str_replace('"', '', $str);
+        $str = str_replace('“', '', $str);
+        $str = str_replace('”', '', $str);
+        $str = str_replace(',', '', $str);
+        $str = str_replace('，', '', $str);
+        $str = str_replace('<', '', $str);
+        $str = str_replace('>', '', $str);
+        $str = str_replace('《', '', $str);
+        $str = str_replace('》', '', $str);
+        $str = str_replace('.', '', $str);
+        $str = str_replace('。', '', $str);
+        $str = str_replace('/', '', $str);
+        $str = str_replace('、', '', $str);
+        $str = str_replace('?', '', $str);
+        $str = str_replace('？', '', $str);
+        return trim($str);
+    }
+}
 ?>
