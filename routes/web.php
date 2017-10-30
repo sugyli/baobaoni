@@ -41,7 +41,7 @@ Route::get('/', 'PagesController@home')->name('home');
 
 Route::group([
     'namespace'     => 'NovelsController',
-    'middleware'    => ['novel'],
+    //'middleware'    => ['novel'],
 ], function () {
     Route::get('/articles/{bid}/{slug?}/{any?}', 'ArticlesController@show')->name('web.articles.show');
     Route::get('/content/{bid}/{cid}/{any?}', 'ArticlesController@showContent')->name('web.articles.content');
