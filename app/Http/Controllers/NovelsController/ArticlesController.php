@@ -385,6 +385,7 @@ class ArticlesController extends Controller
 
     public function showfenlei()
     {
+      dd(request()->id);
       $fenleidatas = $this->article->getArticlesWithFilter('fenleidata',12);
       if($fenleidatas->count() > 0){
         $sorts = $this->article->getSort(request()->id);
