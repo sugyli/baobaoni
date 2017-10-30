@@ -13,6 +13,7 @@
 # ------------------ Page Route ------------------------
 Route::group([
     'namespace'     => 'NovelsController',
+    'middleware'    => ['novel'],
 ], function () {
     Route::get('/jieshaoinfo/{zid}/{bid}.htm', 'RouteCacheJController@cache1');
     Route::get('/book/{zid}/{bid}/index.html', 'RouteCacheJController@cache1');
