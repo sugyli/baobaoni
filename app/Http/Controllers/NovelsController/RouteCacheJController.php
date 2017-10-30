@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 class RouteCacheJController extends Controller
 {
     public function cache1(){
+      dd('dd');
       $bid = request()->bid;
       $bakUrl = route('web.articles.show', ['bid' => $bid]);
       return redirect($bakUrl, 301);
