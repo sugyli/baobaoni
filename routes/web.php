@@ -26,7 +26,7 @@ Route::group([
 
 
 
-    Route::get('/sort-{id}-{zid}/{any?}', 'RouteCacheJController@cache2');
+    //Route::get('/sort-{id}-{zid}/{any?}', 'RouteCacheJController@cache2');
     //Route::get('/fenlei/sort{id}/{zid}/{n}.htm', 'RouteCacheJController@cache2');
 
 
