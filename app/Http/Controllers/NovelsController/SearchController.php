@@ -52,6 +52,7 @@ class SearchController extends Controller
       ]);
       $query = request('query');
       $query = strFilter($query);
+      dd($query);
       $searchDatas = Article::search($query)->paginate(12);
       return view('webdashubao.search', compact('query', 'searchDatas'));
   }
