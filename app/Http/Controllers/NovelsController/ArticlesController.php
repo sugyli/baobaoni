@@ -12,13 +12,21 @@ class ArticlesController extends Controller
 {
 
 
-    protected $article;
-
-    public function __construct(Article $article)
+    public function __construct()
     {
-        $this->article = $article;
 
     }
+
+
+
+    public function home(Article $article){
+
+      //$newBookDatas = $article->limit(6)->orderBy('postdate', 'desc')->remember(60)->cacheTags('home_newbook');
+      dd('w');
+    }
+
+
+    /*
 
     public function index(){
 
@@ -393,6 +401,6 @@ class ArticlesController extends Controller
       return redirect('/');
     }
 
-
+    */
 
 }

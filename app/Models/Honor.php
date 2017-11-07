@@ -19,10 +19,11 @@ class Honor extends Model
 
     public function getBookcaseCount()
     {
-      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : get_sys_set('bookcasemaxcount');
+      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : config('app.bookcasemaxcount');
     }
+    //推荐数
     public function getDayRecommendCount()
     {
-      return isset($this->setting['dayrecommendcount']) ? $this->setting['dayrecommendcount'] : get_sys_set('dayrecommendmaxcount');
+      return isset($this->setting['dayrecommendcount']) ? $this->setting['dayrecommendcount'] : config('app.dayrecommendmaxcount');
     }
 }

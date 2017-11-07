@@ -9,121 +9,111 @@
             Util.StorageDelAll();
             Util.StorageSetter('first_del_v1',1);
         }
-
+        //开启Vue
         self.vuefun();
     },
     vuefun:function(){
 
-          var windowWidth = Util.windowWidth;
           //var offset = $($('.Swipe-tab').find('a')[0]).offset();
           //var index_header_tab_width = offset.width;
           //var index_header_tab_width = $($('.Swipe-tab').find('a')[0]).width();
           window.VM =  new Vue({
                     	  el:'#app',
-                    	  data :{
-                    	  	  screen_width:windowWidth,
-                            //double_screen_width:windowWidth*2,
-                            screen_height:Util.windowHeight,
-                            //index_header_tab_width:index_header_tab_width,
-                            //header_duration:0,
-                            //header_position:0,
-                            //position:0,
-                            //tab_1_class:'Swipe-tab__on',
-                            //tab_2_class:'',
-                            read_f:0,
-                            read_e:0,
+                    	  data:{
+                          screen_width:Util.windowWidth,
+                          screen_height:Util.windowHeight,
+                          read_f:0,
+                          read_e:0,
                     	  },
+                        components: {
+
+                        },
                     	  methods:{
-                          tuijian(bid, num = 1){
-                            bid = Number(bid);
-                            var self = this;
-                            if(self.read_f > 0 || self.read_e > 0){
-                              return;
-                            }else{
-                                self.$loading('推荐请求中...');
-                                self.read_f = 1;
-                                axios.post(Config.recommend, {
-                                      bid: bid,
-                                      num: num,
-                                  })
-                                  .then(function (response) {
-                                    self.$loading.close();
-                                    //console.log(response);
-                                    self.read_f = 0;
-                                    if(response.data.message){
-                                      setTimeout(function () {
-                                          self.$toast.center(response.data.message);
-                                      }, 500);
-
-                                    }else{
-                                      console.log(response);
-                                      setTimeout(function () {
-                                          self.$toast.center('返回数据出错了');
-                                      }, 500);
-                                    }
-
-                                  })
-                                  .catch(function (response) {
-                                      self.$loading.close();
-                                      self.read_f = 0;
-                                      console.log(response);
-                                      setTimeout(function () {
-                                          self.$toast.center('网络故障稍后再试');
-                                      }, 500);
-                                  });
-
-                                }
-
-                          },
-                          addbookcase(bid ,cid){
+                            tuijian(bid, num = 1){
                               bid = Number(bid);
-                              cid = Number(cid);
                               var self = this;
-                              if(self.read_e > 0 || self.read_f > 0){
+                              if(self.read_f > 0 || self.read_e > 0){
                                 return;
                               }else{
-                                  self.$loading('收藏请求中...');
-                                  self.read_e = 1;
-                                  axios.post(Config.addbookcaseurl, {
+                                  self.$loading('推荐请求中...');
+                                  self.read_f = 1;
+                                  axios.post(Config.recommendurl, {
                                         bid: bid,
-                                        cid: cid,
+                                        num: num,
                                     })
                                     .then(function (response) {
                                       self.$loading.close();
-                                      self.read_e = 0;
+                                      //console.log(response);
+                                      self.read_f = 0;
                                       if(response.data.message){
                                         setTimeout(function () {
                                             self.$toast.center(response.data.message);
                                         }, 500);
-
 
                                       }else{
                                         console.log(response);
                                         setTimeout(function () {
                                             self.$toast.center('返回数据出错了');
                                         }, 500);
-
                                       }
 
                                     })
                                     .catch(function (response) {
                                         self.$loading.close();
-                                        self.read_e = 0;
+                                        self.read_f = 0;
                                         console.log(response);
                                         setTimeout(function () {
                                             self.$toast.center('网络故障稍后再试');
                                         }, 500);
-
                                     });
-                              }
 
-                          },
-                          qiandao(){
+                                  }
+                            },
 
-                            alert('f');
+                            addbookcase(bid ,cid){
+                                bid = Number(bid);
+                                cid = Number(cid);
+                                var self = this;
+                                if(self.read_e > 0 || self.read_f > 0){
+                                  return;
+                                }else{
+                                    self.$loading('收藏请求中...');
+                                    self.read_e = 1;
+                                    axios.post(Config.addbookcaseurl, {
+                                          bid: bid,
+                                          cid: cid,
+                                      })
+                                      .then(function (response) {
+                                        self.$loading.close();
+                                        self.read_e = 0;
+                                        if(response.data.message){
+                                          setTimeout(function () {
+                                              self.$toast.center(response.data.message);
+                                          }, 500);
 
-                          }
 
+                                        }else{
+                                          console.log(response);
+                                          setTimeout(function () {
+                                              self.$toast.center('返回数据出错了');
+                                          }, 500);
+
+                                        }
+
+                                      })
+                                      .catch(function (response) {
+                                          self.$loading.close();
+                                          self.read_e = 0;
+                                          console.log(response);
+                                          setTimeout(function () {
+                                              self.$toast.center('网络故障稍后再试');
+                                          }, 500);
+
+                                      });
+                                }
+
+                            },
+                
 
                         },
 
@@ -175,11 +165,6 @@
           $('[data-background="' + initBackground + '"]').children('.bk-container-current').css('display', 'block');
           //Body.css('background', initBackground);
           VM.$refs.appBox.style.background = initBackground;
-
-
-
-
-
 
 
           /*todo 入口函数*/
@@ -301,33 +286,30 @@
                   }
               });
               Win.scroll(function () {
-
-                  Dom.bottom_nav.hide();
-                  Dom.top_nav.hide();
-                  Dom.reader__ft_bar.hide();
-                  //Dom.font_button.removeClass('current');
-                  Dom.font_container.hide();
-                  $(Dom.font_button.find('i')[0]).removeClass('current');
-
-                  Dom.gongneng_container.hide();
-                  $(Dom.gongneng_button.find('i')[0]).removeClass('current');
+                hideHtml();
               });
+              function hideHtml() {
+                Dom.bottom_nav.hide();
+                Dom.top_nav.hide();
+                Dom.reader__ft_bar.hide();
+                //Dom.font_button.removeClass('current');
+                Dom.font_container.hide();
+                $(Dom.font_button.find('i')[0]).removeClass('current');
+
+                Dom.gongneng_container.hide();
+                $(Dom.gongneng_button.find('i')[0]).removeClass('current');
+              }
 
           }
 
           main();//调用入口函数
-
 
       },
       saveMuluHistory: function(bid , page ,weizhi,cid) {
         var key = 'muluobj_' + bid;
         var obj = {'page':page,'weizhi':weizhi ,'cid':cid}
         Util.StorageSetter(key, obj);
-
       },
-
-
-
 
   }
 

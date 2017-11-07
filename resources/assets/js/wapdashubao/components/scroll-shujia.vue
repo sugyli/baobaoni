@@ -1,8 +1,8 @@
 <template>
 	<div class="shujia" :style="'height:'+screen_height+'px;background: #fff;'">
-		<div class="header online HeaderTitlePosition">
-		    书架已存({{num}})本
-				<a :href="bkurl" class="header-left">
+		<div class="header online" style="text-align: center;">
+				我的书架
+				<a class="header-left" :href="bkurl">
 					<i class="iconfont icon-fanhui1"></i>
 				</a>
 		</div>
@@ -18,7 +18,7 @@
 				<span class="red-bg">您的等级只能显示 {{bookcasecount}} 本 如果越界请删除不要的收藏才能显示更多</span>
 				</li>
 				<li v-for="item in items" :id="item.caseid">
-						<p>书名：<img src="/webdashubao/images/new.gif" v-if="item.relation_articles && item.relation_articles.lastupdate > item.lastvisit">
+						<p>书名：<img src="/images/new.gif" v-if="item.relation_articles && item.relation_articles.lastupdate > item.lastvisit">
 						<a v-if="item.relation_articles" :href="redurl +'/' + item.relation_articles.articleid">
 							<span v-if="item.relation_articles && item.relation_articles.lastupdate > item.lastvisit" class="red-bg">
 							{{item.relation_articles.articlename}}
@@ -39,7 +39,7 @@
 							<label v-else>无最新章节</label>
 						</p>
 
-						<p v-if="item.relation_articles">更新时间：{{ get_Date(item.relation_articles.lastupdate) }}</label>
+						<p v-if="item.relation_articles">更新时间：{{ item.relation_articles.updatetime }}</label>
 						<p v-else>更新时间：无</p>
 
 						<p><a v-on:click.stop="case_del(item.caseid)"><span class="red-bg">删除本书</span></a></p>
@@ -145,11 +145,36 @@
 			},
 			case_del(id){
 				var self = this;
-				var url = self.destroyurl +"/"+id;
+				//var url = self.destroyurl +"/"+id;
+				var url = self.destroyurl;
 				this.$dialog.confirm('确认将本书移除吗')
 						.then(function () {
-								$.get(url, '', function(response) {
 
+								axios.post(url, {
+									caseid: id
+									})
+									.then(function (response) {
+											if (response.data.error == 0) {
+												$("#"+id).html("<li><p class='red-bg'>已经删除!</p></li>");
+												//self.$toast.center($.trim(unescape(response.message)));
+												self.$toast.center(response.data.message);
+												self.num = Number(self.num) -1;
+												self.num = self.num <= 0 ? 0 : self.num;
+												return;
+											}else{
+													self.$toast.center('删除失败了');
+													return;
+											}
+									})
+									.catch(function (response) {
+											console.log(response);
+											self.$toast.center('服务器维护稍后再试');
+											return;
+
+									});
+
+								/*
+								$.get(url, '', function(response) {
 										if (response && response.error == 0) {
 												$("#"+id).html("<li><p class='red-bg'>已经删除!</p></li>");
 												self.$toast.center($.trim(unescape(response.message)));
@@ -166,6 +191,7 @@
 										self.$toast.center('服务器维护稍后再试');
 										return;
 								});
+								*/
 						})
 						.catch(function () {
 

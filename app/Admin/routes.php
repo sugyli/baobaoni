@@ -10,19 +10,19 @@ Route::group([
     'middleware'    => ['web', 'admin'],
 ], function (Router $router) {
 
-    $router->get('/', 'HomeController@index');
-    $router->get('systemsettings', 'SystemSettingsController@index');
-    $router->post('systemsettings', 'SystemSettingsController@seting');
+    //$router->get('/', 'HomeController@index');
+    //$router->get('systemsettings', 'SystemSettingsController@index');
+    //$router->post('systemsettings', 'SystemSettingsController@seting');
 
-    $router->resource('sorts', 'SortsController', ['except' => ['create']]);
+    //$router->resource('sorts', 'SortsController', ['except' => ['create']]);
 
-    $router->resource('inboxs', InboxsController::class, ['except' => ['create','edit','destroy','update']]);
-    $router->post('inboxs/imageupload', 'InboxsController@imageUpload');
+    //$router->resource('inboxs', InboxsController::class, ['except' => ['create','edit','destroy','update']]);
+    //$router->post('inboxs/imageupload', 'InboxsController@imageUpload');
 
-    $router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
-    $router->resource('articles', ArticlesController::class);
-    $router->resource('honors', HonorsController::class);
-    $router->delete('delhonorscache', 'HonorsController@delCache')->name('admin.delhonorscache');
+    //$router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
+    //$router->resource('articles', ArticlesController::class);
+    //$router->resource('honors', HonorsController::class);
+    //$router->delete('delhonorscache', 'HonorsController@delCache')->name('admin.delhonorscache');
 
     /*
     get('/users', 'UsersController@index')->name('users.index');
@@ -33,7 +33,7 @@ Route::group([
     patch('/users/{id}', 'UsersController@update')->name('users.update');
     delete('/users/{id}', 'UsersController@destroy')->name('users.destroy');
      */
-     $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+     //$router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
 });

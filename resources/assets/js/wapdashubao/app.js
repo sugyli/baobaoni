@@ -32,10 +32,10 @@ var Util = (function () {
     }
 })();
 window.Util = Util;
-/*
+
 import VueScroller from 'vue-scroller'
 Vue.use(VueScroller)
-*/
+
 import 'vue2-toast/lib/toast.css';
 import Toast from 'vue2-toast';
 Vue.use(Toast, {
@@ -54,16 +54,19 @@ Vue.use(VuejsDialog ,{
   }
 );
 
-Vue.component('mheader', require('./components/mheader.vue'));
 
-Vue.component('scroll-search', require('./components/scroll-search.vue'));
-Vue.component('scroll-mulu', require('./components/scroll-mulu.vue'));
-//Vue.component('user-report', require('./components/user-report.vue'));
+Vue.component('scroll-mulu', require('./components/mulu.vue'));
 Vue.component('scroll-shujia', require('./components/scroll-shujia.vue'));
+//Vue.component('mheader', require('./components/mheader.vue'));
+
+//Vue.component('scroll-search', require('./components/scroll-search.vue'));
+//Vue.component('scroll-mulu', require('./components/scroll-mulu.vue'));
+//Vue.component('user-report', require('./components/user-report.vue'));
+//Vue.component('scroll-shujia', require('./components/scroll-shujia.vue'));
 
 
 
-Vue.component('rotate-loade', require('vue-spinner/src/RotateLoader.vue'));
+//Vue.component('rotate-loade', require('vue-spinner/src/RotateLoader.vue'));
 
 
 require('./pjs');

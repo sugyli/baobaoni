@@ -61,8 +61,8 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         $url = $request->redirect_url ?
-                    route('web.login.create') .'?redirect_url=' .$request->redirect_url
-                    : route('web.login.create');
+                    route('novel.login') .'?redirect_url=' .$request->redirect_url
+                    : route('novel.login');
 
 
         return redirect()->guest($url);

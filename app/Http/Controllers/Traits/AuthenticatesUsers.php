@@ -21,7 +21,7 @@ trait AuthenticatesUsers
   {
     //$backUrl = route('member.show', [Auth::user()]);
     //$redirect_url = \Request::query('redirect_url');
-    $redirect_url = request()->redirect_url ?: route('member.user.show');
+    $redirect_url = request()->redirect_url ?: route('novel.user.show');
     //$redirect_url = request()->input('redirect_url',$backUrl);
     return redirect($redirect_url);
   }
@@ -30,9 +30,9 @@ trait AuthenticatesUsers
   {
     //$redirect_url = request()->input('redirect_url');
     //$redirect_url = \Request::query('redirect_url');
-    $loginUrl = route('web.login.create');
-    $registerUrl = route('web.register.create');
-    $passwordUrl = route('web.password.create');
+    $loginUrl = route('novel.login');
+    $registerUrl = route('novel.register');
+    $passwordUrl = route('novel.password');
     $redirect_url = request()->redirect_url;
     if ($redirect_url) {
       if (str_contains( $redirect_url , $loginUrl ) || str_contains($redirect_url ,$registerUrl) || str_contains($redirect_url ,$passwordUrl)) {

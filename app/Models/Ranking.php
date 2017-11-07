@@ -43,7 +43,7 @@ class Ranking extends Model
     public function relationArticles()
     {
 
-        return $this->hasOne(Article::class ,'articleid' ,'articleid');
+        return $this->hasOne(Article::class ,'articleid' ,'articleid')->getBasicsBook();
     }
 
     static public function getUserTodayHits($uid,$date)

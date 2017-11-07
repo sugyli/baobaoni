@@ -6,26 +6,40 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Carbon\Carbon;
-use Laravel\Scout\Searchable;
+//use Laravel\Scout\Searchable;
 use Watson\Rememberable\Rememberable;
 class Article extends Model
 {
-    use Traits\ArticleFilterable , SoftDeletes ,Searchable ,Rememberable;
+    //use Traits\ArticleFilterable ,
+    use SoftDeletes ,Rememberable;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
-    protected $hidden = ['lastupdatef'];
-    /**
-     * 访问器被附加到模型数组的形式。
-     *
-     * @var array
-     */
-    protected $appends = ['lastupdatef','articlelink','articlefenlei'];
+
+    protected $visible = [
+        'articleid',
+        'articlename',
+        'link',
+        'imgflag',
+        'fullflag',
+        'author',
+        'intro',
+        'sort',
+        'slug',
+        'lastupdate',
+        'updatetime',
+        'mulu',
+        'relationChapters'
+      ];
+
+    protected $appends = ['link','sort','updatetime','mulu'];
     /**
      * 数据模型的启动方法
      *
      * @return void
      */
+
+    /*
     protected static function boot()
     {
         parent::boot();
@@ -34,6 +48,7 @@ class Article extends Model
             $builder->where('lastchapterid', '>', 0);
         });
     }
+    */
     /**
    * 为路由模型获取键名
    *
@@ -44,209 +59,56 @@ class Article extends Model
         return 'articleid';
     }
 
-    /**
-     * 得到该模型索引的名称。
-     *
-     * @return string
-     */
-    public function searchableAs()
+    public function getLinkAttribute()
     {
-        return 'articles_index';
+      if (empty($this->slug)) {
+        return route('novel.info', ['bid' => $this->articleid]);
+      }
+      return route('novel.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
+    }
+    public function getUpdatetimeAttribute()
+    {
+      return formatTime($this->attributes['lastupdate']);
     }
 
-    /**
-     * 得到该模型可索引数据的数组。
-     *
-     * @return array
-     */
-    public function toSearchableArray()
+    public function getImgflagAttribute($value)
     {
-        return [
-          'articlename'=>$this->articlename,
-          'author'=>$this->author,
-          'slug' => $this->slug,
-        ];
-    }
+      return
+              $value > 0 ?
+                          config('app.xsfmdir')
+                          . floor($this->articleid / 1000)
+                          . '/' . $this->articleid . '/'
+                          . $this->articleid . 's.jpg'
+                        :
+                          config('app.dfxsfmdir');
 
+    }
 
     public function getFullflagAttribute($value)
     {
         return $value > 0 ? '完本' : '连载';
     }
-    public function setFullflagAttribute($value)
+
+    public function getSortAttribute()
     {
-        $this->attributes['fullflag'] = $value == '完本' ? 1 : 0;
+        $key = (int)($this->sortid - 1);
+        return config('app.fenlei')[$key] ?? '未知分类';
     }
 
-    public function getLastupdatefAttribute()
+    public function getMuluAttribute()
     {
-        return  $this->attributes['lastupdatef']  = $this->attributes['lastupdate'] > 0 ? formatTime($this->attributes['lastupdate']) : '未知';
-    }
-    public function getArticlelinkAttribute()
-    {
-        return  $this->attributes['articlelink']  = $this->link();
-
-    }
-
-    /*
-    public function setLastupdatefAttribute($value)
-    {
-        $this->attributes['lastupdate'] = time();
-    }
-    */
-    public function getImgflagAttribute($value)
-    {
-      return
-              $value > 0 ?
-                          get_sys_set('xsfmdir')
-                          . floor($this->articleid / 1000)
-                          . '/' . $this->articleid . '/'
-                          . $this->articleid . 's.jpg'
-                        :
-                          get_sys_set('dfxsfmdir');
-
-
-    }
-    /*
-    public function setImgflagAttribute($value)
-    {
-        $this->attributes['fullflag'] = empty($value) ? 0 : 1;
-    }
-    */
-    public function link()
-    {
-        if (empty($this->slug)) {
-            return route('web.articles.show', ['bid' => $this->articleid]);
-        }
-
-        return route('web.articles.show', ['bid' => $this->articleid ,'slug' => $this->slug]);
+      return route('novel.mulu',['bid'=>$this->articleid]);
 
     }
 
-    /*
-    public function getPostdateAttribute($value)
-    {
-        $value =  date("Y-n-d h:i",$value);
-        return \Carbon\Carbon::createFromFormat('Y-n-d h:i', $value)->diffForHumans();
-    }
-    */
-    /**
-     * 为路由模型获取键名
-     *
-     * @return string
-     */
-     /*
-    public function getRouteKeyName()
-    {
-        return 'articleid';
-    }
-    */
-
-    public function getWeekHits()
-    {
-
-      $articleid = $this->articleid;
-      return
-            \Cache::remember(config('app.weekhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
-
-                              $week_begin = mktime(0, 0, 0,date("m"),date("d")-date("w")+1,date("Y"));
-                              $week_end = mktime(23,59,59,date("m"),date("d")-date("w")+7,date("Y"));
-
-                              $ranking =
-                                          Ranking::select(\DB::raw('sum(hits) as h,articleid'))
-                                                        ->whereBetween('ranking_date', [$week_begin, $week_end])
-                                                        ->where('articleid',$articleid)
-                                                        ->groupBy('articleid')
-                                                        ->orderBy('h', 'desc')
-                                                        ->first();
-                                  if($ranking){
-
-                                    return $ranking->h;
-                                  }
-                                  return 0;
-
-                           });
-
-    }
-
-    public function getMonthHits()
-    {
-
-      $articleid = $this->articleid;
-      return
-            \Cache::remember(config('app.monthhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
-                              $dt = Carbon::now();
-                              $ranking =
-                                          Ranking::select(\DB::raw('sum(hits) as h,articleid'))
-                                                        ->whereYear('created_at', $dt->year)
-                                                        ->whereMonth('created_at', $dt->month)
-                                                        ->where('articleid',$articleid)
-                                                        ->groupBy('articleid')
-                                                        ->orderBy('h', 'desc')
-                                                        ->first();
-                                  if($ranking){
-
-                                    return $ranking->h;
-                                  }
-                                  return 0;
-
-                           });
-
-    }
-
-    public function getDayHits()
-    {
-
-      $articleid = $this->articleid;
-      return
-            \Cache::remember(config('app.dayhits').$this->articleid, get_sys_set('cacheTime_g'), function () use ($articleid){
-                              $dt = Carbon::now();
-                              $ranking =
-                                          Ranking::select(\DB::raw('sum(hits) as h,articleid'))
-                                                        ->whereYear('created_at', $dt->year)
-                                                        ->whereMonth('created_at', $dt->month)
-                                                        ->whereDay('created_at', $dt->day)
-                                                        ->where('articleid',$articleid)
-                                                        ->groupBy('articleid')
-                                                        ->orderBy('h', 'desc')
-                                                        ->first();
-                                  if($ranking){
-
-                                    return $ranking->h;
-                                  }
-                                  return 0;
-
-                           });
-
-    }
-
-    public function getArticlefenleiAttribute()
-    {
-        $sorts = $this->getSort($this->sortid);
-        return $sorts['title'] ?? '未知分类';
-
-    }
-
-    public function getSort($sortid = '')
-    {
-        if(!$sortid){
-            $sortid = $this->sortid;
-        }
-        $sorts = get_sort('webnovel');
-        if($sorts){
-          return collect($sorts)->where('sortid',$sortid)->first();
-        }
-        return '';
-
-    }
-
+//关联
     public function relationChapters()
     {
       //第2个参数是 chapter类的外键   第3个是 本类中articleid
         return $this->hasMany(Chapter::class ,'articleid' ,'articleid')
-                    //->where('display',0)
+                    ->where('chaptertype','<=' ,0)
                     ->orderBy('chapterorder', 'asc')
-                    ->limit(get_sys_set('maxchapter'));
+                    ->limit(config('app.maxchapter'));
     }
 
     public function relationBookcases($uid)
@@ -255,46 +117,13 @@ class Article extends Model
                     ->where('userid',$uid)->first();
     }
 
-    /*
-    public function relationRankings($uid,$date)
+
+
+
+    //前台使用
+    public function scopeGetBasicsBook($query)
     {
-        return $this->hasOne(Ranking::class ,'articleid' ,'articleid')
-                    ->where('uid',$uid)
-                    ->where('ranking_date',$date)
-                    ->sum('hits');
+        return $query->where('lastchapterid', '>', 0)
+                    ->where('display', '<=', '0');
     }
-    */
-
-    static public function saveOrGetBookData(int $bid)
-    {
-
-        $key = config('app.bookid') . $bid;
-        $bookObj ='';
-        if (\Cache::has($key)) {
-            $bookObj = \Cache::get($key);
-        }
-
-        if ( !$bookObj ) {//不存在
-
-            $article = static::find($bid);
-            if (empty($article)) {
-                return false;
-            }
-
-            if(empty($article->slug)){
-              $article->slug =  \App\Libraries\SlugTranslate::translate($article->articlename);
-              $article->save();
-            }
-  
-            $article->load('relationChapters');
-            \Cache::put($key, $article, get_sys_set('cacheTime_z'));
-            return $article;
-        }
-        return $bookObj;
-
-    }
-
-
-
-
 }

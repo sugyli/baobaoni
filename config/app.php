@@ -1,39 +1,73 @@
 <?php
 
 return [
+
+    'cacheTime_d' => env('CACHETIME_D'),
+    'cacheTime_z' => env('CACHETIME_Z'),
+    'cacheTime_g' => env('CACHETIME_G'),
+    'keywords' => env('KEYWORDS'),
+    'des' => env('DES'),
+    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认图片
+    'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
+    'fenlei' => [
+      '玄幻魔法',
+      '武侠修真',
+      '都市言情',
+      '历史穿越',
+      '历史穿越',
+      '游戏竞技',
+      '军事科幻',
+      '综合类型',
+      '名家作品',
+      '网友更新',
+      '商战职场',
+      '同人小说'
+
+    ],
+    'maxchapter' => 10000,//章节最大数量
+    'wapmululiebiao' => 20,//目录每页数量
+    'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
+    'txtdir' => env('TXTDIR'),//txt域名
+    'txtlog' => false,//是否开启txt采集日记
+    'minnr' => 300,//章节内容最小内容
+    'imagedir' => env('IMAGEDIR'),//图片地址
+
+    'massagemaxcount' => 20,
+    'bookcasemaxcount' => 20,
+    'dayrecommendmaxcount' => 20,
+    'recommendscore' => 1,//投票增长的经验
+
+
+
+    'syskey' => 'syskey',
     'bookid' => 'bookid_',
     'sorts' => 'sorts_',
-    'syskey' => 'syskey_',
+
     'weekhits' => 'weekhits_',
     'monthhits' => 'monthhits_',
     'dayhits' => 'dayhits_',
-    'txt' =>'txt_',
-    'honors' => 'honors_',
+
 
     'weburi' => env('WEBURI'),//WEB地址结尾要加 /
     'webname' => env('WEBNAME'),
     'webkeywords' => env('WEBKEYWORDS'),
     'webdes' => env('WEBDES'),
-    'cacheTime_d' => env('CACHETIME_D',1),
-    'cacheTime_z' => env('CACHETIME_Z',2),
-    'cacheTime_g' => env('CACHETIME_G',3),
+
     'bili' => 5,
     'qiandao_maxnums' => 35,
     'qiandao_newuser' => 20,
-    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认图片
-    'maxchapter' => 10000,
-    'massagemaxcount' => 20,
-    'bookcasemaxcount' => 20,
-    'dayrecommendmaxcount' => 20,
-    'recommendscore' => 1,
-    'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
-    'txtdir' => env('TXTDIR'),//txt域名
-    'txtlog' => false,//是否开启txt采集日记
-    'minnr' => 300,
-    'imagedir' => env('IMAGEDIR'),//图片地址
-    'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
+
+
+
+
+
+
+
+
+
+
     'txtlog' => env('TXTLOG',false),//是否开启txt采集日记
-    'wapmululiebiao' => 20,//目录每页数量
+
 
 
     'title_index'=>env('TITLE_INDEX'),
@@ -228,8 +262,9 @@ return [
         Encore\Admin\Providers\AdminServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelPinyin\ServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class,
-        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+        //全文搜索
+        //Laravel\Scout\ScoutServiceProvider::class,
+        //ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
     ],

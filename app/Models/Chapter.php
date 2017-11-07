@@ -11,6 +11,19 @@ class Chapter extends Model
     protected $guarded = ['chapterid'];
     protected $table = 'jieqi_article_chapter';
     protected $primaryKey = 'chapterid';
+    protected $visible = [
+      'chapterid',
+      'articleid',
+      'postdate',
+      'lastupdate',
+      'articlename',
+      'chaptername',
+      'chapterorder',
+      'chaptertype',
+      'attachment',
+      'link',
+
+    ];
 
     /**
      * 数据模型的启动方法
@@ -27,7 +40,7 @@ class Chapter extends Model
         });
     }
     */
-    protected $appends = ['chapterlink'];
+    protected $appends = ['link'];
     /**
      * 为路由模型获取键名
      *
@@ -37,16 +50,16 @@ class Chapter extends Model
       {
           return 'chapterid';
       }
-
-
-      public function link()
+      public function getLinkAttribute()
       {
-        return route('web.articles.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
+        return route('novel.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
 
       }
-      public function getChapterlinkAttribute()
+
+
+      //前台使用
+      public function scopeGetBasicsBook($query)
       {
-          return  $this->attributes['chapterlink']  =  $this->link();
 
       }
 }

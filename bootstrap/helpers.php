@@ -1,111 +1,56 @@
 <?php
-/*
+/**
+ * 求取字符串位数（非字节），以UTF-8编码长度计算
+ *
+ * @param string $string 需要被计算位数的字符串
+ * @return int
+ * @author Seven Du <lovevipdsw@vip.qq.com>
+ **/
 
-//保存的是对象
-function saveOrGetBookInfoData($key , $value)
-{
-
-    $articleObj = \Cache::get($key);
-    if ( !$articleObj ) {//不存在
-          $articleObj =   app(\App\Models\Article::class)->getOneBookData($value)->first();
-
-          if ($articleObj) {
-            $articleObj->load('relationChapters');
-
-          //  $articleObj = $articleObj->relationChapters('desc');
-
-          //  \Cache::put($key, $articleObj, config('app.cacheTime_z'));
-          }else{
-            $value = (string) $value;
-            \Log::error('本书不存在',['传值'=>$value]);
+if (!function_exists('getstrlength')) {
+  function getstrlength($string)
+  {
+      $length = strlen($string);
+      $index  = $num = 0;
+      while ($index < $length) {
+          $str = $string[$index];
+          if ($str < "\xC0") {
+              $index += 1;
+          } elseif ($str < "\xE0") {
+              $index += 2;
+          } elseif ($str < "\xF0") {
+              $index += 3;
+          } elseif ($str < "\xF8") {
+              $index += 4;
+          } elseif ($str < "\xFC") {
+              $index += 5;
+          } else {
+              $index += 6;
           }
-
-    }
-    return $articleObj;
-
-    //注意上下2个存储 区别就是  下面会存空对象  上面不会
-
-
-  return
-          \Cache::remember($key, config('app.cacheTime_z'), function () use($value){
-
-              $articleObj =   app(\App\Models\Article::class)->getOneBookData($value)->first();
-
-              if (!$articleObj) {
-                  $value = (string) $value;
-
-                  \Log::error('本书不存在',['传值'=>$value]);
-              }else{
-
-                  return $articleObj;
-
-              }
-
-           });
-
-
-}
-
-
-function saveOrGetBookChapterData($key , \App\Models\Article $article)
-{
-
-      $chapterObj = \Cache::get($key);
-      if ( !$chapterObj ) {//不存在
-            $chapterObj =   $article->relationChapters()->get();
-
-            if(!$chapterObj->isEmpty()){//取出来不为空
-              \Cache::put($key, $chapterObj, config('app.cacheTime_z'));
-
-              if($chapterObj->count() >= MAXCHAPTER) {
-                \Log::warning('小说章节数量超过或等于设置' .MAXCHAPTER. '的数量 只列那么多' ,['书id'=>$article->articleid]);
-              }
-
-            }else{
-              \Log::warning('没有获取到本书的章节',['书id'=>$article->articleid]);
-            }
-
+          $num += 1;
       }
-      return $chapterObj;
-
-  return
-          \Cache::remember($key, config('app.cacheTime_z'), function () use($article){
-
-              $chapterObj =  $article->relationChapters()->get();
-              if($chapterObj->isEmpty()){
-
-                \Log::warning('小说章节数量为0',['书id'=>$article->articleid]);
-
-              }else{
-
-                if($chapterObj->count() >= MAXCHAPTER) {
-                  \Log::warning('小说章节数量超过或等于设置' .MAXCHAPTER. '的数量 只列那么多' ,['书id'=>$article->articleid]);
-                }
-
-
-                return $chapterObj;
-
-
-              }
-
-           });
-
-
+      return $num;
+  }
 }
-*/
-
 //获取小说内容
 if (!function_exists('saveOrGetTxtData')) {
-  function saveOrGetTxtData($key , $txtDir , $lastupdate ,$attachment)
+
+  function saveOrGetTxtData($bid,$cid,$lastupdate,$attachment)
   {
+
+      $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
+      $txtDir = config('app.txtdir') . $path;
+      $key = 'txt_' . $path;
       $outData = ['state'=>false ,'content'=>''];
       $cacheDataArry = \Cache::get($key);
+
       if ( !$cacheDataArry ) {//不存在
           $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
       }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
           $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
       }elseif ($cacheDataArry) {
-        $outData = $cacheDataArry;
+          $outData['state'] = true;
+          $outData = $cacheDataArry;
       }
 
       return $outData;
@@ -119,7 +64,7 @@ if (!function_exists('saveTxt')) {
       $txt = curlTxt($txtDir,$attachment);
       if (!empty($txt)) {
         $outData = ['state'=>true , 'content'=>$txt , 'lastupdate' =>$lastupdate];
-        \Cache::put($key, $outData, get_sys_set('cacheTime_g'));
+        \Cache::put($key, $outData, config('app.cacheTime_g'));
       }
 
       return $outData;
@@ -129,7 +74,6 @@ if (!function_exists('saveTxt')) {
 if (!function_exists('curlTxt')) {
   function curlTxt($txtDir,$attachment)
   {
-
       $txt = '';
       try {
         $curl = new \Curl\Curl();
@@ -167,7 +111,7 @@ if (!function_exists('txtLog')) {
   {
 
     //记录获取错误的TXT 因为历史原因 可记录
-    if (get_sys_set('txtlog')) {
+    if (config('app.txtlog')) {
 
         if (!empty($attachment)) {
           $ms = 'txt内容获取失败 有附件提示可能是图片 状态码不是200 代表txt文件不存在';
@@ -225,39 +169,7 @@ if (!function_exists('contentReplace')) {
 }
 
 
-/**
- * 求取字符串位数（非字节），以UTF-8编码长度计算
- *
- * @param string $string 需要被计算位数的字符串
- * @return int
- * @author Seven Du <lovevipdsw@vip.qq.com>
- **/
 
-if (!function_exists('getstrlength')) {
-  function getstrlength($string)
-  {
-      $length = strlen($string);
-      $index  = $num = 0;
-      while ($index < $length) {
-          $str = $string[$index];
-          if ($str < "\xC0") {
-              $index += 1;
-          } elseif ($str < "\xE0") {
-              $index += 2;
-          } elseif ($str < "\xF0") {
-              $index += 3;
-          } elseif ($str < "\xF8") {
-              $index += 4;
-          } elseif ($str < "\xFC") {
-              $index += 5;
-          } else {
-              $index += 6;
-          }
-          $num += 1;
-      }
-      return $num;
-  }
-}
 
 if (!function_exists('formatTime')) {
   function formatTime($t)
@@ -279,7 +191,7 @@ if (!function_exists('getUserHonor')) {
 
         $filtered = $honor->first(function ($item, $key) use($user){
 
-          return ($user->score >= $item->minscore && $user->score < $item->maxscore);
+            return ($user->score >= $item->minscore && $user->score < $item->maxscore);
 
         });
         return $filtered;
@@ -290,12 +202,12 @@ if (!function_exists('getUserHonor')) {
 //获取头衔
 if (!function_exists('getHonor')) {
   function getHonor(){
-      $honor = \Cache::get(config('app.honors'));
-
+      $key = 'getHonor';
+      $honor = \Cache::get($key);
       if ( !$honor ) {//不存在
           $honor = \App\Models\Honor::orderBy('maxscore', 'asc')->get();
           if ($honor->count() >0) {
-            \Cache::forever(config('app.honors'), $honor);
+            \Cache::forever($key, $honor);
           }
 
       }
