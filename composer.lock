@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "73bad4433915c174ebb5f6ff3a53499d",
+    "content-hash": "1ae43932eb3435a8e3df6398fc811ea6",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2119,6 +2119,52 @@
             "time": "2017-01-16T07:55:07+00:00"
         },
         {
+            "name": "nicolaslopezj/searchable",
+            "version": "1.9.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicolaslopezj/searchable.git",
+                "reference": "c067f11a993c274c9da0d4a2e70ca07614bb92da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/nicolaslopezj/searchable/c067f11a993c274c9da0d4a2e70ca07614bb92da.zip",
+                "reference": "c067f11a993c274c9da0d4a2e70ca07614bb92da",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "illuminate/database": "4.2.x|~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Nicolaslopezj\\Searchable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Lopez",
+                    "email": "nicolaslopezj@me.com"
+                }
+            ],
+            "description": "Eloquent model search trait.",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "search",
+                "searchable"
+            ],
+            "time": "2017-08-09T04:37:57+00:00"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v3.1.1",
             "source": {
@@ -3623,6 +3669,65 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
+        },
+        {
+            "name": "tom-lingham/searchy",
+            "version": "2.0.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomLingham/Laravel-Searchy.git",
+                "reference": "d2f6fbce970f4c4034d6c1829e74eb70ed2843e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/TomLingham/Laravel-Searchy/d2f6fbce970f4c4034d6c1829e74eb70ed2843e1.zip",
+                "reference": "d2f6fbce970f4c4034d6c1829e74eb70ed2843e1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+                "php": "^5.5.9 || ^7.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.4 || ^4.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "TomLingham\\Searchy\\SearchyServiceProvider"
+                    ],
+                    "aliases": {
+                        "Searchy": "TomLingham\\Searchy\\Facades\\Searchy"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomLingham\\Searchy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Lingham",
+                    "email": "tjlingham@gmail.com"
+                }
+            ],
+            "description": "Laravel Searchy makes user driven searching easy with fuzzy search, basic string matching, Levenshtein Distance and more.",
+            "keywords": [
+                "fuzzy",
+                "laravel",
+                "search"
+            ],
+            "time": "2017-08-30T12:31:50+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

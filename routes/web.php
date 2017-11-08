@@ -15,12 +15,15 @@
 
 
 Route::get('/', 'NovelsController@home');
+Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('novel.info');
 
-Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
+//Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
+Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
+Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
 Route::get('/mulu/{bid}','NovelsController@mulu')->name('novel.mulu');
-Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController@content')->name('novel.content');
-
-
+//Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController@content')->name('novel.content');
+Route::get('/wapbook-{bid}-{cid}/{any?}', 'NovelsController@content')->name('novel.content');
+Route::get('/search', 'NovelsController@showsearch')->name('novel.search');
 
 
 Route::group([
@@ -38,9 +41,11 @@ Route::group([
   Route::post('/bookshelf/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('novel.bookshelf.getbookshelfs');
   Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('novel.bookshelf.destroy');
 
-
+  Route::post('/search', 'NovelsController@search')->name('novel.ajax.search');
 
 });
+
+
 
 Route::get('/user/login', 'LoginController@create')->name('novel.login');
 Route::post('/user/login', 'LoginController@store');

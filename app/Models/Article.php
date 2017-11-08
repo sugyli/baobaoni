@@ -8,14 +8,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 //use Laravel\Scout\Searchable;
 use Watson\Rememberable\Rememberable;
+use Nicolaslopezj\Searchable\SearchableTrait;
 class Article extends Model
 {
     //use Traits\ArticleFilterable ,
-    use SoftDeletes ,Rememberable;
+    use SoftDeletes ,Rememberable,SearchableTrait;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
 
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'articlename' => 10,
+            'author' => 5,
+        ],
+    ];
     protected $visible = [
         'articleid',
         'articlename',
@@ -59,13 +73,21 @@ class Article extends Model
         return 'articleid';
     }
 
+
     public function getLinkAttribute()
     {
+      /*
       if (empty($this->slug)) {
         return route('novel.info', ['bid' => $this->articleid]);
       }
       return route('novel.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
+      */
+      return route('novel.info', ['bid' => $this->articleid]);
+
     }
+
+
+
     public function getUpdatetimeAttribute()
     {
       return formatTime($this->attributes['lastupdate']);
@@ -97,7 +119,7 @@ class Article extends Model
 
     public function getMuluAttribute()
     {
-      return route('novel.mulu',['bid'=>$this->articleid]);
+      return route('novel.mulu',['bid'=>$this->articleid] );
 
     }
 

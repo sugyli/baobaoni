@@ -6,7 +6,7 @@
 @section('content')
 <div class="header online" style="text-align: center;">
     书城
-    <a class="header-left">
+    <a class="header-left" href="javascript:">
       <i class="iconfont icon-qiandao"></i>
     </a>
     <a class="header-right" href="{{ route('novel.user.show') }}">
@@ -15,7 +15,7 @@
 </div>
 <div style="padding-top: 45px; background: #fff;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
   <section class="i-top">
-    <a href="/search">
+    <a href="{{route('novel.search')}}">
   		<div class="i-top-search">输入书名/作者/关键字</div>
   	</a>
     <div class="i-top-nav">

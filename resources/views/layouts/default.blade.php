@@ -21,7 +21,8 @@
           recommendurl: '{{ route('novel.ajaxrecommend') }}',
           addbookcaseurl: '{{route('novel.ajaxaddbookcase')}}',
           jubaourl: '{{route('novel.outboxs.ajaxstore')}}',
-          shujiaurl: '{{route('novel.bookshelf.getbookshelfs')}}'
+          shujiaurl: '{{route('novel.bookshelf.getbookshelfs')}}',
+          searchurl: '{{route('novel.ajax.search')}}',
         };
 
     </script>

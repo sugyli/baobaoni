@@ -267,6 +267,7 @@ return [
         //ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        //TomLingham\Searchy\SearchyServiceProvider::class
     ],
 
     /*
@@ -320,6 +321,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        //'Searchy' => TomLingham\Searchy\Facades\Searchy::class
 
     ],
 

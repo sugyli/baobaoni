@@ -42,6 +42,7 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         ),
         'T' => 
         array (
+            'TomLingham\\Searchy\\' => 19,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
         ),
@@ -79,6 +80,10 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         array (
             'Overtrue\\Pinyin\\' => 16,
             'Overtrue\\LaravelPinyin\\' => 23,
+        ),
+        'N' => 
+        array (
+            'Nicolaslopezj\\Searchable\\' => 25,
         ),
         'M' => 
         array (
@@ -161,6 +166,10 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'Watson\\Rememberable\\' => 
         array (
             0 => __DIR__ . '/..' . '/watson/rememberable/src',
+        ),
+        'TomLingham\\Searchy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tom-lingham/searchy/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -261,6 +270,10 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'Overtrue\\LaravelPinyin\\' => 
         array (
             0 => __DIR__ . '/..' . '/overtrue/laravel-pinyin/src',
+        ),
+        'Nicolaslopezj\\Searchable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nicolaslopezj/searchable/src',
         ),
         'Monolog\\' => 
         array (
@@ -481,7 +494,10 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
+        'App\\Http\\Controllers\\BookshelfsController' => __DIR__ . '/../..' . '/app/Http/Controllers/BookshelfsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\InboxsController' => __DIR__ . '/../..' . '/app/Http/Controllers/InboxsController.php',
+        'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\NovelsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController.php',
         'App\\Http\\Controllers\\NovelsController\\ArticlesController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/ArticlesController.php',
         'App\\Http\\Controllers\\NovelsController\\BookshelfsController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/BookshelfsController.php',
@@ -493,9 +509,13 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'App\\Http\\Controllers\\NovelsController\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/SearchController.php',
         'App\\Http\\Controllers\\NovelsController\\UserSignInController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/UserSignInController.php',
         'App\\Http\\Controllers\\NovelsController\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/NovelsController/UsersController.php',
+        'App\\Http\\Controllers\\OutboxsController' => __DIR__ . '/../..' . '/app/Http/Controllers/OutboxsController.php',
         'App\\Http\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PagesController.php',
+        'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
+        'App\\Http\\Controllers\\RouteCacheJController' => __DIR__ . '/../..' . '/app/Http/Controllers/RouteCacheJController.php',
         'App\\Http\\Controllers\\Traits\\AuthenticatesUsers' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/AuthenticatesUsers.php',
         'App\\Http\\Controllers\\Traits\\UsersTrait' => __DIR__ . '/../..' . '/app/Http/Controllers/Traits/UsersTrait.php',
+        'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -3268,6 +3288,7 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'Monolog\\Processor\\UidProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/UidProcessor.php',
         'Monolog\\Processor\\WebProcessor' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Processor/WebProcessor.php',
         'Monolog\\Registry' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Registry.php',
+        'Nicolaslopezj\\Searchable\\SearchableTrait' => __DIR__ . '/..' . '/nicolaslopezj/searchable/src/SearchableTrait.php',
         'Overtrue\\LaravelPinyin\\Facades\\Pinyin' => __DIR__ . '/..' . '/overtrue/laravel-pinyin/src/Facades/Pinyin.php',
         'Overtrue\\LaravelPinyin\\ServiceProvider' => __DIR__ . '/..' . '/overtrue/laravel-pinyin/src/ServiceProvider.php',
         'Overtrue\\Pinyin\\DictLoaderInterface' => __DIR__ . '/..' . '/overtrue/pinyin/src/DictLoaderInterface.php',
@@ -4791,6 +4812,29 @@ class ComposerStaticInit08ff7c0fa01312f2bc87a8035131831f
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'TomLingham\\Searchy\\Facades\\Searchy' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Facades/Searchy.php',
+        'TomLingham\\Searchy\\Interfaces\\MatcherInterface' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Interfaces/MatcherInterface.php',
+        'TomLingham\\Searchy\\Interfaces\\SearchDriverInterface' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Interfaces/SearchDriverInterface.php',
+        'TomLingham\\Searchy\\Matchers\\AcronymMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/AcronymMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\AcronymUnicodeMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/AcronymUnicodeMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\BaseMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/BaseMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\ConsecutiveCharactersMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/ConsecutiveCharactersMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\ConsecutiveCharactersUnicodeMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/ConsecutiveCharactersUnicodeMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\ExactMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/ExactMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\InStringMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/InStringMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\LevenshteinMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/LevenshteinMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\StartOfStringMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/StartOfStringMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\StartOfWordsMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/StartOfWordsMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\StudlyCaseMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/StudlyCaseMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\StudlyCaseUnicodeMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/StudlyCaseUnicodeMatcher.php',
+        'TomLingham\\Searchy\\Matchers\\TimesInStringMatcher' => __DIR__ . '/..' . '/tom-lingham/searchy/src/Matchers/TimesInStringMatcher.php',
+        'TomLingham\\Searchy\\SearchBuilder' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchBuilder.php',
+        'TomLingham\\Searchy\\SearchDrivers\\BaseSearchDriver' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchDrivers/BaseSearchDriver.php',
+        'TomLingham\\Searchy\\SearchDrivers\\FuzzySearchDriver' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchDrivers/FuzzySearchDriver.php',
+        'TomLingham\\Searchy\\SearchDrivers\\FuzzySearchUnicodeDriver' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchDrivers/FuzzySearchUnicodeDriver.php',
+        'TomLingham\\Searchy\\SearchDrivers\\LevenshteinSearchDriver' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchDrivers/LevenshteinSearchDriver.php',
+        'TomLingham\\Searchy\\SearchDrivers\\SimpleSearchDriver' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchDrivers/SimpleSearchDriver.php',
+        'TomLingham\\Searchy\\SearchyServiceProvider' => __DIR__ . '/..' . '/tom-lingham/searchy/src/SearchyServiceProvider.php',
         'Watson\\Rememberable\\Query\\Builder' => __DIR__ . '/..' . '/watson/rememberable/src/Query/Builder.php',
         'Watson\\Rememberable\\Rememberable' => __DIR__ . '/..' . '/watson/rememberable/src/Rememberable.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',

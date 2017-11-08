@@ -57,6 +57,7 @@ Vue.use(VuejsDialog ,{
 
 Vue.component('scroll-mulu', require('./components/mulu.vue'));
 Vue.component('scroll-shujia', require('./components/scroll-shujia.vue'));
+Vue.component('scroll-search', require('./components/scroll-search.vue'));
 //Vue.component('mheader', require('./components/mheader.vue'));
 
 //Vue.component('scroll-search', require('./components/scroll-search.vue'));

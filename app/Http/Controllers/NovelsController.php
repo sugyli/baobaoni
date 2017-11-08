@@ -90,9 +90,16 @@ class NovelsController extends Controller
       $bookData = $this->saveOrGetBookData($bid);
 
       if(is_array($bookData)){
+          /*
           $slug = request()->slug;
           $any = request()->any;
           if ((!empty($bookData['slug']) && $bookData['slug'] != $slug) || !empty($any)) {
+              return redirect($bookData['link'], 301);
+          }
+          */
+          $any = request()->any;
+
+          if(!empty($any)){
               return redirect($bookData['link'], 301);
           }
           return view('info', compact('bookData'));
@@ -224,7 +231,31 @@ class NovelsController extends Controller
 
 
     }
+    public function search()
+    {
+      $query = \Purifier::clean(request('query'), 'search_q');
+      $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+      if(empty($query)){
+        $result['message'] = '搜索关键词不能为空';
+        return response()->json($result);
+      }
 
+      $data =  Article::search($query, null, true)->orderBy('lastupdate', 'desc')->getBasicsBook()->remember(300)->paginate(10);
+      if(count($data->items()) <= 0){
+        $result['message'] = '没有搜索到内容';
+        return response()->json($result);
+      }
+
+      $result['error'] = 0;
+      $result['message'] = '获取成功';
+      $result['bakdata'] = $data;
+      return response()->json($result);
+    }
+
+    protected function showsearch()
+    {
+      return view('search');
+    }
     /*
 
     public function index(){
