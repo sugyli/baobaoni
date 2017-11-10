@@ -14,47 +14,128 @@
 
 
 
-Route::get('/', 'NovelsController@home');
-Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('novel.info');
+Route::get('/', 'PagesController@home');
+
+
+
+Route::group([
+    'namespace'     => 'MNovels',
+], function () {
+    Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('mnovels.info');
+
+    Route::get('/wapbook-{bid}-{cid}/{any?}', 'NovelsController@content')->name('mnovels.content');
+
+    Route::get('/hislogs', 'NovelsController@hislogs')->name('mnovels.hislogs');
+
+    Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/mulu/{bid}','NovelsController@mulu')->name('mnovels.mulu');
+
+    Route::get('/wapsort', 'NovelsController@wapsort')->name('mnovels.wapsort');
+    Route::get('/wapsort/{id}', 'NovelsController@showwapsort')->name('mnovels.showwapsort');
+
+    Route::get('/waptop', 'NovelsController@waptop')->name('mnovels.waptop');
+    Route::get('/waptop/{any}', 'NovelsController@showwaptop')->name('mnovels.showwaptop');
+
+    Route::get('/search', 'NovelsController@search');
+});
+
+
+
+Route::group([
+    'namespace'     => 'MNovels',
+    'prefix'        => 'user',
+    'middleware'    => ['web'],
+], function () {
+
+    Route::get('/login', 'LoginController@create')->name('mnovels.login');
+    Route::post('/login', 'LoginController@store');
+    Route::any('/logout', 'LoginController@destroy')->name('mnovels.login.destroy');
+
+    Route::get('/register', 'RegisterController@create')->name('mnovels.register');
+    Route::post('/register', 'RegisterController@store');
+
+
+    Route::get('/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('mnovels.clickbookshelf');
+});
+
+Route::group([
+    'namespace'     => 'MNovels',
+    'prefix'        => 'user',
+    'middleware'    => ['web','auth'],
+], function () {
+
+    Route::get('/show', 'UsersController@show')->name('mnovels.user.show');
+    Route::get('/passedit', 'UsersController@passedit')->name('mnovels.user.passedit');
+    Route::post('/passedit', 'UsersController@passupdate');
+
+
+
+    Route::get('/bookshelf', 'BookshelfsController@index')->name('mnovels.bookshelf.index');
+
+    Route::get('/inboxs', 'InboxsController@index')->name('mnovels.inboxs.index');
+    Route::get('inboxs/{id}', 'InboxsController@show')->name('mnovels.inboxs.show');
+    Route::get('/inboxs/destroy/{id}', 'InboxsController@destroy')->name('mnovels.inboxs.destroy');
+
+    Route::get('/outboxs', 'OutboxsController@index')->name('mnovels.outboxs.index');
+    Route::get('/outboxs/{id}', 'OutboxsController@show')->name('mnovels.outboxs.show');
+    Route::get('/outboxs/destroy/{id}', 'OutboxsController@destroy')->name('mnovels.outboxs.destroy');
+});
+
+
+
+
+Route::group([
+    'prefix'        => 'ajax',
+    'namespace'     => 'MNovels',
+    'middleware'    => ['web','throttle'],
+], function () {
+
+    Route::post('/recommend', 'UsersController@recommend')->name('ajax.recommend');
+    Route::post('/addbookcase', 'BookshelfsController@addbookcase')->name('ajax.addbookcase');
+    Route::post('/search', 'NovelsController@getsearch')->name('ajax.search');
+    Route::post('/mulu','NovelsController@getmulu')->name('ajax.mulu');
+    Route::post('/sendmessage', 'OutboxsController@ajaxstore')->name('ajax.sendmessage');
+    Route::post('/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('ajax.getbookshelfs');
+
+    Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('ajax.destroy');
+});
 
 //Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
-Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
-Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
-Route::get('/mulu/{bid}','NovelsController@mulu')->name('novel.mulu');
+
+
 //Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController@content')->name('novel.content');
-Route::get('/wapbook-{bid}-{cid}/{any?}', 'NovelsController@content')->name('novel.content');
-Route::get('/search', 'NovelsController@showsearch')->name('novel.search');
 
 
+
+/*
 Route::group([
     'prefix'        => 'ajax',
     //'namespace'     => 'NovelsController',
     //'middleware'    => ['novel'],
 ], function () {
 
-  Route::post('/getmulu','NovelsController@ajaxmulu')->name('novel.ajaxmulu');
-  Route::post('/user/recommend', 'UsersController@recommend')->name('novel.ajaxrecommend');
-  Route::post('/user/addbookcase', 'BookshelfsController@addbookcase')->name('novel.ajaxaddbookcase');
-  Route::post('/outboxs/store', 'OutboxsController@ajaxstore')->name('novel.outboxs.ajaxstore');
+
+
+
+  Route::post('/outboxs/ajaxstore', 'OutboxsController@ajaxstore')->name('novel.outboxs.ajaxstore');
   Route::get('/bookshelf/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('novel.bookshelf.clickbookshelf');
 
   Route::post('/bookshelf/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('novel.bookshelf.getbookshelfs');
   Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('novel.bookshelf.destroy');
 
-  Route::post('/search', 'NovelsController@search')->name('novel.ajax.search');
 
 });
 
-
-
-Route::get('/user/login', 'LoginController@create')->name('novel.login');
-Route::post('/user/login', 'LoginController@store');
-Route::any('/user/logout', 'LoginController@destroy')->name('novel.login.destroy');
+*/
 
 
 
-Route::get('/user/register', 'RegisterController@create')->name('novel.register');
-Route::post('/user/register', 'RegisterController@store');
+
+
+
+
+
 
 Route::get('/user/password','PasswordController@create')->name('novel.password');
 
@@ -62,25 +143,23 @@ Route::group([
     'prefix'        => 'user',
     'middleware'    => ['auth'],
 ], function () {
-    Route::get('/usershow', 'UsersController@show')->name('novel.user.show');
+
     Route::post('/usershow', 'UsersController@update');
     Route::get('/edit', 'UsersController@edit')->name('novel.user.edit');
 
-    Route::get('/user/passedit', 'UsersController@passedit')->name('novel.user.passedit');
-    Route::post('/user/passedit', 'UsersController@passupdate');
 
 
-    Route::get('/outboxs', 'OutboxsController@index')->name('novel.outboxs.index');
+
     Route::get('/outboxs/create', 'OutboxsController@create')->name('novel.outboxs.create');
-    Route::get('/outboxs/{id}', 'OutboxsController@show')->name('novel.outboxs.show');
-    Route::get('/outboxs/destroy/{id}', 'OutboxsController@destroy')->name('novel.outboxs.destroy');
-    //Route::post('/outboxs/store', 'OutboxsController@store')->name('novel.outboxs.webstore');
 
-    Route::get('/inboxs', 'InboxsController@index')->name('novel.inboxs.index');
-    Route::get('inboxs/{id}', 'InboxsController@show')->name('novel.inboxs.show');
-    Route::get('/inboxs/destroy/{id}', 'InboxsController@destroy')->name('novel.inboxs.destroy');
 
-    Route::get('/bookshelf', 'BookshelfsController@index')->name('novel.bookshelf.index');
+    Route::post('/outboxs/store', 'OutboxsController@store')->name('novel.outboxs.store');
+
+
+
+
+
+
 
 
 });

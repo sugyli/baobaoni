@@ -1,48 +1,94 @@
 <?php
 namespace App\Models\Traits;
-
+use App\Models\Ranking;
+use Carbon\Carbon;
 trait ArticleFilterable
 {
   public function getArticlesWithFilter($filter, $limit = 20)
   {
       $filter = $this->getArticleFilter($filter);
 
-      return $this->applyFilter($filter)->paginate($limit);
+      return $this->applyFilter($filter,$limit);
 
 
   }
-
   public function getArticleFilter($filter)
   {
-      $filters = ['newdata', 'updatedata','fenleidata'];
+      $filters = ['newbook','monthhit','weekhit','dayhit'];
       if (in_array($filter, $filters)) {
           return $filter;
       }
       return 'default';
   }
 
-
-
-  public function applyFilter($filter)
+  public function getArticleFilterName($filter)
   {
 
+      if($filter == 'newbook'){
+         return '最新入库';
+      }
+      if($filter == 'monthhit'){
+         return '月推荐榜';
+      }
+      if($filter == 'weekhit'){
+         return '周推荐榜';
+      }
+      if($filter == 'dayhit'){
+         return '日推荐榜';
+      }
+      return '最新更新';
+  }
+
+
+
+  public function applyFilter($filter,$limit)
+  {
+    $query = $this->getBasicsBook();
 
     switch ($filter) {
 
-      case 'newdata':
-          return $this->makeVisible('lastupdatef')->orderBy('postdate', 'desc');
+      case 'newbook':
+          return $query ->orderBy('postdate', 'desc')->remember(config('app.cacheTime_d'))->paginate($limit);
+          break;
+      case 'monthhit':
+          $dt = Carbon::now();
+          return Ranking::select(\DB::raw('sum(hits) as h,articleid'))
+                          ->whereYear('created_at', $dt->year)
+                          ->whereMonth('created_at', $dt->month)
+                          ->groupBy('articleid')
+                          ->orderBy('h', 'desc')
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
-      case 'updatedata':
-          return $this->makeVisible('lastupdatef')->orderBy('lastupdate', 'desc');
+      case 'weekhit':
+          $week_begin = mktime(0, 0, 0,date("m"),date("d")-date("w")+1,date("Y"));
+          $week_end = mktime(23,59,59,date("m"),date("d")-date("w")+7,date("Y"));
+          return
+                  Ranking::select(\DB::raw('sum(hits) as h,articleid'))
+                          //->whereYear('created_at', '2016')
+                          //->whereMonth('created_at', '9')
+                          ->whereBetween('ranking_date', [$week_begin, $week_end])
+                          ->groupBy('articleid')
+                          ->orderBy('h', 'desc')
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
-      case 'fenleidata':
-          $id = request()->id;
-          return $this->where('sortid',$id)->orderBy('lastupdate', 'desc')->remember(get_sys_set('cacheTime_d'));
+
+      case 'dayhit':
+          $date = date("Y-m-d",time());
+          $date = strtotime($date);
+          return
+                  Ranking::select(\DB::raw('sum(hits) as h,articleid'))
+                          ->where('ranking_date', $date)
+                          ->groupBy('articleid')
+                          ->orderBy('h', 'desc')
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
       default:
-          return '';
+          return $query->orderBy('lastupdate', 'desc')->remember(config('app.cacheTime_d'))->paginate($limit);
           break;
 
     }
@@ -52,60 +98,6 @@ trait ArticleFilterable
 
 
 
-  //获取一本书
-  public function getOneBookData($bookid)
-  {
-
-    //return $this->visitOneBook($bookid)->withoutDisplay()->visitBasics();
-
-    return $this->getBasicsBook()->where('articleid', $bookid);
-
-  }
-
-
-//给书架用的
-  public function scopeGetBasicsBookByLastupdate($query ,$od = 'desc')
-  {
-
-    return $this->getBasicsBook()->byLastupdate($od);
-
-  }
-  public function scopeByLastupdate($query ,$od = 'desc')
-  {
-      return $query->orderBy('lastupdate', $od);
-  }
-    //获取列表基础数据
-  public function scopeGetBasicsBook($query)
-  {
-      return $query->where('display', '<=', '0')
-                    ->where('lastchapterid', '>', 0);
-  }
-
-
-
-
-/*
-public function getBasicsBook()
-{
-
-  return $this->withoutDisplay()->visitBasics();
-
-}
-  public function scopeVisitOneBook($query , $bookid)
-  {
-      return $query->where('articleid', $bookid);
-  }
-  public function scopeWithoutDisplay($query)
-  {
-      return $query->where('display', '<=', '0');
-  }
-
-  public function scopeVisitBasics($query)
-  {
-      return $query->where('lastchapterid', '>', 0);
-  }
-
-*/
 
 
 

@@ -22,6 +22,8 @@ class Chapter extends Model
       'chaptertype',
       'attachment',
       'link',
+      'mulu',
+      'updatetime'
 
     ];
 
@@ -40,7 +42,7 @@ class Chapter extends Model
         });
     }
     */
-    protected $appends = ['link'];
+    protected $appends = ['link','updatetime','mulu'];
     /**
      * 为路由模型获取键名
      *
@@ -50,12 +52,20 @@ class Chapter extends Model
       {
           return 'chapterid';
       }
-      public function getLinkAttribute()
+      public function getMuluAttribute()
       {
-        return route('novel.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
+        return route('mnovels.mulu',['bid'=>$this->articleid] );
 
       }
+      public function getLinkAttribute()
+      {
+        return route('mnovels.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);
 
+      }
+      public function getUpdatetimeAttribute()
+      {
+        return formatTime($this->attributes['lastupdate']);
+      }
 
       //前台使用
       public function scopeGetBasicsBook($query)

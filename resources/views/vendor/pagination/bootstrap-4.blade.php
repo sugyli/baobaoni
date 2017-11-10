@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <div class="pagelink">
+    <div class="pagelink" style="display: none;">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <a href="javascript:">&laquo;</a>

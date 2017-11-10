@@ -55,7 +55,7 @@
   <div class="jubao-title">
     <h2>举报错误</h2>
   </div>
-  <form id="jubaoForm" name="frmnewmessage" action="{{ route('novel.outboxs.webstore') }}" method="post">
+  <form id="jubaoForm" name="frmnewmessage" action="{{ route('novel.outboxs.store') }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="from" value="{{ old($from) ?: $from }}">
     <input type="hidden" name="title" value="{{ old($title) ?: $title }}">

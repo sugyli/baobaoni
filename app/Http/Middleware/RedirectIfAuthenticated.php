@@ -15,10 +15,11 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
+    //如果已经登录 再次访问登录页面 跳转地址
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect( route('novel.user.show') );
+            return redirect( route('mnovels.user.show') );
         }
 
         return $next($request);

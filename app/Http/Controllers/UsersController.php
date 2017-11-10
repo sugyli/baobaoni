@@ -36,7 +36,6 @@ class UsersController extends Controller
           $result['message'] = '还没有登录';
           return response()->json($result);
         }
-
         $num = (int)$request->num + 0 ;
         $articleid = (int)$request->bid + 0 ;
         if ($num <= 0 || $articleid<=0) {

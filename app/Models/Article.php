@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Carbon\Carbon;
+//use Carbon\Carbon;
 //use Laravel\Scout\Searchable;
 use Watson\Rememberable\Rememberable;
 use Nicolaslopezj\Searchable\SearchableTrait;
 class Article extends Model
 {
-    //use Traits\ArticleFilterable ,
+    use Traits\ArticleFilterable;
     use SoftDeletes ,Rememberable,SearchableTrait;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
@@ -74,24 +74,41 @@ class Article extends Model
     }
 
 
-    public function getLinkAttribute()
-    {
-      /*
-      if (empty($this->slug)) {
-        return route('novel.info', ['bid' => $this->articleid]);
-      }
-      return route('novel.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
-      */
-      return route('novel.info', ['bid' => $this->articleid]);
 
+
+//关联
+    public function relationChapters()
+    {
+      //第2个参数是 chapter类的外键   第3个是 本类中articleid
+        return $this->hasMany(Chapter::class ,'articleid' ,'articleid')
+                    ->where('chaptertype','<=' ,0)
+                    ->where('display', '<=', '0')
+                    ->orderBy('chapterorder', 'asc')
+                    ->limit(config('app.maxchapter'));
+    }
+
+    public function relationBookcases($uid)
+    {
+        return $this->hasOne(Bookcase::class ,'articleid' ,'articleid')
+                    ->where('userid',$uid)->first();
     }
 
 
-
-    public function getUpdatetimeAttribute()
+    public function getBidBookData($bid)
     {
-      return formatTime($this->attributes['lastupdate']);
+        $key = 'getBidBookData_'.$bid;
+        return
+                \Cache::remember($key, config('app.cacheTime_z'), function () use ($bid){
+                    $bookData  =   $this->getBasicsBook()->where('articleid', $bid)->first();
+                    if($bookData){
+                      $bookData->load('relationChapters');
+                      return $bookData->toArray();
+                    }
+
+                 });
+
     }
+
 
     public function getImgflagAttribute($value)
     {
@@ -116,31 +133,26 @@ class Article extends Model
         $key = (int)($this->sortid - 1);
         return config('app.fenlei')[$key] ?? '未知分类';
     }
-
+    public function getUpdatetimeAttribute()
+    {
+      return formatTime($this->attributes['lastupdate']);
+    }
     public function getMuluAttribute()
     {
-      return route('novel.mulu',['bid'=>$this->articleid] );
+      return route('mnovels.mulu',['bid'=>$this->articleid] );
 
     }
-
-//关联
-    public function relationChapters()
+    public function getLinkAttribute()
     {
-      //第2个参数是 chapter类的外键   第3个是 本类中articleid
-        return $this->hasMany(Chapter::class ,'articleid' ,'articleid')
-                    ->where('chaptertype','<=' ,0)
-                    ->orderBy('chapterorder', 'asc')
-                    ->limit(config('app.maxchapter'));
+      /*
+      if (empty($this->slug)) {
+        return route('novel.info', ['bid' => $this->articleid]);
+      }
+      return route('novel.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
+      */
+      return route('mnovels.info', ['bid' => $this->articleid]);
+
     }
-
-    public function relationBookcases($uid)
-    {
-        return $this->hasOne(Bookcase::class ,'articleid' ,'articleid')
-                    ->where('userid',$uid)->first();
-    }
-
-
-
 
     //前台使用
     public function scopeGetBasicsBook($query)

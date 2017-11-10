@@ -54,6 +54,7 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
+     //如果点击需要登录的地址 用户没有登录会跳转这
     protected function unauthenticated($request, AuthenticationException $exception)
     {
 
@@ -61,8 +62,8 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         $url = $request->redirect_url ?
-                    route('novel.login') .'?redirect_url=' .$request->redirect_url
-                    : route('novel.login');
+                    route('mnovels.login') .'?redirect_url=' .$request->redirect_url
+                    : route('mnovels.login');
 
 
         return redirect()->guest($url);

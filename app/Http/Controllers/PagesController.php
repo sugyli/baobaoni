@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\NovelsController\ArticlesController;
+use App\Http\Controllers\MNovels\NovelsController;
 
 class PagesController extends Controller
 {
@@ -13,27 +13,25 @@ class PagesController extends Controller
     {
       $url = request()->url();
 
-      $weburi = get_sys_set('weburi');
-      $wapuri = get_sys_set('wapuri');
+      $weburl = config('app.url_web');
+      $wapurl = config('app.url_wap');
 
-      if(str_is($url.'*', $weburi) || str_is($url.'*', $wapuri)){
-
-          return $this->novel();
-
+      if(str_is($url.'*', $weburl)){
+          dd('开发中');
       }
-      return $this->mySoftware();
+      if(str_is($url.'*', $wapurl)){
+          return $this->novelWapIndex();
+      }
+      dd('非法域名');
     }
 
-    protected function novel()
+    protected function novelWapIndex()
     {
-        return app(ArticlesController::class)->index();
+        return app(NovelsController::class)->index();
     }
 
 
-    protected function mySoftware()
-    {
-        dd('not_novel');
-    }
+
 
 
 

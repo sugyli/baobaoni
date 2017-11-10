@@ -1,14 +1,12 @@
 <?php
 
 return [
+    'url_web' => 'http://www.sugyli.com',
 
-    'cacheTime_d' => env('CACHETIME_D'),
-    'cacheTime_z' => env('CACHETIME_Z'),
-    'cacheTime_g' => env('CACHETIME_G'),
-    'keywords' => env('KEYWORDS'),
-    'des' => env('DES'),
-    'dfxsfmdir' => env('DFXSFMDIR'),//小说封面默认图片
-    'xsfmdir' => env('XSFMDIR','/'),//小说封面路径
+    'url_wap' => 'http://m.sugyli.com',
+    'wap_name' => '大书包小说网手机版',
+    'wap_keywords' => '大书包小说网,小说,手机阅读网',
+    'wap_des' => '大书包小说网收录了当前最好看的小说,是广大小说阅读爱好者必备的手机阅读小说网。',
     'fenlei' => [
       '玄幻魔法',
       '武侠修真',
@@ -22,20 +20,34 @@ return [
       '网友更新',
       '商战职场',
       '同人小说'
-
     ],
+    'dfxsfmdir' => 'http://www.dashubao.net/css/noimg.jpg',//小说封面默认图片
+    'xsfmdir' => 'http://www.dashubao.net/xsfengmian/',//小说封面路径
+    'cacheTime_d' => 1,
+    'cacheTime_z' => 2,
+    'cacheTime_g' => 3,
     'maxchapter' => 10000,//章节最大数量
-    'wapmululiebiao' => 20,//目录每页数量
-    'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
-    'txtdir' => env('TXTDIR'),//txt域名
-    'txtlog' => false,//是否开启txt采集日记
-    'minnr' => 300,//章节内容最小内容
-    'imagedir' => env('IMAGEDIR'),//图片地址
-
     'massagemaxcount' => 20,
     'bookcasemaxcount' => 20,
     'dayrecommendmaxcount' => 20,
     'recommendscore' => 1,//投票增长的经验
+    'wapmululiebiao' => 20,//目录每页数量
+    'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
+    'txtdir' => 'http://txt.home520.com/',//txt域名
+    'txtlog' => false,//是否开启txt采集日记
+    'minnr' => 300,//章节内容最小内容
+    'imagedir' => 'http://img.dashubao.net/',//图片地址
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -266,7 +278,7 @@ return [
         //Laravel\Scout\ScoutServiceProvider::class,
         //ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        Jenssegers\Agent\AgentServiceProvider::class,
+        //Jenssegers\Agent\AgentServiceProvider::class,
         //TomLingham\Searchy\SearchyServiceProvider::class
     ],
 
@@ -320,7 +332,7 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Pinyin' => Overtrue\LaravelPinyin\Facades\Pinyin::class,
-        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        //'Agent' => Jenssegers\Agent\Facades\Agent::class,
         //'Searchy' => TomLingham\Searchy\Facades\Searchy::class
 
     ],

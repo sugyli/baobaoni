@@ -21,7 +21,7 @@ trait AuthenticatesUsers
   {
     //$backUrl = route('member.show', [Auth::user()]);
     //$redirect_url = \Request::query('redirect_url');
-    $redirect_url = request()->redirect_url ?: route('novel.user.show');
+    $redirect_url = request()->redirect_url ?: route('mnovels.user.show');
     //$redirect_url = request()->input('redirect_url',$backUrl);
     return redirect($redirect_url);
   }
@@ -30,21 +30,19 @@ trait AuthenticatesUsers
   {
     //$redirect_url = request()->input('redirect_url');
     //$redirect_url = \Request::query('redirect_url');
-    $loginUrl = route('novel.login');
-    $registerUrl = route('novel.register');
-    $passwordUrl = route('novel.password');
+    $loginUrl = route('mnovels.login');
+    $registerUrl = route('mnovels.register');
+    //$passwordUrl = route('novel.password');
     $redirect_url = request()->redirect_url;
-    if ($redirect_url) {
-      if (str_contains( $redirect_url , $loginUrl ) || str_contains($redirect_url ,$registerUrl) || str_contains($redirect_url ,$passwordUrl)) {
-          $redirect_url = null;
-      }
+    if (str_contains( $redirect_url , $loginUrl ) || str_contains($redirect_url ,$registerUrl) ) {
+        $redirect_url = null;
     }
 
     $loginSubmitAddress = $redirect_url ? $loginUrl.'?redirect_url='.$redirect_url : $loginUrl;
     $registerSubmitAddress = $redirect_url ? $registerUrl.'?redirect_url='.$redirect_url : $registerUrl;
-    $passwordSubmitAddress = $redirect_url ? $passwordUrl.'?redirect_url='.$redirect_url : $passwordUrl;
+    //$passwordSubmitAddress = $redirect_url ? $passwordUrl.'?redirect_url='.$redirect_url : $passwordUrl;
 
-    return compact('loginSubmitAddress','registerSubmitAddress','passwordSubmitAddress' ,'redirect_url');
+    return compact('loginSubmitAddress','registerSubmitAddress' ,'redirect_url');
   }
 
   /**

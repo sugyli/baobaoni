@@ -1,9 +1,9 @@
 @extends('layouts.default')
-<link rel="stylesheet" type="text/css" href="/css/home.css">
 @section('title'){{config('app.name')}}-{{config('app.url')}}@endsection
 @section('keywords'){{config('app.keywords')}}@endsection
 @section('description'){{config('app.des')}}@endsection
 @section('content')
+<link rel="stylesheet" type="text/css" href="/css/home.css">
 <div class="header online" style="text-align: center;">
     书城
     <a class="header-left" href="javascript:">

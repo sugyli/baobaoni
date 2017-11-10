@@ -15,7 +15,7 @@ class User extends Authenticatable
     protected $guarded = [];
 
     protected $hidden = [
-        'pass', 'remember_token',
+        'pass', 'remember_token','api_token',
     ];
     /**
      * 访问器被附加到模型数组的形式。
@@ -23,87 +23,105 @@ class User extends Authenticatable
      * @var array
      */
     //protected $appends = ['loginname','caption'];
-
-
-
-
-    //获取用户等级
-    public function getUserHonor()
-    {
-        return getUserHonor($this);
-
-    }
     //经典的递归
     public static function createEmail()
     {
-        $token = str_random(30);
-        $tokens = self::byEmail($token)->count();
-
-        if ($tokens) {
+        $email = str_random(30);
+        $emails = self::byEmail($email)->count();
+        if ($emails) {
             return self::createEmail();
         }
-
-        return $token;
+        return $email;
     }
-    public function scopeByEmail($query ,$token)
+    public function scopeByEmail($query ,$email)
     {
-        return $query->where('email', $token);
+        return $query->where('email', $email);
     }
 
-    //主要为了兼容验证password
-    public function getRegdateAttribute($value)
+    //推荐数
+    public function getDayRecommendCount()
     {
-        return date("Y-m-d H:i:s",$value);
+      $honor = Honor::getUserHonor($this);
+      return isset($honor->setting['dayrecommendcount']) ? $honor->setting['dayrecommendcount'] : config('app.dayrecommendmaxcount');
     }
-    public function getPasswordAttribute()
+    //书架数
+    public function getBookcaseCount()
     {
-        return $this->attributes['pass'];
+      $honor = Honor::getUserHonor($this);
+      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : config('app.bookcasemaxcount');
     }
-
-    public function getPortraitAttribute($value)
+    public function getMassageMaxCount()
     {
-        return empty($value) ? '/images/noavatar.jpg' : $value;
+      $honor = Honor::getUserHonor($this);
+      return isset($honor->setting['maxmessage']) ? $honor->setting['maxmessage'] : config('app.massagemaxcount');
     }
-
-
-    public function getMobileAttribute($value)
+    //等级
+    public function getCaption()
     {
-        return empty($value) ? '未填' : $value;
+      $honor = Honor::getUserHonor($this);
+      return $honor->caption;
     }
-
-    //保存头像
-    public function savePortrait($upload_status)
-    {
-      Trash::where('body',$upload_status)
-            ->delete();
-      if ($this->portrait) {
-        Trash::withTrashed()
-              ->where('body',$this->portrait)
-              ->restore();
-      }
-
-      $this->portrait = $upload_status;
-      $this->save();
-    }
-
+    //设置收件箱已读
     public function markAdminemailAsRead()
     {
         if($this->adminemail >= 1) {
             $this->forceFill(['adminemail' => 0])->save();
         }
     }
-    public function markAdminemailAsNoRead()
+
+    /*
+    public static function createToken()
     {
-        if($this->adminemail < 9 ) {
-            $this->increment('adminemail');
+        $token = str_random(64);
+        $tokens = self::byToken($token)->count();
+
+        if ($tokens) {
+            return self::createToken();
         }
+        return $token;
+    }
+    public function scopeByToken($query ,$token)
+    {
+        return $query->where('api_token', $token);
     }
 
+    */
+
+
+      //用户今天使用了多少票
+    public function relationRankingsUseHits()
+    {
+      $date = date("Y-m-d",time());
+      $date = strtotime($date);
+      //第2个参数是 关联类的外键   第3个是 本类中
+        return $this->hasMany(Ranking::class ,'uid' ,'uid')
+                    ->where('ranking_date',$date)
+                    ->sum('hits');
+    }
+    //这本书今日有没有被推荐过
+    //第三个参数为中间模型的外键名称 而第四个参数为最终模型的外键名称，第五个参数则为本地键。
+    public function relationRankingsTodyBookHits($articleid)
+    {
+      $date = date("Y-m-d",time());
+      $date = strtotime($date);
+        return $this->hasMany(Ranking::class ,'uid' ,'uid')
+                      ->where('articleid',$articleid)
+                      ->where('ranking_date',$date)
+                      ->first();
+    }
+
+
+    public function relationBookcasesUse()
+    {
+        //第2个参数是 关联类的外键   第3个是 本类中
+        return $this->hasMany(Bookcase::class ,'userid' ,'uid')->count();
+    }
     public function relationBookcases()
     {
-      //第2个参数是 关联类的外键   第3个是 本类中
+        //第2个参数是 关联类的外键   第3个是 本类中
         return $this->hasMany(Bookcase::class ,'userid' ,'uid');
     }
+
     //第2个参数是 关联类的外键   第3个是 本类中
     public function relationOutboxs()
     {
@@ -114,14 +132,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class ,'toid' ,'uid');
     }
-
-    //第三个参数为中间模型的外键名称 而第四个参数为最终模型的外键名称，第五个参数则为本地键。
-    public function relationRankings($articleid,$date)
-    {
-        return $this->hasMany(Ranking::class ,'uid' ,'uid')
-                      ->where('articleid',$articleid)
-                      ->where('ranking_date',$date)
-                      ->first();
-    }
-
 }

@@ -12,18 +12,31 @@ class Honor extends Model
         'setting' => 'json',
     ];
 
-    public function getMassageMaxCount()
-    {
-      return isset($this->setting['maxmessage']) ? $this->setting['maxmessage'] : get_sys_set('massagemaxcount');
+    public static function getUserHonor(User $user){
+
+        $honor = self::getAllHonor();
+        if ($honor && $honor->count() >0) {
+
+          $filtered = $honor->first(function ($item, $key) use($user){
+
+              return ($user->score >= $item->minscore && $user->score < $item->maxscore);
+
+          });
+          return $filtered;
+        }
+        throw new \Exception('请设置用户等级');
     }
 
-    public function getBookcaseCount()
-    {
-      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : config('app.bookcasemaxcount');
-    }
-    //推荐数
-    public function getDayRecommendCount()
-    {
-      return isset($this->setting['dayrecommendcount']) ? $this->setting['dayrecommendcount'] : config('app.dayrecommendmaxcount');
+    public static function getAllHonor(){
+        $key = 'getHonor';
+        $honor = \Cache::get($key);
+        if ( !$honor ) {//不存在
+            $honor = self::orderBy('maxscore', 'asc')->get();
+            if ($honor->count() >0) {
+              \Cache::forever($key, $honor);
+            }
+
+        }
+        return $honor;
     }
 }
