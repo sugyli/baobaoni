@@ -36,7 +36,7 @@ return [
     'recommendscore' => 1,//投票增长的经验
     'wapmululiebiao' => 20,//目录每页数量
     'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
-    'txtdir' => 'http://txt.home520.com/',//txt域名
+    'txtdir' => env('TXTDIR'),//txt域名
     'txtlog' => false,//是否开启txt采集日记
     'minnr' => 300,//章节内容最小内容
     'imagedir' => 'http://img.dashubao.net/',//图片地址
