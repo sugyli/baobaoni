@@ -55,7 +55,12 @@ class OutboxsController extends Controller
             //禁用导出数据按钮
             $grid->disableExport();
             //禁用查询过滤器
-            $grid->disableFilter();
+            //$grid->disableFilter();
+            $grid->filter(function($filter){
+              // 禁用id查询框
+              $filter->disableIdFilter();
+              $filter->is('toname', '收件人');
+            });
             $grid->model()->where('fromid', 0);
             $grid->model()->orderBy('postdate', 'desc');
             $grid->actions(function ($actions) {

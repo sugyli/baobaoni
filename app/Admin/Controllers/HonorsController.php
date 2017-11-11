@@ -79,7 +79,8 @@ class HonorsController extends Controller
             $grid->caption('等级');
             $grid->minscore('积分大于')->sortable();
             $grid->maxscore	('积分小于')->sortable();
-
+            //禁用导出按钮
+            $grid->disableExport();
             $grid->column('setting' ,'附加信息')->display(function ($obj) {
 
               if (empty($obj['bookcasecount'])) {
