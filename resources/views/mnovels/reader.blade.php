@@ -87,7 +87,7 @@
             </a>
             <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf1" />
 
-            <a href="{{route('mnovels.bookshelf.index')}}">
+            <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>
             </a>
         </ul>
@@ -117,7 +117,7 @@
             </a>
             <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf3" />
 
-            <a href="{{route('mnovels.bookshelf.index')}}">
+            <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>
             </a>
         </ul>
