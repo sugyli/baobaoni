@@ -12,10 +12,10 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    $router->resource('honors', HonorsController::class);
 
 
 
-    
     //$router->get('systemsettings', 'SystemSettingsController@index');
     //$router->post('systemsettings', 'SystemSettingsController@seting');
 
