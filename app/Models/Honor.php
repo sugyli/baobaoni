@@ -28,7 +28,7 @@ class Honor extends Model
     }
 
     public static function getAllHonor(){
-        $key = 'getHonor';
+        $key = config('app.honorskey');
         $honor = \Cache::get($key);
         if ( !$honor ) {//不存在
             $honor = self::orderBy('maxscore', 'asc')->get();

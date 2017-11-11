@@ -33,7 +33,7 @@
 <section class="my-con" :style="'min-height:' + screen_height-150 + 'px;max-width: 720px;'">
   <div class="con_column con_taquan">
       <a href="javascript:" class="clearfix">
-          <p><span>0</span> 书币</p>
+          <p><span>{{$user->score}}</span> 经验</p>
       </a>
   </div>
   <div class="setfenge"></div>

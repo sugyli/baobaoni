@@ -13,7 +13,7 @@ Route::group([
     $router->get('/', 'HomeController@index');
 
     $router->resource('honors', HonorsController::class);
-
+    $router->delete('delhonorscache', 'HonorsController@delCache')->name('admin.delhonorscache');
 
 
     //$router->get('systemsettings', 'SystemSettingsController@index');

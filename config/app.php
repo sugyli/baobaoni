@@ -39,7 +39,8 @@ return [
     'txtdir' => env('TXTDIR'),//txt域名
     'txtlog' => false,//是否开启txt采集日记
     'minnr' => 300,//章节内容最小内容
-    'imagedir' => 'http://img.dashubao.net/',//图片地址
+    'imagedir' => 'http://img.dashubao.net/',//附件地址
+    'honorskey'=>'honorskey',
 
     /*
     |--------------------------------------------------------------------------

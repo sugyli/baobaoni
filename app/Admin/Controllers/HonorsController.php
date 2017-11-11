@@ -83,21 +83,21 @@ class HonorsController extends Controller
             $grid->column('setting' ,'附加信息')->display(function ($obj) {
 
               if (empty($obj['bookcasecount'])) {
-                  $a =  '默认'. get_sys_set('bookcasemaxcount') .' 书架';
+                  $a =  '默认'. config('app.bookcasemaxcount') .' 书架';
               }else{
 
                   $a = isset($obj['bookcasecount']) ? $obj['bookcasecount'].' 书架' : '故障';
               }
 
               if (empty($obj['dayrecommendcount'])) {
-                  $b = '默认'. get_sys_set('dayrecommendmaxcount') .' 日推荐';
+                  $b = '默认'. config('app.dayrecommendmaxcount') .' 日推荐';
               }else{
 
                   $b = isset($obj['dayrecommendcount']) ? $obj['dayrecommendcount'].' 日推荐' : '故障';
               }
 
               if (empty($obj['maxmessage'])) {
-                  $c = '默认'. get_sys_set('massagemaxcount') .' 收发箱';
+                  $c = '默认'. config('app.massagemaxcount') .' 收发箱';
               }else{
 
                   $c = isset($obj['maxmessage']) ? $obj['maxmessage'].' 收发箱' : '故障';
@@ -169,7 +169,7 @@ class HonorsController extends Controller
     protected function delCache()
     {
       //删除缓存
-      \Cache::forget(config('app.honors'));
+      \Cache::forget(config('app.honorskey'));
 
     }
 }
