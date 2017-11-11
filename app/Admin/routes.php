@@ -15,14 +15,16 @@ Route::group([
     $router->resource('honors', HonorsController::class);
     $router->delete('delhonorscache', 'HonorsController@delCache')->name('admin.delhonorscache');
 
+    $router->resource('inboxs', InboxsController::class, ['except' => ['create','edit','destroy','update']]);
+    $router->post('inboxs/imageupload', 'InboxsController@imageUpload');
+
 
     //$router->get('systemsettings', 'SystemSettingsController@index');
     //$router->post('systemsettings', 'SystemSettingsController@seting');
 
     //$router->resource('sorts', 'SortsController', ['except' => ['create']]);
 
-    //$router->resource('inboxs', InboxsController::class, ['except' => ['create','edit','destroy','update']]);
-    //$router->post('inboxs/imageupload', 'InboxsController@imageUpload');
+
 
     //$router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
     //$router->resource('articles', ArticlesController::class);

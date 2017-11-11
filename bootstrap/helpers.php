@@ -128,4 +128,22 @@ if (!function_exists('real_strip_tags')) {
         return strip_tags($str, $allowable_tags);
     }
 }
- ?>
+
+
+if (!function_exists('get_images_from_html')) {
+  function get_images_from_html($html)
+  {
+      $doc = new DOMDocument();
+      @$doc->loadHTML($html);
+
+      $img_tags = $doc->getElementsByTagName('img');
+
+      $result = [];
+      foreach ($img_tags as $img) {
+          $result[] = $img->getAttribute('src');
+      }
+
+      return $result;
+  }
+}
+?>

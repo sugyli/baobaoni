@@ -82,6 +82,12 @@ class User extends Authenticatable
             $this->forceFill(['adminemail' => 0])->save();
         }
     }
+    public function markAdminemailAsNoRead()
+    {
+        if($this->adminemail < 9 ) {
+            $this->increment('adminemail');
+        }
+    }
 
     /*
     public static function createToken()
