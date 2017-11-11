@@ -118,7 +118,6 @@ class NovelsController extends Controller
       $article = app(Article::class);
       $newBookDatas = $article->getArticlesWithFilter('newbook',6);
       $daydates = $article->getArticlesWithFilter('dayhit',6);
-      dd($daydates);
       $weekdates = $article->getArticlesWithFilter('weekhit',6);
       $monthdates = $article->getArticlesWithFilter('monthhit',6);
       $updataBooks = $article->getArticlesWithFilter('updatebook',6);
