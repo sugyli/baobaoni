@@ -33512,7 +33512,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n\t报错\n")]), _vm._v(" "), _c('sweet-modal', {
     ref: "voteAlert",
     staticStyle: {
-      "margin-top": "45px"
+      "margin-top": "120px"
     },
     attrs: {
       "title": "举报错误"

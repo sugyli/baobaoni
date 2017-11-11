@@ -3,7 +3,7 @@
 <div class="set1" v-on:click="openModel('voteAlert')">
 	报错
 </div>
-<sweet-modal title="举报错误" ref="voteAlert" style="margin-top:45px;">
+<sweet-modal title="举报错误" ref="voteAlert" style="margin-top:120px;">
 		<form id="jubaoForm">
 			<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
 			<div class="input_el">
