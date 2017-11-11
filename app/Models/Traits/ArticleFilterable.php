@@ -57,7 +57,7 @@ trait ArticleFilterable
                           ->whereMonth('created_at', $dt->month)
                           ->groupBy('articleid')
                           ->orderBy('h', 'desc')
-                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_d'));}])
                           ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
@@ -71,7 +71,7 @@ trait ArticleFilterable
                           ->whereBetween('ranking_date', [$week_begin, $week_end])
                           ->groupBy('articleid')
                           ->orderBy('h', 'desc')
-                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_d'));}])
                           ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
@@ -83,7 +83,7 @@ trait ArticleFilterable
                           ->where('ranking_date', $date)
                           ->groupBy('articleid')
                           ->orderBy('h', 'desc')
-                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_z'));}])
+                          ->with(['relationArticles'=> function ($q) { $q->remember(config('app.cacheTime_d'));}])
                           ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
