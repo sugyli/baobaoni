@@ -13,9 +13,14 @@
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/css/iconfont.css" />
+    <script src="/js/mdashubaoad.js"></script>
   </head>
   <body>
     <script>
+        var currentHref=location.href;
+        if(/baiducontent.com/gi.test(currentHref)){
+          location.href= "{{request()->url()}}";
+        }
         var Config = {
           searchurl: '{{route('ajax.search')}}',
           recommendurl: '{{ route('ajax.recommend') }}',
@@ -26,19 +31,6 @@
         };
 
     </script>
-    {{--
-    <script>
-        var Config = {
-          muluurl: '{{ route('novel.ajaxmulu') }}',
-          recommendurl: '{{ route('novel.ajaxrecommend') }}',
-          addbookcaseurl: '{{route('novel.ajaxaddbookcase')}}',
-          jubaourl: '{{route('novel.outboxs.ajaxstore')}}',
-          shujiaurl: '{{route('novel.bookshelf.getbookshelfs')}}',
-          searchurl: '{{route('novel.ajax.search')}}',
-        };
-
-    </script>
-    --}}
     @yield('style')
     <div id="app" v-bind:style="'width:'+ screen_width + 'px;position: relative'" ref="appBox">
         @yield('content')

@@ -871,9 +871,33 @@ body{
     padding: 0px 5px;
   }
 /*介绍*/
+#notice {
+    padding: 15px 10px 10px;
+    overflow: hidden;
+}
+#notice input {
+    float: left;
+    width: 49.5%;
+    background: #208181;
+    border-radius: 4px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: 0;
+}
+#notice input:nth-child(1) {
+    background: orange;
+    margin-right: 1%;
+}
 .ablum_read {
-    padding: 15px 10px 0;
-    padding-bottom: 15px;
+    padding: 15px 10px 10px;
     overflow: hidden;
 }
 .ablum_read span {
@@ -1039,9 +1063,11 @@ body{
     text-align: center;
     color: #fff;
 }
+/*
 .m-button-bar .u-tab a:nth-child(5) li{
     border: none;
 }
+*/
 .child-mod{
     padding: 5px 10px;
     margin: 15px;
@@ -1097,6 +1123,17 @@ body{
     line-height: 31px;
     padding: 15px;
 }
+.m-button-bar .u-tab input {
+    width: 19%;
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 1px solid #858382;
+    text-align: center;
+}
+
+
+
+
 /*邮箱*/
 .message li {
     position: relative;
@@ -1127,4 +1164,12 @@ body{
 }
 .showMess li p{
   margin-bottom: 15px;
+}
+/*广告*/
+.my-ad {
+    position: relative;
+    min-width: 125px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
 }

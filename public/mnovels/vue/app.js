@@ -45210,7 +45210,7 @@ module.exports = Component.exports
             });
         },
         readApi: function readApi(bid, page, weizhi, cid, bookName) {
-
+            //统计浏览记录
             var str = $.cookie("hislogs");
             var jos = { 'url': window.location.href, 'bookName': bookName };
             var hislogs = new Array();

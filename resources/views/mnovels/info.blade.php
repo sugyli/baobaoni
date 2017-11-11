@@ -39,7 +39,14 @@
        </a>
     </div>
     <div class="clear"></div>
-    <div class="ablum_read" id="chapterlist" style="">
+    <div id="notice">
+        @foreach ($bookData['relation_chapters'] as $chapter)
+        <input type="button" onclick="location.href= '{{$chapter['link']}}'" value="开始阅读">
+        @break($loop->iteration >= 1)
+        @endforeach
+        <input type="button" onclick="location.href= '{{ $bookData['mulu'] }}'" value="查看目录">
+  	</div>
+    <div class="ablum_read" id="chapterlist" style="display:none">
   		<span class="left"><a href="{{ $bookData['mulu'] }}">开始阅读</a></span>
   		<span><a href="javascript:void(0)" v-on:click.stop="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
@@ -49,6 +56,9 @@
     <div class="intro_info">
   		{{$bookData['intro']}}
   	</div>
+    <div class="my-ad">
+      <script>info_ad_z();</script>
+    </div>
     <div class="intro">
   		最新章节预览
   	</div>
@@ -61,8 +71,15 @@
   	</ul>
     @endif
   </div>
+  <div class="my-ad">
+    <script>info_ad_d();</script>
+  </div>
   @include('mnovels.layouts.foot')
 </div>
-
-
+@endsection
+@section('subscripts')
+<script>
+$("#notice").hide();
+$("#chapterlist").show();
+</script>
 @endsection

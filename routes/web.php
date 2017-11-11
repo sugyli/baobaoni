@@ -16,8 +16,6 @@
 
 Route::get('/', 'PagesController@home');
 
-
-
 Route::group([
     'namespace'     => 'MNovels',
 ], function () {
@@ -31,6 +29,7 @@ Route::group([
     Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
     Route::get('/mulu/{bid}','NovelsController@mulu')->name('mnovels.mulu');
 
+
     Route::get('/wapsort', 'NovelsController@wapsort')->name('mnovels.wapsort');
     Route::get('/wapsort/{id}', 'NovelsController@showwapsort')->name('mnovels.showwapsort');
 
@@ -38,6 +37,7 @@ Route::group([
     Route::get('/waptop/{any}', 'NovelsController@showwaptop')->name('mnovels.showwaptop');
 
     Route::get('/search', 'NovelsController@search');
+
 });
 
 
@@ -107,62 +107,6 @@ Route::group([
 //Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController@content')->name('novel.content');
 
 
-
-/*
-Route::group([
-    'prefix'        => 'ajax',
-    //'namespace'     => 'NovelsController',
-    //'middleware'    => ['novel'],
-], function () {
-
-
-
-
-  Route::post('/outboxs/ajaxstore', 'OutboxsController@ajaxstore')->name('novel.outboxs.ajaxstore');
-  Route::get('/bookshelf/clickbookshelf/{bid?}/{cid?}', 'BookshelfsController@clickBookshelf')->name('novel.bookshelf.clickbookshelf');
-
-  Route::post('/bookshelf/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('novel.bookshelf.getbookshelfs');
-  Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('novel.bookshelf.destroy');
-
-
-});
-
-*/
-
-
-
-
-
-
-
-
-
-Route::get('/user/password','PasswordController@create')->name('novel.password');
-
-Route::group([
-    'prefix'        => 'user',
-    'middleware'    => ['auth'],
-], function () {
-
-    Route::post('/usershow', 'UsersController@update');
-    Route::get('/edit', 'UsersController@edit')->name('novel.user.edit');
-
-
-
-
-    Route::get('/outboxs/create', 'OutboxsController@create')->name('novel.outboxs.create');
-
-
-    Route::post('/outboxs/store', 'OutboxsController@store')->name('novel.outboxs.store');
-
-
-
-
-
-
-
-
-});
 
 
 

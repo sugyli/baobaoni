@@ -1,9 +1,12 @@
 <?php
 
 return [
-    'url_web' => 'http://www.sugyli.com',
+    'url_web' => 'http://www.dashubao.net',
+    'debug_web'=> '',
 
-    'url_wap' => 'http://m.sugyli.com',
+    'url_wap' => 'http://m.dashubao.net',
+    'debug_wap'=> 'http://m.sugyli.com',
+
     'wap_name' => '大书包小说网手机版',
     'wap_keywords' => '大书包小说网,小说,手机阅读网',
     'wap_des' => '大书包小说网收录了当前最好看的小说,是广大小说阅读爱好者必备的手机阅读小说网。',
@@ -38,58 +41,6 @@ return [
     'minnr' => 300,//章节内容最小内容
     'imagedir' => 'http://img.dashubao.net/',//图片地址
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    'syskey' => 'syskey',
-    'bookid' => 'bookid_',
-    'sorts' => 'sorts_',
-
-    'weekhits' => 'weekhits_',
-    'monthhits' => 'monthhits_',
-    'dayhits' => 'dayhits_',
-
-
-    'weburi' => env('WEBURI'),//WEB地址结尾要加 /
-    'webname' => env('WEBNAME'),
-    'webkeywords' => env('WEBKEYWORDS'),
-    'webdes' => env('WEBDES'),
-
-    'bili' => 5,
-    'qiandao_maxnums' => 35,
-    'qiandao_newuser' => 20,
-
-
-
-
-
-
-
-
-
-
-    'txtlog' => env('TXTLOG',false),//是否开启txt采集日记
-
-
-
-    'title_index'=>env('TITLE_INDEX'),
-    'keywords_index'=>env('KEYWORDS_INDEX'),
-    'des_index'=>env('DES_INDEX'),
-
-    'wapuri' => env('WAPURI'),//WEB地址结尾要加 /
-    'wapname' => env('WAPNAME'),
-    'wapkeywords' => env('WAPKEYWORDS'),
-    'wapdes' => env('WAPDES'),
     /*
     |--------------------------------------------------------------------------
     | Application Name

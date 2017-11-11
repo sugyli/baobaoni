@@ -70,17 +70,25 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top">
+            <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top" id="prev_bf" style="display:none">
               <li>上一章</li>
             </a>
-            <a href="{{ $chapter['mulu'] }}">
+            <input type="button" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf1" />
+
+            <a href="{{ $chapter['mulu'] }}" id="mu_bf" style="display:none">
               <li>目录</li>
             </a>
-            <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top">
+            <input type="button" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
+
+
+
+            <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top" id="next_bf" style="display:none">
               <li>下一章</li>
             </a>
+            <input type="button" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf1" />
+
             <a href="{{route('mnovels.bookshelf.index')}}">
-              <li>书架</li>
+              <li style="border: none;">书架</li>
             </a>
         </ul>
     </div>
@@ -90,17 +98,25 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top">
+            <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top" id="prev_bf2" style="display:none">
               <li>上一章</li>
             </a>
-            <a href="{{ $chapter['mulu'] }}">
+            <input type="button" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf3" />
+
+            <a href="{{ $chapter['mulu'] }}" id="mu_bf2" style="display:none">
               <li>目录</li>
             </a>
-            <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top">
+            <input type="button" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
+
+
+
+            <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top" id="next_bf2" style="display:none">
               <li>下一章</li>
             </a>
+            <input type="button" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf3" />
+
             <a href="{{route('mnovels.bookshelf.index')}}">
-              <li>书架</li>
+              <li style="border: none;">书架</li>
             </a>
         </ul>
     </div>
@@ -112,6 +128,23 @@
 <script src="/js/jquery.cookie.js"></script>
 <script>
 baobaoni.readApi({{$chapter['articleid']}} , {{$page}} ,{{$weizhi}} ,{{$chapter['chapterid']}} ,'{{$chapter['articlename']}}');
+$("#prev_bf1").hide();
+$("#prev_bf").show();
+
+$("#mu_bf1").hide();
+$("#mu_bf").show();
+
+$("#next_bf1").hide();
+$("#next_bf").show();
+
+$("#prev_bf3").hide();
+$("#prev_bf2").show();
+
+$("#mu_bf3").hide();
+$("#mu_bf2").show();
+
+$("#next_bf3").hide();
+$("#next_bf2").show();
 </script>
 
 @endsection
