@@ -38,6 +38,9 @@
   </body>
   @section('scripts')
   <script src="{{ mix('/mnovels/vue/app.js') }}"></script>
+    @if (!Request::is('user/*'))
+    <script>tongji();</script>
+    @endif
   @show
   @section('subscripts')
 

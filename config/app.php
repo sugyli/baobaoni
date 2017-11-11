@@ -2,10 +2,10 @@
 
 return [
     'url_web' => 'http://www.dashubao.net',
-    'debug_web'=> '',
+    'debug_web'=> false,
 
     'url_wap' => 'http://m.dashubao.net',
-    'debug_wap'=> 'http://m.sugyli.com',
+    'debug_wap'=> true,
 
     'wap_name' => '大书包小说网手机版',
     'wap_keywords' => '大书包小说网,小说,手机阅读网',
