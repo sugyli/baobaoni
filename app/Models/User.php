@@ -17,6 +17,20 @@ class User extends Authenticatable
     protected $hidden = [
         'pass', 'remember_token','api_token',
     ];
+
+    public function getPasswordAttribute()
+    {
+        return $this->attributes['pass'];
+    }
+
+
+    public function getPortraitAttribute($value)
+    {
+        return empty($value) ? '/images/noavatar.jpg' : $value;
+    }
+
+
+
     /**
      * 访问器被附加到模型数组的形式。
      *
