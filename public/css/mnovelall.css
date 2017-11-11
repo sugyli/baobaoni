@@ -1007,6 +1007,32 @@ body{
     background-color: #FDFDFD;
 }
 /*内容*/
+.read_header{
+  background: #1ABC9C;
+  color: #fff;
+  padding: 0px 45px;
+  border-bottom: 1px solid #ddd;
+  line-height: 44px;
+  height: 44px;
+  position: relative;
+  width: 100%;
+}
+.read_header .header-left {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+}
+.read_header .header-right {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+}
 .nr_set {
     padding: 10px;
     font-size: 12px;
@@ -1130,7 +1156,17 @@ body{
     border-right: 1px solid #858382;
     text-align: center;
 }
-
+.reade_input{
+  background: #000;
+  opacity: 0.9;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+  line-height: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #858382;
+}
 
 
 

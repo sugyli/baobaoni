@@ -4,7 +4,7 @@
 @section('description'){{$chapter['chaptername']}}是小说{{$chapter['articlename']}}的最新章节。@endsection
 
 @section('content')
-<div class="header online" style="text-align: center;">
+<div class="read_header online" style="text-align: center;">
     {{$chapter['articlename']}}
     <a class="header-left" href="javascript:history.back()">
       <i class="iconfont icon-fanhui1"></i>
@@ -13,7 +13,7 @@
       <i class="iconfont icon-shouye1"></i>
     </a>
 </div>
-<div v-bind:style="'padding-top:45px;width:'+ screen_width + 'px;min-height:' + screen_height +'px;'">
+<div v-bind:style="'width:'+ screen_width + 'px;min-height:' + screen_height +'px;'">
   <div class="nr_set">
     <baocuo-bnt
       title="{{$chapter['articlename']}}_{{$chapter['chaptername']}}"
@@ -65,6 +65,7 @@
     <div class="nr_title">
           {{$chapter['chaptername']}}
     </div>
+    <div class="my-ad"><script>read_ad_s_1();</script></div>
     <div class="m-button-bar">
         <ul class="u-tab">
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
@@ -73,26 +74,28 @@
             <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top" id="prev_bf" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf1" />
 
             <a href="{{ $chapter['mulu'] }}" id="mu_bf" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
 
 
 
             <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top" id="next_bf" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf1" />
 
             <a href="{{route('mnovels.bookshelf.index')}}">
               <li style="border: none;">书架</li>
             </a>
         </ul>
     </div>
+    <div class="my-ad"><script>read_ad_s_2();</script></div>
     {!!$content!!}
+    <div class="my-ad"><script>read_ad_d_1();</script></div>
     <div class="m-button-bar">
         <ul class="u-tab">
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
@@ -101,25 +104,27 @@
             <a href="{{ $previousChapter['link'] or $chapter['link'] }}" target="_top" id="prev_bf2" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['link'] }}'" value="上一章" id="prev_bf3" />
 
             <a href="{{ $chapter['mulu'] }}" id="mu_bf2" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
 
 
 
             <a href="{{ $nextChapter['link'] or $chapter['link'] }}" target="_top" id="next_bf2" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['link'] }}'" value="下一章" id="next_bf3" />
 
             <a href="{{route('mnovels.bookshelf.index')}}">
               <li style="border: none;">书架</li>
             </a>
         </ul>
     </div>
+    <div class="my-ad"><script>read_ad_d_2();</script></div>
+    <div class="my-ad"><script>read_ad_d_3();</script></div>
   </div>
 </div>
 

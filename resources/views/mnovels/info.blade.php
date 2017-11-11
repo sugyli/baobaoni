@@ -71,7 +71,7 @@
   	</ul>
     @endif
   </div>
-  <div class="my-ad">
+  <div class="my-ad" style="margin-top:5px;">
     <script>info_ad_d();</script>
   </div>
   @include('mnovels.layouts.foot')
