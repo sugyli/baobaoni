@@ -56,8 +56,7 @@
     <div class="intro_info">
   		{{$bookData['intro']}}
   	</div>
-    <div class="my-ad">
-      <script>info_ad_z();</script>
+    <div class="my-ad" id="show_info_ad_z">
     </div>
     <div class="intro">
   		最新章节预览
@@ -71,15 +70,27 @@
   	</ul>
     @endif
   </div>
-  <div class="my-ad" style="margin-top:5px;">
-    <script>info_ad_d();</script>
+  <div class="my-ad" style="margin-top:5px;" id='show_info_ad_d'>
+
   </div>
   @include('mnovels.layouts.foot')
 </div>
 @endsection
 @section('subscripts')
+<div id="info_ad_z" style="display:none">
+  <script>info_ad_z();</script>
+</div>
+<div id="info_ad_d" style="display:none">
+  <script>info_ad_d();</script>
+</div>
 <script>
 $("#notice").hide();
 $("#chapterlist").show();
+document.getElementById("show_info_ad_z").innerHTML = document.getElementById("info_ad_z").innerHTML;
+document.getElementById("info_ad_z").innerHTML = "";
+
+document.getElementById("show_info_ad_d").innerHTML = document.getElementById("info_ad_d").innerHTML;
+document.getElementById("info_ad_d").innerHTML = "";
+
 </script>
 @endsection

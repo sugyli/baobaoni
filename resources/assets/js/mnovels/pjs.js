@@ -11,8 +11,10 @@
         }
         //开启Vue
         self.vuefun();
+        //self.myAd();
     },
     vuefun:function(){
+
 
           //var offset = $($('.Swipe-tab').find('a')[0]).offset();
           //var index_header_tab_width = offset.width;
@@ -24,7 +26,6 @@
                           screen_height:Util.windowHeight,
                     	  },
                         components: {
-
                         },
                     	  methods:{
                           tuijian(bid){

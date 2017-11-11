@@ -45136,6 +45136,7 @@ module.exports = Component.exports
             }
             //开启Vue
             self.vuefun();
+            //self.myAd();
         },
         vuefun: function vuefun() {
 

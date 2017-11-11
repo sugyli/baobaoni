@@ -65,7 +65,6 @@
     <div class="nr_title">
           {{$chapter['chaptername']}}
     </div>
-    <div class="my-ad"><script>read_ad_s_1();</script></div>
     <div class="m-button-bar">
         <ul class="u-tab">
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
@@ -93,9 +92,9 @@
             </a>
         </ul>
     </div>
-    <div class="my-ad"><script>read_ad_s_2();</script></div>
     {!!$content!!}
-    <div class="my-ad"><script>read_ad_d_1();</script></div>
+    <div class="my-ad" id='show_read_ad_s_1'></div>
+    <div class="my-ad" id='show_read_ad_d_1'></div>
     <div class="m-button-bar">
         <ul class="u-tab">
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
@@ -123,8 +122,8 @@
             </a>
         </ul>
     </div>
-    <div class="my-ad"><script>read_ad_d_2();</script></div>
-    <div class="my-ad"><script>read_ad_d_3();</script></div>
+    <div class="my-ad" id='show_read_ad_d_2'></div>
+    <div class="my-ad" id='show_read_ad_d_3'></div>
   </div>
 </div>
 
@@ -151,5 +150,29 @@ $("#mu_bf2").show();
 $("#next_bf3").hide();
 $("#next_bf2").show();
 </script>
+<div id="read_ad_s_1" style="display:none">
+  <script>read_ad_s_1();</script>
+</div>
 
+<div id="read_ad_d_1" style="display:none">
+  <script>read_ad_d_1();</script>
+</div>
+
+<div id="read_ad_d_2" style="display:none">
+  <script>read_ad_d_2();</script>
+</div>
+
+<div id="read_ad_d_3" style="display:none">
+  <script>read_ad_d_3();</script>
+</div>
+<script>
+document.getElementById("show_read_ad_s_1").innerHTML = document.getElementById("read_ad_s_1").innerHTML;
+document.getElementById("read_ad_s_1").innerHTML = "";
+document.getElementById("show_read_ad_d_1").innerHTML = document.getElementById("read_ad_d_1").innerHTML;
+document.getElementById("read_ad_d_1").innerHTML = "";
+document.getElementById("show_read_ad_d_2").innerHTML = document.getElementById("read_ad_d_2").innerHTML;
+document.getElementById("read_ad_d_2").innerHTML = "";
+document.getElementById("show_read_ad_d_3").innerHTML = document.getElementById("read_ad_d_3").innerHTML;
+document.getElementById("read_ad_d_3").innerHTML = "";
+</script>
 @endsection
