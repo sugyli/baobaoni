@@ -16,7 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
 */
 //mix.js('resources/assets/js/webdashubao/app.js', 'public/webdashubao/vue').version();
 
-mix.js('resources/assets/js/mnovels/app.js', 'public/mnovels/vue').version();
+mix.js('resources/assets/js/mnovels/app.js', 'public/mnovels/vue');
 
 
 /*
