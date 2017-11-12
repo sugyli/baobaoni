@@ -2245,7 +2245,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				self.delStorage();
 				self.bookname = '本地址通过手机加载出错了';
 				self.noData = true;
-				self.searchNoDataText = "请求出现故障";
+				self.searchNoDataText = "请求出现故障,刷新下页面看看";
 				self.$refs.searchScroller.finishInfinite(true);
 			});
 		},
