@@ -2028,7 +2028,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__ = __webpack_require__("./node_modules/sweet-modal-vue/src/main.js");
 //
 //
 //
@@ -2087,15 +2086,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 //import BScroll from 'better-scroll'
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2113,16 +2103,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			items: [],
 			refreshText: "下拉刷新",
 			cid: 0,
-			bookname: '',
-			content: ''
+			bookname: ''
 
 		};
 	},
 
-	components: {
-		SweetModal: __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__["a" /* SweetModal */],
-		SweetModalTab: __WEBPACK_IMPORTED_MODULE_0_sweet_modal_vue__["b" /* SweetModalTab */]
-	},
 	computed: {},
 	mounted: function mounted() {
 		var pageItem = Util.StorageGetter('muluobj_' + this.bid);
@@ -2136,20 +2121,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	},
 
 	methods: {
-		openModel: function openModel(ref) {
-			if (this.$refs[ref]) {
-				this.$refs[ref].open();
-			} else {
-				throw new Error('openModel Ref not defined: ' + ref);
-			}
-		},
-		closeModel: function closeModel(ref) {
-			if (this.$refs[ref]) {
-				this.$refs[ref].close();
-			} else {
-				throw new Error('openModel Ref not defined: ' + ref);
-			}
-		},
 		refresh: function refresh(done) {
 			var _this = this;
 
@@ -2225,12 +2196,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 							self.items.splice(0, 0, datas[i]);
 						}
 					}
-				} else if (response.data.error == 3) {
-					//书章节少了 分页存储不对清理
-					self.delStorage();
-					self.searchNoDataText = "已经是最后一页了";
-					self.$refs.searchScroller.finishInfinite(true);
-					self.noData = true;
 				} else {
 					if (type == 0) {
 						self.searchNoDataText = "没有数据了";
@@ -2243,8 +2208,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				}
 			}).catch(function (response) {
 				console.log(response);
-				self.delStorage();
-				self.bookname = '本地址通过手机加载出错了';
+				//self.delStorage();
+				self.bookname = '有问题点击右边按钮刷新';
 				self.noData = true;
 				self.searchNoDataText = "请求出现故障,刷新下页面看看";
 				self.$refs.searchScroller.finishInfinite(true);
@@ -2253,43 +2218,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		delStorage: function delStorage() {
 			var key = 'muluobj_' + this.bid;
 			Util.StorageDel(key);
-			this.bookname = '<span onclick="location.href= window.location.href">列表不出现点击我刷新</span>';
+			location.href = window.location.href;
 		},
 		isNotNullArray: function isNotNullArray(t) {
 			return t.constructor == Array && t.length > 0;
-		},
-		onSubmit: function onSubmit() {
-			this.closeModel('voteAlert');
-			//$("textarea[name='content']").val("");
-			//var jsonData = $("#jubaoForm").serialize();
-			//var jsonData = $("#jubaoForm").serializeArray();
-			var content = $.trim(this.content);
-			this.content = '';
-			if (!content) {
-				this.$toast.center('提交内容不能为空');
-				return;
-			}
-			if (!this.bookname) {
-				this.$toast.center('请等待数据加载完毕');
-				return;
-			}
-			var self = this;
-			var from = self.from;
-			var title = '来源手机_书名：' + self.bookname + '_来路：' + from;
-			axios.post(Config.jubaourl, {
-				content: content,
-				title: title
-			}).then(function (response) {
-				//console.log(response);
-				if (response.data.message) {
-					self.$toast.center(response.data.message);
-				} else {
-					self.$toast.center('返回数据出错了');
-				}
-			}).catch(function (response) {
-				console.log(response);
-				self.$toast.center('网络故障稍后再试！');
-			});
 		}
 	}
 });
@@ -33910,20 +33842,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "text-align": "center"
     }
-  }, [_c('div', {
-    domProps: {
-      "innerHTML": _vm._s(_vm.bookname)
-    }
-  }, [_vm._v(_vm._s(_vm.bookname))]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.bookname) + "\n\t\t\t"), _vm._m(0), _vm._v(" "), _c('a', {
     staticClass: "header-right",
     on: {
       "click": function($event) {
         $event.stopPropagation();
-        _vm.openModel('voteAlert')
+        _vm.delStorage()
       }
     }
   }, [_c('i', {
-    staticClass: "iconfont icon-warning"
+    staticClass: "iconfont icon-shuaxin1"
   })])]), _vm._v(" "), _c('scroller', {
     ref: "searchScroller",
     staticStyle: {
@@ -33947,56 +33875,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "href": item['link']
       }
     }, [_vm._v(_vm._s(item['chaptername']))]), _c('i')])
-  }))]), _vm._v(" "), _c('sweet-modal', {
-    ref: "voteAlert",
-    staticStyle: {
-      "margin-top": "45px"
-    },
-    attrs: {
-      "title": "举报错误"
-    }
-  }, [_c('form', {
-    attrs: {
-      "id": "jubaoForm"
-    }
-  }, [_c('textarea', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.content),
-      expression: "content"
-    }],
-    staticClass: "textarea",
-    style: ('width:100%;height:' + (_vm.screen_height * 0.4) + 'px;'),
-    attrs: {
-      "name": "content",
-      "placeholder": "输入举报内容 来源地址 我们已经记录了"
-    },
-    domProps: {
-      "value": (_vm.content)
-    },
-    on: {
-      "keyup": function($event) {
-        if (!('button' in $event) && $event.keyCode !== 13) { return null; }
-        _vm.onSubmit($event)
-      },
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.content = $event.target.value
-      }
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "input_el"
-  }, [_c('button', {
-    staticClass: "btn_small",
-    attrs: {
-      "type": "button",
-      "value": "submit"
-    },
-    on: {
-      "click": _vm.onSubmit
-    }
-  }, [_vm._v("提　　交")])])])])], 1)
+  }))])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "header-left",
@@ -45224,6 +45103,13 @@ module.exports = Component.exports
                                 self.$toast.center('网络故障稍后再试');
                             }, 500);
                         });
+                    },
+                    yudu: function yudu(bid, cid) {
+                        var pageItem = Util.StorageGetter('muluobj_' + bid);
+                        if (pageItem) {
+                            cid = pageItem.cid;
+                        }
+                        location.href = '/wapbook-' + bid + '-' + cid;
                     }
                 }
             });

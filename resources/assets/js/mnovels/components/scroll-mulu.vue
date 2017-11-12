@@ -1,12 +1,12 @@
 <template>
 <div class="mulu" :style="'height:'+screen_height+'px;background: #fff;'">
 	<div class="header online" style="text-align: center;">
-			<div v-html="bookname">{{bookname}}</div>
+			{{bookname}}
 			<a class="header-left" href="javascript:" onclick="javascript:history.go(-1);">
 				<i class="iconfont icon-fanhui1"></i>
 			</a>
-			<a class="header-right" v-on:click.stop="openModel('voteAlert')">
-				<i class="iconfont icon-warning"></i>
+			<a class="header-right" v-on:click.stop="delStorage()">
+				<i class="iconfont icon-shuaxin1"></i>
 			</a>
 	</div>
 	<scroller
@@ -23,14 +23,6 @@
 			</li>
 		</ul>
 		</scroller>
-		<sweet-modal title="举报错误" ref="voteAlert" style="margin-top:45px;">
-				<form id="jubaoForm">
-					<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
-					<div class="input_el">
-							<button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
-					</div>
-				</form>
-		</sweet-modal>
 </div>
 
 </template>
@@ -65,7 +57,6 @@
 </style>
 
 <script type="text/ecmascript-6">
-	import {SweetModal , SweetModalTab} from 'sweet-modal-vue';
   //import BScroll from 'better-scroll'
   export default {
     props:['bid','from'],
@@ -83,14 +74,9 @@
 				refreshText: "下拉刷新",
 				cid: 0,
 				bookname: '',
-				content:'',
 
       }
     },
-		components: {
-				SweetModal,
-				SweetModalTab,
-		},
 		computed: {
 
     },
@@ -105,20 +91,6 @@
         }
     },
     methods: {
-			openModel(ref) {
-				if (this.$refs[ref]) {
-					this.$refs[ref].open()
-				} else {
-					throw new Error('openModel Ref not defined: ' + ref)
-				}
-			},
-			closeModel(ref) {
-				if (this.$refs[ref]) {
-					this.$refs[ref].close()
-				} else {
-					throw new Error('openModel Ref not defined: ' + ref)
-				}
-			},
       refresh(done){
 					this.refreshPage = Number(this.refreshPage) - 1;
 					if(this.refreshPage <= 0){
@@ -195,13 +167,7 @@
 
 									}
 
-              }else if(response.data.error == 3){//书章节少了 分页存储不对清理
-								self.delStorage();
-								self.searchNoDataText = "已经是最后一页了";
-								self.$refs.searchScroller.finishInfinite(true);
-								self.noData = true;
-
-							}else{
+              }else{
 								if(type == 0){
 									self.searchNoDataText = "没有数据了";
 									self.$refs.searchScroller.finishInfinite(true);
@@ -217,8 +183,8 @@
             })
             .catch(function (response) {
 								console.log(response);
-								self.delStorage();
-								self.bookname = '本地址通过手机加载出错了';
+								//self.delStorage();
+								self.bookname = '有问题点击右边按钮刷新';
                 self.noData = true;
                 self.searchNoDataText = "请求出现故障,刷新下页面看看";
                 self.$refs.searchScroller.finishInfinite(true);
@@ -229,49 +195,11 @@
 			delStorage(){
 				var key = 'muluobj_' + this.bid;
 				Util.StorageDel(key);
-				this.bookname = '<span onclick="location.href= window.location.href">列表不出现点击我刷新</span>'
+				location.href = window.location.href;
 			},
 			isNotNullArray(t){
 				return (t.constructor==Array) && t.length > 0;
 			},
-			onSubmit(){
-				this.closeModel('voteAlert');
-				//$("textarea[name='content']").val("");
-				//var jsonData = $("#jubaoForm").serialize();
-				//var jsonData = $("#jubaoForm").serializeArray();
-				 var content =  $.trim(this.content);
-				 this.content = '';
-				 if(!content){
-				 		this.$toast.center('提交内容不能为空');
-						return
-				 }
-				 if(!this.bookname){
-						this.$toast.center('请等待数据加载完毕');
-						return;
-				 }
-				 var self = this;
-				 var from = self.from;
-				 var title = '来源手机_书名：'+ self.bookname + '_来路：' + from;
-				 axios.post(Config.jubaourl, {
-							 content: content,
-							 title: title,
-					 })
-					 .then(function (response) {
-						 //console.log(response);
-						 if(response.data.message){
-						 		self.$toast.center(response.data.message);
-						 }else{
-						 		self.$toast.center('返回数据出错了');
-						 }
-
-					 })
-					 .catch(function (response) {
-							 console.log(response);
-							 self.$toast.center('网络故障稍后再试！');
-					 });
-
-				},
-
     },
   }
 </script>

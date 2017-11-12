@@ -153,7 +153,6 @@ class NovelsController extends Controller
         if ($page<=0 || $page > $pagenum)
         {
           // $page = $pagenum;//分页越界
-           $result['error'] = 3;
            $result['message'] = "总页数{$pagenum},请求页数{$page}";
            return response()->json($result);
 

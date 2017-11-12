@@ -96,7 +96,14 @@
                                   });
 
                               },
-                              //
+                              yudu(bid ,cid){
+                                var pageItem = Util.StorageGetter('muluobj_'+bid);
+                                if(pageItem){
+                                   cid = pageItem.cid;
+                                }
+                                location.href= '/wapbook-'+ bid+ '-' + cid;
+
+                              }
                         },
                     });
 
