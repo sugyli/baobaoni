@@ -5,8 +5,8 @@
 				<a class="header-left" href="javascript:history.back()">
 					<i class="iconfont icon-fanhui1"></i>
 				</a>
-				<a class="header-right" v-on:click.stop="openModel('voteAlert')">
-					<i class="iconfont icon-warning"></i>
+				<a class="header-right" v-on:click.stop="shuaxin()">
+					<i class="iconfont icon-shuaxin1"></i>
 				</a>
 		</div>
 		<scroller
@@ -49,14 +49,6 @@
 				</li>
 			</ul>
 			</scroller>
-			<sweet-modal title="举报错误" ref="voteAlert" style="margin-top:45px;">
-					<form id="jubaoForm">
-						<textarea name="content" v-model="content" @keyup.13="onSubmit" class="textarea" :style="'width:100%;height:'+ (screen_height * 0.4)+ 'px;'" placeholder="输入举报内容 来源地址 我们已经记录了"></textarea>
-						<div class="input_el">
-								<button type="button" class="btn_small" value="submit" v-on:click="onSubmit">提　　交</button>
-						</div>
-					</form>
-			</sweet-modal>
 	</div>
 </template>
 <style>
@@ -83,8 +75,7 @@
 </style>
 
 <script type="text/ecmascript-6">
-  import BScroll from 'better-scroll'
-	import {SweetModal , SweetModalTab} from 'sweet-modal-vue';
+
   export default {
     props:['redurl','destroyurl','bookcasecount','from'],
     data() {
@@ -95,13 +86,8 @@
 				screen_height: Util.windowHeight,
 				frist:0,
 				isrefresh:0,
-				content: ''
       }
     },
-		components: {
-				SweetModal,
-				SweetModalTab,
-		},
     methods: {
 			refresh(done){
 					this.items = [];
@@ -142,7 +128,7 @@
             })
             .catch(function (response) {
 								console.log(response);
-                self.searchNoDataText = "请求出现故障";
+                self.searchNoDataText = "服务器繁忙,点击右边按钮刷新";
                 self.$refs.searchScroller.finishInfinite(true);
 
             });
@@ -184,50 +170,9 @@
 						});
 
 			},
-			openModel(ref) {
-				if (this.$refs[ref]) {
-					this.$refs[ref].open()
-				} else {
-					throw new Error('openModel Ref not defined: ' + ref)
-				}
-			},
-			closeModel(ref) {
-				if (this.$refs[ref]) {
-					this.$refs[ref].close()
-				} else {
-					throw new Error('openModel Ref not defined: ' + ref)
-				}
-			},
-			onSubmit(){
-				this.closeModel('voteAlert');
-				 var content =  $.trim(this.content);
-				 this.content = '';
-				 if(!content){
-				 		this.$toast.center('提交内容不能为空');
-						return
-				 }
-				 var self = this;
-				 var from = self.from;
-				 var title = '来源手机的书架_来路：' + from;
-				 axios.post(Config.jubaourl, {
-							 content: content,
-							 title: title,
-					 })
-					 .then(function (response) {
-						 //console.log(response);
-						 if(response.data.message){
-						 		self.$toast.center(response.data.message);
-						 }else{
-						 		self.$toast.center('返回数据出错了');
-						 }
-
-					 })
-					 .catch(function (response) {
-							 console.log(response);
-							 self.$toast.center('网络故障稍后再试！');
-					 });
-
-				},
+			shuaxin(){
+				location.href = window.location.href;
+			}
 
     },
   }
