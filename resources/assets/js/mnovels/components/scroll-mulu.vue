@@ -193,7 +193,14 @@
 
 									}
 
-              }else{
+              }else if(response.data.error == 3){//书章节少了 分页存储不对清理
+								self.delStorage();
+								self.searchNoDataText = "请刷新下页面再次获取";
+								self.$refs.searchScroller.finishInfinite(true);
+								self.noData = true;
+								location.href = window.location.href;
+
+							}else{
 								if(type == 0){
 									self.searchNoDataText = "没有数据了";
 									self.$refs.searchScroller.finishInfinite(true);
@@ -209,6 +216,7 @@
             })
             .catch(function (response) {
 								console.log(response);
+								self.delStorage();
 								self.bookname = '本地址通过手机加载出错了';
                 self.noData = true;
                 self.searchNoDataText = "请求出现故障";
@@ -217,6 +225,10 @@
             });
 
       },
+			delStorage(){
+				var key = 'muluobj_' + self.bid;
+				Util.StorageDel(key);
+			},
 			isNotNullArray(t){
 				return (t.constructor==Array) && t.length > 0;
 			},
