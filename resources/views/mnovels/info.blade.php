@@ -18,6 +18,8 @@
       <div class="i-top-search">输入书名/作者/关键字</div>
     </a>
   </section>
+  <div class="my-ad" id="show_info_ad_s">
+  </div>
   <div class="cover">
     <div class="block">
       <a href="{{$bookData['link']}}">
@@ -77,6 +79,9 @@
 </div>
 @endsection
 @section('subscripts')
+<div id="info_ad_s" style="display:none">
+  <script>info_ad_s();</script>
+</div>
 <div id="info_ad_z" style="display:none">
   <script>info_ad_z();</script>
 </div>
@@ -86,6 +91,9 @@
 <script>
 $("#notice").hide();
 $("#chapterlist").show();
+document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
+document.getElementById("info_ad_s").innerHTML = "";
+
 document.getElementById("show_info_ad_z").innerHTML = document.getElementById("info_ad_z").innerHTML;
 document.getElementById("info_ad_z").innerHTML = "";
 

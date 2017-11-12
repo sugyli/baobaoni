@@ -45129,10 +45129,10 @@ module.exports = Component.exports
         init: function init() {
             var self = this;
             //第一次先清理下缓存
-            var first_del_v1 = Util.StorageGetter('first_del_v1');
-            if (!first_del_v1) {
+            var first_del_v = Util.StorageGetter('first_del_v2');
+            if (!first_del_v) {
                 Util.StorageDelAll();
-                Util.StorageSetter('first_del_v1', 1);
+                Util.StorageSetter('first_del_v2', 1);
             }
             //开启Vue
             self.vuefun();
