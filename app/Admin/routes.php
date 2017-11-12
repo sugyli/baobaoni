@@ -19,9 +19,9 @@ Route::group([
     $router->post('inboxs/imageupload', 'InboxsController@imageUpload');
 
     $router->resource('outboxs', OutboxsController::class, ['except' => ['create','store','edit','destroy','update']]);
+    $router->get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
-    
     //$router->get('systemsettings', 'SystemSettingsController@index');
     //$router->post('systemsettings', 'SystemSettingsController@seting');
 
