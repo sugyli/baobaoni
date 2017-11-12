@@ -252,7 +252,7 @@
             </div>
           </a>
         </li>
-        @break($loop->iteration >= 6)
+        @break($loop->iteration >= 10)
         @endforeach
   </section>
   @endif

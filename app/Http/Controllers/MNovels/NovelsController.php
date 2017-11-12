@@ -32,7 +32,11 @@ class NovelsController extends Controller
           return response()->json($result);
         }
 
-        $datas =  Article::search($query, null, true)->getBasicsBook()->orderBy('lastupdate', 'desc')->remember(config('app.cacheTime_z'))->paginate(10);
+        $datas =  Article::search($query, null, true)
+                            ->getBasicsBook()
+                            ->orderBy('lastupdate', 'desc')
+                            ->remember(config('app.cacheTime_z'))
+                            ->paginate(10);
         //分页支持这种
         if($datas->count() <= 0){
           $result['message'] = '没有搜索到内容';
@@ -120,7 +124,7 @@ class NovelsController extends Controller
       $daydates = $article->getArticlesWithFilter('dayhit',6);
       $weekdates = $article->getArticlesWithFilter('weekhit',6);
       $monthdates = $article->getArticlesWithFilter('monthhit',6);
-      $updataBooks = $article->getArticlesWithFilter('updatebook',6);
+      $updataBooks = $article->getArticlesWithFilter('updatebook',10);
       return view('mnovels.index',compact('newBookDatas','weekdates','monthdates','daydates','updataBooks'));
     }
 
