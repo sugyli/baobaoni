@@ -2691,16 +2691,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       if (this.noData) {
         return;
       }
-
       var self = this;
       var searchKeyword = self.getKeyWord();
-      self.page = self.page + 1;
-      var url = self.url + self.page;
+
       if (searchKeyword) {
+        self.page = self.page + 1;
+        var url = self.url + self.page;
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
-
           if (response.data.error == 0) {
             var data = response.data.bakdata.data;
             for (var i = 0; i < data.length; i++) {
@@ -2719,7 +2718,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         }).catch(function (response) {
           console.log(response);
           self.noData = true;
-          self.searchNoDataText = "请求出现故障";
+          self.searchNoDataText = "请求出现延迟请稍等";
           self.$refs.searchScroller.finishInfinite(true);
         });
       } else {
