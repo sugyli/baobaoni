@@ -34,7 +34,7 @@ return [
     'bookcasemaxcount' => 20,
     'dayrecommendmaxcount' => 20,
     'recommendscore' => 1,//投票增长的经验
-    'wapmululiebiao' => 20,//目录每页数量
+    'wapmululiebiao' => 40,//目录每页数量
     'dfnr' => '章节丢失了,欢迎举报让我们修复,非常感谢！！！',
     'txtdir' => env('TXTDIR'),//txt域名
     'txtlog' => false,//是否开启txt采集日记

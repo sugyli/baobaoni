@@ -70,10 +70,10 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['mulu'] }}" target="_top" id="prev_bf" style="display:none">
+            <a href="{{ $previousChapter['link'] or $chapter['infolink'] }}" target="_top" id="prev_bf" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['infolink'] }}'" value="上一章" id="prev_bf1" />
 
             <a href="{{ $chapter['mulu'] }}" id="mu_bf" style="display:none">
               <li>目录</li>
@@ -82,10 +82,10 @@
 
 
 
-            <a href="{{ $nextChapter['link'] or $chapter['mulu'] }}" target="_top" id="next_bf" style="display:none">
+            <a href="{{ $nextChapter['link'] or $chapter['infolink'] }}" target="_top" id="next_bf" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['mulu'] }}'" value="下一章" id="next_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['infolink'] }}'" value="下一章" id="next_bf1" />
 
             <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>
@@ -100,10 +100,10 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['mulu'] }}" target="_top" id="prev_bf2" style="display:none">
+            <a href="{{ $previousChapter['link'] or $chapter['infolink'] }}" target="_top" id="prev_bf2" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['infolink'] }}'" value="上一章" id="prev_bf3" />
 
             <a href="{{ $chapter['mulu'] }}" id="mu_bf2" style="display:none">
               <li>目录</li>
@@ -112,10 +112,10 @@
 
 
 
-            <a href="{{ $nextChapter['link'] or $chapter['mulu'] }}" target="_top" id="next_bf2" style="display:none">
+            <a href="{{ $nextChapter['link'] or $chapter['infolink'] }}" target="_top" id="next_bf2" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['mulu'] }}'" value="下一章" id="next_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['infolink'] }}'" value="下一章" id="next_bf3" />
 
             <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>

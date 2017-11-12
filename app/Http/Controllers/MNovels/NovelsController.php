@@ -36,7 +36,7 @@ class NovelsController extends Controller
                             ->getBasicsBook()
                             ->orderBy('lastupdate', 'desc')
                             ->remember(config('app.cacheTime_z'))
-                            ->paginate(10);
+                            ->paginate(20);
         //分页支持这种
         if($datas->count() <= 0){
           $result['message'] = '没有搜索到内容';
