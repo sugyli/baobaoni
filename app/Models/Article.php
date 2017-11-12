@@ -43,7 +43,9 @@ class Article extends Model
         'lastupdate',
         'updatetime',
         'mulu',
-        'relationChapters'
+        'relationChapters',
+        'lastchapterid',
+        'lastchapter',
       ];
 
     protected $appends = ['link','sort','updatetime','mulu'];
