@@ -2250,7 +2250,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			});
 		},
 		delStorage: function delStorage() {
-			var key = 'muluobj_' + self.bid;
+			var key = 'muluobj_' + this.bid;
 			Util.StorageDel(key);
 		},
 		isNotNullArray: function isNotNullArray(t) {

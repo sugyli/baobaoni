@@ -226,7 +226,7 @@
 
       },
 			delStorage(){
-				var key = 'muluobj_' + self.bid;
+				var key = 'muluobj_' + this.bid;
 				Util.StorageDel(key);
 			},
 			isNotNullArray(t){
