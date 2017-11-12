@@ -88,7 +88,7 @@ Route::group([
 Route::group([
     'prefix'        => 'ajax',
     'namespace'     => 'MNovels',
-    'middleware'    => ['web','throttle'],
+    'middleware'    => ['web'],
 ], function () {
 
     Route::post('/recommend', 'UsersController@recommend')->name('ajax.recommend');
