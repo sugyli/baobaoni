@@ -293,7 +293,7 @@
         noData: false,
         ishide: false,
         searchNoDataText: "没有更多数据",
-        frist:0
+        frist:0,
       }
     },
     computed: {
@@ -401,6 +401,7 @@
           if(this.noData){
               return;
           }
+
           var self = this;
           var searchKeyword = self.getKeyWord();
           self.page = self.page + 1;
@@ -443,6 +444,7 @@
               self.$refs.searchScroller.finishInfinite(true);
 
           }
+
       },
       tagclick(v){
           this.searchKeyword = v;

@@ -2691,6 +2691,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
       if (this.noData) {
         return;
       }
+
       var self = this;
       var searchKeyword = self.getKeyWord();
       self.page = self.page + 1;
