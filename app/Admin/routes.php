@@ -7,7 +7,7 @@ Admin::registerHelpersRoutes();
 Route::group([
     'prefix'        => config('admin.prefix'),
     'namespace'     => Admin::controllerNamespace(),
-    'middleware'    => ['bast', 'web', 'admin'],
+    'middleware'    => ['web1', 'admin'],
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
