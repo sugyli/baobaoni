@@ -277,9 +277,9 @@
 
 </style>
 <script>
-  import Vue from 'vue'
-  import VueScroller from 'vue-scroller'
-  Vue.use(VueScroller)
+  //import Vue from 'vue'
+  //import VueScroller from 'vue-scroller'
+  //Vue.use(VueScroller)
   export default {
     //props:['searchinput'],
     data() {
@@ -367,7 +367,7 @@
             setTimeout(() => {
               this.getData();
               done()
-            }, 1500)
+            }, 3000)
 
         }else{
             this.searchNoDataText = "已经到头了";

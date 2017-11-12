@@ -126,7 +126,7 @@
 								this.weizhi = '';
 							}
 							done()
-						}, 1500)
+						}, 3000)
 
 				}else{
 						this.searchNoDataText = "没有搜索到数据了";
