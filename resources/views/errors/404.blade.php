@@ -17,6 +17,7 @@
       margin-bottom: 15px;
       text-align: center;
   }
+
 </style>
 @endsection
 @section('content')
@@ -29,6 +30,6 @@
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp section">
   <div class="error"></div>
   <p>对不起，您访问的页面暂时无法显示！</p>
-  <a href="/">返回首页</a>
+  <p><a href="/">返回首页</a></p>
 </div>
 @endsection
