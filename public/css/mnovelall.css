@@ -1149,6 +1149,20 @@ body{
     line-height: 31px;
     padding: 15px;
 }
+.m-read-content p {
+    text-indent: 2em;
+    margin: 0.5em 0;
+    letter-spacing: 0px;
+    line-height: 24px;
+}
+.m-read-content .divimage{
+
+    text-align: center;
+}
+.m-read-content .divimage img{
+    max-width: 100%!important;
+    height: auto!important;
+}
 .m-button-bar .u-tab input {
     width: 19%;
     display: inline-block;
@@ -1201,6 +1215,12 @@ body{
 .showMess li p{
   margin-bottom: 15px;
 }
+.showMess img{
+    max-width: 100%!important;
+    height: auto!important;
+}
+
+
 /*广告*/
 .my-ad {
     position: relative;
