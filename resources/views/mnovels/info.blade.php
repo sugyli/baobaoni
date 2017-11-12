@@ -64,7 +64,7 @@
     @if (count($bookData['relation_chapters']) > 0)
     <ul class="chapter">
       @foreach (array_reverse($bookData['relation_chapters']) as $chapter)
-  		 <li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$bookData['updatetime']}}</span></a></li>
+  		 <li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$chapter['updatetime']}}</span></a></li>
       @break($loop->iteration >= 9)
       @endforeach
   	</ul>
