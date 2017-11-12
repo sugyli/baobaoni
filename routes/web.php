@@ -14,10 +14,11 @@
 
 
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home')->middleware('lasthead');
 
 Route::group([
     'namespace'     => 'MNovels',
+    'middleware'    => ['lasthead'],
 ], function () {
     Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('mnovels.info');
 
