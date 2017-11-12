@@ -198,7 +198,7 @@
 								self.searchNoDataText = "请刷新下页面再次获取";
 								self.$refs.searchScroller.finishInfinite(true);
 								self.noData = true;
-								location.href = window.location.href;
+								//location.href = window.location.href;
 
 							}else{
 								if(type == 0){
