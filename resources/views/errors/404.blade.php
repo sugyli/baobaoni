@@ -22,7 +22,7 @@
 @endsection
 @section('content')
 <div class="header online" style="text-align: center;">
-    出错了返回首页
+    出错了请返回首页
     <a class="header-left" href="/">
       <i class="iconfont icon-fanhui1"></i>
     </a>
