@@ -370,7 +370,7 @@
             }, 1500)
 
         }else{
-            this.searchNoDataText = "没有搜索到数据";
+            this.searchNoDataText = "已经到头了";
             this.$refs.searchScroller.finishInfinite(true);
 
         }
