@@ -1,7 +1,7 @@
 <template>
 <div class="mulu" :style="'height:'+screen_height+'px;background: #fff;'">
 	<div class="header online" style="text-align: center;">
-			{{bookname}}
+			<div v-html="bookname">{{bookname}}</div>
 			<a class="header-left" href="javascript:" onclick="javascript:history.go(-1);">
 				<i class="iconfont icon-fanhui1"></i>
 			</a>
@@ -168,7 +168,9 @@
 					if(this.noData && type ==  0){
 							return;
 					}
+
           var self = this;
+
           axios.post(self.url, {
 							bid: self.bid,
 							page: page,
@@ -195,10 +197,9 @@
 
               }else if(response.data.error == 3){//书章节少了 分页存储不对清理
 								self.delStorage();
-								self.searchNoDataText = "请刷新下页面再次获取";
+								self.searchNoDataText = "已经是最后一页了";
 								self.$refs.searchScroller.finishInfinite(true);
 								self.noData = true;
-								//location.href = window.location.href;
 
 							}else{
 								if(type == 0){
@@ -228,6 +229,7 @@
 			delStorage(){
 				var key = 'muluobj_' + this.bid;
 				Util.StorageDel(key);
+				this.bookname = '<span onclick="location.href= window.location.href">列表不出现点击我刷新</span>'
 			},
 			isNotNullArray(t){
 				return (t.constructor==Array) && t.length > 0;

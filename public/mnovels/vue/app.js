@@ -2202,7 +2202,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			if (this.noData && type == 0) {
 				return;
 			}
+
 			var self = this;
+
 			axios.post(self.url, {
 				bid: self.bid,
 				page: page
@@ -2226,10 +2228,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 				} else if (response.data.error == 3) {
 					//书章节少了 分页存储不对清理
 					self.delStorage();
-					self.searchNoDataText = "请刷新下页面再次获取";
+					self.searchNoDataText = "已经是最后一页了";
 					self.$refs.searchScroller.finishInfinite(true);
 					self.noData = true;
-					//location.href = window.location.href;
 				} else {
 					if (type == 0) {
 						self.searchNoDataText = "没有数据了";
@@ -2252,6 +2253,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		delStorage: function delStorage() {
 			var key = 'muluobj_' + this.bid;
 			Util.StorageDel(key);
+			this.bookname = '<span onclick="location.href= window.location.href">列表不出现点击我刷新</span>';
 		},
 		isNotNullArray: function isNotNullArray(t) {
 			return t.constructor == Array && t.length > 0;
@@ -33908,7 +33910,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("\n\t\t\t" + _vm._s(_vm.bookname) + "\n\t\t\t"), _vm._m(0), _vm._v(" "), _c('a', {
+  }, [_c('div', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.bookname)
+    }
+  }, [_vm._v(_vm._s(_vm.bookname))]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('a', {
     staticClass: "header-right",
     on: {
       "click": function($event) {
