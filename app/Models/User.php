@@ -58,12 +58,23 @@ class User extends Authenticatable
       $honor = Honor::getUserHonor($this);
       return isset($honor->setting['dayrecommendcount']) ? $honor->setting['dayrecommendcount'] : config('app.dayrecommendmaxcount');
     }
+
+    public function shenyuDayRecommendCount()
+    {
+        //用户拥有的今日推荐次数
+        $userRecommendCount = (int)$this->getDayRecommendCount();
+        //用户今天使用了多少票
+        $userHits = (int)$this->relationRankingsUseHits();
+        return  $userRecommendCount - $userHits;
+    }
     //书架数
     public function getBookcaseCount()
     {
       $honor = Honor::getUserHonor($this);
       return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : config('app.bookcasemaxcount');
     }
+
+    //消息容量
     public function getMassageMaxCount()
     {
       $honor = Honor::getUserHonor($this);
@@ -130,7 +141,7 @@ class User extends Authenticatable
                       ->first();
     }
 
-
+    //书架使用量
     public function relationBookcasesUse()
     {
         //第2个参数是 关联类的外键   第3个是 本类中

@@ -33,13 +33,34 @@
 <section class="my-con" :style="'min-height:' + screen_height-150 + 'px;max-width: 720px;'">
   <div class="con_column con_taquan">
       <a href="javascript:" class="clearfix">
-          <p><span>{{$user->score}}</span> 经验</p>
+          <p>经验 <span>{{$user->score}}</span></p>
+      </a>
+  </div>
+  <div class="con_column con_taquan">
+      <a href="javascript:" class="clearfix">
+          <p>书架容量 <span>{{$user->getBookcaseCount()}}</span> 已用 <span>{{$user->relationBookcasesUse()}}</span></p>
+      </a>
+  </div>
+  <div class="con_column con_taquan">
+      <a href="javascript:" class="clearfix">
+          <p>日推荐票 <span>{{$user->getDayRecommendCount()}}</span> 今日剩余 <span>{{$user->shenyuDayRecommendCount()}}</span></p>
+      </a>
+  </div>
+  <div class="con_column con_taquan">
+      <a href="javascript:" class="clearfix">
+          <p>收发件最大存储 <span>{{$user->getMassageMaxCount()}}</span></p>
       </a>
   </div>
   <div class="setfenge"></div>
   <div class="con_column clearfix">
       <a href="{{route('mnovels.user.passedit')}}?redirect_url={{request()->url()}}" class="clearfix">
           <p>修改密码</p>
+          <b></b>
+      </a>
+  </div>
+  <div class="con_column clearfix">
+      <a href="{{ route('mnovels.hislogs') }}" class="clearfix con_rack">
+          <p>历史浏览</p>
           <b></b>
       </a>
   </div>
@@ -80,5 +101,5 @@
       </a>
   </div>
 </section>
-
+@include('mnovels.layouts.foot')
 @endsection
