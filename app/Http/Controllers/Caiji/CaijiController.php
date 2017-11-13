@@ -22,8 +22,6 @@ class CaijiController extends Controller
         $curl->close();
         if ($curl->http_status_code == '200') {
           $txt = $curl->response;
-          echo $txt;
-          exit;
           if (!empty($txt)){
               return $txt;
           }
