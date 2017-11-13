@@ -237,14 +237,14 @@ class CaijiController extends Controller
             die("dizhiweikong book<0");
         }
 
-        $txt = $this->caiji($url);
+        $txt = $this->caiji($url ,true);
         preg_match("{<div class=\"pages\">(.+?)<\/div>}", $txt,$results);
         if (isset($results[1])) {
             preg_match_all("{<a href=\/read\/\d+\/\d+\/>(\d+)</a>}", $results[1],$outArry);
             $counts = count($outArry[1]);
             if ($counts > 0) {
                 for ($i=0; $i < $counts; $i++) {
-                  $t = $this->caiji($url.$outArry[1][$i].'/');
+                  $t = $this->caiji($url.$outArry[1][$i].'/' ,true);
                   if (empty($t)){
                       die("caijifenyeshibai");
                   }
