@@ -101,35 +101,6 @@
 
       },
       readApi: function(bid , page ,weizhi,cid , bookName){
-        //统计浏览记录
-        var str = $.cookie("hislogs");
-        var jos = {'url':window.location.href,'bookName':bookName};
-        var hislogs = new Array();
-        if (str !=null){
-            hislogs = JSON.parse(str);
-            $.each(hislogs, function(i,val){
-              if (val.url == window.location.href) {
-                  hislogs.splice(eval(i),1);
-                  return false;
-                }else if(val.bookName == bookName) {
-                  hislogs.splice(eval(i),1);
-                  return false;
-                }
-            });
-        }
-        var arrylength = (hislogs.length -1);
-        if (arrylength < 100) {
-            hislogs.push(jos);
-            var str = JSON.stringify(hislogs);
-            $.cookie('hislogs',str,{expires:365 , path:'/'});
-
-        }else{
-            hislogs.splice(0,1);
-            hislogs.push(jos);
-            var str = JSON.stringify(hislogs);
-            $.cookie('hislogs',str,{expires:365 , path:'/'});
-        }
-
 
         var Dom = {
             night_icon: $('#night_icon'),
@@ -260,6 +231,37 @@
           }
 
           main();//调用入口函数
+
+
+          //统计浏览记录
+          var str = $.cookie("hislogs");
+          var jos = {'url':window.location.href,'bookName':bookName};
+          var hislogs = new Array();
+          if (str){
+              hislogs = JSON.parse(str);
+              $.each(hislogs, function(i,val){
+                if (val.url == window.location.href) {
+                    hislogs.splice(eval(i),1);
+                    return false;
+                  }else if(val.bookName == bookName) {
+                    hislogs.splice(eval(i),1);
+                    return false;
+                  }
+              });
+          }
+          var arrylength = (hislogs.length -1);
+          if (arrylength < 100) {
+              hislogs.push(jos);
+              var str = JSON.stringify(hislogs);
+              $.cookie('hislogs',str,{expires:30 , path:'/'});
+
+          }else{
+              hislogs.splice(0,1);
+              hislogs.push(jos);
+              var str = JSON.stringify(hislogs);
+              $.cookie('hislogs',str,{expires:30 , path:'/'});
+          }
+
 
       },
 

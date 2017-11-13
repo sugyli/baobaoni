@@ -32,6 +32,9 @@
     <a class="header-left" href="javascript:" onclick="javascript:history.go(-1);">
       <i class="iconfont icon-fanhui1"></i>
     </a>
+    <a class="header-right" href="javascript:" onclick="delcook()">
+      <i class="iconfont icon-shuaxin1"></i>
+    </a>
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp" id="sotitle">
   <div style="text-align:center; padding:50px 0;">
@@ -43,9 +46,9 @@
 <script src="/js/jquery.cookie.js"></script>
 <script>
 var str = $.cookie("hislogs");
-if (str !=null){
+if (str){
     var hislogs = JSON.parse(str);
-    var lengths=hislogs.length;
+    var lengths= hislogs.length;
     //翻转数组
     hislogs=$.map(hislogs,function(v,i){// map方法匿名函数传的值v是值、i是索引。
         return hislogs[lengths-1-i];
@@ -62,6 +65,10 @@ if (str !=null){
     var html =  '<div style="text-align:center; padding:50px 0;">没有阅读记录</div>';
     $("#sotitle").html(html);
 
+}
+function delcook() {
+  $.cookie('hislogs',"",-1);
+  location.href = window.location.href;
 }
 </script>
 @endsection
