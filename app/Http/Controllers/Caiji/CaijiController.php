@@ -27,7 +27,7 @@ class CaijiController extends Controller
           }
 
         }
-        die("没有采集到数据 状态码 {$curl->http_status_code}");
+        die("meiyoucaijidaoshuju  zhuangtaima {$curl->http_status_code}");
     }
 
     public function zuhe($text , $bookid){
@@ -246,13 +246,13 @@ class CaijiController extends Controller
                 for ($i=0; $i < $counts; $i++) {
                   $t = $this->caiji($url.$outArry[1][$i].'/');
                   if (empty($t)){
-                      die("采集分页数据失败");
+                      die("caijifenyeshibai");
                   }
 
                   $txt = $txt . $t;
                 }
             }else{
-      				die('分页规则错误了');
+      				die('fenyeguizcuowu');
       			}
         }
 
