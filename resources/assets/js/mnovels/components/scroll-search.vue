@@ -440,7 +440,6 @@
                     self.noData = true;
                     self.searchNoDataText = "请求出现延迟请再点一次搜索";
                     self.$refs.searchScroller.finishInfinite(true);
-
                 });
 
           }else{
