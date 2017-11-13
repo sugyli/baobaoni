@@ -371,7 +371,7 @@
             }, 500)
 
         }else{
-            this.searchNoDataText = "加载完毕,没有内容就是无相关内容";
+            this.searchNoDataText = "第一次搜索有点慢,多确认几次,没有就是没有";
             this.$refs.searchScroller.finishInfinite(true);
 
         }
