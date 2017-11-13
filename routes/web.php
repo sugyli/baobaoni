@@ -14,18 +14,17 @@
 
 
 
-Route::get('/', 'PagesController@home')->middleware('lasthead');
+Route::get('/', 'PagesController@home');
 
 Route::group([
     'namespace'     => 'MNovels',
-    'middleware'    => ['lasthead'],
 ], function () {
     Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('mnovels.info');
 
     Route::get('/wapbook-{bid}-{cid}/{any?}', 'NovelsController@content')->name('mnovels.content');
 
     Route::get('/hislogs', 'NovelsController@hislogs')->name('mnovels.hislogs');
-
+    Route::get('/wapbook-{bid}', 'RouteCacheJController@cache1');
     Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
     Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
     Route::get('/mulu/{bid}','NovelsController@mulu')->name('mnovels.mulu');
