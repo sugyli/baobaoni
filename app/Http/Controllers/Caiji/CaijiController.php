@@ -228,6 +228,7 @@ class CaijiController extends Controller
     {
         header('Content-type:text/plain;charset=gbk');
 		    ini_set('pcre.backtrack_limit', 999999999);
+        set_time_limit(300);
         $url = request()->url;
         $bookid = (int)request()->bookid;
         if (empty($url) || $bookid <= 0){
