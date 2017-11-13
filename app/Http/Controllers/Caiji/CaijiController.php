@@ -234,7 +234,7 @@ class CaijiController extends Controller
         $url = request()->url;
         $bookid = (int)request()->bookid;
         if (empty($url) || $bookid <= 0){
-            die("地址为空了或BOOKID小于等于0");
+            die("dizhiweikong book<0");
         }
 
         $txt = $this->caiji($url);
