@@ -41123,7 +41123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       searchItems: [],
       searchKeyword: '',
       storageSearchItems: [],
-      url: Config.nodnssearchurl ? Config.nodnssearchurl + '?page=' : Config.searchurl + '?page=',
+      url: Config.searchurl + '?page=',
       page: 0,
       noData: false,
       ishide: false,
