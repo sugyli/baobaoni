@@ -18,7 +18,7 @@ Route::get('/', 'PagesController@home');
 
 Route::group([
     'namespace'     => 'MNovels',
-    //'domain' => config('app.url_wap')
+    'domain' => config('app.url_wap')
 ], function () {
     Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('mnovels.info');
 
@@ -47,7 +47,7 @@ Route::group([
     'namespace'     => 'MNovels',
     'prefix'        => 'user',
     'middleware'    => ['web'],
-    //'domain' => config('app.url_wap')
+    'domain' => config('app.url_wap')
 ], function () {
 
     Route::get('/login', 'LoginController@create')->name('mnovels.login');
@@ -65,7 +65,7 @@ Route::group([
     'namespace'     => 'MNovels',
     'prefix'        => 'user',
     'middleware'    => ['web','auth'],
-    //'domain' => config('app.url_wap')
+    'domain' => config('app.url_wap')
 ], function () {
 
     Route::get('/show', 'UsersController@show')->name('mnovels.user.show');
