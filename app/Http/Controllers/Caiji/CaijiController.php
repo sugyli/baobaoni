@@ -11,7 +11,7 @@ class CaijiController extends Controller
     public function caiji($url, $ishttps = false)
     {
         $curl = new \Curl\Curl();
-        $curl->setOpt(CURLOPT_TIMEOUT, 30);
+        $curl->setOpt(CURLOPT_TIMEOUT, 60);
         $curl->setOpt(CURLOPT_RETURNTRANSFER, 1);
         $curl->setOpt(CURLOPT_REFERER, "http://www.baidu.com");
         $curl->setOpt(CURLOPT_USERAGENT, "Baiduspider+(+http://www.baidu.com/search/spider.htm)");
