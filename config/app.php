@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'url_web' => 'http://www.dashubao.net',
-    'debug_web'=> false,
+    'url_web' => env('URL_WEB'),
 
-    'url_wap' => 'http://m.dashubao.net',
-    'debug_wap'=> true,
+    'url_wap' => env('URL_WAP'),
+
+    'url_so' => env('URL_SO'),
 
     'wap_name' => '大书包小说网手机版',
     'wap_keywords' => '大书包小说网,小说,手机阅读网',

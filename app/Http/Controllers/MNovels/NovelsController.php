@@ -14,7 +14,7 @@ class NovelsController extends Controller
 
     public function __construct()
     {
-
+      
     }
     public function search()
     {

@@ -16,12 +16,13 @@ class PagesController extends Controller
       $weburl = config('app.url_web');
       $wapurl = config('app.url_wap');
 
-      if(str_is($url.'*', $weburl) || config('app.debug_web')){
+      if(str_is($url.'*', $weburl)){
           dd('开发中');
       }
-      if(str_is($url.'*', $wapurl) || config('app.debug_wap')){
+      if(str_is($url.'*', $wapurl)){
           return $this->novelWapIndex();
       }
+
       dd('非法域名');
     }
 
@@ -29,10 +30,6 @@ class PagesController extends Controller
     {
         return app(NovelsController::class)->index();
     }
-
-
-
-
 
 
 }

@@ -41123,7 +41123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       searchItems: [],
       searchKeyword: '',
       storageSearchItems: [],
-      url: Config.searchurl + '?page=',
+      url: Config.nodnssearchurl ? Config.nodnssearchurl + '?page=' : Config.searchurl + '?page=',
       page: 0,
       noData: false,
       ishide: false,
@@ -41244,6 +41244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         self.page = self.page + 1;
         var url = self.url + self.page;
         self.jiazai = true;
+
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {

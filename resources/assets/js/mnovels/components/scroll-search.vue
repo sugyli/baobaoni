@@ -288,7 +288,7 @@
         searchItems: [],
         searchKeyword: '',
         storageSearchItems: [],
-        url: Config.searchurl +  '?page=',
+        url: Config.searchurl  +  '?page=',
         page: 0,
         noData: false,
         ishide: false,
@@ -412,6 +412,7 @@
               self.page = self.page + 1;
               var url  = self.url + self.page;
               self.jiazai =true;
+
               axios.post(url, {
                     query: searchKeyword,
                 })

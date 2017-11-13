@@ -101,6 +101,7 @@ Route::group([
     Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('ajax.destroy');
 });
 
+
 //Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
 
 
