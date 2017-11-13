@@ -60,7 +60,7 @@ class OutboxsController extends Controller
                 ->orderBy('postdate', 'desc')
                 ->limit($limit);
       }]);
-      $bkurl = request()->redirect_url ?: '/';
+      $bkurl = request()->redirect_url ?: route('mnovels.user.show');
       //$supplement = ['title'=>'收件箱' ,'subTitle'=>'发件人'];
       return view('mnovels.useroutbox' , compact('user','bkurl'));
 
