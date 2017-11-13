@@ -21,10 +21,7 @@ class CaijiController extends Controller
         $curl->get($url);
         $curl->close();
         if ($curl->http_status_code == '200') {
-          $txt = $curl->response;
-          if (!empty($txt)){
-              return $txt;
-          }
+          return $curl->response;
 
         }
         die("meiyoucaijidaoshuju  zhuangtaima {$curl->http_status_code}");
