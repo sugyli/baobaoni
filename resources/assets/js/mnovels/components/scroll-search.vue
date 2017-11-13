@@ -288,7 +288,7 @@
         searchItems: [],
         searchKeyword: '',
         storageSearchItems: [],
-        url: Config.searchurl  +  '?page=',
+        url:  Config.searchurl  +  '?page=',
         page: 0,
         noData: false,
         ishide: false,
