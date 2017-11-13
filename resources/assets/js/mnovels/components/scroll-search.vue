@@ -294,6 +294,7 @@
         ishide: false,
         searchNoDataText: "没有更多数据",
         frist:0,
+        jiazai: false
       }
     },
     computed: {
@@ -367,10 +368,10 @@
             setTimeout(() => {
               this.getData();
               done()
-            }, 3000)
+            }, 1500)
 
         }else{
-            this.searchNoDataText = "已经到头了";
+            this.searchNoDataText = "加载完毕,没有内容就是无相关内容";
             this.$refs.searchScroller.finishInfinite(true);
 
         }
@@ -401,35 +402,39 @@
           if(this.noData){
               return;
           }
+          if(this.jiazai){
+            return;
+          }
           var self = this;
           var searchKeyword = self.getKeyWord();
 
           if(searchKeyword){
               self.page = self.page + 1;
               var url  = self.url + self.page;
+              self.jiazai =true;
               axios.post(url, {
                     query: searchKeyword,
                 })
                 .then(function (response) {
                   if(response.data.error == 0){
+
                       var data = response.data.bakdata.data;
                       for (var i = 0; i < data.length; i++) {
                           self.searchItems.push(data[i]);
                       }
                       if(Number(response.data.bakdata.last_page) <= self.page){
-                        self.searchNoDataText = "没有数据了";
-                        self.$refs.searchScroller.finishInfinite(true);
+
                         self.noData = true;
                       }
 
                   }else{
-                    self.searchNoDataText = "没有数据了";
-                    self.$refs.searchScroller.finishInfinite(true);
+
                     self.noData = true;
                   }
-
+                  self.jiazai =false;
                 })
                 .catch(function (response) {
+                    self.jiazai =false;
                     console.log(response);
                     self.noData = true;
                     self.searchNoDataText = "请求出现延迟请再点一次搜索";

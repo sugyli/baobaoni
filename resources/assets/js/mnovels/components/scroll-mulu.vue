@@ -74,7 +74,7 @@
 				refreshText: "下拉刷新",
 				cid: 0,
 				bookname: '',
-
+				jiazai: false
       }
     },
 		computed: {
@@ -84,71 +84,75 @@
         var pageItem = Util.StorageGetter('muluobj_'+this.bid);
 
         if(pageItem){
-           this.infinitePage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
-           this.refreshPage =  Number(pageItem.page) <= 0 ? 1 : pageItem.page;
+           this.infinitePage = pageItem.page;
+           this.refreshPage =  pageItem.page;
 					 this.weizhi = pageItem.weizhi;
 					 this.cid = pageItem.cid;
         }
     },
     methods: {
       refresh(done){
-					this.refreshPage = Number(this.refreshPage) - 1;
-					if(this.refreshPage <= 0){
-						 this.refreshText = "已经是第一页了";
-						 this.$refs.searchScroller.finishPullToRefresh();
-						 return;
-					}else{
-
-						setTimeout(() => {
-							this.getData(this.refreshPage , 1);
-							done()
-						}, 1500)
-
-					}
-
+						if(this.refreshPage <= 0){
+							 this.refreshText = "没有上一页了";
+							 this.$refs.searchScroller.finishPullToRefresh();
+							 return;
+						}else{
+								setTimeout(() => {
+									this.getData(1);
+									done()
+								}, 1500)
+						}
       },
       infinite(done) {
-				if(this.frist > 0){
-					this.infinitePage = Number(this.infinitePage) + 1;
-				}else{
-					this.frist = 1;
-				}
-				if(!this.noData){
-						setTimeout(() => {
-							this.getData(this.infinitePage);
-							if(this.isNotNullArray(this.items) && this.weizhi){
-								var weizhi = this.weizhi;
-
-								setTimeout(() => {
-									this.$refs.searchScroller.scrollTo(0, weizhi , true);
-								}, 500)
-
-								this.weizhi = '';
-							}
-							done()
-						}, 3000)
-
-				}else{
-						this.searchNoDataText = "没有搜索到数据了";
-						this.$refs.searchScroller.finishInfinite(true);
-				}
+					if(!this.noData){
+							setTimeout(() => {
+								this.getData(0);
+								if(this.isNotNullArray(this.items) && this.weizhi){
+									var weizhi = this.weizhi;
+									setTimeout(() => {
+										this.$refs.searchScroller.scrollTo(0, weizhi , true);
+									}, 500)
+									this.weizhi = '';
+								}
+								done()
+							}, 1500)
+					}else{
+							this.searchNoDataText = "最后一页了";
+							this.$refs.searchScroller.finishInfinite(true);
+					}
       },
-			getData(page ,type=0){
-					if(page <= 0 && type > 0){
-							return;
+			getData(type=0){
+					if(this.jiazai){
+						return;
 					}
 					if(this.noData && type ==  0){
 							return;
 					}
 
-          var self = this;
+					var page;
+					if(type ==  0 && this.frist > 0){
+							page = this.infinitePage = Number(this.infinitePage) + 1;
+					}
+					if(type ==  0 && this.frist == 0){
+							this.frist = 1;
+							page = this.infinitePage;
+					}
+					if(type > 0){
+						  page = this.refreshPage = Number(this.refreshPage) - 1;
+							if(page <= 0){
+									this.refreshText = "已经是第一页了";
+									this.$refs.searchScroller.finishPullToRefresh();
+									return;
+							}
+					}
 
+          var self = this;
+					self.jiazai =true;
           axios.post(self.url, {
 							bid: self.bid,
 							page: page,
             })
             .then(function (response) {
-
               if(response.data.error == 0){
 									if(!self.bookname){
 											self.bookname = response.data.bookName;
@@ -159,6 +163,9 @@
 										for (var i = 0; i < datas.length; i++) {
 												self.items.push(datas[i]);
 										}
+										if(page >= response.data.lastpage){
+												self.noData = true;
+										}
 
 									}else{
 										for (var i = (datas.length-1); i >= 0; i--) {
@@ -166,11 +173,10 @@
 										}
 
 									}
-
-              }else{
+              }else if(response.data.error == 3){
+									self.delStorage();
+							}else{
 								if(type == 0){
-									self.searchNoDataText = "没有数据了";
-									self.$refs.searchScroller.finishInfinite(true);
 									self.noData = true;
 
 								}else{
@@ -179,9 +185,10 @@
 								}
 
               }
-
+							self.jiazai =false;
             })
             .catch(function (response) {
+								self.jiazai =false;
 								console.log(response);
 								//self.delStorage();
 								self.bookname = '有问题点击右边按钮刷新';

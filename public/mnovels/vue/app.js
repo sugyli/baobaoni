@@ -41128,7 +41128,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       noData: false,
       ishide: false,
       searchNoDataText: "没有更多数据",
-      frist: 0
+      frist: 0,
+      jiazai: false
     };
   },
 
@@ -41202,9 +41203,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setTimeout(function () {
           _this2.getData();
           done();
-        }, 3000);
+        }, 1500);
       } else {
-        this.searchNoDataText = "已经到头了";
+        this.searchNoDataText = "加载完毕,没有内容就是无相关内容";
         this.$refs.searchScroller.finishInfinite(true);
       }
     },
@@ -41233,31 +41234,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (this.noData) {
         return;
       }
+      if (this.jiazai) {
+        return;
+      }
       var self = this;
       var searchKeyword = self.getKeyWord();
 
       if (searchKeyword) {
         self.page = self.page + 1;
         var url = self.url + self.page;
+        self.jiazai = true;
         axios.post(url, {
           query: searchKeyword
         }).then(function (response) {
           if (response.data.error == 0) {
+
             var data = response.data.bakdata.data;
             for (var i = 0; i < data.length; i++) {
               self.searchItems.push(data[i]);
             }
             if (Number(response.data.bakdata.last_page) <= self.page) {
-              self.searchNoDataText = "没有数据了";
-              self.$refs.searchScroller.finishInfinite(true);
+
               self.noData = true;
             }
           } else {
-            self.searchNoDataText = "没有数据了";
-            self.$refs.searchScroller.finishInfinite(true);
+
             self.noData = true;
           }
+          self.jiazai = false;
         }).catch(function (response) {
+          self.jiazai = false;
           console.log(response);
           self.noData = true;
           self.searchNoDataText = "请求出现延迟请再点一次搜索";
@@ -41565,141 +41571,153 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 //import BScroll from 'better-scroll'
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['bid', 'from'],
-	data: function data() {
-		return {
-			url: Config.muluurl,
-			screen_height: Util.windowHeight,
-			infinitePage: 1,
-			refreshPage: 1,
-			weizhi: '',
-			searchNoDataText: "没有更多数据",
-			noData: false,
-			frist: 0,
-			items: [],
-			refreshText: "下拉刷新",
-			cid: 0,
-			bookname: ''
-
-		};
-	},
-
-	computed: {},
-	mounted: function mounted() {
-		var pageItem = Util.StorageGetter('muluobj_' + this.bid);
-
-		if (pageItem) {
-			this.infinitePage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
-			this.refreshPage = Number(pageItem.page) <= 0 ? 1 : pageItem.page;
-			this.weizhi = pageItem.weizhi;
-			this.cid = pageItem.cid;
-		}
-	},
-
-	methods: {
-		refresh: function refresh(done) {
-			var _this = this;
-
-			this.refreshPage = Number(this.refreshPage) - 1;
-			if (this.refreshPage <= 0) {
-				this.refreshText = "已经是第一页了";
-				this.$refs.searchScroller.finishPullToRefresh();
-				return;
-			} else {
-
-				setTimeout(function () {
-					_this.getData(_this.refreshPage, 1);
-					done();
-				}, 1500);
-			}
+		props: ['bid', 'from'],
+		data: function data() {
+				return {
+						url: Config.muluurl,
+						screen_height: Util.windowHeight,
+						infinitePage: 1,
+						refreshPage: 1,
+						weizhi: '',
+						searchNoDataText: "没有更多数据",
+						noData: false,
+						frist: 0,
+						items: [],
+						refreshText: "下拉刷新",
+						cid: 0,
+						bookname: '',
+						jiazai: false
+				};
 		},
-		infinite: function infinite(done) {
-			var _this2 = this;
 
-			if (this.frist > 0) {
-				this.infinitePage = Number(this.infinitePage) + 1;
-			} else {
-				this.frist = 1;
-			}
-			if (!this.noData) {
-				setTimeout(function () {
-					_this2.getData(_this2.infinitePage);
-					if (_this2.isNotNullArray(_this2.items) && _this2.weizhi) {
-						var weizhi = _this2.weizhi;
+		computed: {},
+		mounted: function mounted() {
+				var pageItem = Util.StorageGetter('muluobj_' + this.bid);
 
-						setTimeout(function () {
-							_this2.$refs.searchScroller.scrollTo(0, weizhi, true);
-						}, 500);
-
-						_this2.weizhi = '';
-					}
-					done();
-				}, 3000);
-			} else {
-				this.searchNoDataText = "没有搜索到数据了";
-				this.$refs.searchScroller.finishInfinite(true);
-			}
-		},
-		getData: function getData(page) {
-			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-			if (page <= 0 && type > 0) {
-				return;
-			}
-			if (this.noData && type == 0) {
-				return;
-			}
-
-			var self = this;
-
-			axios.post(self.url, {
-				bid: self.bid,
-				page: page
-			}).then(function (response) {
-
-				if (response.data.error == 0) {
-					if (!self.bookname) {
-						self.bookname = response.data.bookName;
-					}
-					var datas = response.data.bakdata;
-					if (type == 0) {
-						//上拉
-						for (var i = 0; i < datas.length; i++) {
-							self.items.push(datas[i]);
-						}
-					} else {
-						for (var i = datas.length - 1; i >= 0; i--) {
-							self.items.splice(0, 0, datas[i]);
-						}
-					}
-				} else {
-					if (type == 0) {
-						self.searchNoDataText = "没有数据了";
-						self.$refs.searchScroller.finishInfinite(true);
-						self.noData = true;
-					} else {
-						self.refreshText = "没有数据了";
-						self.$refs.searchScroller.finishPullToRefresh();
-					}
+				if (pageItem) {
+						this.infinitePage = pageItem.page;
+						this.refreshPage = pageItem.page;
+						this.weizhi = pageItem.weizhi;
+						this.cid = pageItem.cid;
 				}
-			}).catch(function (response) {
-				console.log(response);
-				//self.delStorage();
-				self.bookname = '有问题点击右边按钮刷新';
-				self.noData = true;
-				self.searchNoDataText = "请求出现故障,刷新下页面看看";
-				self.$refs.searchScroller.finishInfinite(true);
-			});
 		},
-		delStorage: function delStorage() {
-			var key = 'muluobj_' + this.bid;
-			Util.StorageDel(key);
-			location.href = window.location.href;
-		},
-		isNotNullArray: function isNotNullArray(t) {
-			return t.constructor == Array && t.length > 0;
+
+		methods: {
+				refresh: function refresh(done) {
+						var _this = this;
+
+						if (this.refreshPage <= 0) {
+								this.refreshText = "没有上一页了";
+								this.$refs.searchScroller.finishPullToRefresh();
+								return;
+						} else {
+								setTimeout(function () {
+										_this.getData(1);
+										done();
+								}, 1500);
+						}
+				},
+				infinite: function infinite(done) {
+						var _this2 = this;
+
+						if (!this.noData) {
+								setTimeout(function () {
+										_this2.getData(0);
+										if (_this2.isNotNullArray(_this2.items) && _this2.weizhi) {
+												var weizhi = _this2.weizhi;
+												setTimeout(function () {
+														_this2.$refs.searchScroller.scrollTo(0, weizhi, true);
+												}, 500);
+												_this2.weizhi = '';
+										}
+										done();
+								}, 1500);
+						} else {
+								this.searchNoDataText = "最后一页了";
+								this.$refs.searchScroller.finishInfinite(true);
+						}
+				},
+				getData: function getData() {
+						var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+						if (this.jiazai) {
+								return;
+						}
+						if (this.noData && type == 0) {
+								return;
+						}
+
+						var page;
+						if (type == 0 && this.frist > 0) {
+								page = this.infinitePage = Number(this.infinitePage) + 1;
+						}
+						if (type == 0 && this.frist == 0) {
+								this.frist = 1;
+								page = this.infinitePage;
+						}
+						if (type > 0) {
+								page = this.refreshPage = Number(this.refreshPage) - 1;
+								if (page <= 0) {
+										this.refreshText = "已经是第一页了";
+										this.$refs.searchScroller.finishPullToRefresh();
+										return;
+								}
+						}
+
+						var self = this;
+						self.jiazai = true;
+						axios.post(self.url, {
+								bid: self.bid,
+								page: page
+						}).then(function (response) {
+								if (response.data.error == 0) {
+										if (!self.bookname) {
+												self.bookname = response.data.bookName;
+										}
+										var datas = response.data.bakdata;
+										if (type == 0) {
+												//上拉
+												for (var i = 0; i < datas.length; i++) {
+														self.items.push(datas[i]);
+												}
+												if (page >= response.data.lastpage) {
+														self.noData = true;
+												}
+										} else {
+												for (var i = datas.length - 1; i >= 0; i--) {
+														self.items.splice(0, 0, datas[i]);
+												}
+										}
+								} else if (response.data.error == 3) {
+										self.delStorage();
+								} else {
+										if (type == 0) {
+												self.noData = true;
+										} else {
+												self.refreshText = "没有数据了";
+												self.$refs.searchScroller.finishPullToRefresh();
+										}
+								}
+								self.jiazai = false;
+						}).catch(function (response) {
+								self.jiazai = false;
+								console.log(response);
+								//self.delStorage();
+								self.bookname = '有问题点击右边按钮刷新';
+								self.noData = true;
+								self.searchNoDataText = "请求出现故障,刷新下页面看看";
+								self.$refs.searchScroller.finishInfinite(true);
+						});
+				},
+				delStorage: function delStorage() {
+						var key = 'muluobj_' + this.bid;
+						Util.StorageDel(key);
+						location.href = window.location.href;
+				},
+				isNotNullArray: function isNotNullArray(t) {
+						return t.constructor == Array && t.length > 0;
+				}
 		}
-	}
 });
 
 /***/ }),
