@@ -14,7 +14,7 @@ class NovelsController extends Controller
 
     public function __construct()
     {
-      
+
     }
     public function search()
     {
@@ -35,7 +35,7 @@ class NovelsController extends Controller
         $datas =  Article::search($query, null, true)
                             ->getBasicsBook()
                             ->orderBy('lastupdate', 'desc')
-                            ->remember(config('app.cacheTime_z'))
+                            ->remember(config('app.cacheTime_g'))
                             ->paginate(20);
         //分页支持这种
         if($datas->count() <= 0){

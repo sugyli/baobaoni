@@ -105,6 +105,17 @@ Route::group([
 });
 
 
+
+Route::group([
+    'prefix'        => 'caiji',
+    'namespace'     => 'Caiji',
+    'domain' => config('app.url_caiji')
+], function () {
+    Route::get('/miaobigemulu', 'CaijiController@miaobigemulu');
+
+});
+
+
 //Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
 
 
