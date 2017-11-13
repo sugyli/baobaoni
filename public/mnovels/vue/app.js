@@ -41203,7 +41203,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setTimeout(function () {
           _this2.getData();
           done();
-        }, 1500);
+        }, 500);
       } else {
         this.searchNoDataText = "加载完毕,没有内容就是无相关内容";
         this.$refs.searchScroller.finishInfinite(true);
@@ -41614,7 +41614,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 								setTimeout(function () {
 										_this.getData(1);
 										done();
-								}, 1500);
+								}, 1000);
 						}
 				},
 				infinite: function infinite(done) {
@@ -41627,11 +41627,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 												var weizhi = _this2.weizhi;
 												setTimeout(function () {
 														_this2.$refs.searchScroller.scrollTo(0, weizhi, true);
-												}, 500);
+												}, 300);
 												_this2.weizhi = '';
 										}
 										done();
-								}, 1500);
+								}, 1000);
 						} else {
 								this.searchNoDataText = "最后一页了";
 								this.$refs.searchScroller.finishInfinite(true);

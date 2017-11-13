@@ -100,7 +100,7 @@
 								setTimeout(() => {
 									this.getData(1);
 									done()
-								}, 1500)
+								}, 1000)
 						}
       },
       infinite(done) {
@@ -111,11 +111,11 @@
 									var weizhi = this.weizhi;
 									setTimeout(() => {
 										this.$refs.searchScroller.scrollTo(0, weizhi , true);
-									}, 500)
+									}, 300)
 									this.weizhi = '';
 								}
 								done()
-							}, 1500)
+							}, 1000)
 					}else{
 							this.searchNoDataText = "最后一页了";
 							this.$refs.searchScroller.finishInfinite(true);

@@ -368,7 +368,7 @@
             setTimeout(() => {
               this.getData();
               done()
-            }, 1500)
+            }, 500)
 
         }else{
             this.searchNoDataText = "加载完毕,没有内容就是无相关内容";
