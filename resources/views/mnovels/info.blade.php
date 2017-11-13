@@ -22,23 +22,21 @@
   </div>
   <div class="cover">
     <div class="block">
-      <a href="{{$bookData['link']}}">
-          <div class="block_img">
-            <img src="{{$bookData['imgflag']}}" onerror="this.src='{{config('app.dfxsfmdir')}}'">
-          </div>
-          <div class="block_txt">
-             <h2>{{$bookData['articlename']}}</h2>
-            <p>
-              作者：{{$bookData['author']}}
-            </p>
-            <p>
-              更新：{{$bookData['updatetime']}}
-            </p>
-            <p>
-                {{$bookData['intro']}}
-            </p>
-          </div>
-       </a>
+        <div class="block_img">
+          <img src="{{$bookData['imgflag']}}" onerror="this.src='{{config('app.dfxsfmdir')}}'">
+        </div>
+        <div class="block_txt">
+           <h2>{{$bookData['articlename']}}</h2>
+          <p>
+            作者：{{$bookData['author']}}
+          </p>
+          <p>
+            更新：{{$bookData['updatetime']}}
+          </p>
+          <p>
+              {{$bookData['intro']}}
+          </p>
+        </div>
     </div>
     <div class="clear"></div>
     <div id="notice">
