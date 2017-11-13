@@ -43089,13 +43089,6 @@ if (false) {
                                 self.$toast.center('网络故障稍后再试');
                             }, 500);
                         });
-                    },
-                    yudu: function yudu(bid, cid) {
-                        var pageItem = Util.StorageGetter('muluobj_' + bid);
-                        if (pageItem) {
-                            cid = pageItem.cid;
-                        }
-                        location.href = '/wapbook-' + bid + '-' + cid;
                     }
                 }
             });

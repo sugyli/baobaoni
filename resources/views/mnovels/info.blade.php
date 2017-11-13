@@ -50,7 +50,7 @@
   	</div>
     <div class="ablum_read" id="chapterlist" style="display:none">
       @foreach ($bookData['relation_chapters'] as $chapter)
-      <span class="left"><a v-on:click.stop="yudu( {{$chapter['articleid']}} ,{{$chapter['chapterid']}})">开始阅读</a></span>
+      <span class="left"><a href="{{$bookData['mulu']}}">开始阅读</a></span>
       @break($loop->iteration >= 1)
       @endforeach
 
