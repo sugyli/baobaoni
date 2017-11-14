@@ -53,12 +53,12 @@
   <div class="chapterlist" id="chapter">
     <ul>
         @foreach ($chapters as $chapter)
-    		<li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}</a></li>
+        <li><input type="button" onclick="location.href= '{{$chapter['link']}}'" value="{{$chapter['chaptername']}}"></li>
         @endforeach
     </ul>
     <div class="page">
-      <a href="{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$pevpage ] )}}">上一页</a>
-    	<a href="{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$nextpage] )}}">下一页</a>
+      <input type="button" onclick="location.href= '{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$pevpage ] )}}'" value="上一页">
+      <input type="button" onclick="location.href= '{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$nextpage] )}}'" value="下一页">
     </div>
   </div>
   <div class="my-ad" id="show_mulu_ad_d">
@@ -76,8 +76,8 @@
   <script>mulu_ad_d();</script>
 </div>
 <script>
-$("#chapter").hide();
-$("#zjlb").show();
+//$("#chapter").hide();
+//$("#zjlb").show();
 $("#zjlb .spage").click(function(){$("#zjlb .showpage").show(300);
 $("#spagebg").css("opacity","0.7").fadeIn(500).height($("body").height());  });
 $("#spagebg").click(function(){$(this).fadeOut(700);$("#zjlb .showpage").hide(300);});

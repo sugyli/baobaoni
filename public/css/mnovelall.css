@@ -1398,17 +1398,13 @@ body{
     display: list-item;
     padding-left: 10px;
 }
-.chapterlist li a {
-    display: block;
-    border-radius: 4px;
-    overflow: hidden;
-}
+
 .chapterlist .page {
     height: auto;
     padding-top: 10px;
     text-align: center;
 }
-.chapterlist .page a {
+.chapterlist .page input {
     display: inline-block;
     text-align: center;
     height: 30px;
