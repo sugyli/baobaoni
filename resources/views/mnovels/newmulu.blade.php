@@ -2,39 +2,7 @@
 @section('title'){{$title}}最新章节_{{config('app.wap_name')}}-{{config('app.url_wap')}}@endsection
 @section('keywords'){{$title}}最新章节|{{$title}}手机阅读|{{config('app.wap_name')}}@endsection
 @section('description'){{$title}}最新章节由网友提供，{{$title}}情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的综合类型，{{config('app.wap_name')}}免费提供{{$title}}最新清爽干净的文字章节在线手机阅读。@endsection
-@section('style')
-<style>
-.chapter li {
-    border-bottom: 1px solid #efefef;
-    height: 35px;
-    line-height: 35px;
-    color: #999;
-    display: list-item;
-    padding-left: 10px;
-}
-.chapter li a {
-    display: block;
-    border-radius: 4px;
-    overflow: hidden;
-}
-.chapter .page {
-    height: auto;
-    padding-top: 10px;
-    text-align: center;
-}
-.chapter .page a {
-    display: inline-block;
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 15px;
-    margin-right: 5px;
-    border-radius: 4px;
-    background: #208181;
-    color: #fff;
-}
-</style>
-@endsection
+
 @section('content')
 <div class="header online" style="text-align: center;">
     {{$title}}
@@ -82,7 +50,7 @@
     </div>
   </div>
   </section>
-  <div class="chapter" id="chapter">
+  <div class="chapterlist" id="chapter">
     <ul>
         @foreach ($chapters as $chapter)
     		<li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}</a></li>

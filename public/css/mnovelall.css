@@ -1390,3 +1390,32 @@ body{
     background: #fff no-repeat center right url(/images/list2.png);
     border-radius: 3px;
 }
+.chapterlist li {
+    border-bottom: 1px solid #efefef;
+    height: 35px;
+    line-height: 35px;
+    color: #999;
+    display: list-item;
+    padding-left: 10px;
+}
+.chapterlist li a {
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.chapterlist .page {
+    height: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+.chapterlist .page a {
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    margin-right: 5px;
+    border-radius: 4px;
+    background: #208181;
+    color: #fff;
+}
