@@ -47,7 +47,7 @@
         <input type="button" onclick="location.href= '{{request()->url()}}'" value="刷新阅读">
   	</div>
     <div class="ablum_read" id="chapterlist" style="display:none">
-      <span class="left"><a href="{{$bookData['mulu']}}">开始阅读</a></span>
+      <span class="left"><a href="{{ $bookData['newmulu'] or $bookData['mulu']}}">开始阅读</a></span>
   		<span><a href="javascript:void(0)" v-on:click.stop="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
     <div class="intro">

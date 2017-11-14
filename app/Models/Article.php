@@ -43,12 +43,13 @@ class Article extends Model
         'lastupdate',
         'updatetime',
         'mulu',
+        'newmulu',
         'relationChapters',
         'lastchapterid',
         'lastchapter',
       ];
 
-    protected $appends = ['link','sort','updatetime','mulu'];
+    protected $appends = ['link','sort','updatetime','mulu','newmulu'];
     /**
      * 数据模型的启动方法
      *
@@ -111,6 +112,35 @@ class Article extends Model
 
     }
 
+    public static function getBidBookDataByGet($bid)
+    {
+
+      try {
+        $isuse = Mulu::where('articleid',$bid)
+                                      ->where('is_use',1)
+                                      ->count();
+        if ($isuse <= 0) {
+            $key = 'getBidBookData_'.$bid;
+            $mulu =   Mulu::where('articleid',$bid)->first();
+            if($mulu){
+                Mulu::where('articleid',$bid)->update(['is_use'=>1]);
+            }else{
+                Mulu::create(['articleid' =>$bid,'is_use' => 1]);
+            }
+            $bookData  = self::getBasicsBook()->where('articleid', $bid)->first();
+            if($bookData){
+              $bookData->load('relationChapters');
+              \Cache::put($key, $bookData->toArray(), config('app.cacheTime_z'));
+            }
+
+            Mulu::where('articleid',$bid)->update(['is_use'=>0]);
+        }
+
+      } catch (\Exception $e) {
+          \Log::error('ajax更新书的缓存失败',['bookid'=>$bid ,'errno' => $e->getMessage()]);
+           Mulu::where('articleid',$bid)->update(['is_use'=>0]);
+      }
+    }
 
     public function getImgflagAttribute($value)
     {
@@ -142,6 +172,11 @@ class Article extends Model
     public function getMuluAttribute()
     {
       return route('mnovels.mulu',['bid'=>$this->articleid] );
+
+    }
+    public function getNewmuluAttribute()
+    {
+      return route('mnovels.newmulu',['bid'=>$this->articleid ,'id'=>1] );
 
     }
     public function getLinkAttribute()

@@ -75,10 +75,10 @@
             </a>
             <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf1" />
 
-            <a href="{{ $chapter['mulu'] }}" id="mu_bf" style="display:none">
+            <a href="{{ $chapter['newmulu'] or $chapter['mulu'] }}" id="mu_bf" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['newmulu'] or $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
 
 
 
@@ -105,10 +105,10 @@
             </a>
             <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf3" />
 
-            <a href="{{ $chapter['mulu'] }}" id="mu_bf2" style="display:none">
+            <a href="{{ $chapter['newmulu'] or $chapter['mulu'] }}" id="mu_bf2" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['newmulu'] or $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
 
 
 

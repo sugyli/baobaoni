@@ -26,8 +26,12 @@ Route::group([
 
     Route::get('/hislogs', 'NovelsController@hislogs')->name('mnovels.hislogs');
     Route::get('/wapbook-{bid}/{any?}', 'RouteCacheJController@cache1');
-    Route::get('/wapbook-{bid}_{zid}/{any?}', 'RouteCacheJController@cache1');
-    Route::get('/wapbook-{bid}_{zid}_{id}/{any?}', 'RouteCacheJController@cache1');
+
+    Route::get('/wapbook-{bid}_{id}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu');
+    Route::get('/wapbook-{bid}_{id}_{zid}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu1');
+
+
+
     Route::get('/mulu/{bid}','NovelsController@mulu')->name('mnovels.mulu');
 
 
@@ -38,6 +42,8 @@ Route::group([
     Route::get('/waptop/{any}', 'NovelsController@showwaptop')->name('mnovels.showwaptop');
 
     Route::get('/search', 'NovelsController@search');
+
+
 
 });
 
@@ -102,6 +108,9 @@ Route::group([
     Route::post('/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('ajax.getbookshelfs');
 
     Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('ajax.destroy');
+
+
+    Route::get('/checkupsql/{bid}', 'NovelsController@upsqldata')->name('mnovels.checkupsql');
 });
 
 

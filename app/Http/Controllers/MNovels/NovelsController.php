@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Article;
+use App\Models\Chapter;
 use Cache;
 use App\Models\Ranking;
 class NovelsController extends Controller
@@ -127,6 +128,85 @@ class NovelsController extends Controller
       $updataBooks = $article->getArticlesWithFilter('updatebook',10);
       return view('mnovels.index',compact('newBookDatas','weekdates','monthdates','daydates','updataBooks'));
     }
+
+    public function htmlmulu($bid)
+    {
+        $bid = (int)request()->bid + 0;
+        $page = (int)request()->id + 0;
+        $sort  = request()->zid ? 'desc' : null ; //false正序
+
+        $bookData = app(Article::class)->getBidBookData($bid);
+        if(!$bookData){
+            return redirect('/');
+        }
+        $total = count($bookData['relation_chapters']);
+        if($total <= 0){
+            $infoUrl = route('mnovels.info', ['bid' => $bid]);
+            return redirect($infoUrl);
+        }
+        $pageSize = (int)config('app.wapmululiebiao');
+        //计算总页数
+        $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
+
+        if ($page <= $pagenum && $page > 0)
+        {
+            //开始的索引
+            $offset = ($page - 1) * $pageSize;
+            if ($sort == 'desc') {
+                //翻转
+                $bookData['relation_chapters'] = collect($bookData['relation_chapters'])
+                                                        ->reverse()
+                                                        ->all();
+            }
+            $chapters = collect($bookData['relation_chapters'])->slice($offset, $pageSize)->values();
+            $thispage = "";
+            $pageset = '<div class="showpage r3"><div class="bk">请选择章节</div><ul>';
+            //分页样式
+            for($i = 1 ; $i <= $pagenum ; $i++){
+                if($i == $page){
+                    $thispage .= '<a class="xbk this tb">'.(($i-1)*$pageSize+1).' - '.($i*$pageSize).'章</a>';
+                    $pageset .= $thispage;
+                }
+                else{
+                    $url = empty($sort) ? route('mnovels.newmulu',['bid'=>$bid ,'id'=>$i]) : route('mnovels.newmulu1',['bid'=>$bid ,'id'=>$i ,'zid'=>1]);
+
+                    $pageset .= '<li><a href=" ' . $url  . '" class="xbk">'.(($i-1)*$pageSize+1).' - '.($i*$pageSize).'章</a><li>';
+                }
+            }
+            $pageset .= '<li><a class="xbk tb">没有更多分页了！</a></li></ul></div>'."<div id='spagebg'></div>";
+            $pageset .= '<div class="spage" class="xbk r3">'.$thispage.'</div>'.$pageset;
+            $title = $bookData['articlename'];
+            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort'));
+        }
+
+        $muluUrl = route('mnovels.newmulu', ['bid' => $bid ,'id'=>1]);
+        return redirect($muluUrl);
+
+    }
+    //判断是否更新
+    public function upsqldata()
+    {
+        $bid = (int)request()->bid + 0;
+        if ($bid>0) {
+            $key = 'getBidBookData_'.$bid;
+            if (\Cache::has($key)) {
+
+                $cCount = Chapter::getBasicsChapter()
+                              ->where('articleid',$bid)
+                              ->count();
+                $bookData = Cache::get($key);
+                if($cCount>0 && count($bookData['relation_chapters']) != $cCount){
+                  Article::getBidBookDataByGet($bid);
+                }
+                unset($bookData);
+
+            }else{
+                Article::getBidBookDataByGet($bid);
+            }
+        }
+        //return $response->write('console.log("1");');
+    }
+
 
     public function mulu($bid)
     {
