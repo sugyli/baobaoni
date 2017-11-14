@@ -8,6 +8,7 @@ Route::group([
     'prefix'        => config('admin.prefix'),
     'namespace'     => Admin::controllerNamespace(),
     'middleware'    => ['web1', 'admin'],
+    'domain' => config('app.url_admin')
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
