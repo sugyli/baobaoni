@@ -70,22 +70,22 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['mulu'] }}" target="_top" id="prev_bf" style="display:none">
+            <a href="{{ $previousChapter['link'] or  '#' }}" target="_top" id="prev_bf" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or 'javascript:' }}'" value="上一章" id="prev_bf1" />
 
-            <a href="{{ $chapter['newmulu'] or $chapter['mulu'] }}" id="mu_bf" style="display:none">
+            <a href="{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ] ) }}" id="mu_bf" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['newmulu'] or $chapter['mulu'] }}'" value="目录" id="mu_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ]) }}'" value="目录" id="mu_bf1" />
 
 
 
-            <a href="{{ $nextChapter['link'] or $chapter['mulu'] }}" target="_top" id="next_bf" style="display:none">
+            <a href="{{ $nextChapter['link'] or '#' }}" target="_top" id="next_bf" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['mulu'] }}'" value="下一章" id="next_bf1" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or 'javascript:' }}'" value="下一章" id="next_bf1" />
 
             <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>
@@ -100,22 +100,22 @@
             <a v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">
               <li>书签</li>
             </a>
-            <a href="{{ $previousChapter['link'] or $chapter['mulu'] }}" target="_top" id="prev_bf2" style="display:none">
+            <a href="{{ $previousChapter['link'] or '#' }}" target="_top" id="prev_bf2" style="display:none">
               <li>上一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or $chapter['mulu'] }}'" value="上一章" id="prev_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $previousChapter['link'] or 'javascript:' }}'" value="上一章" id="prev_bf3" />
 
-            <a href="{{ $chapter['newmulu'] or $chapter['mulu'] }}" id="mu_bf2" style="display:none">
+            <a href="{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ]) }}" id="mu_bf2" style="display:none">
               <li>目录</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $chapter['newmulu'] or $chapter['mulu'] }}'" value="目录" id="mu_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ]) }}'" value="目录" id="mu_bf3" />
 
 
 
-            <a href="{{ $nextChapter['link'] or $chapter['mulu'] }}" target="_top" id="next_bf2" style="display:none">
+            <a href="{{ $nextChapter['link'] or '#' }}" target="_top" id="next_bf2" style="display:none">
               <li>下一章</li>
             </a>
-            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or $chapter['mulu'] }}'" value="下一章" id="next_bf3" />
+            <input type="button" class="reade_input" onclick="location.href= '{{ $nextChapter['link'] or 'javascript:' }}'" value="下一章" id="next_bf3" />
 
             <a href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}">
               <li style="border: none;">书架</li>

@@ -176,7 +176,9 @@ class NovelsController extends Controller
             $pageset .= '<li><a class="xbk tb">没有更多分页了！</a></li></ul></div>'."<div id='spagebg'></div>";
             $pageset .= '<div class="spage" class="xbk r3">'.$thispage.'</div>'.$pageset;
             $title = $bookData['articlename'];
-            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort'));
+            $nextpage = $page +1;
+            $pevpage = ($page-1) <= 0 ? 1 : ($page-1);
+            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage'));
         }
 
         $muluUrl = route('mnovels.newmulu', ['bid' => $bid ,'id'=>1]);
@@ -204,7 +206,7 @@ class NovelsController extends Controller
                 Article::getBidBookDataByGet($bid);
             }
         }
-      
+
     }
 
 

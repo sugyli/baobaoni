@@ -26,9 +26,12 @@ Route::group([
 
     Route::get('/hislogs', 'NovelsController@hislogs')->name('mnovels.hislogs');
     Route::get('/wapbook-{bid}/{any?}', 'RouteCacheJController@cache1');
+    Route::get('/wapbook-{bid}_{id}/{any?}', 'RouteCacheJController@cache2');
+    Route::get('/wapbook-{bid}_{id}_{zid}/{any?}', 'RouteCacheJController@cache2');
 
-    Route::get('/wapbook-{bid}_{id}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu');
-    Route::get('/wapbook-{bid}_{id}_{zid}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu1');
+
+    Route::get('/bookmulu-{bid}_{id}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu');
+    Route::get('/bookmulu-{bid}_{id}_{zid}/{any?}', 'NovelsController@htmlmulu')->name('mnovels.newmulu1');
 
 
 

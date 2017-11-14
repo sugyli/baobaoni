@@ -15,4 +15,13 @@ class RouteCacheJController extends Controller
 
     }
 
+    public function cache2(){
+
+      $bid = request()->bid;
+      $id = request()->id;
+      $bakUrl = route('mnovels.newmulu', ['bid' => $bid , 'id'=>$id]);
+      return redirect($bakUrl, 301);
+
+    }
+
 }

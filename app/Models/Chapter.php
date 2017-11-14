@@ -23,7 +23,6 @@ class Chapter extends Model
       'attachment',
       'link',
       'mulu',
-      'newmulu',
       'infolink',
       'updatetime'
 
@@ -44,7 +43,7 @@ class Chapter extends Model
         });
     }
     */
-    protected $appends = ['link','updatetime','mulu','infolink','newmulu'];
+    protected $appends = ['link','updatetime','mulu','infolink'];
     /**
      * 为路由模型获取键名
      *
@@ -64,11 +63,7 @@ class Chapter extends Model
         return route('mnovels.mulu',['bid'=>$this->articleid] );
 
       }
-      public function getNewmuluAttribute()
-      {
-        return route('mnovels.newmulu',['bid'=>$this->articleid ,'id'=>1] );
 
-      }
       public function getLinkAttribute()
       {
         return route('mnovels.content', ['bid' => $this->articleid ,'cid'=>$this->chapterid]);

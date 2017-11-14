@@ -2,7 +2,39 @@
 @section('title'){{$title}}最新章节_{{config('app.wap_name')}}-{{config('app.url_wap')}}@endsection
 @section('keywords'){{$title}}最新章节|{{$title}}手机阅读|{{config('app.wap_name')}}@endsection
 @section('description'){{$title}}最新章节由网友提供，{{$title}}情节跌宕起伏、扣人心弦，是一本情节与文笔俱佳的综合类型，{{config('app.wap_name')}}免费提供{{$title}}最新清爽干净的文字章节在线手机阅读。@endsection
-
+@section('style')
+<style>
+.chapter li {
+    border-bottom: 1px solid #efefef;
+    height: 35px;
+    line-height: 35px;
+    color: #999;
+    display: list-item;
+    padding-left: 10px;
+}
+.chapter li a {
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.chapter .page {
+    height: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+.chapter .page a {
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    margin-right: 5px;
+    border-radius: 4px;
+    background: #208181;
+    color: #fff;
+}
+</style>
+@endsection
 @section('content')
 <div class="header online" style="text-align: center;">
     {{$title}}
@@ -14,8 +46,7 @@
     </a>
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
-  <div class="my-ad" id="show_mulu_ad_s">
-  </div>
+  <div class="my-ad" id="show_mulu_ad_s"></div>
   <section id="zjlb" class="zjlb" style="display:none">
     <div class="fenye">
       <div class="fy">{!! $pageset !!}</div>
@@ -49,15 +80,25 @@
         </div>
         <div class="cc"></div>
     </div>
-    @include('mnovels.layouts.foot')
   </div>
   </section>
-</div>
-  <div style="padding-top:150px;text-align:center; padding-bottom:150px;" id="mululist">
-    <input type="button" style="font-size:20px" onclick="location.href= '{{route('mnovels.newmulu',['bid'=>$bid , 'id'=>1])}}'" value="被百度转码点击下切换">
+  <div class="chapter" id="chapter">
+    <ul>
+        @foreach ($chapters as $chapter)
+    		<li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}</a></li>
+        @endforeach
+    </ul>
+    <div class="page">
+      <a href="{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$pevpage ] )}}">上一页</a>
+    	<a href="{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$nextpage] )}}">下一页</a>
+    </div>
   </div>
   <div class="my-ad" id="show_mulu_ad_d">
   </div>
+  @include('mnovels.layouts.foot')
+
+</div>
+
 @endsection
 @section('subscripts')
 <div id="mulu_ad_s" style="display:none">
@@ -67,7 +108,7 @@
   <script>mulu_ad_d();</script>
 </div>
 <script>
-$("#mululist").hide();
+$("#chapter").hide();
 $("#zjlb").show();
 $("#zjlb .spage").click(function(){$("#zjlb .showpage").show(300);
 $("#spagebg").css("opacity","0.7").fadeIn(500).height($("body").height());  });
