@@ -76,8 +76,8 @@
   <script>mulu_ad_d();</script>
 </div>
 <script>
-//$("#chapter").hide();
-//$("#zjlb").show();
+$("#chapter").hide();
+$("#zjlb").show();
 $("#zjlb .spage").click(function(){$("#zjlb .showpage").show(300);
 $("#spagebg").css("opacity","0.7").fadeIn(500).height($("body").height());  });
 $("#spagebg").click(function(){$(this).fadeOut(700);$("#zjlb .showpage").hide(300);});
