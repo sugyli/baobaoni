@@ -4,6 +4,8 @@
 @section('description'){{$chapter['chaptername']}}是小说{{$chapter['articlename']}}的最新章节。@endsection
 @section('style')
 <link rel="stylesheet" type="text/css" href="/css/sweetalert.css" />
+<script src="/js/jquery.cookie.js"></script>
+<script src="/js/sweetalert.min.js"></script>
 @endsection
 @section('content')
 <div class="read_header online" style="text-align: center;">
@@ -165,8 +167,6 @@
 
 @endsection
 @section('subscripts')
-<script src="/js/jquery.cookie.js"></script>
-<script src="/js/sweetalert.min.js"></script>
 <script>
 (function () {
   baobaoni.readApi({{$chapter['articleid']}} , {{$page}} ,{{$weizhi}} ,{{$chapter['chapterid']}} ,'{{$chapter['articlename']}}');
