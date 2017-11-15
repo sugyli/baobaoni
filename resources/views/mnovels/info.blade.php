@@ -64,7 +64,8 @@
     @if (count($bookData['relation_chapters']) > 0)
     <ul class="chapter">
       @foreach (array_reverse($bookData['relation_chapters']) as $chapter)
-  		 <li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$chapter['updatetime']}}</span></a></li>
+        <li class='yingc_i'><input type="button" onclick="location.href= '{{$chapter['link']}}'" value="{{$chapter['chaptername']}}"><span>{{$chapter['updatetime']}}</span></li>
+  		  <li class='yingc_a' style="display:none"><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$chapter['updatetime']}}</span></a></li>
       @break($loop->iteration >= 9)
       @endforeach
   	</ul>
@@ -89,6 +90,10 @@
 <script>
 $("#notice").hide();
 $("#chapterlist").show();
+
+$(".yingc_i").hide();
+$(".yingc_a").show();
+
 document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
 document.getElementById("info_ad_s").innerHTML = "";
 

@@ -951,6 +951,12 @@ body{
     border-radius: 4px;
     overflow: hidden;
 }
+.chapter li input {
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+    border: none;
+}
 .chapter span {
     display: block;
     float: right;
