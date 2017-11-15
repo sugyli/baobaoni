@@ -14,6 +14,11 @@
     </a>
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
+  <section class="i-top">
+    <a href="/search">
+      <div class="i-top-search">输入书名/作者/关键字</div>
+    </a>
+  </section>
   <div class="my-ad" id="show_mulu_ad_s"></div>
   <section id="zjlb" class="zjlb" style="display:none">
     <div class="fenye">

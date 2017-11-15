@@ -34,7 +34,10 @@
             更新：{{$bookData['updatetime']}}
           </p>
           <p>
-              {{$bookData['intro']}}
+            状态：{{$bookData['fullflag']}}
+          </p>
+          <p>
+            标签：{{$bookData['sort']}}
           </p>
         </div>
     </div>
