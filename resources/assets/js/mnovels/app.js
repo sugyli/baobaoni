@@ -1,5 +1,6 @@
 require('../base');
-
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.Vue = require('vue');
 var Util = (function () {
     //本地存储 加prefix区别
     var prefix = 'html5_'

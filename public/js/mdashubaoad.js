@@ -1,3 +1,37 @@
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var Util = (function () {
+    //本地存储 加prefix区别
+    var prefix = 'html5_'
+    var StorageGetter = function (key) {
+        return JSON.parse(localStorage.getItem(prefix + key));
+    }
+    var StorageSetter = function (key, val) {
+        var val = JSON.stringify(val)
+        return localStorage.setItem(prefix + key, val)
+    }
+    var StorageDel = function (key) {
+        localStorage.removeItem(prefix + key);
+    }
+    var StorageDelAll = function () {
+         localStorage.clear();
+    }
+    var windowWidth = $(window).width();
+    if(windowWidth<320){
+       windowWidth = 320;
+    }
+    var windowHeight =$(window).height();
+    //暴露方法
+    return {
+        windowWidth: windowWidth,
+        windowHeight: windowHeight,
+        StorageGetter: StorageGetter,
+        StorageSetter: StorageSetter,
+        StorageDel: StorageDel,
+        StorageDelAll: StorageDelAll
+    }
+})();
+window.Util = Util;
+
 //mulu
 function mulu_ad_s(){
   document.writeln("<script type=\"text/javascript\">");

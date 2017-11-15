@@ -14,11 +14,12 @@
 
 
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home')->middleware('responseLast');
 
 Route::group([
     'namespace'     => 'MNovels',
-    'domain' => config('app.url_wap')
+    'domain' => config('app.url_wap'),
+    //'middleware'    => ['responseLast'],
 ], function () {
     Route::get('/info-{bid}/{any?}', 'NovelsController@info')->name('mnovels.info');
 

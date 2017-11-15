@@ -13,7 +13,12 @@
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/css/iconfont.css" />
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/vue.min.js"></script>
+    <script src="/js/toast.js"></script>
+    <script src="/js/axios.min.js"></script>
     <script src="/js/mdashubaoad.js"></script>
+
   </head>
   <body>
     <script>
@@ -37,12 +42,11 @@
     </div>
   </body>
   @section('scripts')
-  <script src="{{ mix('/mnovels/vue/app.js') }}"></script>
+  <script src="/js/myjs.js"></script>
     @if (!Request::is('user/*'))
     <script>tongji();</script>
     @endif
   @show
   @section('subscripts')
-
   @show
 </html>

@@ -76,22 +76,24 @@
   <script>mulu_ad_d();</script>
 </div>
 <script>
-$("#chapter").hide();
-$("#zjlb").show();
-$("#zjlb .spage").click(function(){$("#zjlb .showpage").show(300);
-$("#spagebg").css("opacity","0.7").fadeIn(500).height($("body").height());  });
-$("#spagebg").click(function(){$(this).fadeOut(700);$("#zjlb .showpage").hide(300);});
-var pageItem = Util.StorageGetter('muluobj_'+{{$bid}});
+(function () {
+  $("#chapter").hide();
+  $("#zjlb").show();
+  $("#zjlb .spage").click(function(){$("#zjlb .showpage").show(300);
+  $("#spagebg").css("opacity","0.7").fadeIn(500).height($("body").height());  });
+  $("#spagebg").click(function(){$(this).fadeOut(700);$("#zjlb .showpage").hide(300);});
+  var pageItem = Util.StorageGetter('muluobj_'+{{$bid}});
 
-if(pageItem){
-   $("#"+pageItem.cid).css("color","red");
-}
+  if(pageItem){
+     $("#"+pageItem.cid).css("color","red");
+  }
 
-document.getElementById("show_mulu_ad_s").innerHTML = document.getElementById("mulu_ad_s").innerHTML;
-document.getElementById("mulu_ad_s").innerHTML = "";
+  document.getElementById("show_mulu_ad_s").innerHTML = document.getElementById("mulu_ad_s").innerHTML;
+  document.getElementById("mulu_ad_s").innerHTML = "";
 
-document.getElementById("show_mulu_ad_d").innerHTML = document.getElementById("mulu_ad_d").innerHTML;
-document.getElementById("mulu_ad_d").innerHTML = "";
+  document.getElementById("show_mulu_ad_d").innerHTML = document.getElementById("mulu_ad_d").innerHTML;
+  document.getElementById("mulu_ad_d").innerHTML = "";
+})()//闭包不影响全局
 </script>
 <script defer src="{{ route( 'mnovels.checkupsql',['bid'=>$bid] ) }}"></script>
 @endsection
