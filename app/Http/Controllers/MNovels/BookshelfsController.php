@@ -19,43 +19,42 @@ class BookshelfsController extends Controller
             $result['message'] = '您还没有登录,请登录！';
             return response()->json($result);
         }
-        $bid = (int)$request->bid;
-        $cid = (int)$request->cid;
+        $bid = (int)($request->bid+0);
+        $cid = (int)($request->cid+0);
         $time = time();
         if($bid <= 0){
           $result['message'] = '操作非法';
           return response()->json($result);
         }
-        //用户拥有的书架
-        $userBookshelfCount = (int)$user->getBookcaseCount();
-        //已经使用的书架
-        $userUseBookCount = (int)$user->relationBookcasesUse();
-        if($userUseBookCount > $userBookshelfCount){
-            $z = $userUseBookCount - $userBookshelfCount;
-            $result['message'] = "您的书架已经越界 {$z} 本,请删除才能添加";
-            return response()->json($result);
-        }elseif ($userUseBookCount == $userBookshelfCount) {
-          $result['message'] = "您的书架已经满了,不能添加了";
-          return response()->json($result);
-        }
-
         $article = Article::where('articleid', $bid)->getBasicsBook()->first();
         if (empty($article)) {
             $result['message'] = '本书已经不存在了';
             return response()->json($result);
         }
-
         if($cid > 0){
           $chapter = Chapter::where('display', '<=', '0')->find($cid);
-          if (empty($article)) {
+          if (empty($chapter)) {
               $result['message'] = '本章节已经不存在了';
               return response()->json($result);
           }
         }
-
         $bookcase = $article->relationBookcases($user->uid);
-
         if (empty($bookcase)) {//看看这本书 用户书架有没有
+            //用户拥有的书架
+            $userBookshelfCount = (int)$user->getBookcaseCount();
+            //已经使用的书架
+            $userUseBookCount = (int)$user->relationBookcasesUse();
+
+            if($userUseBookCount > $userBookshelfCount){
+                $z = $userUseBookCount - $userBookshelfCount;
+                $result['message'] = "您的书架已经越界 {$z} 本,请删除才能添加";
+                return response()->json($result);
+            }elseif ($userUseBookCount == $userBookshelfCount) {
+              $result['message'] = "您的书架已经满了,不能添加了";
+              return response()->json($result);
+
+            }
+
             $data=[
                   'articleid' => $article->articleid,
                   'articlename' => $article->articlename,
@@ -71,6 +70,7 @@ class BookshelfsController extends Controller
               ];
 
             $result['message'] = '添加书架成功了';
+
             if ($cid > 0) {
                 $data['chapterid'] = $cid;
                 $data['chaptername'] = $chapter->chaptername;
@@ -86,12 +86,15 @@ class BookshelfsController extends Controller
             $result['message'] = '添加书架失败了';
             return response()->json($result);
 
-        }
 
+
+      }
+      
         if($cid<=0){
           $result['message'] = '本书已经在书架了,无需操作';
           return response()->json($result);
         }
+
         if (
           $bookcase->chapterid == $chapter->chapterid &&
           $bookcase->chaptername == $chapter->chaptername &&

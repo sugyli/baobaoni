@@ -71,7 +71,9 @@ class User extends Authenticatable
     public function getBookcaseCount()
     {
       $honor = Honor::getUserHonor($this);
-      return isset($this->setting['bookcasecount']) ? $this->setting['bookcasecount'] : config('app.bookcasemaxcount');
+
+      return isset($honor->setting['bookcasecount']) ? $honor->setting['bookcasecount'] : config('app.bookcasemaxcount');
+
     }
 
     //消息容量
