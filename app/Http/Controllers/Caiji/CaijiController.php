@@ -202,12 +202,12 @@ class CaijiController extends Controller
     		for ($i=0; $i <count($results[0]) ; $i++) {
     			if ($i>0) {
     				if(preg_match("{<li><a.*?href=\".+?\"}",$results[0][$i])){
-    					$results[0][$i] = preg_replace("{<li><a.*?href=\".+?\"}","<li><a href=\"{$results[1][$i]}&lasturl=http://www.miaobige.com{$results[1][$i-1]}\"",$results[0][$i]);
+    					$results[0][$i] = preg_replace("{<li><a.*?href=\".+?\"}","<li><a href=\"{$results[1][$i]}&lasturl=https://www.miaobige.com{$results[1][$i-1]}\"",$results[0][$i]);
     				}else{
     					$newword = str_ireplace("<li>","",$results[0][$i]);
     					$newword = str_ireplace("</li>","",$newword);
     					$newword = substr($newword,0, -5);
-    					$results[0][$i] = "<li><a href=\"/read/{$bookid}/&lasturl=http://www.miaobige.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
+    					$results[0][$i] = "<li><a href=\"/read/{$bookid}/&lasturl=https://www.miaobige.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
     				}
 
     			}
