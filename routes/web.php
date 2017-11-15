@@ -14,7 +14,7 @@
 
 
 
-Route::get('/', 'PagesController@home')->middleware('responseLast');
+Route::get('/', 'PagesController@home');
 
 Route::group([
     'namespace'     => 'MNovels',
