@@ -59,7 +59,7 @@
           <span v-else>@{{ item.articlename }} <em style="color:red;">丢失</em></span>
           </p>
 
-          <p>作者：@{{ item.relation_articles.author ? item.relation_articles.author : '未知'}}</p>
+          <p>作者：@{{ (item.relation_articles && item.relation_articles.author) ? item.relation_articles.author : '未知'}}</p>
 
           <p>书签：
             <a v-if="item.chapterid > 0" :href="redurl +'/' + item.articleid +'/'+ item.chapterid">@{{item.chaptername}}</a>
