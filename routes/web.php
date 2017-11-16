@@ -125,7 +125,8 @@ Route::group([
     'domain' => config('app.url_caiji')
 ], function () {
     Route::get('/miaobigemulu', 'CaijiController@miaobigemulu');
-
+    Route::get('/sousuobaba', 'CaijiController@sousuobaba');
+    Route::get('/caijibaba', 'CaijiController@caijibaba');
 });
 
 
