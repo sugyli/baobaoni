@@ -8,7 +8,7 @@ return [
     |
     | The following language lines contain the default error messages used by
     | the validator class. Some of these rules have multiple versions such
-    | such as the size rules. Feel free to tweak each of these messages.
+    | as the size rules. Feel free to tweak each of these messages.
     |
     */
 
@@ -38,7 +38,7 @@ return [
     'dimensions'           => 'الـ :attribute يحتوي على أبعاد صورة غير صالحة.',
     'distinct'             => 'للحقل :attribute قيمة مُكرّرة.',
     'email'                => 'يجب أن يكون :attribute عنوان بريد إلكتروني صحيح البُنية',
-    'exists'               => ':attribute لاغٍ',
+    'exists'               => 'القيمة المحددة :attribute غير موجودة',
     'file'                 => 'الـ :attribute يجب أن يكون ملفا.',
     'filled'               => ':attribute إجباري',
     'image'                => 'يجب أن يكون :attribute صورةً',

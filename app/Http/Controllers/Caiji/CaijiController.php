@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Caiji;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -307,7 +306,6 @@ class CaijiController extends Controller
 
     public function sousuobaba()
     {
-
       header('Content-type:text/html;charset=gbk');
       //set_time_limit(0);
 
@@ -335,7 +333,7 @@ class CaijiController extends Controller
       $index = 0;
       $sy = 0;
 
-      for ($i=90; $i < count($array); $i++) {
+      for ($i=130; $i < count($array); $i++) {
         $index++;
         $bf_v = $value = trim($array[$i]);
         $jisu = count($bookid);

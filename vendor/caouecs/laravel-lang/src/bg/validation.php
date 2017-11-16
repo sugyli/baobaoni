@@ -9,7 +9,7 @@ return [
     |
     | The following language lines contain the default error messages used by
     | the validator class. Some of these rules have multiple versions such
-    | such as the size rules. Feel free to tweak each of these messages.
+    | as the size rules. Feel free to tweak each of these messages.
     |
     */
 
@@ -40,15 +40,15 @@ return [
     'distinct'             => 'Данните в полето :attribute се дублират.',
     'email'                => 'Полето :attribute е в невалиден формат.',
     'exists'               => 'Избранато поле :attribute вече съществува.',
-    'file'                 => 'The :attribute must be a file.',
+    'file'                 => 'Полето :attribute трябва да бъде файл.',
     'filled'               => 'Полето :attribute е задължително.',
     'image'                => 'Полето :attribute трябва да бъде изображение.',
     'in'                   => 'Избраното поле :attribute е невалидно.',
-    'in_array'             => 'The :attribute field does not exist in :other.',
+    'in_array'             => 'Полето :attribute не съществува в :other.',
     'integer'              => 'Полето :attribute трябва да бъде цяло число.',
     'ip'                   => 'Полето :attribute трябва да бъде IP адрес.',
-    'ipv4'                 => 'The :attribute must be a valid IPv4 address.',
-    'ipv6'                 => 'The :attribute must be a valid IPv6 address.',
+    'ipv4'                 => 'Полето :attribute трябва да бъде IPv4 адрес.',
+    'ipv6'                 => 'Полето :attribute трябва да бъде IPv6 адрес.',
     'json'                 => 'Полето :attribute трябва да бъде JSON низ.',
     'max'                  => [
         'numeric' => 'Полето :attribute трябва да бъде по-малко от :max.',
@@ -70,7 +70,7 @@ return [
     'regex'                => 'Полето :attribute е в невалиден формат.',
     'required'             => 'Полето :attribute е задължително.',
     'required_if'          => 'Полето :attribute се изисква, когато :other е :value.',
-    'required_unless'      => 'The :attribute field is required unless :other is in :values.',
+    'required_unless'      => 'Полето :attribute се изисква, освен ако :other не е в :values.',
     'required_with'        => 'Полето :attribute се изисква, когато :values има стойност.',
     'required_with_all'    => 'Полето :attribute е задължително, когато :values имат стойност.',
     'required_without'     => 'Полето :attribute се изисква, когато :values няма стойност.',

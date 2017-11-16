@@ -91,20 +91,21 @@
   <script>info_ad_d();</script>
 </div>
 <script>
-$("#notice").hide();
-$("#chapterlist").show();
+(function () {
+  $("#notice").hide();
+  $("#chapterlist").show();
 
-$(".yingc_i").hide();
-$(".yingc_a").show();
+  $(".yingc_i").hide();
+  $(".yingc_a").show();
 
-document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
-document.getElementById("info_ad_s").innerHTML = "";
+  document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
+  document.getElementById("info_ad_s").innerHTML = "";
 
-document.getElementById("show_info_ad_z").innerHTML = document.getElementById("info_ad_z").innerHTML;
-document.getElementById("info_ad_z").innerHTML = "";
+  document.getElementById("show_info_ad_z").innerHTML = document.getElementById("info_ad_z").innerHTML;
+  document.getElementById("info_ad_z").innerHTML = "";
 
-document.getElementById("show_info_ad_d").innerHTML = document.getElementById("info_ad_d").innerHTML;
-document.getElementById("info_ad_d").innerHTML = "";
-
+  document.getElementById("show_info_ad_d").innerHTML = document.getElementById("info_ad_d").innerHTML;
+  document.getElementById("info_ad_d").innerHTML = "";
+})()//闭包不影响全局
 </script>
 @endsection

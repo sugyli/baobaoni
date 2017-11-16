@@ -41,7 +41,7 @@ return [
     'email'                => ':attribute non è valido.',
     'exists'               => ':attribute selezionato non è valido.',
     'file'                 => ':attribute deve essere un file.',
-    'filled'               => 'Il campo :attribute è richiesto.',
+    'filled'               => 'Il campo :attribute deve contenere un valore.',
     'image'                => ":attribute deve essere un'immagine.",
     'in'                   => ':attribute selezionato non è valido.',
     'in_array'             => 'Il valore del campo :attribute non esiste in :other.',
@@ -117,7 +117,33 @@ return [
     */
 
     'attributes' => [
-        //
+        'name'                  => 'nome',
+        'username'              => 'nome utente',
+        'first_name'            => 'nome',
+        'last_name'             => 'cognome',
+        'password_confirmation' => 'conferma password',
+        'city'                  => 'città',
+        'country'               => 'paese',
+        'address'               => 'indirizzo',
+        'phone'                 => 'telefono',
+        'mobile'                => 'cellulare',
+        'age'                   => 'età',
+        'sex'                   => 'sesso',
+        'gender'                => 'genere',
+        'day'                   => 'giorno',
+        'month'                 => 'mese',
+        'year'                  => 'anno',
+        'hour'                  => 'ora',
+        'minute'                => 'minuto',
+        'second'                => 'secondo',
+        'title'                 => 'titolo',
+        'content'               => 'contenuto',
+        'description'           => 'descrizione',
+        'excerpt'               => 'estratto',
+        'date'                  => 'data',
+        'time'                  => 'ora',
+        'available'             => 'disponibile',
+        'size'                  => 'dimensione',
     ],
 
 ];
