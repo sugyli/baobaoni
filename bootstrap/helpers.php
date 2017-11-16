@@ -99,7 +99,10 @@ if (!function_exists('curlTxt')) {
                 txtLog($txtDir,$attachment,$curl->http_status_code);
             }
 
-        }else{
+        }elseif ($curl->http_status_code == '404') {
+          \Log::error('章节可能丢失',['路径'=>$txtDir,'状态码'=>$curl->http_status_code]);
+        }
+        else{
             //记录获取错误的TXT 因为历史原因 可记录
             txtLog($txtDir,$attachment,$curl->http_status_code);
 

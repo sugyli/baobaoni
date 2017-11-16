@@ -295,17 +295,14 @@ class CaijiController extends Controller
         die('meiyou_url');
       }
       $curl = new \Curl\Curl();
-      $curl->setOpt(CURLOPT_COOKIE, '__cfduid=dcb97836be8f757c3db8c5d3c3a29dc1b1510106350; UM_distinctid=15f995a452f67-0a7b73f48c33bf-31657c00-13c680-15f995a45311b6; CNZZDATA1256847605=535306642-1510541154-%7C1510816560; Hm_lvt_0121ba7b78519d766211a964bcd86fdc=1510805720,1510806949,1510810699,1510811646; Hm_lpvt_0121ba7b78519d766211a964bcd86fdc=1510821885; jieqiUserInfo=jieqiUserId%3D288523%2CjieqiUserUname%3D88dushuw%2CjieqiUserName%3D88dushuw%2CjieqiUserGroup%3D2%2CjieqiUserGroupName%3D%CF%B5%CD%B3%B9%DC%C0%ED%D4%B1%2CjieqiUserVip%3D0%2CjieqiUserHonorId%3D%2CjieqiUserHonor%3D%CC%BD%BB%A8%2CjieqiNewMessage%3D1%2CjieqiUserUname_un%3D88dushuw%2CjieqiUserName_un%3D88dushuw%2CjieqiUserHonor_un%3D%26%23x63A2%3B%26%23x82B1%3B%2CjieqiUserGroupName_un%3D%26%23x7CFB%3B%26%23x7EDF%3B%26%23x7BA1%3B%26%23x7406%3B%26%23x5458%3B%2CjieqiUserLogin%3D1510821880; jieqiVisitInfo=jieqiUserLogin%3D1510821880%2CjieqiUserId%3D288523; jieqiOnlineInfo=jieqiAdminLogin%3D1; PHPSESSID=40v2s5io0uv6ipq57ro2lg62t0');
+      $curl->setOpt(CURLOPT_COOKIE, config('app.cookie_baba'));
       $curl->get($url);
       $curl->close();
       if ($curl->http_status_code == '200') {
-
           echo $curl->response;
-          exit;
       }else{
           die('caiji_err_zhuangtaima_'.$curl->http_status_code);
       }
-      \Log::info('未知错误',['地址'=>$url]);
     }
 
     public function sousuobaba()
@@ -344,7 +341,7 @@ class CaijiController extends Controller
         $jisu = count($bookid);
         $value = mb_convert_encoding($value, 'GBK', 'UTF-8');
         $curl = new \Curl\Curl();
-        $curl->setOpt(CURLOPT_COOKIE, '__cfduid=dcb97836be8f757c3db8c5d3c3a29dc1b1510106350; UM_distinctid=15f995a452f67-0a7b73f48c33bf-31657c00-13c680-15f995a45311b6; CNZZDATA1256847605=535306642-1510541154-%7C1510816560; Hm_lvt_0121ba7b78519d766211a964bcd86fdc=1510805720,1510806949,1510810699,1510811646; Hm_lpvt_0121ba7b78519d766211a964bcd86fdc=1510821885; jieqiUserInfo=jieqiUserId%3D288523%2CjieqiUserUname%3D88dushuw%2CjieqiUserName%3D88dushuw%2CjieqiUserGroup%3D2%2CjieqiUserGroupName%3D%CF%B5%CD%B3%B9%DC%C0%ED%D4%B1%2CjieqiUserVip%3D0%2CjieqiUserHonorId%3D%2CjieqiUserHonor%3D%CC%BD%BB%A8%2CjieqiNewMessage%3D1%2CjieqiUserUname_un%3D88dushuw%2CjieqiUserName_un%3D88dushuw%2CjieqiUserHonor_un%3D%26%23x63A2%3B%26%23x82B1%3B%2CjieqiUserGroupName_un%3D%26%23x7CFB%3B%26%23x7EDF%3B%26%23x7BA1%3B%26%23x7406%3B%26%23x5458%3B%2CjieqiUserLogin%3D1510821880; jieqiVisitInfo=jieqiUserLogin%3D1510821880%2CjieqiUserId%3D288523; jieqiOnlineInfo=jieqiAdminLogin%3D1; PHPSESSID=40v2s5io0uv6ipq57ro2lg62t0');
+        $curl->setOpt(CURLOPT_COOKIE, config('app.cookie_baba'));
         $curl->post('http://www.88dushu.com/modules/article/admin/article.php', array(
             'keyword' => $value,
             'keytype' => '0',
