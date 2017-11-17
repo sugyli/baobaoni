@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Caiji;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class CaijiController extends Controller
 {
 

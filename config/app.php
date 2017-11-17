@@ -44,6 +44,14 @@ return [
     'imagedir' => 'http://img.dashubao.net/',//附件地址
     'honorskey'=>'honorskey',
 
+
+
+    //SOU sdk
+    'accessKeyId' => env('accessKeyId'),
+    'secret' => env('secret'),
+    'endPoint' => env('endPoint'),
+    'aliAppName_sosuo' => env('aliAppName_sosuo'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

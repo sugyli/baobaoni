@@ -129,7 +129,6 @@ Route::group([
     Route::get('/caijibaba', 'CaijiController@caijibaba');
 });
 
-
 //Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
 
 
