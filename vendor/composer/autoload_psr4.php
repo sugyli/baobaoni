@@ -12,7 +12,6 @@ return array(
     'Watson\\Rememberable\\' => array($vendorDir . '/watson/rememberable/src'),
     'TomLingham\\Searchy\\' => array($vendorDir . '/tom-lingham/searchy/src'),
     'TijsVerkoyen\\CssToInlineStyles\\' => array($vendorDir . '/tijsverkoyen/css-to-inline-styles/src'),
-    'Thrift\\' => array($baseDir . '/Util/OpenSearch/Thrift'),
     'Tests\\' => array($baseDir . '/tests'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
