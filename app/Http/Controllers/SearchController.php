@@ -61,9 +61,9 @@ class SearchController extends Controller
         // 指定返回的搜索结果的格式为json
         $params->setFormat("fulljson");
         //指定粗排表达式
-        $params->setFirstRankName('title');
+        $params->setFirstRankName('default');
         //指定精排表达式
-        $params->setSecondRankName('default');
+        $params->setSecondRankName('title');
         //添加排序，scroll只支持单字段排序，且字段类型必须是int
         //$params->addSort('bookid', SearchParamsBuilder::SORT_DECREASE);
         // 执行搜索，获取搜索结果
