@@ -136,7 +136,7 @@ class PushBook extends Command
             sleep(10);
 
       }
-      $this->info("========总共上传了{$jisu}页数据=========");
+      $this->info("========总共上传了{$jisu}页数据 一共有 {$total} 本书=========");
       \Log::info("阿里云上传结束总共上传了{$jisu}页数据 结束页码{$endpage}");
       return true;
 
