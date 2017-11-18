@@ -15,7 +15,7 @@
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
   <section class="i-top">
-    <a href="/search">
+    <a href="/newsearch">
       <div class="i-top-search">输入书名/作者/关键字</div>
     </a>
   </section>
