@@ -36,7 +36,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "OpenSearch\\": "Util/OpenSearch"
+            "OpenSearch\\": "Util/OpenSearch",
+            "Thrift\\": "Util/OpenSearch/Thrift"
         }
     },
     "autoload-dev": {

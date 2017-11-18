@@ -140,8 +140,9 @@ class NovelsController extends Controller
             return redirect('/');
         }
         $total = count($bookData['relation_chapters']);
+        $infoUrl = route('mnovels.info', ['bid' => $bid]);
         if($total <= 0){
-            $infoUrl = route('mnovels.info', ['bid' => $bid]);
+
             return redirect($infoUrl);
         }
         $pageSize = (int)config('app.wapmululiebiao');
@@ -178,7 +179,8 @@ class NovelsController extends Controller
             $title = $bookData['articlename'];
             $nextpage = $page +1;
             $pevpage = ($page-1) <= 0 ? 1 : ($page-1);
-            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage'));
+
+            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage','infoUrl'));
         }
 
         $muluUrl = route('mnovels.newmulu', ['bid' => $bid ,'id'=>1]);

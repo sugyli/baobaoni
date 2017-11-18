@@ -9,8 +9,8 @@
     <a class="header-left" href="javascript:history.back()">
       <i class="iconfont icon-fanhui1"></i>
     </a>
-    <a class="header-right" href="/">
-      <i class="iconfont icon-shouye1"></i>
+    <a class="header-right" href="{{$infoUrl}}">
+      <i class="iconfont icon-liebiao"></i>
     </a>
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\ESInit::class,
-        \App\Console\Commands\CacheBook::class
+        \App\Console\Commands\PushBook::class
 
     ];
 
@@ -26,7 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
+
+      $schedule->command('pushbook:xiaoshuo')->hourly();
+      // $schedule->command('inspire')
         //          ->hourly();
 
     }

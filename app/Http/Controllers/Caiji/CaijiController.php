@@ -334,7 +334,7 @@ class CaijiController extends Controller
       $index = 0;
       $sy = 0;
 
-      for ($i=130; $i < count($array); $i++) {
+      for ($i=190; $i < count($array); $i++) {
         $index++;
         $bf_v = $value = trim($array[$i]);
         $jisu = count($bookid);

@@ -5,11 +5,11 @@
 @section('content')
 <div class="header online" style="text-align: center;">
     {{ $bookData['articlename'] }}
-    <a class="header-left" href="javascript:history.back()">
+    <a class="header-left" href="/">
       <i class="iconfont icon-fanhui1"></i>
     </a>
-    <a class="header-right" v-on:click.stop="addbookcase({{$bookData['articleid']}} , 0)">
-      <i class="iconfont icon-shoucang"></i>
+    <a class="header-right" href="{{ route('mnovels.hislogs') }}">
+      <i class="iconfont icon-lishi"></i>
     </a>
 </div>
 <div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
@@ -53,6 +53,10 @@
       <span class="left"><a href="{{ $bookData['newmulu'] or $bookData['mulu']}}">开始阅读</a></span>
   		<span><a href="javascript:void(0)" v-on:click.stop="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
+    <div class="ablum_read">
+      <span class="left"><a href="{{ $bookData['mulu'] }}">动态目录</a></span>
+      <span><a href="javascript:void(0)" v-on:click.stop="addbookcase({{$bookData['articleid']}} , 0)">收藏本书</a></span>
+    </div>
     <div class="intro">
   		小说简介
   	</div>

@@ -15,6 +15,7 @@
 
 
 Route::get('/', 'PagesController@home');
+Route::get('/newsearch', 'SearchController@alisearchview');
 
 Route::group([
     'namespace'     => 'MNovels',
@@ -97,6 +98,10 @@ Route::group([
 
 
 
+Route::post('/alisearch', 'SearchController@alisearch')
+          ->middleware('web')
+          ->prefix('ajax')
+          ->name('ajax.alisearch');
 
 Route::group([
     'prefix'        => 'ajax',
@@ -107,6 +112,7 @@ Route::group([
     Route::post('/recommend', 'UsersController@recommend')->name('ajax.recommend');
     Route::post('/addbookcase', 'BookshelfsController@addbookcase')->name('ajax.addbookcase');
     Route::post('/search', 'NovelsController@getsearch')->name('ajax.search');
+
     Route::post('/mulu','NovelsController@getmulu')->name('ajax.mulu');
     Route::post('/sendmessage', 'OutboxsController@ajaxstore')->name('ajax.sendmessage');
     Route::post('/getbookshelfs', 'BookshelfsController@getBookshelfsData')->name('ajax.getbookshelfs');
@@ -128,6 +134,7 @@ Route::group([
     Route::get('/sousuobaba', 'CaijiController@sousuobaba');
     Route::get('/caijibaba', 'CaijiController@caijibaba');
 });
+
 
 //Route::get('/info/{bid}/{slug?}/{any?}', 'NovelsController@info')->name('novel.info');
 

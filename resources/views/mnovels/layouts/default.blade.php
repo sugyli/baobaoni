@@ -28,6 +28,7 @@
         }
         var Config = {
           searchurl: '{{route('ajax.search')}}',
+          alisearchurl: '{{route('ajax.alisearch')}}',
           recommendurl: '{{ route('ajax.recommend') }}',
           addbookcaseurl: '{{route('ajax.addbookcase')}}',
           muluurl: '{{ route('ajax.mulu') }}',
