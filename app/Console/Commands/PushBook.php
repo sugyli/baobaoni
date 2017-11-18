@@ -72,6 +72,8 @@ class PushBook extends Command
 
       if($endpage >$pagenum){
           $endpage = $pagenum;
+          $this->info("========最后一页了 总数是 {$total}=========");
+          return true;
       }
       $jisu = 0;
       for ($i=$startpage; $i <= $endpage; $i++) {
