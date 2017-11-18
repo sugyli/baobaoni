@@ -208,6 +208,7 @@ class NovelsController extends Controller
                 Article::getBidBookDataByGet($bid);
             }
         }
+        response('console.log("1");', 200);
 
     }
 

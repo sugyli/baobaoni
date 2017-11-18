@@ -45,7 +45,6 @@
 @section('subscripts')
 <script src="/js/jquery.cookie.js"></script>
 <script>
-(function () {
 var str = $.cookie("hislogs");
 if (str){
     var hislogs = JSON.parse(str);
@@ -71,6 +70,6 @@ function delcook() {
   $.cookie('hislogs',"",-1);
   location.href = window.location.href;
 }
-})()//闭包不影响全局
+
 </script>
 @endsection
