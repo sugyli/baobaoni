@@ -132,7 +132,7 @@ class PushBook extends Command
 
             //延迟10秒，高级版主表增量90%，10秒内生效，99%在10min内，附表暂不保证。
             file_put_contents($path, $i);
-            $this->info("========上传第{$i}页成功 我要睡10秒再继续=========");
+            $this->info("========上传第{$i}页成功 我要睡15秒再继续=========");
             sleep(15);
 
       }
