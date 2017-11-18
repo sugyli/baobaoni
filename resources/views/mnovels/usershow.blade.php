@@ -15,7 +15,7 @@
 
   <div class="use">
     <a href="/" class="home"></a>
-    <a href="/search" class="search_white"></a>
+    <a href="/newsearch" class="search_white"></a>
   </div>
 </header>
 
