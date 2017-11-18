@@ -61,7 +61,7 @@ class PushBook extends Command
       //计算总页数
       $pagenum = (int)ceil($total / $pageSize);//当没有数据的时候 计算出来为0
 
-      $startpage = 1;
+      $startpage = 142;
       $endpage = $pagenum;
       $path = storage_path()."/sosuopage.txt";
 
@@ -138,7 +138,7 @@ class PushBook extends Command
 
       }
       $this->info("========总共上传了{$jisu}页数据 一共有 {$total} 本书=========");
-      \Log::info("阿里云上传结束总共上传了{$jisu}页数据 结束页码{$endpage}");
+      \Log::info("开启阿里云上传成功了结束页码{$endpage}");
       return true;
 
     }
