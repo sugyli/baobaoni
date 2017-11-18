@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-      $schedule->command('pushbook:xiaoshuo')->hourly();
+      $schedule->command('pushbook:xiaoshuo')->everyFiveMinutes();
       // $schedule->command('inspire')
         //          ->hourly();
 
