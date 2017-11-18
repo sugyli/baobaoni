@@ -72,7 +72,7 @@ class SearchController extends Controller
         $ret = json_decode($ret,true);
         //分页支持这种
         if(!isset($ret['status']) || $ret['status'] != 'OK'){
-          \Log::info('阿里搜索出现问题',['搜索词'=> $query ]);
+          \Log::info('本搜索词可能不存在',['搜索词'=> $query ]);
           $result['message'] = '搜索服务器繁忙请稍后访问';
           return response()->json($result);
         }
