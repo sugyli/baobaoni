@@ -133,8 +133,10 @@
                                     if(response.data.error == 0){
                                       swal("消息提示！", response.data.message ,"success");
 
-                                     }else{
-                                        swal("消息提示！", response.data.message ,"warning");
+                                    }else if (response.data.message) {
+                                      swal("消息提示！", response.data.message ,"warning");
+                                    }else{
+                                        swal("消息提示！", '服务器返回数据出错了' ,"warning");
 
                                      }
 
