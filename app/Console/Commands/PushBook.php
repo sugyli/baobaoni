@@ -66,14 +66,13 @@ class PushBook extends Command
       $path = storage_path()."/sosuopage.txt";
 
       if(is_file($path) && $lastpage = file_get_contents($path)){
+
           $startpage = (int)$lastpage;
 
       }
 
-      if($endpage >$pagenum){
-          $endpage = $pagenum;
-          $this->info("========最后一页了 总数是 {$total}=========");
-          return true;
+      if($startpage >$pagenum){
+          $startpage = $pagenum;
       }
       $jisu = 0;
       for ($i=$startpage; $i <= $endpage; $i++) {
