@@ -61,7 +61,7 @@ a:hover, a:link, a:visited {
     width: 100%;
     -webkit-transform-origin: top center;
     -webkit-transform: translateX(50%) rotate(45deg) translateY(50%) scale(0.8);
-    font-size: 1.4rem;
+    font-size: 12px;
     text-align: center;
 }
 .p-tag.-word{
@@ -616,7 +616,7 @@ a:hover, a:link, a:visited {
 }
 .center_header .back {
     color: #fff;
-    font-size: 1.8rem;
+    font-size: 18px;
     position: relative;
     display: -webkit-box;
     display: -moz-box;
@@ -696,7 +696,7 @@ a:hover, a:link, a:visited {
 .home_login .logged h1 {
     margin: 15px 0 10px;
     color: #fff;
-    font-size: 1.7rem;
+    font-size: 14px;
     font-weight: 400;
 }
 .home_login .logged div p {
@@ -714,7 +714,7 @@ a:hover, a:link, a:visited {
     text-align: center;
     line-height: 17px;
     color: #fff;
-    font-size: .9rem;
+    font-size: 7px;
 }
 .home_login a i {
     float: right;
@@ -742,13 +742,13 @@ a:hover, a:link, a:visited {
     display: block;
 }
 .my-con .con_column a p {
-    font-size: 1.6rem;
+    font-size: 14px;
     line-height: 55px;
     float: left;
 }
 .my-con .con_taquan a p span {
     color: #ff6a66;
-    font-size: 1.8rem;
+    font-size: 16px;
 }
 .my-con .con_column a b {
     width: 7px;
@@ -772,7 +772,7 @@ a:hover, a:link, a:visited {
 .my-con .con_sign .sign_lj {
     width: 70px;
     height: 25px;
-    font-size: 1.2rem;
+    font-size: 10px;
     line-height: 23px;
     border: 1px solid #25c4a6;
     color: #25c4a6;
