@@ -12,7 +12,7 @@
       margin: 175px auto 15px;
   }
   .section p {
-      font-size: 1.5rem;
+      font-size: 14px;
       color: #6d6c6c;
       margin-bottom: 15px;
       text-align: center;
