@@ -7,7 +7,7 @@
     <meta name="applicable-device" content="mobile" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="stylesheet" type="text/css" href="/css/wapxs.css">
+    <link rel="stylesheet" type="text/css" href="/css/mnovelall_19_11_25.css">
     <title>@section('title')标题@show</title>
     <meta name="keywords" content="@yield('keywords','关键词')" />
     <meta name="description" content="@yield('description','描述')" />

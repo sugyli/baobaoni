@@ -1,11 +1,11 @@
-body{font:14px/1.5 'microsoft yahei';}
+* {box-sizing: border-box;}
+body{font-size: 12px; 'microsoft yahei';}
 body,ul,li,p,span,h1,h2,h3,h4,h5,h6.dl,dt,dd{margin:0px;padding:0px;}
 ul,li{list-style:none;}
 h1,h2,h3,h4,h5,h6{font-size:16px; font-weight:normal}
 input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
 img{border:0px;}
 input, textarea {font-size:12px;font-family:"微软雅黑";}
-li {list-style:none;}
 img {border:none;margin:0;padding:0;}
 a,button{cursor:pointer;}
 a{color:#333;text-decoration:none;}

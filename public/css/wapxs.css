@@ -1,30 +1,16 @@
-* {box-sizing: border-box;}
-*[hidefocus],input,textarea,a{outline:none;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{padding:0;margin:0;}
-fieldset,img,html,body,iframe{border:0;}
-table{border-collapse:collapse;border-spacing:0;}
-li{list-style:none;}
-h1,h2,h3,h4,h5,h6{font-size:100%;}
-caption,th{font-weight:normal;font-style:normal;text-align:left;}
-em,strong{font-weight:bold;font-style:normal;}
-body,textarea,select,input,pre{font-family: "miui", "Helvetica Neue",Helvetica,STHeiTi,sans-serif;font-size:14px;color:#555;}
-body{background:#f8f8f8;line-height:1.5em;-webkit-text-size-adjust:none;}
+body{font:14px/1.5 'microsoft yahei';}
+body,ul,li,p,span,h1,h2,h3,h4,h5,h6.dl,dt,dd{margin:0px;padding:0px;}
+ul,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:16px; font-weight:normal}
+input:-webkit-autofill {-webkit-box-shadow: 0 0 0px 1000px white inset;}
+img{border:0px;}
+input, textarea {font-size:12px;font-family:"微软雅黑";}
+li {list-style:none;}
+img {border:none;margin:0;padding:0;}
 a,button{cursor:pointer;}
-textarea{resize:none;overflow:auto;}
-pre{white-space:pre-wrap;}
 a{color:#333;text-decoration:none;}
 a:hover, a:link, a:visited {
     text-decoration: none;
-}
-input{
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -webkit-user-modify: read-write-plaintext-only;
-}
-html{width:100%;height: 100% ;overflow-x:hidden;font-size: 10px;}
-body{background:rgba(255, 255, 255, 0);position:relative;text-align:left;width:100%;height:100%;-webkit-tap-highlight-color: rgba(0,0,0,0.05);-webkit-touch-callout:none;-webkit-user-select:none;}
-
-body{
-    -webkit-overflow-scrolling: touch;
 }
 .online{
 	overflow: hidden;
