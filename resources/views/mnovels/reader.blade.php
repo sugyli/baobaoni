@@ -29,10 +29,10 @@
 
 		<div class="set2">
 			<div id="large-font">
-				A++
+				字 +
 			</div>
 			<div id="small-font">
-				A--
+				字 -
 			</div>
       <div id="beijing-bnt">
         背景
