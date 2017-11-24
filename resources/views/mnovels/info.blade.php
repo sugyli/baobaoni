@@ -47,13 +47,13 @@
         <input type="button" onclick="location.href= '{{$chapter['link']}}'" value="开始阅读">
         @break($loop->iteration >= 1)
         @endforeach
-        <input type="button" onclick="location.href= '{{request()->url()}}'" value="刷新阅读">
+        <input type="button" onclick="location.href= '{{$bookData['newmulu']}}'" value="查看目录">
   	</div>
-    <div class="ablum_read" id="chapterlist" style="display:none">
+    <div class="ablum_read chapterlist" style="display:none">
       <span class="left"><a href="{{ $bookData['newmulu'] or $bookData['mulu']}}">开始阅读</a></span>
   		<span><a href="javascript:void(0)" v-on:click.stop="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
-    <div class="ablum_read">
+    <div class="ablum_read chapterlist" style="display:none">
       <span class="left"><a href="{{ $bookData['mulu'] }}">动态目录</a></span>
       <span><a href="javascript:void(0)" v-on:click.stop="addbookcase({{$bookData['articleid']}} , 0)">收藏本书</a></span>
     </div>
@@ -71,8 +71,7 @@
     @if (count($bookData['relation_chapters']) > 0)
     <ul class="chapter">
       @foreach (array_reverse($bookData['relation_chapters']) as $chapter)
-        <li class='yingc_i'><input type="button" onclick="location.href= '{{$chapter['link']}}'" value="{{$chapter['chaptername']}}"><span>{{$chapter['updatetime']}}</span></li>
-  		  <li class='yingc_a' style="display:none"><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$chapter['updatetime']}}</span></a></li>
+  		  <li><a href="{{$chapter['link']}}">{{$chapter['chaptername']}}<span>{{$chapter['updatetime']}}</span></a></li>
       @break($loop->iteration >= 9)
       @endforeach
   	</ul>
@@ -97,10 +96,7 @@
 <script>
 (function () {
   $("#notice").hide();
-  $("#chapterlist").show();
-
-  $(".yingc_i").hide();
-  $(".yingc_a").show();
+  $(".chapterlist").show();
 
   document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
   document.getElementById("info_ad_s").innerHTML = "";
