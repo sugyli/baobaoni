@@ -17,7 +17,7 @@
     <script src="/js/vue.min.js"></script>
     <script src="/js/toast.js"></script>
     <script src="/js/axios.min.js"></script>
-    <script src="/js/quanju.js"></script>
+    <script src="/js/quanju_1.js"></script>
 
   </head>
   <body>

@@ -17,6 +17,7 @@
       <i class="iconfont icon-liebiao"></i>
     </a>
 </div>
+<div class="my-ad" id='show_read_ad_s_1'></div>
 <div v-bind:style="'width:'+ screen_width + 'px;min-height:' + screen_height +'px;'">
   <div class="nr_set">
     <div class="set1" v-on:click="jubaocuowu('{{$chapter['articlename']}}_{{$chapter['chaptername']}}' , '{{request()->url()}}')">
@@ -44,6 +45,7 @@
 		<div class="clear">
 		</div>
 	</div>
+
   <div class="child-mod" style="display: none;" id='beijing_container'>
         <span>背景</span>
         <div id="first_day" class="bk-container bk-container-white" data-background="#f7eee5">
@@ -94,7 +96,7 @@
   	</div>
 
     {!!$content!!}
-    <div class="my-ad" id='show_read_ad_s_1'></div>
+    <div class="my-ad" id='show_read_ad_s_2'></div>
     <div class="my-ad" id='show_read_ad_d_1'></div>
     <div class="nr_page">
   		<a class="nr_page_a" v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})" >书签</a>
@@ -144,6 +146,10 @@
   <script>read_ad_s_1();</script>
 </div>
 
+<div id="read_ad_s_2" style="display:none">
+  <script>read_ad_s_2();</script>
+</div>
+
 <div id="read_ad_d_1" style="display:none">
   <script>read_ad_d_1();</script>
 </div>
@@ -159,6 +165,8 @@
 (function () {
   document.getElementById("show_read_ad_s_1").innerHTML = document.getElementById("read_ad_s_1").innerHTML;
   document.getElementById("read_ad_s_1").innerHTML = "";
+  document.getElementById("show_read_ad_s_2").innerHTML = document.getElementById("read_ad_s_2").innerHTML;
+  document.getElementById("read_ad_s_2").innerHTML = "";
   document.getElementById("show_read_ad_d_1").innerHTML = document.getElementById("read_ad_d_1").innerHTML;
   document.getElementById("read_ad_d_1").innerHTML = "";
   document.getElementById("show_read_ad_d_2").innerHTML = document.getElementById("read_ad_d_2").innerHTML;
