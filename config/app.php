@@ -9,6 +9,7 @@ return [
 
     'url_admin' => env('URL_ADMIN'),
     'cookie_baba' => env('COOKIE_BABA'),
+    'cookie_jiusanshu' => env('COOKIE_JIUSANSHU'),
     'wap_name' => '大书包小说网手机版',
     'wap_keywords' => '大书包小说网,小说,手机阅读网',
     'wap_des' => '大书包小说网收录了当前最好看的小说,是广大小说阅读爱好者必备的手机阅读小说网。',

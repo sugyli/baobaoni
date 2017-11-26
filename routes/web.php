@@ -133,6 +133,7 @@ Route::group([
     Route::get('/miaobigemulu', 'CaijiController@miaobigemulu');
     Route::get('/sousuobaba', 'CaijiController@sousuobaba');
     Route::get('/caijibaba', 'CaijiController@caijibaba');
+    Route::get('/caijijiusanshu', 'CaijiController@caijijiusanshu');
 });
 
 
