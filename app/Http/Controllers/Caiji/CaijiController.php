@@ -212,7 +212,7 @@ class CaijiController extends Controller
     					$newword = str_ireplace("<li>","",$results[0][$i]);
     					$newword = str_ireplace("</li>","",$newword);
     					$newword = substr($newword,0, -5);
-    					$results[0][$i] = "<li><a href=\"/read/{$bookid}/&lasturl=http://www.93shu.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
+    					$results[0][$i] = "<li><a href=\"/chapter/{$bookid}/&lasturl=http://www.93shu.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
     				}
 
     			}
