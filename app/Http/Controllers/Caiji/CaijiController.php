@@ -205,7 +205,7 @@ class CaijiController extends Controller
     		for ($i=0; $i <count($results[0]) ; $i++) {
     			if ($i>0) {
     				if(preg_match("{<li><a.*?href=\".+?\"}",$results[0][$i])){
-    					$results[0][$i] = preg_replace("{<li><a.*?href=\".+?\"}","<li><a href=\"{$results[1][$i]}&lasturl=https://www.miaobige.com{$results[1][$i-1]}\"",$results[0][$i]);
+    					$results[0][$i] = preg_replace("{<li><a.*?href=\".+?\"}","<li><a href=\"{$results[1][$i]}&lasturl=http://www.93shu.com{$results[1][$i-1]}\"",$results[0][$i]);
     				}else{
     					$newword = str_ireplace("<li>","",$results[0][$i]);
     					$newword = str_ireplace("</li>","",$newword);
