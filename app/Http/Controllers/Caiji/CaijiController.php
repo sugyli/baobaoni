@@ -200,9 +200,7 @@ class CaijiController extends Controller
     }
     function shuchu($text,$bookid){
     	preg_match_all("{<li>(?:<a.*?href=\"(.+?)\".*?>(.+?)</a>|(.+?)).*?</li>}", $text, $results);
-      echo '<per>';
-      print_r($results);
-    	exit;
+
     	if (is_array($results) && is_array($results[0]) && is_array($results[1])) {
     		for ($i=0; $i <count($results[0]) ; $i++) {
     			if ($i>0) {
@@ -216,7 +214,6 @@ class CaijiController extends Controller
     				}
 
     			}
-
 
     		}
         echo '<pre>';
