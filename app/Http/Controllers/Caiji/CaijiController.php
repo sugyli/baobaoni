@@ -237,7 +237,7 @@ class CaijiController extends Controller
             die("dizhiweikong book<0");
         }
 
-        $txt = $this->caiji($url ,true);
+        $txt = $this->caiji($url , false, config('app.cookie_jiusanshu'));
         preg_match("{<div class=\"pages\">(.+?)<\/div>}", $txt,$results);
         if (isset($results[1])) {
             preg_match_all("{<a href=\/chapter\/\d+\/\d+\/>(\d+)</a>}", $results[1],$outArry);
