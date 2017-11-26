@@ -51,7 +51,7 @@ class InboxsController extends Controller
             $grid->fromname('发件人');
             $grid->title('标题')->limit(150);
             $grid->postdate('时间')->display(function ($postdate) {
-                return formatTime($postdate);
+                return date("Y-m-d",$postdate);
             });
             $grid->toname('收件人');
             $grid->isread('状态')->display(function ($isread) {

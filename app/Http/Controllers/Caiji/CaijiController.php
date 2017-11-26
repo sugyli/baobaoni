@@ -307,7 +307,7 @@ class CaijiController extends Controller
 
     public function sousuobaba()
     {
-      for ($i=1; $i <= 50; $i++) {
+      for ($i=1; $i <= 150; $i++) {
           echo "http://www.93shu.com/shuku/0_1_0_0_0_{$i} <br />";
       }
       exit;
