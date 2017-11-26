@@ -39,7 +39,7 @@ class CaijiController extends Controller
 
       			$results[0] = preg_replace("{<ul>\s*<li class=\"hidden\">[\s\S]+?</ul>}", "", $results[0]);
       			//$results[0] = preg_replace("{<ul>\s*<h3>正文</h3>\s*<div class=\"border-line\"></div>章节不存在时显示\s*</ul>}", "", $results[0]);
-      			$results[0] = preg_replace("{<a href=\"/read/{$bookid}/\d*\.html\" title=\"\" target=\"_blank\"></a>}", "<a href=\"/read/{$bookid}/1.html\" title=\"标题不见了\" target=\"_blank\">标题不见了</a>", $results[0]);
+      			$results[0] = preg_replace("{<a href=\"/chapter/{$bookid}/\d*\.html\" title=\"\" target=\"_blank\"></a>}", "<a href=\"/chapter/{$bookid}/1.html\" title=\"标题不见了\" target=\"_blank\">标题不见了</a>", $results[0]);
       			$results[0] = preg_replace("{<ul>\s*<h3>.+?<\/h3>\s*<div class=\"border-line\"><\/div>章节不存在时显示\s*<\/ul>}", "", $results[0]);
 
       			//daying($results[0]);
@@ -83,7 +83,7 @@ class CaijiController extends Controller
     function suanfa($text ,$bookid){
       	$isok=false;
       	if(preg_match("{<li><a.*?href=\"(\d+)\.html\".*?>.+?</a>}", $text)){
-      		$text = preg_replace("{<li><a.*?href=\"}","<li><a href=\"/read/{$bookid}/",$text);
+      		$text = preg_replace("{<li><a.*?href=\"}","<li><a href=\"/chapter/{$bookid}/",$text);
       	}
 
       	if(preg_match("{<li><a.*?href=\".+?\/(\d+)\.html\".*?>.+?</a>}", $text)){
@@ -240,7 +240,7 @@ class CaijiController extends Controller
         $txt = $this->caiji($url ,true);
         preg_match("{<div class=\"pages\">(.+?)<\/div>}", $txt,$results);
         if (isset($results[1])) {
-            preg_match_all("{<a href=\/read\/\d+\/\d+\/>(\d+)</a>}", $results[1],$outArry);
+            preg_match_all("{<a href=\/chapter\/\d+\/\d+\/>(\d+)</a>}", $results[1],$outArry);
             $counts = count($outArry[1]);
             if ($counts > 0) {
                 for ($i=0; $i < $counts; $i++) {
@@ -265,7 +265,7 @@ class CaijiController extends Controller
               if(isset($results[2]) && is_array($results[2])){
                 echo"规则1";
                 for ($i = 0; $i < $index; $i++) {
-                  $txt = str_replace($results[0][$i], "/read/{$results[2][$i]}/{$bookid}/" . $results[1][$i] . ".html", $txt);
+                  $txt = str_replace($results[0][$i], "/chapter/{$results[2][$i]}/{$bookid}/" . $results[1][$i] . ".html", $txt);
                 }
                 $this->zuhe($txt,zuhe);
                 exit;
@@ -274,7 +274,7 @@ class CaijiController extends Controller
 								echo "规则2";
 
 								for ($i = 0; $i < $index; $i++) {
-									$txt = str_replace($results[0][$i], "/read/{$bookid}/" . ($results[1][$i] - 100) . ".html", $txt);
+									$txt = str_replace($results[0][$i], "/chapter/{$bookid}/" . ($results[1][$i] - 100) . ".html", $txt);
 								}
 								//echo $urldata;
 								$this->zuhe($txt,$bookid);
