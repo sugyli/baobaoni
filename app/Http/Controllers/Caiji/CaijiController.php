@@ -210,7 +210,7 @@ class CaijiController extends Controller
     					$newword = str_ireplace("<li>","",$results[0][$i]);
     					$newword = str_ireplace("</li>","",$newword);
     					$newword = substr($newword,0, -5);
-    					$results[0][$i] = "<li><a href=\"/read/{$bookid}/&lasturl=https://www.miaobige.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
+    					$results[0][$i] = "<li><a href=\"/read/{$bookid}/&lasturl=http://www.93shu.com{$results[1][$i-1]}\" target=\"_blank\">{$newword}</a> 09-26</li>";
     				}
 
     			}
@@ -296,6 +296,7 @@ class CaijiController extends Controller
       }
       $curl = new \Curl\Curl();
       $curl->setOpt(CURLOPT_COOKIE, config('app.cookie_baba'));
+      $curl->setUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)");
       $curl->get($url);
       $curl->close();
       if ($curl->http_status_code == '200') {
@@ -307,6 +308,10 @@ class CaijiController extends Controller
 
     public function sousuobaba()
     {
+      for ($i=1; $i <= 50; $i++) {
+          echo "http://www.93shu.com/shuku/0_1_0_0_0_{$i} <br />";
+      }
+      exit;
       header('Content-type:text/html;charset=gbk');
       //set_time_limit(0);
 
@@ -334,7 +339,7 @@ class CaijiController extends Controller
       $index = 0;
       $sy = 0;
 
-      for ($i=3240; $i < count($array); $i++) {
+      for ($i=4040; $i < count($array); $i++) {
         $index++;
         $bf_v = $value = trim($array[$i]);
         $jisu = count($bookid);
@@ -389,6 +394,7 @@ class CaijiController extends Controller
       echo '==xunhuan'.$index;
       echo '==tingzhi'.$stopk;
       echo '==suoying'.$sy;
+      echo '=='.count($array);
       exit;
 
     }
