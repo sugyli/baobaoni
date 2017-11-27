@@ -111,7 +111,7 @@ class InboxsController extends Controller
               $showForm = new Form1($message);
               $showForm->display('fromname' ,'发件人');
               $showForm->display('toname', '收件人');
-              $showForm->display('' ,'发件时间')->default(formatTime($message->postdate));
+              $showForm->display('' ,'发件时间')->default(date("Y-m-d",$message->postdate));
               $showForm->display('title', '标题');
               $showForm->display('content', '内容');
             //  $showForm->fromname('fromname');
