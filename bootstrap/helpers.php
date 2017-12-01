@@ -64,7 +64,7 @@ if (!function_exists('saveOrGetTxtData')) {
               $outData = $cacheDataArry;
           }
 
-          return $outData;
+
       }else{
           $path = "\\" .intval($bid/1000) . "\\" .$bid . "\\{$cid}.txt";
           $txtDir = config('app.benditxtdir') . $path;
@@ -84,8 +84,8 @@ if (!function_exists('saveOrGetTxtData')) {
             \Log::info('文件不存在',['路径'=>$txtDir]);
 
           }
-          return $outData;
       }
+      return $outData;
 
   }
 }
