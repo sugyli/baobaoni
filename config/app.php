@@ -44,8 +44,8 @@ return [
     'minnr' => 300,//章节内容最小内容
     'imagedir' => 'http://img.dashubao.net/',//附件地址
     'honorskey'=>'honorskey',
-
-
+    'benditxt'=>env('BDTXT'),
+    'benditxtdir'=>env('BDTXTDIR'),
 
     //SOU sdk
     'accessKeyId' => env('accessKeyId'),

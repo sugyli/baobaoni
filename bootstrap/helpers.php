@@ -47,23 +47,45 @@ if (!function_exists('saveOrGetTxtData')) {
 
   function saveOrGetTxtData($bid,$cid,$lastupdate,$attachment)
   {
-
-      $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
-      $txtDir = config('app.txtdir') . $path;
-      $key = 'txt_' . $path;
       $outData = ['state'=>false ,'content'=>''];
-      $cacheDataArry = \Cache::get($key);
 
-      if ( !$cacheDataArry ) {//不存在
-          $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
-      }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
-          $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
-      }elseif ($cacheDataArry) {
-          $outData['state'] = true;
-          $outData = $cacheDataArry;
+      if (!config('app.benditxt')) {
+          $path = intval($bid/1000) . '/' .$bid . "/{$cid}.txt";
+          $txtDir = config('app.txtdir') . $path;
+          $key = 'txt_' . $path;
+          $cacheDataArry = \Cache::get($key);
+
+          if ( !$cacheDataArry ) {//不存在
+              $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
+          }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
+              $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
+          }elseif ($cacheDataArry) {
+              $outData['state'] = true;
+              $outData = $cacheDataArry;
+          }
+
+          return $outData;
+      }else{
+          $path = "\\" .intval($bid/1000) . "\\" .$bid . "\\{$cid}.txt";
+          $txtDir = config('app.benditxtdir') . $path;
+          if(file_exists($txtDir)){
+             $txtData = file_get_contents($txtDir);
+             $txtData = trim($txtData);
+             if (!empty($txtData)) {
+                 $txtData = mb_convert_encoding($txtData, 'utf-8', 'GBK,UTF-8,ASCII');
+                 $outData['state'] = true;
+                 $txtData = @str_replace("\n\n","\n",$txtData);
+                 $txtData = @str_replace("\n","\n\n",$txtData);
+                 $txtData = @str_replace("&nbsp;"," ",$txtData);
+                 $outData['content'] = $txtData;
+             }
+
+          }else{
+            \Log::info('文件不存在',['路径'=>$txtDir]);
+
+          }
+          return $outData;
       }
-
-      return $outData;
 
   }
 }
@@ -95,6 +117,9 @@ if (!function_exists('curlTxt')) {
             $txt = trim($txt);
             if (!empty($txt)) {
                 $txt = mb_convert_encoding($txt, 'utf-8', 'GBK,UTF-8,ASCII');
+                $txt = @str_replace("\n\n","\n",$txt);
+                $txt = @str_replace("\n","\n\n",$txt);
+                $txt = @str_replace("&nbsp;"," ",$txt);
             }else {
                 txtLog($txtDir,$attachment,$curl->http_status_code);
             }
@@ -107,6 +132,7 @@ if (!function_exists('curlTxt')) {
             txtLog($txtDir,$attachment,$curl->http_status_code);
 
         }
+
         return $txt;
 
 
