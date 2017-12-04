@@ -4,6 +4,7 @@
 @section('description')小说搜索@endsection
 @section('style')
 <link rel="stylesheet" type="text/css" href="/newcss/zujian.css" />
+<script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.min.js"></script>
 @endsection
 @section('content')
 <div class="top__bd" :style="'height:'+screen_height+'px;'">
