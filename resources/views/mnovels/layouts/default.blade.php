@@ -13,7 +13,6 @@
     <meta name="description" content="@yield('description','描述')" />
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/css/iconfont.css" />
-    <script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/vue.min.js"></script>
     <script src="/js/toast.js"></script>
