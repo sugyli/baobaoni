@@ -3,6 +3,8 @@
 @section('keywords')小说目录列表@endsection
 @section('description')小说目录列表@endsection
 @section('style')
+<script src="/js/vue.min.js"></script>
+<script src="/js/toast.js"></script>
 <style>
 .mulu li {
     position: relative;

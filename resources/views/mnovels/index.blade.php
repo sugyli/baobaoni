@@ -12,7 +12,7 @@
       <i class="iconfont icon-huiyuan"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
+<div id="root" class="container-warp">
   <section class="i-top">
     <a href="/newsearch">
   		<div class="i-top-search">输入书名/作者/关键字</div>
@@ -258,6 +258,4 @@
   @endif
   @include('mnovels.layouts.foot')
 </div>
-
-
 @endsection

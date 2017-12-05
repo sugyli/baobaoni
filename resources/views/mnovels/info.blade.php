@@ -12,12 +12,8 @@
       <i class="iconfont icon-lishi"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
-  <section class="i-top">
-    <a href="/newsearch">
-      <div class="i-top-search">输入书名/作者/关键字</div>
-    </a>
-  </section>
+<div id="root" class="container-warp">
+  @include('mnovels.layouts.search')
   <div class="my-ad" id="show_info_ad_s">
   </div>
   <div class="cover">
@@ -50,12 +46,15 @@
         <input type="button" onclick="location.href= '{{$bookData['newmulu']}}'" value="查看目录">
   	</div>
     <div class="ablum_read chapterlist" style="display:none">
-      <span class="left"><a href="{{ $bookData['newmulu'] or $bookData['mulu']}}">开始阅读</a></span>
-  		<span><a href="javascript:void(0)" v-on:click.stop="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
+      @foreach ($bookData['relation_chapters'] as $chapter)
+      <span class="left"><a href="{{$chapter['link']}}">开始阅读</a></span>
+      @break($loop->iteration >= 1)
+      @endforeach
+  		<span><a href="javascript:void(0)" onclick="baobaoni.tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
     <div class="ablum_read chapterlist" style="display:none">
-      <span class="left"><a href="{{ $bookData['mulu'] }}">动态目录</a></span>
-      <span><a href="javascript:void(0)" v-on:click.stop="addbookcase({{$bookData['articleid']}} , 0)">收藏本书</a></span>
+      <span class="left"><a href="{{ $bookData['newmulu'] }}">章节目录</a></span>
+      <span><a href="javascript:void(0)" onclick="baobaoni.addbookcase( {{ $bookData['articleid'] }} , 0)">收藏本书</a></span>
     </div>
     <div class="intro">
   		小说简介

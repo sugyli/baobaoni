@@ -8,7 +8,7 @@
 
 @endsection
 @section('content')
-<header class="center_header" v-bind:style="'width:'+ screen_width + 'px;'">
+<header class="center_header" id="root">
   <span class="back">
     <i onclick="javascript:window.location.href='{{$bkurl}}';"></i>个人中心
   </span>
@@ -30,7 +30,7 @@
       </div>
   </div>
 </section>
-<section class="my-con" :style="'min-height:' + screen_height-150 + 'px;max-width: 720px;'">
+<section class="my-con">
   <div class="con_column con_taquan">
       <a href="javascript:" class="clearfix">
           <p>经验 <span>{{$user->score}}</span></p>

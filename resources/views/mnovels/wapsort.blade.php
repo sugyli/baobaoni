@@ -12,12 +12,8 @@
       <i class="iconfont icon-shouye1"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
-  <section class="i-top">
-    <a href="/newsearch">
-  		<div class="i-top-search">输入书名/作者/关键字</div>
-  	</a>
-  </section>
+<div id="root" class="container-warp">
+  @include('mnovels.layouts.search')
   <div class="sortcontent">
     <ul>
     @foreach (config('app.fenlei') as $key => $value)

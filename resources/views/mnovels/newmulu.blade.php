@@ -13,7 +13,7 @@
       <i class="iconfont icon-liebiao"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
+<div id="root" class="container-warp">
   <section class="i-top">
     <a href="/newsearch">
       <div class="i-top-search">输入书名/作者/关键字</div>
@@ -98,7 +98,15 @@
 
   document.getElementById("show_mulu_ad_d").innerHTML = document.getElementById("mulu_ad_d").innerHTML;
   document.getElementById("mulu_ad_d").innerHTML = "";
+  axios.get("{{ route( 'mnovels.checkupsql',['bid'=>$bid] ) }}", {
+    })
+    .then(function (response) {
+      console.log(response)
+
+    })
+    .catch(function (response) {
+        console.log(response);
+    });
 })()//闭包不影响全局
 </script>
-<script defer src="{{ route( 'mnovels.checkupsql',['bid'=>$bid] ) }}"></script>
 @endsection

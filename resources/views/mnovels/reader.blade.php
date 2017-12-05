@@ -18,9 +18,9 @@
     </a>
 </div>
 <div class="my-ad" id='show_read_ad_s_1'></div>
-<div v-bind:style="'width:'+ screen_width + 'px;min-height:' + screen_height +'px;'">
+<div id="reader">
   <div class="nr_set">
-    <div class="set1" v-on:click="jubaocuowu('{{$chapter['articlename']}}_{{$chapter['chaptername']}}' , '{{request()->url()}}')">
+    <div class="set1" onclick="baobaoni.jubaocuowu('{{$chapter['articlename']}}_{{$chapter['chaptername']}}' , '{{request()->url()}}')">
     	报错
     </div>
     <div id="night-day-button">
@@ -38,7 +38,7 @@
       <div id="beijing-bnt">
         背景
       </div>
-      <div v-on:click="tuijian({{ $chapter['articleid'] }})">
+      <div onclick="baobaoni.tuijian({{ $chapter['articleid'] }})">
         推荐
       </div>
 		</div>
@@ -72,7 +72,7 @@
     </div>
 
     <div class="nr_page">
-  		<a class="nr_page_a" v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})" >书签</a>
+  		<a class="nr_page_a" href="javascript:void(0)" onclick="baobaoni.addbookcase( {{$chapter['articleid']}} , {{$chapter['chapterid']}} )" >书签</a>
       @if($previousChapter)
       <a class="nr_page_a prev_bf" href="{{ $previousChapter['link']}}" target="_top" style="display:none" >上一章</a>
       <input class="nr_page_a nr_page_input prev_bf1" type="button" onclick="location.href= '{{ $previousChapter['link']}}'" value="上一章" />
@@ -88,8 +88,8 @@
       <a class="nr_page_a next_bf" href="{{ $nextChapter['link'] }}" target="_top" style="display:none" >下一章</a>
       <input class="nr_page_a nr_page_input next_bf1" type="button"  onclick="location.href= '{{ $nextChapter['link'] }}'" value="下一章" />
       @else
-      <a class="nr_page_a next_bf" href="{{ $chapter['mulu'] }}" target="_top" style="display:none" >最新？</a>
-      <input class="nr_page_a nr_page_input next_bf1" type="button"  onclick="location.href= '{{ $chapter['mulu'] }}'" value="最新？" />
+      <a class="nr_page_a next_bf" href="{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ] ) }}" target="_top" style="display:none" >最新？</a>
+      <input class="nr_page_a nr_page_input next_bf1" type="button"  onclick="location.href= '{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ] ) }}'" value="最新？" />
       @endif
 
   		<a class="nr_page_a" href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}" >书架</a>
@@ -99,7 +99,7 @@
     <div class="my-ad" id='show_read_ad_s_2'></div>
     <div class="my-ad" id='show_read_ad_d_1'></div>
     <div class="nr_page">
-  		<a class="nr_page_a" v-on:click.stop="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})" >书签</a>
+  		<a class="nr_page_a" href="javascript:void(0)" onclick="baobaoni.addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">书签</a>
 
       @if($previousChapter)
       <a class="nr_page_a prev_bf" href="{{ $previousChapter['link'] }}" target="_top" style="display:none" >上一章</a>
@@ -116,8 +116,8 @@
       <a class="nr_page_a next_bf" href="{{ $nextChapter['link'] }}" target="_top" style="display:none" >下一章</a>
       <input class="nr_page_a nr_page_input next_bf1" type="button" onclick="location.href= '{{ $nextChapter['link'] }}'" value="下一章" />
       @else
-      <a class="nr_page_a next_bf" href="{{ $chapter['mulu'] }}" target="_top" style="display:none" >最新？</a>
-      <input class="nr_page_a nr_page_input next_bf1" type="button" onclick="location.href= '{{ $chapter['mulu'] }}'" value="最新？" />
+      <a class="nr_page_a next_bf" href="{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ] ) }}" target="_top" style="display:none" >最新？</a>
+      <input class="nr_page_a nr_page_input next_bf1" type="button" onclick="location.href= '{{ route('mnovels.newmulu',['bid'=>$chapter['articleid'] ,'id'=>$page ] ) }}'" value="最新？" />
       @endif
 
   		<a class="nr_page_a" href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}" >书架</a>

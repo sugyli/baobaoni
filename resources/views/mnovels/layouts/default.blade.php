@@ -14,8 +14,7 @@
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="/css/iconfont.css" />
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/vue.min.js"></script>
-    <script src="/js/toast.js"></script>
+    <script src="/js/layer_mobile/layer.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/quanju_2.js"></script>
 
@@ -27,10 +26,10 @@
           location.href= "{{request()->url()}}";
         }
         var Config = {
-          searchurl: '{{route('ajax.search')}}',
           alisearchurl: '{{route('ajax.alisearch')}}',
           recommendurl: '{{ route('ajax.recommend') }}',
           addbookcaseurl: '{{route('ajax.addbookcase')}}',
+          delbookcaseurl: '{{ route('ajax.destroy') }}',
           muluurl: '{{ route('ajax.mulu') }}',
           jubaourl: '{{route('ajax.sendmessage')}}',
           shujiaurl: '{{route('ajax.getbookshelfs')}}',
@@ -38,12 +37,12 @@
 
     </script>
     @yield('style')
-    <div id="app" v-bind:style="'width:'+ screen_width + 'px;position: relative'" ref="appBox">
+    <div id="app" style="position: relative;">
         @yield('content')
     </div>
   </body>
   @section('scripts')
-  <script src="/js/myjs.js"></script>
+  <script src="/js/myjs_1.js"></script>
     @if (!Request::is('user/*'))
     <script>tongji();</script>
     @endif

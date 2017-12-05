@@ -13,7 +13,7 @@
       <i class="iconfont icon-shouye1"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp">
+<div id="root" class="container-warp">
   <form name="frmregister" action="{{ $registerSubmitAddress }}" method="post">
       {{ csrf_field() }}
       <div class="login">

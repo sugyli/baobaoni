@@ -46,7 +46,7 @@ Route::group([
     Route::get('/waptop', 'NovelsController@waptop')->name('mnovels.waptop');
     Route::get('/waptop/{any}', 'NovelsController@showwaptop')->name('mnovels.showwaptop');
 
-    Route::get('/search', 'NovelsController@search');
+    //Route::get('/search', 'NovelsController@search');
 
 
 
@@ -111,7 +111,7 @@ Route::group([
 
     Route::post('/recommend', 'UsersController@recommend')->name('ajax.recommend');
     Route::post('/addbookcase', 'BookshelfsController@addbookcase')->name('ajax.addbookcase');
-    Route::post('/search', 'NovelsController@getsearch')->name('ajax.search');
+    //Route::post('/search', 'NovelsController@getsearch')->name('ajax.search');
 
     Route::post('/mulu','NovelsController@getmulu')->name('ajax.mulu');
     Route::post('/sendmessage', 'OutboxsController@ajaxstore')->name('ajax.sendmessage');

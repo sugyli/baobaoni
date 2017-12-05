@@ -36,7 +36,7 @@
       <i class="iconfont icon-shuaxin1"></i>
     </a>
 </div>
-<div v-bind:style="'width:'+ screen_width + 'px;'" class="container-warp" id="sotitle">
+<div id="root" class="container-warp">
   <div style="text-align:center; padding:50px 0;">
     <input type="button" style="font-size:20px;" onclick="location.href= '{{ route('mnovels.hislogs') }}'" value="被百度转码点击跳转" />
   </div>
@@ -60,10 +60,10 @@ if (str){
         html += '</li>';
     });
     html += '</ul>';
-    $("#sotitle").html(html);
+    $("#root").html(html);
 }else{
     var html =  '<div style="text-align:center; padding:50px 0;">没有阅读记录</div>';
-    $("#sotitle").html(html);
+    $("#root").html(html);
 
 }
 function delcook() {

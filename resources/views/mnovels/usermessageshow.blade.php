@@ -9,7 +9,7 @@
       <i class="iconfont icon-fanhui1"></i>
     </a>
 </div>
-<div style="padding-top: 45px;" class="showMess container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
+<div style="padding-top: 45px;" class="showMess container-warp" id="root">
   <ul class="Displayanimation">
     <li>
       <p>{{$messageData->title}}</p>

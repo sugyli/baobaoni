@@ -10,7 +10,7 @@
     </a>
 </div>
 
-<div style="padding-top: 45px;" class="container-warp" v-bind:style="'width:'+ screen_width + 'px;'">
+<div style="padding-top: 45px;" class="container-warp" id="root">
   <ul class="message Displayanimation">
     @if($user->relationInboxs->count() > 0)
       <li style="padding:10px 0;">

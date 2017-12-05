@@ -3,240 +3,159 @@
 @section('keywords')小说搜索@endsection
 @section('description')小说搜索@endsection
 @section('style')
-<link rel="stylesheet" type="text/css" href="/newcss/zujian.css" />
+<style>
+.search_box {
+    padding: 15px;
+    width: 100%;
+    background: #f5f5f5;
+    border-bottom: 1px solid #f2f2f2;
+    position: relative;
+    overflow: hidden;
+}
+.search_box input {
+    width: 100%;
+    height: 38px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 14px;
+    display: block;
+}
+.search_box .look {
+    background: url(/images/person_icon.png) 0 -144px no-repeat;
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-size: 100%;
+    position: absolute;
+    top: 27px;
+    right: 24px;
+}
+.i-cl-list{
+  padding: 0 13px;
+
+}
+.i-cl-list li{
+  padding: 17px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.i-cl-list li:last-child {
+    border: none;
+}
+.i-cl-list-main{
+  overflow: hidden;
+}
+
+.i-cl-list-main-left{
+  position: relative;
+  float: left;
+  width: 85px;
+  height: 113px;
+  background-color: #eeece9;/*书没加载出来有个背景色*/
+  border: 1px solid #f0f0f0;
+  border-radius: 1px;
+  overflow: hidden;
+}
+.i-cl-list-main-left img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1px;
+}
+.i-cl-list-main-left-state{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;/* border和padding计算入width之内*/
+  font: 10px/10px a;
+  padding: 25px 7px 6px;
+  color: #fff;
+  background: -webkit-linear-gradient(top,rgba(0,0,0,0),rgba(0,0,0,0.3));
+
+}
+.i-cl-list-main-right{
+    margin-left: 100px;
+    padding-top: 6px;
+    background: #fff;
+}
+.i-cl-list-main-right-bookname{
+  margin-bottom: 4px;
+  font: 16px/17px a;
+  color: rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;/*单行溢出文本显示省略号*/
+  white-space: nowrap;/*规定段落中的文本不进行换行*/
+}
+.i-cl-list-main-right-author{
+  margin-top: 8px;
+  font: 12px/12px a;
+  color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.i-cl-list-main-right-info{
+  margin: 8px 0 0;
+  height: 2.8em;
+  font: 12px/1.4em a;
+  color: rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*下面3个控制多行*/
+  display: -webkit-box;/*多行文字溢出*/
+  -webkit-line-clamp: 2;/*多行文字几行*/
+  -webkit-box-orient: vertical;/*溢出就用...*/
+}
+
+.i-cl-list-main-right-tags{
+  margin-top: 10px;
+  padding-top: 3px;
+  overflow: hidden;
+}
+.i-cl-list-main-right-tags-tag{
+  float: left;
+  margin: -3px 7px 0 0;
+  padding: 3px 6px 2px;
+  font: 10px/11px a;
+  color: #53ac7d;
+  border-radius: 3px;
+  border: 1px solid #53ac7d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 6em;
+}
+.i-cl-list-main-right-tags-tag:last-child {
+    margin-right: 0;
+}
+
+</style>
+
 @endsection
 @section('content')
-<div class="top__bd" :style="'height:'+screen_height+'px;'">
-  <div class="right-search">
-    <a href="javascript:history.back()" class="top__back"></a>
-    <div id="search-input" class="search-input"> <b class="search-input__mi"></b>
-      <input type="text" v-model="searchKeyword" placeholder="输入书名/作者/关键字" @keyup.13="search">
-      <div class="search-input__btn" v-on:click="search">搜索</div>
-    </div>
+<div class="header online" style="text-align: center;">
+    小说搜索
+    <a class="header-left" href="javascript:history.back()">
+      <i class="iconfont icon-fanhui1"></i>
+    </a>
+</div>
+<div id="reader" style="padding-top: 45px;">
+  <div class="search_box">
+
+      <input type="text" name="keyWord" placeholder="书名/作者/关键词" class="search" id="searchBox" autocomplete="off">
+      <input id="search_bnt" type="button" class="look" style="border: none" value="" autocomplete="off">
+
   </div>
-  <scroller
-    style="top: 45px"
-    ref="searchScroller"
-    :on-refresh="refresh"
-    :on-infinite="infinite"
-    :no-data-text="searchNoDataText"
-    >
-    <section class="i-cl" v-if="isNotNullArray(searchItems)">
-      <ul class="i-cl-list Displayanimation">
-          <li v-for="(item, index) in searchItems">
-            <div class="i-cl-list-main">
-              <a :href="item['fields']['link']">
-                <div class="i-cl-list-main-left">
-                  <img  :src="item['fields']['image']"/>
+  <section id="sousuo" class="i-cl">
 
-                </div>
-                <div class="i-cl-list-main-right">
-                  <p class="i-cl-list-main-right-bookname">
-                    @{{item['fields']['title']}}
-                  </p>
-
-                  <p class="i-cl-list-main-right-author">
-                      @{{item['fields']['author']}}
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
-      </ul>
-    </section>
-    <div :class="{ishide:ishide}">
-        <ul class="m-tag -color search-tag">
-          <li v-for="(item, index) in storageSearchItems" class="u-tag">
-          <a v-on:click.stop="tagclick(item)">@{{item}}</a>
-          </li>
-        </ul>
-
-        <div class="his-dele" v-if="isNotNullArray(storageSearchItems)">
-          <a v-on:click.stop="delStorageSearchItems">
-          <img src="/images/icon_search_del.png" style="width:.98rem;height:.92rem;display: inline-block;">清除记录
-          </a>
-        </div>
-    </div>
-  </scroller>
+  </section>
 </div>
 @endsection
-@section('scripts')
-<script src="/js/vue-scroller.min.js"></script>
+@section('subscripts')
 <script>
-
 (function () {
-var imagepath =
-Vue.use(VueScroller)
-new Vue({
-      el:'#app',
-      data:{
-        screen_width:Util.windowWidth,
-        screen_height:Util.windowHeight,
-        searchItems: [],
-        searchKeyword: '',
-        storageSearchItems: [],
-        url:  Config.alisearchurl,
-        imagepath:'{{config('app.xsfmdir')}}',
-        defimage: '{{config('app.dfxsfmdir')}}',
-        noData: false,
-        ishide: false,
-        searchNoDataText: "没有更多数据",
-        frist:0,
-        jiazai: false
-      },
-      mounted() {
-        setTimeout(() => {
-            this._initScroll();
-        }, 20)
-      },
-      methods: {
-        _initScroll() {
-            this.storageSearchItems = this.getStorageSearchItems();
-            if (!this.$refs.searchScroller) {
-                return;
-            }
-            this.searchNoDataText = "没有相应的搜索结果";
-            this.$refs.searchScroller.finishInfinite(true);
+  baobaoni.searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
 
-        },
-
-        getStorageSearchItems(){
-            var storageSearchItems = Util.StorageGetter('StorageSearchItems');
-            var itme = [];
-            if(storageSearchItems){
-               itme =  storageSearchItems;
-
-            }else{
-               itme = [];
-            }
-
-            return itme;
-        },
-        setStorageSearchItems(keyword){
-            Array.prototype.unique3 = function(){
-              var res = [];
-              var json = {};
-              for(var i = 0; i < this.length; i++){
-                if(!json[this[i]]){
-                  res.push(this[i]);
-                  json[this[i]] = 1;
-                }
-              }
-              return res;
-            }
-          var storageSearchItems = this.getStorageSearchItems();
-          storageSearchItems.splice(0, 0,keyword);
-          storageSearchItems = storageSearchItems.unique3();
-          //this.storageSearchItems.push(keyword)
-          Util.StorageSetter('StorageSearchItems',storageSearchItems);
-
-        },
-        delStorageSearchItems(){
-          Util.StorageDel('StorageSearchItems');
-          this.storageSearchItems = [];
-        },
-        refresh (done) {
-          this.$refs.searchScroller.finishPullToRefresh();
-          return;
-        },
-
-        infinite (done) {
-
-          if(this.frist <=0){
-            return;
-          }
-          if(this.frist > 0 && !this.noData){
-              setTimeout(() => {
-                this.getData();
-                done()
-              }, 500)
-
-          }else{
-              this.$refs.searchScroller.finishInfinite(true);
-          }
-        },
-        isNotNullArray(t){
-          return (t.constructor==Array) && t.length > 0;
-        },
-        getKeyWord(){
-          return $.trim(this.searchKeyword);
-        },
-        search:function() {
-            var keyword =  this.getKeyWord();
-            keyword = $.trim(keyword);
-            if (keyword) {
-                this.frist = 1;
-                this.noData = false;
-                this.storageSearchItems = [];
-                this.searchItems = [];
-                this.ishide = true;
-                this.setStorageSearchItems(keyword);
-                this.$refs.searchScroller.finishInfinite(false);
-
-            }
-
-        },
-        getData(){
-            if(this.noData){
-                return;
-            }
-            if(this.jiazai){
-              return;
-            }
-            var self = this;
-            var searchKeyword = self.getKeyWord();
-
-            if(searchKeyword){
-                self.jiazai =true;
-                axios.post(self.url, {
-                      query: searchKeyword,
-                  })
-                  .then(function (response) {
-                    if(response.data.error == 0){
-                        var data = response.data.bakdata;
-
-                        for (var i = 0; i < data.length; i++) {
-                            if(data[i]['fields']['price'] == 'nopic'){
-                                data[i]['fields']['image'] = self.defimage;
-
-                             }else{
-                                data[i]['fields']['image'] = self.imagepath + data[i]['fields']['price'];
-                             }
-                            //data[i]['fields']['update'] = self.DateToUnix(data[i]['fields']['create_timestamp']);
-                            data[i]['fields']['link'] = '/info-' + data[i]['fields']['bookid'];
-                            self.searchItems.push(data[i]);
-                        }
-
-                    }else{
-                      self.searchNoDataText = "没有查询到数据";
-                    }
-                    self.noData = true;
-                    self.jiazai =false;
-                    self.$refs.searchScroller.finishInfinite(true);
-                  })
-                  .catch(function (response) {
-                      self.jiazai =false;
-                      console.log(response);
-                      self.noData = true;
-                      self.searchNoDataText = "请求出现故障稍后再试";
-                      self.$refs.searchScroller.finishInfinite(true);
-                  });
-
-            }else{
-                self.noData = true;
-                self.searchNoDataText = "搜索词不能为空";
-                self.$refs.searchScroller.finishInfinite(true);
-
-            }
-
-        },
-        tagclick(v){
-            this.searchKeyword = v;
-            this.search();
-        },
-      }
-    });
 })()//闭包不影响全局
-
 </script>
 @endsection

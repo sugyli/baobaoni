@@ -17,6 +17,7 @@ class NovelsController extends Controller
     {
 
     }
+    /*
     public function search()
     {
         return view('mnovels.search');
@@ -49,7 +50,7 @@ class NovelsController extends Controller
         $result['bakdata'] = $datas;
         return response()->json($result);
     }
-
+    */
     public function wapsort()
     {
         return view('mnovels.wapsort');
@@ -208,7 +209,8 @@ class NovelsController extends Controller
                 Article::getBidBookDataByGet($bid);
             }
         }
-        response('console.log("1");', 200);
+        echo 'ok';
+        //response('console.log("1");', 200);
 
     }
 

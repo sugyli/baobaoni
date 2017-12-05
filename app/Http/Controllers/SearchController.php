@@ -33,10 +33,18 @@ class SearchController extends Controller
       return view('mnovels.alisearch');
 
     }
+
     public function alisearch()
     {
 
-        $query = \Purifier::clean(request('query'), 'search_q');
+
+        $query = \Purifier::clean( trim(request('query')), 'search_q');
+
+        $hits = (int)request()->hits + 0;
+        if($hits <= 0 || $hits>=30){
+            $hits = 30;
+        }
+
 
         $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
         if(empty($query)){
@@ -51,7 +59,7 @@ class SearchController extends Controller
         //设置config子句的start值  从数据第几个开始取
         $params->setStart(0);
         //设置config子句的hit值 每次取几个
-        $params->setHits(100);
+        $params->setHits($hits);
         // 指定一个应用用于搜索
         $params->setAppName($this->appName);
         // 指定搜索关键词
