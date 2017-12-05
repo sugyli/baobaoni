@@ -152,6 +152,7 @@
 </div>
 @endsection
 @section('subscripts')
+
 <script>
   baobaoni.searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
 </script>
