@@ -16,7 +16,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/layer_mobile/layer.js"></script>
     <script src="/js/axios.min.js"></script>
-    <script src="/js/quanju_2.js"></script>
+    <script src="/js/quanju_3.js"></script>
 
   </head>
   <body>
@@ -42,7 +42,7 @@
     </div>
   </body>
   @section('scripts')
-  <script src="/js/myjs_1.js"></script>
+  <script src="/js/myjs_2.js"></script>
     @if (!Request::is('user/*'))
     <script>tongji();</script>
     @endif

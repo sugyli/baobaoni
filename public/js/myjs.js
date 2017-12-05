@@ -515,7 +515,7 @@
                         htmls += '<p>更新时间：无</p>';
                       }
 
-                      htmls += '<p><a href="javascript:void(0)" onclick="baobaoni.case_del('+ items[i].caseid + ')"><span class="red-bg">删除本书</span></a></p>';
+                      htmls += '<p><a href="javascript:void(0)" onclick="case_del('+ items[i].caseid + ')"><span class="red-bg">删除本书</span></a></p>';
                       htmls += '</li>';
                    }
                 }else{

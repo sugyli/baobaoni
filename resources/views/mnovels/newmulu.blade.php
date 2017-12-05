@@ -19,7 +19,9 @@
       <div class="i-top-search">输入书名/作者/关键字</div>
     </a>
   </section>
-  <div class="my-ad" id="show_mulu_ad_s"></div>
+  <div class="my-ad">
+    <script>mulu_ad_s();</script>
+  </div>
   <section id="zjlb" class="zjlb" style="display:none">
     <div class="fenye">
       <div class="fy">{!! $pageset !!}</div>
@@ -66,7 +68,8 @@
       <input type="button" onclick="location.href= '{{route('mnovels.newmulu',['bid'=>$bid ,'id'=>$nextpage] )}}'" value="下一页">
     </div>
   </div>
-  <div class="my-ad" id="show_mulu_ad_d">
+  <div class="my-ad">
+    <script>mulu_ad_d();</script>
   </div>
   @include('mnovels.layouts.foot')
 
@@ -74,12 +77,6 @@
 
 @endsection
 @section('subscripts')
-<div id="mulu_ad_s" style="display:none">
-  <script>mulu_ad_s();</script>
-</div>
-<div id="mulu_ad_d" style="display:none">
-  <script>mulu_ad_d();</script>
-</div>
 <script>
 (function () {
   $("#chapter").hide();
@@ -92,12 +89,6 @@
   if(pageItem){
      $("#"+pageItem.cid).css("color","red");
   }
-
-  document.getElementById("show_mulu_ad_s").innerHTML = document.getElementById("mulu_ad_s").innerHTML;
-  document.getElementById("mulu_ad_s").innerHTML = "";
-
-  document.getElementById("show_mulu_ad_d").innerHTML = document.getElementById("mulu_ad_d").innerHTML;
-  document.getElementById("mulu_ad_d").innerHTML = "";
   axios.get("{{ route( 'mnovels.checkupsql',['bid'=>$bid] ) }}", {
     })
     .then(function (response) {

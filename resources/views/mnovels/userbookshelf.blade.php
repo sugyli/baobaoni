@@ -41,8 +41,9 @@
 
 @section('subscripts')
 <script>
-(function () {
-  baobaoni.showshujia("{{route('mnovels.clickbookshelf')}}" , "{{ $user->getBookcaseCount() }}");
-})()//闭包不影响全局
+$(document).ready(function()
+{
+    showshujia("{{route('mnovels.clickbookshelf')}}" , "{{ $user->getBookcaseCount() }}");
+});
 </script>
 @endsection

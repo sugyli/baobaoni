@@ -153,6 +153,9 @@
 @endsection
 @section('subscripts')
 <script>
-  baobaoni.searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
+  $(document).ready(function()
+  {
+      searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
+  });
 </script>
 @endsection

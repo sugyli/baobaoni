@@ -14,7 +14,8 @@
 </div>
 <div id="root" class="container-warp">
   @include('mnovels.layouts.search')
-  <div class="my-ad" id="show_info_ad_s">
+  <div class="my-ad">
+    <script>info_ad_s();</script>
   </div>
   <div class="cover">
     <div class="block">
@@ -50,11 +51,11 @@
       <span class="left"><a href="{{$chapter['link']}}">开始阅读</a></span>
       @break($loop->iteration >= 1)
       @endforeach
-  		<span><a href="javascript:void(0)" onclick="baobaoni.tuijian({{$bookData['articleid']}})">推荐本书</a></span>
+  		<span><a href="javascript:void(0)" onclick="tuijian({{$bookData['articleid']}})">推荐本书</a></span>
   	</div>
     <div class="ablum_read chapterlist" style="display:none">
       <span class="left"><a href="{{ $bookData['newmulu'] }}">章节目录</a></span>
-      <span><a href="javascript:void(0)" onclick="baobaoni.addbookcase( {{ $bookData['articleid'] }} , 0)">收藏本书</a></span>
+      <span><a href="javascript:void(0)" onclick="addbookcase( {{ $bookData['articleid'] }} , 0)">收藏本书</a></span>
     </div>
     <div class="intro">
   		小说简介
@@ -62,7 +63,8 @@
     <div class="intro_info">
   		{{$bookData['intro']}}
   	</div>
-    <div class="my-ad" id="show_info_ad_z">
+    <div class="my-ad">
+      <script>info_ad_z();</script>
     </div>
     <div class="intro">
   		最新章节预览
@@ -76,35 +78,17 @@
   	</ul>
     @endif
   </div>
-  <div class="my-ad" style="margin-top:5px;" id='show_info_ad_d'>
-
+  <div class="my-ad" style="margin-top:5px;">
+    <script>info_ad_d();</script>
   </div>
   @include('mnovels.layouts.foot')
 </div>
 @endsection
 @section('subscripts')
-<div id="info_ad_s" style="display:none">
-  <script>info_ad_s();</script>
-</div>
-<div id="info_ad_z" style="display:none">
-  <script>info_ad_z();</script>
-</div>
-<div id="info_ad_d" style="display:none">
-  <script>info_ad_d();</script>
-</div>
 <script>
 (function () {
   $("#notice").hide();
   $(".chapterlist").show();
-
-  document.getElementById("show_info_ad_s").innerHTML = document.getElementById("info_ad_s").innerHTML;
-  document.getElementById("info_ad_s").innerHTML = "";
-
-  document.getElementById("show_info_ad_z").innerHTML = document.getElementById("info_ad_z").innerHTML;
-  document.getElementById("info_ad_z").innerHTML = "";
-
-  document.getElementById("show_info_ad_d").innerHTML = document.getElementById("info_ad_d").innerHTML;
-  document.getElementById("info_ad_d").innerHTML = "";
 })()//闭包不影响全局
 </script>
 @endsection

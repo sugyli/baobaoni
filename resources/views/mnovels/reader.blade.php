@@ -17,10 +17,12 @@
       <i class="iconfont icon-liebiao"></i>
     </a>
 </div>
-<div class="my-ad" id='show_read_ad_s_1'></div>
+<div class="my-ad">
+  <script>read_ad_s_1();</script>
+</div>
 <div id="reader">
   <div class="nr_set">
-    <div class="set1" onclick="baobaoni.jubaocuowu('{{$chapter['articlename']}}_{{$chapter['chaptername']}}' , '{{request()->url()}}')">
+    <div class="set1" onclick="jubaocuowu('{{$chapter['articlename']}}_{{$chapter['chaptername']}}' , '{{request()->url()}}')">
     	报错
     </div>
     <div id="night-day-button">
@@ -38,7 +40,7 @@
       <div id="beijing-bnt">
         背景
       </div>
-      <div onclick="baobaoni.tuijian({{ $chapter['articleid'] }})">
+      <div onclick="tuijian({{ $chapter['articleid'] }})">
         推荐
       </div>
 		</div>
@@ -72,7 +74,7 @@
     </div>
 
     <div class="nr_page">
-  		<a class="nr_page_a" href="javascript:void(0)" onclick="baobaoni.addbookcase( {{$chapter['articleid']}} , {{$chapter['chapterid']}} )" >书签</a>
+  		<a class="nr_page_a" href="javascript:void(0)" onclick="addbookcase( {{$chapter['articleid']}} , {{$chapter['chapterid']}} )" >书签</a>
       @if($previousChapter)
       <a class="nr_page_a prev_bf" href="{{ $previousChapter['link']}}" target="_top" style="display:none" >上一章</a>
       <input class="nr_page_a nr_page_input prev_bf1" type="button" onclick="location.href= '{{ $previousChapter['link']}}'" value="上一章" />
@@ -96,10 +98,14 @@
   	</div>
 
     {!!$content!!}
-    <div class="my-ad" id='show_read_ad_s_2'></div>
-    <div class="my-ad" id='show_read_ad_d_1'></div>
+    <div class="my-ad">
+      <script>read_ad_s_2();</script>
+    </div>
+    <div class="my-ad">
+      <script>read_ad_d_1();</script>
+    </div>
     <div class="nr_page">
-  		<a class="nr_page_a" href="javascript:void(0)" onclick="baobaoni.addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">书签</a>
+  		<a class="nr_page_a" href="javascript:void(0)" onclick="addbookcase({{$chapter['articleid']}} , {{$chapter['chapterid']}})">书签</a>
 
       @if($previousChapter)
       <a class="nr_page_a prev_bf" href="{{ $previousChapter['link'] }}" target="_top" style="display:none" >上一章</a>
@@ -122,8 +128,12 @@
 
   		<a class="nr_page_a" href="{{route('mnovels.bookshelf.index')}}?redirect_url={{request()->url()}}" >书架</a>
   	</div>
-    <div class="my-ad" id='show_read_ad_d_2'></div>
-    <div class="my-ad" id='show_read_ad_d_3'></div>
+    <div class="my-ad">
+      <script>read_ad_d_2();</script>
+    </div>
+    <div class="my-ad">
+      <script>read_ad_d_3();</script>
+    </div>
   </div>
 </div>
 
@@ -131,7 +141,7 @@
 @section('subscripts')
 <script>
 (function () {
-  baobaoni.readApi({{$chapter['articleid']}} , {{$page}} ,{{$weizhi}} ,{{$chapter['chapterid']}} ,'{{$chapter['articlename']}}');
+  readApi({{$chapter['articleid']}} , {{$page}} ,{{$weizhi}} ,{{$chapter['chapterid']}} ,'{{$chapter['articlename']}}');
   $(".prev_bf1").hide();
   $(".prev_bf").show();
 
@@ -140,39 +150,6 @@
 
   $(".next_bf1").hide();
   $(".next_bf").show();
-})()//闭包不影响全局
-</script>
-<div id="read_ad_s_1" style="display:none">
-  <script>read_ad_s_1();</script>
-</div>
-
-<div id="read_ad_s_2" style="display:none">
-  <script>read_ad_s_2();</script>
-</div>
-
-<div id="read_ad_d_1" style="display:none">
-  <script>read_ad_d_1();</script>
-</div>
-
-<div id="read_ad_d_2" style="display:none">
-  <script>read_ad_d_2();</script>
-</div>
-
-<div id="read_ad_d_3" style="display:none">
-  <script>read_ad_d_3();</script>
-</div>
-<script>
-(function () {
-  document.getElementById("show_read_ad_s_1").innerHTML = document.getElementById("read_ad_s_1").innerHTML;
-  document.getElementById("read_ad_s_1").innerHTML = "";
-  document.getElementById("show_read_ad_s_2").innerHTML = document.getElementById("read_ad_s_2").innerHTML;
-  document.getElementById("read_ad_s_2").innerHTML = "";
-  document.getElementById("show_read_ad_d_1").innerHTML = document.getElementById("read_ad_d_1").innerHTML;
-  document.getElementById("read_ad_d_1").innerHTML = "";
-  document.getElementById("show_read_ad_d_2").innerHTML = document.getElementById("read_ad_d_2").innerHTML;
-  document.getElementById("read_ad_d_2").innerHTML = "";
-  document.getElementById("show_read_ad_d_3").innerHTML = document.getElementById("read_ad_d_3").innerHTML;
-  document.getElementById("read_ad_d_3").innerHTML = "";
 })()//闭包不影响全局
 </script>
 @endsection
