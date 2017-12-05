@@ -153,9 +153,6 @@
 @endsection
 @section('subscripts')
 <script>
-(function () {
   baobaoni.searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
-
-})()//闭包不影响全局
 </script>
 @endsection
