@@ -152,6 +152,7 @@
 </div>
 @endsection
 @section('subscripts')
+<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
 <script>
 (function () {
   baobaoni.searchApi("{{config('app.dfxsfmdir')}}","{{config('app.xsfmdir')}}");
