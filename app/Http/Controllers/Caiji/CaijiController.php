@@ -73,11 +73,11 @@ class CaijiController extends Controller
 
 
       			}else{
-      				die("判断有无段落规则BUG");
+      				die("panduanyouwuduanluoguiz_BUG");
       			}
       		}
       	}
-      	die("获取目录内容规则出错");
+      	die("huoqumuluneirongguizechucuo");
     }
 
     function suanfa($text ,$bookid){
@@ -85,7 +85,6 @@ class CaijiController extends Controller
       	if(preg_match("{<li><a.*?href=\"(\d+)\.html\".*?>.+?</a>}", $text)){
       		$text = preg_replace("{<li><a.*?href=\"}","<li><a href=\"/chapter/{$bookid}/",$text);
       	}
-
       	if(preg_match("{<li><a.*?href=\".+?\/(\d+)\.html\".*?>.+?</a>}", $text)){
 
       		preg_match_all("{<li><a.*?href=\".+?\/(\d+)\.html\".*?>.+?</a>}", $text, $results);
@@ -167,7 +166,7 @@ class CaijiController extends Controller
 
       						$results[0][$i-2] = $jilu[$i];
       					}else{
-      						die("算法出现BUG");
+      						die("suanfa_BUG");
       					}
 
       				}
@@ -193,8 +192,8 @@ class CaijiController extends Controller
       				exit;
       			}
       	}else{
-
-      		die("算法规则bug");
+          return '';
+      		//die("suanfa_bug_1");
       	}
 
     }
@@ -230,6 +229,7 @@ class CaijiController extends Controller
     {
         header('Content-type:text/plain;charset=gbk');
 		    ini_set('pcre.backtrack_limit', 999999999);
+
         //set_time_limit(300);
         $url = request()->url;
         $bookid = (int)request()->bookid;
