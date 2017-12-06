@@ -21,7 +21,7 @@ class ResponseLast
 
         // 执行动作
 
-        return $response->header('Cache-Control', 'no-store, no-cache, must-revalidate');
+        return $response->header('Cache-Control', 'private');
 
     }
 }

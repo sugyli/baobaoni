@@ -181,7 +181,13 @@ class NovelsController extends Controller
             $nextpage = $page +1;
             $pevpage = ($page-1) <= 0 ? 1 : ($page-1);
 
-            return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage','infoUrl'));
+            if($page == $pagenum){
+              return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage','infoUrl'));
+            }
+            return response()
+                    ->view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage','infoUrl'))
+                    ->header('Cache-Control', 'private');
+            //return view('mnovels.newmulu',compact('pageset','chapters','bid','title' ,'pageset' ,'sort' ,'nextpage','pevpage','infoUrl'));
         }
 
         $muluUrl = route('mnovels.newmulu', ['bid' => $bid ,'id'=>1]);
@@ -334,7 +340,6 @@ class NovelsController extends Controller
                   $isimg = 1;
             }
         }
-
         return view('mnovels.reader', compact('chapter','previousChapter','nextChapter','content','isimg','page','weizhi'));
 
 
