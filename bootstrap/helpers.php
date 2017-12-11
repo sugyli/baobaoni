@@ -54,7 +54,6 @@ if (!function_exists('saveOrGetTxtData')) {
           $txtDir = config('app.txtdir') . $path;
           $key = 'txt_' . $path;
           $cacheDataArry = \Cache::get($key);
-
           if ( !$cacheDataArry ) {//不存在
               $outData = saveTxt($key,$txtDir,$lastupdate,$outData,$attachment);
           }elseif ($cacheDataArry && $lastupdate != $cacheDataArry['lastupdate']) {//虽然有缓存 但是内容被编辑过
@@ -77,6 +76,8 @@ if (!function_exists('saveOrGetTxtData')) {
                  $txtData = @str_replace("\n\n","\n",$txtData);
                  $txtData = @str_replace("\n","\n\n",$txtData);
                  $txtData = @str_replace("&nbsp;"," ",$txtData);
+                 $txtData = @str_replace("<","&lt;",$txtData);
+                 $txtData = @str_replace(">","&gt;",$txtData);
                  $outData['content'] = $txtData;
              }
 
@@ -120,6 +121,8 @@ if (!function_exists('curlTxt')) {
                 $txt = @str_replace("\n\n","\n",$txt);
                 $txt = @str_replace("\n","\n\n",$txt);
                 $txt = @str_replace("&nbsp;"," ",$txt);
+                $txt = @str_replace("<","&lt;",$txt);
+                $txt = @str_replace(">","&gt;",$txt);
             }else {
                 txtLog($txtDir,$attachment,$curl->http_status_code);
             }

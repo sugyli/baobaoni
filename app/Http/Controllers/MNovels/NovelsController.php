@@ -322,7 +322,7 @@ class NovelsController extends Controller
               $content = $imghtml;
               $isimg = 1;
             }else {
-              //$content = contentReplace($txtObj['content']);
+              //$content = $txtObj['content'];
               $content = \Purifier::clean($txtObj['content'],'xiaoshuo_body');
 
             }
