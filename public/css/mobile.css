@@ -75,7 +75,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .pages .skip span em{font-style:normal;}
 
 .header{position:relative}
-.logo{width:58px;height:58px;background:url(../m_images/logo.png) no-repeat;position:absolute;left:10px;top:13px}
+.logo{width:58px;height:58px;background:url(../m_images/logo.jpeg) no-repeat;position:absolute;left:10px;top:13px}
 .nav{height:50px;background:#202020;padding:0 10px 0 70px;font-size:1.8rem}
 .nav a{float:left;width:25%;height:50px;line-height:50px;text-align:center;color:#FFF}
 .nav a.current{color:#d2a05f}
@@ -274,7 +274,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 
 .otherlogin h3{height:25px;line-height:25px;margin-bottom:5px}
 .otherlogin p{height:32px}
-.otherlogin p a{float:left;width:32px;height:32px;margin-right:20px;background:url(../m_images/login-icon.png) no-repeat;overflow:hidden}
+.otherlogin p a{float:left;width:32px;height:32px;margin-right:20px;background:url(/images/login-icon.jpeg) no-repeat;overflow:hidden}
 .otherlogin p a.qq-icon{background-position:0 -66px}
 .otherlogin p a.weibo-icon{background-position:0 -33px}
 .otherlogin p a.baidu-icon{background-position:0 0}
