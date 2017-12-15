@@ -75,7 +75,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .pages .skip span em{font-style:normal;}
 
 .header{position:relative}
-.logo{width:58px;height:58px;background:url(/images/logo.jpeg) no-repeat;position:absolute;left:10px;top:13px}
+.logo{width:58px;height:58px;background:url(/images/logo.jpeg) no-repeat;position:absolute;left:10px;top:13px;border-radius:50%}
 .nav{height:50px;background:#202020;padding:0 10px 0 70px;font-size:1.8rem}
 .nav a{float:left;width:25%;height:50px;line-height:50px;text-align:center;color:#FFF}
 .nav a.current{color:#d2a05f}
