@@ -16,7 +16,15 @@
 
 Route::get('/', 'PagesController@home');
 Route::get('/newsearch', 'SearchController@alisearchview');
+Route::group([
+    'namespace'     => 'Novels',
+    'domain' => config('app.url_web'),
+    //'middleware'    => ['responseLast'],
+], function () {
 
+
+
+});
 Route::group([
     'namespace'     => 'MNovels',
     'domain' => config('app.url_wap'),
@@ -102,6 +110,20 @@ Route::post('/alisearch', 'SearchController@alisearch')
           ->middleware('web')
           ->prefix('ajax')
           ->name('ajax.alisearch');
+Route::post('/searchinput', 'SearchController@aliinputsearch')
+          ->middleware('web')
+          ->prefix('ajax')
+          ->name('ajax.aliinputsearch');
+
+Route::group([
+    'prefix'        => 'ajax',
+    'namespace'     => 'Novels',
+    'middleware'    => ['web'],
+], function () {
+
+
+
+});
 
 Route::group([
     'prefix'        => 'ajax',

@@ -7,12 +7,18 @@ return [
 
     'url_caiji' => env('URL_CAIJI'),
 
+    'url_weixin' => env('URL_WEIXIN'),
+
     'url_admin' => env('URL_ADMIN'),
     'cookie_baba' => env('COOKIE_BABA'),
     'cookie_jiusanshu' => env('COOKIE_JIUSANSHU'),
     'wap_name' => '大书包小说网手机版',
+    'web_name' => '大书包小说网',
+    'weixin_name' => '微信名称',
     'wap_keywords' => '大书包小说网,小说,手机阅读网',
+    'web_keywords' => '小说,大书包,大书包小说网',
     'wap_des' => '大书包小说网收录了当前最好看的小说,是广大小说阅读爱好者必备的手机阅读小说网。',
+    'web_des' => '大书包小说网收录了当前最好看的小说,是广大小说阅读爱好者必备的小说网。',
     'fenlei' => [
       '玄幻魔法',
       '武侠修真',

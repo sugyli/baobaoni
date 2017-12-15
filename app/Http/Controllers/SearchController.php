@@ -7,6 +7,8 @@ use OpenSearch\Client\OpenSearchClient;
 use OpenSearch\Client\SearchClient;
 use OpenSearch\Util\SearchParamsBuilder;
 
+use OpenSearch\Client\SuggestClient;
+use OpenSearch\Util\SuggestParamsBuilder;
 class SearchController extends Controller
 {
 
@@ -32,6 +34,32 @@ class SearchController extends Controller
 
       return view('mnovels.alisearch');
 
+    }
+
+    public function aliinputsearch()
+    {
+      $query = \Purifier::clean( trim(request('query')), 'search_q');
+      $result = ['error'=>1,'message'=>'未知错误','bakdata'=>[]];
+      if(empty($query)){
+        $result['message'] = '搜索关键词不能为空';
+        return response()->json($result);
+      }
+
+      //创建下拉提示client
+      $suggestClient = new SuggestClient($this->client);
+      //创建下拉提示参数对象
+      $params = SuggestParamsBuilder::build($this->appName, 'tishi', $query, 10);
+      //执行查询并返回下拉提示信息
+      $ret = $suggestClient->execute($params);
+      $data = json_decode($ret->result, true);
+      if(!empty($data['suggestions'])){
+          $result['error'] = 0;
+          $result['message'] = '获取成功';
+          $result['bakdata'] = $data['suggestions'];
+          return response()->json($result);
+      }
+      $result['message'] = '未获取到数据';
+      return response()->json($result);
     }
 
     public function alisearch()
