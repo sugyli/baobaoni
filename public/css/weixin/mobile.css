@@ -43,7 +43,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .pagetitle{margin-bottom:10px;line-height:25px;font-size:1.6rem}
 .loading a{display:block;height:35px;line-height:35px;background:#EEE;text-align: center;color: #999;}
 
-.v-icon{display:inline-block;width:12px;height:12px;background:url(../m_images/v-icon.png) no-repeat;vertical-align:middle;overflow:hidden}
+.v-icon{display:inline-block;width:12px;height:12px;background:url(/images/v-icon.png) no-repeat;vertical-align:middle;overflow:hidden}
 .pt-icon,.lv-icon{display:inline-block;text-align:center;font-size:1.2rem;overflow: hidden;margin-left: 5px;}
 .pt-icon{width:18px;height:18px;line-height:18px;color: #fff;vertical-align: text-bottom;}
 .lv-icon{width:33px;height:16px;line-height:16px;border:1px solid #eb0000;color:#eb0000}
@@ -101,7 +101,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .bookimglist{padding:5px 0}
 .bookimglist li{float:left;width:25%;padding:10px 0;text-align:center}
 .bookimglist li a{display:block;width:90%;min-width:64px;margin:0 auto}
-.bookimglist li .pic{width:100%;height:auto}
+.bookimglist li .pic{width:86px;height:113px;}
 .bookimglist li .name{height:20px;line-height:20px;font-size:1.2rem;color:#666}
 .booktextlist{padding-top:8px}
 .booktextlist li{height:30px;line-height:30px}
@@ -144,7 +144,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .bookbutton a{display:block}
 
 .latestchapter{min-height:50px;line-height:22px;padding-left:60px;position:relative}
-.latestchapter .st-icon{width:50px;height:50px;position:absolute;left:0;top:0;background:url(../m_images/status-icon.png) no-repeat;overflow:hidden}
+.latestchapter .st-icon{width:50px;height:50px;position:absolute;left:0;top:0;background:url(/images/status-icon.png) no-repeat;overflow:hidden}
 .latestchapter .serial-icon{background-position:0 0}
 .latestchapter .end-icon{background-position:0 -55px}
 
@@ -188,7 +188,7 @@ a:link,a:visited{text-decoration:none;color:#333}
 .location,.btlocation{line-height:25px;font-size:1.6rem}
 .location{ margin-bottom: 15px;}
 .btlocation{ margin-top: 10px;}
-.location .home,.btlocation .home{display:inline-block;width:20px;height:20px;background:url(../m_images/home.png) no-repeat 3px 3px;vertical-align:text-bottom;overflow:hidden}
+.location .home,.btlocation .home{display:inline-block;width:20px;height:20px;background:url(/images/home_520.png) no-repeat 3px 3px;vertical-align:text-bottom;overflow:hidden}
 .location .gt,.btlocation .gt{padding:0 8px}
 
 .readbg{background:#e4dfd3}

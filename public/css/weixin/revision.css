@@ -1,0 +1,63 @@
+fieldset {border: 1px solid #e5e5e5;-webkit-border-radius: 4px;border-radius: 4px;padding: 24px 10px;margin: 10px 0;font-size: 12px;background: #fff;}
+fieldset legend {font-size: 14px;color: #999;text-align: center;}
+
+.content2{height: auto;width: 100%;overflow: hidden;margin: 0 auto 10px auto;background-color: #fff;min-height:200px;}
+.content2 ul{height: auto;width: 96%;margin: 15px auto 10px auto ;overflow: hidden;}
+.content2 ul li{width:22%;margin:15px 0 15px 9%;float:left;}
+.content2 ul li img{width: 100%;height: auto;}
+.content2 ul li p{font-size: 12px;text-align: center;}
+.content2 ul li a{width: 100%;height: auto;}
+.content2 ul li .hots{width: 50%;position: absolute;right: 0;}
+.content2 ul .hot{position: relative;}
+
+.logoTc{padding:40px 0; text-align:center}
+.oauthd{height: 70px;}
+.oauthd li{float:left;width:25%;text-align: center;padding:0;background:none;margin:0;}
+.oauthd li a{background: url(/m_images/sprite01_bg.png) 0 0 no-repeat;width: 50px;height: 50px;word-wrap: break-word;margin: 0 auto;background-size: 50px 251px;display: block;}
+.oauthd li a.wb{background-position: 0 -65px;}
+.oauthd li a.bd{background-position: 0 -132px;}
+.oauthd li a.wx{background-position: 0 -197px;}
+.oauthd li span{display: block;margin-top:3px;}
+
+.logMost{margin:30px auto; height:1px; background:#e0e0e0; position:relative}
+.logMost span{background:#fff; color:#333; height:22px; line-height:22px; width:130px; margin:-11px 0 0 -50px; position:absolute; top:50%; left:45%}
+
+#weixin-tip{display:none; position: fixed; left:0; top:0; background: rgba(0,0,0,0.8); filter:alpha(opacity=80); width: 100%; height:100%; z-index: 100;}
+#weixin-tip p{text-align: center; margin-top: 10%; padding:0 5%; position: relative;}
+#weixin-tip img {max-width: 100%;height: auto;}
+#weixin-tip .close{color: #fff;padding: 5px;font: bold 20px/20px simsun;text-shadow: 0 1px 0 #ddd;position: absolute;top: 0; left: 5%;}
+
+.recharge_shb{width: 100%;height: auto;overflow: hidden;background-color: #fff;margin: 0 auto;}
+.recharge_shb ul{width: 100%;height: auto;margin-top: 20px;margin-bottom: 20px;overflow: hidden;}
+.recharge_shb ul li{width: 40%;height:auto;border:1px solid #dfdfdf;float: left;border-radius: 5px;margin-left: 6%;margin-bottom: 15px;text-align: center;line-height: 22px;}
+.recharge_shb ul li a{display: block;position: relative;}
+.recharge_shb ul li a span{line-height: 26px;display: block;}
+.recharge_shb span.orange {color: #fe5b00;display: block; font-size: 18px;}
+.recharge_shb li i {display: inline-block;background: url(/m_images/pay/0.png) no-repeat;background-size: 100%;width: 40px;height: 40px;position: absolute;top: 0;right:0;z-index: 99;font-style: normal;}
+.recharge_shb li i.i1000 {background: url(/m_images/pay/1000.png) no-repeat;background-size: 100%;}
+.recharge_shb li i.i500 {background: url(/m_images/pay/500.png) no-repeat;background-size: 100%;}
+.recharge_shb li i.i200 {background: url(/m_images/pay/200.png) no-repeat;background-size: 100%;}
+.recharge_shb li i.i100 {background: url(/m_images/pay/100.png) no-repeat;background-size: 100%;}
+.recharge_shb li i.i50 {background: url(/m_images/pay/50.png) no-repeat;background-size: 100%;}
+.recharge_shb li i.i365 {background: url(/m_images/pay/365.png) no-repeat;background-size: 100%;}
+
+.hot a.line{display: block;border-top: 1px solid #DDDDDD;line-height: 125%;font-size: 0.95em;width:100%; color: #333;text-decoration: none;padding:10px 0;}
+.hot a.line:first-of-type{border-top:none;}
+
+.appdownload{width:100%;height:50px;background:rgba(0,0,0,.65);position:fixed;left:0;bottom:0;z-index:999;display:none}
+.appdownload .bd{height:50px;display:-webkit-box;display:-moz-box;display:-webkit-flex;display:flex}
+.appdownload .close{width:50px;height:50px;background:url(/m_images/close.png) no-repeat center center;background-size:24px 24px;text-indent:-999px;overflow:hidden}
+.appdownload .download{height:50px;-webkit-box-flex:1;-moz-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1}
+.appdownload .download .l{float:left}
+.appdownload .download .r{float:right}
+.appdownload .download .icon{width:40px;height:40px;margin:5px 0;background:url(/m_images/applogo.png) no-repeat;background-size:40px 40px}
+.appdownload .download .text{margin:5px 0 5px 10px;line-height:20px;font-size:1.2rem;color:#fff}
+.appdownload .download .text p{color:#999}
+.appdownload .download .btn{width:70px;height:30px;line-height:30px;margin:10px 10px 10px 0;background:#5fbc8a;background-image:-webkit-linear-gradient(top,#5fbc8a,#5fbc8a)}
+
+.articlecon p.VipHint a {color: #C52633;}
+.readnav {font-size:15px;background-color:#dfdfdf;margin: 0 0 10px 0;padding: 5px;color: #666;}
+.app{text-align: center;margin: 15px 10px;}
+.app a{border: 1px solid #799324;border-radius: 5px;display:block;padding: 5px 0;}
+.footers {text-align:center;margin:20px 0;display: inline-block;width: 100%;font-size:14px;}
+.footers a{font-size:14px;color:#666;}

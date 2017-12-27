@@ -14,7 +14,7 @@ trait ArticleFilterable
   }
   public function getArticleFilter($filter)
   {
-      $filters = ['newbook','monthhit','weekhit','dayhit'];
+      $filters = ['newbook','monthhit','weekhit','dayhit','weixin_hit','weixin_tuijian','weixin_newbook'];
       if (in_array($filter, $filters)) {
           return $filter;
       }
@@ -87,6 +87,32 @@ trait ArticleFilterable
                           ->remember(config('app.cacheTime_z'))->paginate($limit);
           break;
 
+      case 'weixin_hit':
+          $week_begin = mktime(0, 0, 0,date("m"),date("d")-date("w")+1,date("Y"));
+          $week_end = mktime(23,59,59,date("m"),date("d")-date("w")+7,date("Y"));
+          return
+                  Ranking::select(\DB::raw('sum(hits) as h,articleid'))
+                          //->whereYear('created_at', '2016')
+                          //->whereMonth('created_at', '9')
+                          ->whereBetween('ranking_date', [$week_begin, $week_end])
+                          ->groupBy('articleid')
+                          ->orderBy('h', 'desc')
+                          ->with(['relationArticles'=> function ($q) { $q->where('is_weixin',1)->remember(config('app.cacheTime_d'));}])
+                          ->remember(config('app.cacheTime_z'))->paginate($limit);
+          break;
+      case 'weixin_tuijian':
+          return $query->where('is_weixin',1)
+                        ->where('is_weixin_recommend',1)
+                        ->orderBy('articleid', 'desc')
+                        ->remember(config('app.cacheTime_d'))
+                        ->paginate($limit);
+          break;
+      case 'weixin_newbook':
+          return $query->where('is_weixin',1)
+                        ->orderBy('lastupdate', 'desc')
+                        ->remember(config('app.cacheTime_d'))
+                        ->paginate($limit);
+          break;
       default:
           return $query->orderBy('lastupdate', 'desc')->remember(config('app.cacheTime_d'))->paginate($limit);
           break;

@@ -47,9 +47,10 @@ class Article extends Model
         'relationChapters',
         'lastchapterid',
         'lastchapter',
+        'weixinlink'
       ];
 
-    protected $appends = ['link','sort','updatetime','mulu','newmulu'];
+    protected $appends = ['link','sort','updatetime','mulu','newmulu','weixinlink'];
     /**
      * 数据模型的启动方法
      *
@@ -172,6 +173,14 @@ class Article extends Model
     public function getMuluAttribute()
     {
       return route('mnovels.mulu',['bid'=>$this->articleid] );
+
+    }
+    public function getWeixinlinkAttribute()
+    {
+      if (empty($this->slug)) {
+        return route('weixin.info', ['bid' => $this->articleid]);
+      }
+      return route('weixin.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
 
     }
     public function getNewmuluAttribute()

@@ -26,6 +26,16 @@ Route::group([
 
 });
 Route::group([
+    'namespace'     => 'WeiXin',
+    'domain' => config('app.url_weixin'),
+    //'middleware'    => ['responseLast'],
+], function () {
+    Route::get('/info/{bid}/{slug?}', 'NovelsController@info')->name('weixin.info');
+    Route::get('/content/{bid}/{cid}/{any?}', 'NovelsController@content')->name('weixin.content');
+    Route::get('/catalog/{bid}', 'NovelsController@catalog')->name('weixin.catalog');
+
+});
+Route::group([
     'namespace'     => 'MNovels',
     'domain' => config('app.url_wap'),
     //'middleware'    => ['responseLast'],
