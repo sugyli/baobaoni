@@ -17,10 +17,11 @@ class PagesController extends Controller
       $weburl = config('app.url_web');
       $wapurl = config('app.url_wap');
       $weixinurl = config('app.url_weixin');
-
+      /*
       if(str_is($url.'*', $weixinurl)){
           return app(weixinindex::class)->index();;
       }
+      */
       if(str_is($url.'*', $weburl)){
           dd('开发中');
           //return app(webindex::class)->index();
