@@ -17,7 +17,6 @@
     <script src="/js/layer_mobile/layer.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/quanju_7.js"></script>
-
   </head>
   <body>
     <script>
