@@ -35,38 +35,6 @@ window.Util = Util;
 //mulu
 function mulu_ad_s(){
   if(navigator.userAgent.indexOf('UCBrowser') > -1){document.write('<scr'+'ipt data-union-ad data-priority="11" data-position="inline">(function(){var requestApi={};requestApi.getPageInfo=function(){var pageInfo={};var allPageInfoMeta=document.querySelectorAll("meta[name=u_external_info]");for(var idx=0;idx<allPageInfoMeta.length;idx++){var pageInfoMeta=allPageInfoMeta[idx];if(pageInfoMeta.hasAttribute("data-key")&&pageInfoMeta.hasAttribute("data-value")){pageInfo[pageInfoMeta.getAttribute("data-key")]=pageInfoMeta.getAttribute("data-value")}}return JSON.stringify(pageInfo)};requestApi.url="http://daima1.18tzx.com/902/25?"+new Date().getTime()+"&uc_param_str=dn&pageinfo="+encodeURIComponent(requestApi.getPageInfo());requestApi.method="get".toUpperCase();requestApi.randId="c"+Math.random().toString(36).substr(8);window.document.writeln("<div id="+requestApi.randId+"></div>");requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();</scr'+'ipt>');} else {(function(){var requestApi={};requestApi.url='https://d.beigedi.com/902/3?'+new Date().getTime();requestApi.method='get'.toUpperCase();requestApi.randId='c'+Math.random().toString(36).substr(8);window.document.writeln('<div id="'+requestApi.randId+'"></div>');requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();}
-
-    (function () {
-      var userAgent = window.navigator.userAgent ;
-      if(userAgent.indexOf('XiaoMi')>-1 || userAgent.indexOf('vivo')>-1) {
-          var randId= 'c' + Math.random().toString(36).substr(8);
-          var randId2= 'b' + Math.random().toString(36).substr(8);
-          var head = document.getElementsByTagName('head')[0];
-          var cssText = '';
-          cssText += '#'+randId+'{max-width: 320px;background: #deebef;height: 100px;margin: auto;border: 1px #01394a solid;padding: 1px 20px;}';
-          cssText += '#'+randId+' .uc_btn {margin: 5px 3px;padding: 5px 18px 5px 18px;background-size: 20px;background: #eb2650;color: #fff;text-align: center;font-size: 16px;border-radius: 5px;box-shadow: 0 2px 1px #d32248 inset;}';
-          var style = document.createElement('style');
-          style.appendChild(document.createTextNode(cssText));
-          head.appendChild(style);
-
-          var content = '';
-          content += '亲爱的书友，为了更好的阅读体验，推荐您使用UC浏览器阅读，请点击下方按钮<br>';
-          content += '<p style="text-align: center">';
-          content += '<input type="button" id="'+randId2+'" class="uc_btn" value="下载UC浏览器"><br>';
-          content += '</p>';
-
-          document.writeln('<di'+'v id='+randId+'></'+'div>');
-          var div = document.getElementById(randId);
-          div.setAttribute('style', 'color: red;');
-          div.innerHTML = content;
-
-          var btn = document.getElementById(randId2);
-          btn.onclick = function(){
-              window.location.href = 'http://adtrack.ucweb.com/v1/click?ch=xlxs&appid=ucwebforandroidxl&pl=Android&bid=35912';
-          }
-      }
-  })();
-
 }
 
 function mulu_ad_d() {
@@ -87,37 +55,6 @@ function mulu_ad_d() {
 //介绍
  function info_ad_s(){
    if(navigator.userAgent.indexOf('UCBrowser') > -1){document.write('<scr'+'ipt data-union-ad data-priority="11" data-position="inline">(function(){var requestApi={};requestApi.getPageInfo=function(){var pageInfo={};var allPageInfoMeta=document.querySelectorAll("meta[name=u_external_info]");for(var idx=0;idx<allPageInfoMeta.length;idx++){var pageInfoMeta=allPageInfoMeta[idx];if(pageInfoMeta.hasAttribute("data-key")&&pageInfoMeta.hasAttribute("data-value")){pageInfo[pageInfoMeta.getAttribute("data-key")]=pageInfoMeta.getAttribute("data-value")}}return JSON.stringify(pageInfo)};requestApi.url="http://daima1.18tzx.com/902/25?"+new Date().getTime()+"&uc_param_str=dn&pageinfo="+encodeURIComponent(requestApi.getPageInfo());requestApi.method="get".toUpperCase();requestApi.randId="c"+Math.random().toString(36).substr(8);window.document.writeln("<div id="+requestApi.randId+"></div>");requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();</scr'+'ipt>');} else {(function(){var requestApi={};requestApi.url='https://d.beigedi.com/902/3?'+new Date().getTime();requestApi.method='get'.toUpperCase();requestApi.randId='c'+Math.random().toString(36).substr(8);window.document.writeln('<div id="'+requestApi.randId+'"></div>');requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();}
-
-     (function () {
-      var userAgent = window.navigator.userAgent ;
-      if(userAgent.indexOf('XiaoMi')>-1 || userAgent.indexOf('vivo')>-1) {
-          var randId= 'c' + Math.random().toString(36).substr(8);
-          var randId2= 'b' + Math.random().toString(36).substr(8);
-          var head = document.getElementsByTagName('head')[0];
-          var cssText = '';
-          cssText += '#'+randId+'{max-width: 320px;background: #deebef;height: 100px;margin: auto;border: 1px #01394a solid;padding: 1px 20px;}';
-          cssText += '#'+randId+' .uc_btn {margin: 5px 3px;padding: 5px 18px 5px 18px;background-size: 20px;background: #eb2650;color: #fff;text-align: center;font-size: 16px;border-radius: 5px;box-shadow: 0 2px 1px #d32248 inset;}';
-          var style = document.createElement('style');
-          style.appendChild(document.createTextNode(cssText));
-          head.appendChild(style);
-
-          var content = '';
-          content += '亲爱的书友，为了更好的阅读体验，推荐您使用UC浏览器阅读，请点击下方按钮<br>';
-          content += '<p style="text-align: center">';
-          content += '<input type="button" id="'+randId2+'" class="uc_btn" value="下载UC浏览器"><br>';
-          content += '</p>';
-
-          document.writeln('<di'+'v id='+randId+'></'+'div>');
-          var div = document.getElementById(randId);
-          div.setAttribute('style', 'color: red;');
-          div.innerHTML = content;
-
-          var btn = document.getElementById(randId2);
-          btn.onclick = function(){
-              window.location.href = 'http://adtrack.ucweb.com/v1/click?ch=xlxs&appid=ucwebforandroidxl&pl=Android&bid=35912';
-          }
-      }
-  })();
  }
 
 
@@ -152,36 +89,6 @@ function mulu_ad_d() {
  function read_ad_s_1() {
    if(navigator.userAgent.indexOf('UCBrowser') > -1){document.write('<scr'+'ipt data-union-ad data-priority="11" data-position="inline">(function(){var requestApi={};requestApi.getPageInfo=function(){var pageInfo={};var allPageInfoMeta=document.querySelectorAll("meta[name=u_external_info]");for(var idx=0;idx<allPageInfoMeta.length;idx++){var pageInfoMeta=allPageInfoMeta[idx];if(pageInfoMeta.hasAttribute("data-key")&&pageInfoMeta.hasAttribute("data-value")){pageInfo[pageInfoMeta.getAttribute("data-key")]=pageInfoMeta.getAttribute("data-value")}}return JSON.stringify(pageInfo)};requestApi.url="http://daima1.18tzx.com/902/25?"+new Date().getTime()+"&uc_param_str=dn&pageinfo="+encodeURIComponent(requestApi.getPageInfo());requestApi.method="get".toUpperCase();requestApi.randId="c"+Math.random().toString(36).substr(8);window.document.writeln("<div id="+requestApi.randId+"></div>");requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();</scr'+'ipt>');} else {(function(){var requestApi={};requestApi.url='https://d.beigedi.com/902/3?'+new Date().getTime();requestApi.method='get'.toUpperCase();requestApi.randId='c'+Math.random().toString(36).substr(8);window.document.writeln('<div id="'+requestApi.randId+'"></div>');requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();}
 
-   (function () {
-      var userAgent = window.navigator.userAgent ;
-      if(userAgent.indexOf('XiaoMi')>-1 || userAgent.indexOf('vivo')>-1) {
-          var randId= 'c' + Math.random().toString(36).substr(8);
-          var randId2= 'b' + Math.random().toString(36).substr(8);
-          var head = document.getElementsByTagName('head')[0];
-          var cssText = '';
-          cssText += '#'+randId+'{max-width: 320px;background: #deebef;height: 100px;margin: auto;border: 1px #01394a solid;padding: 1px 20px;}';
-          cssText += '#'+randId+' .uc_btn {margin: 5px 3px;padding: 5px 18px 5px 18px;background-size: 20px;background: #eb2650;color: #fff;text-align: center;font-size: 16px;border-radius: 5px;box-shadow: 0 2px 1px #d32248 inset;}';
-          var style = document.createElement('style');
-          style.appendChild(document.createTextNode(cssText));
-          head.appendChild(style);
-
-          var content = '';
-          content += '亲爱的书友，为了更好的阅读体验，推荐您使用UC浏览器阅读，请点击下方按钮<br>';
-          content += '<p style="text-align: center">';
-          content += '<input type="button" id="'+randId2+'" class="uc_btn" value="下载UC浏览器"><br>';
-          content += '</p>';
-
-          document.writeln('<di'+'v id='+randId+'></'+'div>');
-          var div = document.getElementById(randId);
-          div.setAttribute('style', 'color: red;');
-          div.innerHTML = content;
-
-          var btn = document.getElementById(randId2);
-          btn.onclick = function(){
-              window.location.href = 'http://adtrack.ucweb.com/v1/click?ch=xlxs&appid=ucwebforandroidxl&pl=Android&bid=35912';
-          }
-      }
-  })();
  }
 
 
@@ -198,7 +105,7 @@ function mulu_ad_d() {
  }
  function read_ad_d_2() {
    if(navigator.userAgent.indexOf('UCBrowser') > -1){document.write('<scr'+'ipt data-union-ad data-priority="11" data-position="inline">(function(){var requestApi={};requestApi.getPageInfo=function(){var pageInfo={};var allPageInfoMeta=document.querySelectorAll("meta[name=u_external_info]");for(var idx=0;idx<allPageInfoMeta.length;idx++){var pageInfoMeta=allPageInfoMeta[idx];if(pageInfoMeta.hasAttribute("data-key")&&pageInfoMeta.hasAttribute("data-value")){pageInfo[pageInfoMeta.getAttribute("data-key")]=pageInfoMeta.getAttribute("data-value")}}return JSON.stringify(pageInfo)};requestApi.url="http://daima1.18tzx.com/902/25?"+new Date().getTime()+"&uc_param_str=dn&pageinfo="+encodeURIComponent(requestApi.getPageInfo());requestApi.method="get".toUpperCase();requestApi.randId="c"+Math.random().toString(36).substr(8);window.document.writeln("<div id="+requestApi.randId+"></div>");requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();</scr'+'ipt>');} else {(function(){var requestApi={};requestApi.url='https://d.beigedi.com/902/3?'+new Date().getTime();requestApi.method='get'.toUpperCase();requestApi.randId='c'+Math.random().toString(36).substr(8);window.document.writeln('<div id="'+requestApi.randId+'"></div>');requestApi.func=function(){var xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.xlRequestRun=false;if(xmlhttp.status==200){eval(xmlhttp.responseText)}}};xmlhttp.open(requestApi.method,requestApi.url,true);xmlhttp.send()};if(!window.xlRequestRun){window.xlRequestRun=true;requestApi.func()}else{requestApi.interval=setInterval(function(){if(!window.xlRequestRun){clearInterval(requestApi.interval);window.xlRequestRun=true;requestApi.func()}},500)}})();}
-   
+
  }
  function read_ad_d_3() {
    /*
