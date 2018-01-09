@@ -23,7 +23,8 @@ class PagesController extends Controller
       }
       */
       if(str_is($url.'*', $weburl)){
-        return app(webindex::class)->index();
+          dd('开发中');
+          //return app(webindex::class)->index();
           //return app(weixinindex::class)->index();;
       }
       if(str_is($url.'*', $wapurl)){
