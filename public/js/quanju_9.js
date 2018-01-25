@@ -161,7 +161,7 @@ function mulu_ad_d() {
    var _hmt = _hmt || [];
    (function() {
      var hm = document.createElement("script");
-     hm.src = "https://hm.baidu.com/hm.js?df3682ac84f527833641669afe78821b";
+     hm.src = "https://hm.baidu.com/hm.js?602f2ab4a04c486a32e70d128db31d4b";
      var s = document.getElementsByTagName("script")[0];
      s.parentNode.insertBefore(hm, s);
    })();
