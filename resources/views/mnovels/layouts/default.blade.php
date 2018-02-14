@@ -16,7 +16,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/layer_mobile/layer.js"></script>
     <script src="/js/axios.min.js"></script>
-    <script src="/js/quanju_13.js"></script>
+    <script src="/js/quanju_14.js"></script>
   </head>
   <body>
     <script>
