@@ -33,8 +33,8 @@ return [
       '商战职场',
       '同人小说'
     ],
-    'dfxsfmdir' => 'http://www.dashubao.net/css/noimg.jpg',//小说封面默认图片
-    'xsfmdir' => 'http://www.dashubao.net/xsfengmian/',//小说封面路径
+    'dfxsfmdir' => 'http://txt.home520.com/css/noimg.jpg',//小说封面默认图片
+    'xsfmdir' => 'http://txt.home520.com/xsfengmian/',//小说封面路径
     'cacheTime_d' => env('DI'),
     'cacheTime_z' => env('ZHONG'),
     'cacheTime_g' => env('GAO'),
