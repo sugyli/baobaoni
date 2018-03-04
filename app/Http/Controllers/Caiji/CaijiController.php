@@ -299,8 +299,6 @@ class CaijiController extends Controller
       $curl->get($url);
       $curl->close();
 
-      echo config('app.cookie_baba') .'\n';
-
       if ($curl->http_status_code == '200') {
           echo $curl->response;
       }else{
