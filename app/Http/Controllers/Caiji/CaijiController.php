@@ -23,8 +23,6 @@ class CaijiController extends Controller
         }
         $curl->get($url);
         $curl->close();
-        die('ff');
-        return $curl->response;
         if ($curl->http_status_code == '200') {
           return $curl->response;
 
@@ -300,6 +298,8 @@ class CaijiController extends Controller
       $curl->setUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)");
       $curl->get($url);
       $curl->close();
+      echo $curl->response;
+      exit;
       if ($curl->http_status_code == '200') {
           echo $curl->response;
       }else{
