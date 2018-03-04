@@ -23,6 +23,7 @@ class CaijiController extends Controller
         }
         $curl->get($url);
         $curl->close();
+        return $curl->response;
         if ($curl->http_status_code == '200') {
           return $curl->response;
 
