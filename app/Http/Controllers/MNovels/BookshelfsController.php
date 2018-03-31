@@ -88,8 +88,8 @@ class BookshelfsController extends Controller
 
 
 
-      }
-      
+       }
+
         if($cid<=0){
           $result['message'] = '本书已经在书架了,无需操作';
           return response()->json($result);
