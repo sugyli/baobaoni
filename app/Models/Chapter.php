@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chapter extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $guarded = ['chapterid'];
     protected $table = 'jieqi_article_chapter';
     protected $primaryKey = 'chapterid';
