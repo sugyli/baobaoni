@@ -133,7 +133,7 @@ Route::group([
     Route::post('/bookshelf/destroy', 'BookshelfsController@destroy')->name('ajax.destroy');
 
 
-    Route::get('/checkupsql/{bid}', 'NovelsController@upsqldata')->name('mnovels.checkupsql');
+    //Route::get('/checkupsql/{bid}', 'NovelsController@upsqldata')->name('mnovels.checkupsql');
 });
 
 

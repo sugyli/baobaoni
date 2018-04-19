@@ -89,6 +89,8 @@
   if(pageItem){
      $("#"+pageItem.cid).css("color","red");
   }
+
+  /*
   axios.get("{{ route( 'mnovels.checkupsql',['bid'=>$bid] ) }}", {
     })
     .then(function (response) {
@@ -99,5 +101,6 @@
         console.log(response);
     });
 })()//闭包不影响全局
+*/
 </script>
 @endsection
