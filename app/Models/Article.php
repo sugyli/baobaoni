@@ -39,7 +39,6 @@ class Article extends Model
         'author',
         'intro',
         'sort',
-        'slug',
         'lastupdate',
         'updatetime',
         'mulu',
