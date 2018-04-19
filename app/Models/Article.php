@@ -3,7 +3,7 @@
 namespace App\Models;
 //use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 //use Carbon\Carbon;
 //use Laravel\Scout\Searchable;
@@ -12,7 +12,7 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 class Article extends Model
 {
     use Traits\ArticleFilterable;
-    use SoftDeletes ,Rememberable,SearchableTrait;
+    use Rememberable,SearchableTrait;
     protected $guarded = ['articleid'];
     protected $table = 'jieqi_article_article';
     protected $primaryKey = 'articleid';
@@ -47,10 +47,9 @@ class Article extends Model
         'relationChapters',
         'lastchapterid',
         'lastchapter',
-        'weixinlink'
       ];
 
-    protected $appends = ['link','sort','updatetime','mulu','newmulu','weixinlink'];
+    protected $appends = ['link','sort','updatetime','mulu','newmulu'];
     /**
      * 数据模型的启动方法
      *
@@ -175,14 +174,7 @@ class Article extends Model
       return route('mnovels.mulu',['bid'=>$this->articleid] );
 
     }
-    public function getWeixinlinkAttribute()
-    {
-      if (empty($this->slug)) {
-        return route('weixin.info', ['bid' => $this->articleid]);
-      }
-      return route('weixin.info', ['bid' => $this->articleid ,'slug' => $this->slug]);
 
-    }
     public function getNewmuluAttribute()
     {
       return route('mnovels.newmulu',['bid'=>$this->articleid ,'id'=>1] );
