@@ -16,15 +16,7 @@
 
 Route::get('/', 'PagesController@home');
 Route::get('/newsearch', 'SearchController@alisearchview');
-Route::group([
-    'namespace'     => 'Novels',
-    'domain' => config('app.url_web'),
-    //'middleware'    => ['responseLast'],
-], function () {
-
-
-
-});
+/*
 Route::group([
     'namespace'     => 'WeiXin',
     'domain' => config('app.url_weixin'),
@@ -35,6 +27,7 @@ Route::group([
     Route::get('/catalog/{bid}', 'NovelsController@catalog')->name('weixin.catalog');
 
 });
+*/
 Route::group([
     'namespace'     => 'MNovels',
     'domain' => config('app.url_wap'),
@@ -65,8 +58,6 @@ Route::group([
     Route::get('/waptop/{any}', 'NovelsController@showwaptop')->name('mnovels.showwaptop');
 
     //Route::get('/search', 'NovelsController@search');
-
-
 
 });
 
@@ -124,16 +115,6 @@ Route::post('/searchinput', 'SearchController@aliinputsearch')
           ->middleware('web')
           ->prefix('ajax')
           ->name('ajax.aliinputsearch');
-
-Route::group([
-    'prefix'        => 'ajax',
-    'namespace'     => 'Novels',
-    'middleware'    => ['web'],
-], function () {
-
-
-
-});
 
 Route::group([
     'prefix'        => 'ajax',

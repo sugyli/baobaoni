@@ -108,10 +108,6 @@ class ArticlesController extends Controller
                 $actions->prepend('<a href=""><i class="fa fa-paper-plane"></i></a>');
             });
 
-
-
-
-
         });
     }
 
