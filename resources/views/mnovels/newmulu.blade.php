@@ -89,6 +89,7 @@
   if(pageItem){
      $("#"+pageItem.cid).css("color","red");
   }
+})()//闭包不影响全局
 
 </script>
 @endsection
